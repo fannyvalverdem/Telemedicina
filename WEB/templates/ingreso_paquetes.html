@@ -1,0 +1,15 @@
+{% extends 'tarifas.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="row">
+	<h2>Ingresar Paquetes</h2>
+</div>
+<div class="row">
+	<form action="/paciente/" method="post">
+		{% csrf_token %}
+		{{ form }}
+		<input type="submit" value="Iniciar Sesion" />
+	</form>
+</div>
+{% endblock %}
