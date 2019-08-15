@@ -1,0 +1,57 @@
+{% extends 'base_main.html' %}
+{% load static %}
+
+
+{% block base %}
+<br><br><br><br><br><br><br>
+<div class="row">
+	<div id="l-tele" class="col-xl-8">
+	  <img src="https://via.placeholder.com/400x400" alt="logo"/>
+	</div>
+
+	<div id="inicio" class="col-xl-4">
+		<div class="row">
+			<h2>TELEMEDICINA</h2>
+			<br><br>
+		</div>
+		<div class="row">
+			<form method="post" action="/getdata/">
+			    <table>
+			        <tr>
+
+			            <td><br><input type="email" name="email" placeholder="Correo" /></td>
+
+			        </tr>
+			        <tr>
+			            <td><br><input type="password" name="pass" placeholder="Contraseña" /></td>
+			        </tr>
+			        <tr>
+			            <td>
+							<br>
+							<br>
+			                <button>Iniciar Sesion</button>
+			            </td>
+			        </tr>
+			    </table>
+			</form>
+		</div>
+		<br>
+		<div class="row">
+		  <h4>--------------- o ---------------</h4>
+		</div>
+		<br>
+		<div class="row">
+		  <h3>FACEBOOK</h3>
+		</div>
+		<br>
+		<div class="row">
+		  <h3>GOOGLE</h3>
+		</div>
+		
+	</div>
+
+</div>
+
+
+
+{% endblock %}

@@ -9,6 +9,16 @@ def base(request):
   dictionary.update(csrf(request)) 
   return render(request,'base.html', dictionary)
 
+def inicio(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'inicio_sesion.html', dictionary)
+
+def registro(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'registro.html', dictionary)
+
 def index_paciente(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
