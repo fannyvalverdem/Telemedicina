@@ -38,6 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'medicina',
+    #allauth
+	'django.contrib.sites',
+	'allauth',
+	'allauth.account',
+	'allauth.socialaccount',
+
+	#providers
+	'allauth.socialaccount.providers.facebook',
+	'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +131,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS=(os.path.join(BASE_DIR,'static'),)
+
+SITE_ID=1

@@ -21,5 +21,6 @@ from medicina import views
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
-	url(r'', include('medicina.urls')),  
+	url(r'', include('medicina.urls')),
+	path('accounts/', include('allauth.urls')),
 ]
