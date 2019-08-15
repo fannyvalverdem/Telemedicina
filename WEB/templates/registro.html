@@ -15,33 +15,10 @@
 			<br><br>
 		</div>
 		<div class="row">
-			<form method="post" action="/getdata/">
-			    <table>
-			        <tr>
-
-			            <td><br><input type="text" name="name" placeholder="Nombre" /></td>
-
-			        </tr>
-			        <tr>
-			            <td><br><input type="text" name="apellido" placeholder="Apellido" /></td>
-			        </tr>
-					<tr>
-			            <td><br><input type="text" name="phone" placeholder="Telefono" /></td>
-			        </tr>
-					<tr>
-			            <td><br><input type="email" name="correo" placeholder="Correo" /></td>
-			        </tr>
-					<tr>
-			            <td><br><input type="password" name="pass" placeholder="Contraseña" /></td>
-			        </tr>
-			        <tr>
-			            <td>
-							<br>
-							<br>
-			                <button>Registrarse</button>
-			            </td>
-			        </tr>
-			    </table>
+			<form action="/paciente/" method="post">
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="Registrarse" />
 			</form>
 		</div>
 		<br>

@@ -15,24 +15,10 @@
 			<br><br>
 		</div>
 		<div class="row">
-			<form method="post" action="/getdata/">
-			    <table>
-			        <tr>
-
-			            <td><br><input type="email" name="email" placeholder="Correo" /></td>
-
-			        </tr>
-			        <tr>
-			            <td><br><input type="password" name="pass" placeholder="Contraseña" /></td>
-			        </tr>
-			        <tr>
-			            <td>
-							<br>
-							<br>
-			                <button>Iniciar Sesion</button>
-			            </td>
-			        </tr>
-			    </table>
+			<form action="/paciente/" method="post">
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="Iniciar Sesion" />
 			</form>
 		</div>
 		<br>
@@ -46,6 +32,28 @@
 		<br>
 		<div class="row">
 		  <h3>GOOGLE</h3>
+		</div>
+		<br>
+		<div class="row">
+		  <h4>¿No tienes cuenta?</h4>
+		  <a href="{% url 'registro' %}">Registrarse</a>
+		</div>
+		<br>
+		<div class="row">
+		  <a href="">¿Has olvidado tu contraseña</a>
+		</div>
+		<br>
+		<div class="row">
+		  <h4>Descarga la aplicación</h4>
+		</div>
+		<br>
+		<div class="row">
+			<div id="store" class="col-xl-6">
+		  		<a tittle="app-store" href=""><img src="{% static 'imagenes/App-Store.png' %}" alt="logo"/></a>
+		  	</div>
+		  	<div id="play" class="col-xl-6">
+		  		<a tittle="google-play" href=""><img src="{% static 'imagenes/google-play.png' %}" alt="logo"/></a>
+			</div>
 		</div>
 		
 	</div>
