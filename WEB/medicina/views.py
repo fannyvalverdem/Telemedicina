@@ -8,3 +8,19 @@ def base(request):
   dictionary = dict(request=request) 
   dictionary.update(csrf(request)) 
   return render(request,'base.html', dictionary)
+
+def index_paciente(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'index_paciente.html', dictionary)
+
+def index_admin(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'index_admin.html', dictionary)
+
+def index_medico(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'index_medico.html', dictionary)
+
