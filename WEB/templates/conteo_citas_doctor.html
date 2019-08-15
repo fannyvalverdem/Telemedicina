@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-12">
+	<div class="row">
+        <div class="col-3">
+		    Buscar por nombre
+        </div>
+        <div class="col-3">
+            Buscar por paciente
+        </div>
+        <div class="col-3">
+            Filtro
+        </div>
+        <div class="col-3">
+            Número de citas: 
+        </div>
+	</div>
+	<thead>
+		<tr>
+			<td>Asunto</td>
+			<td>Paciente</td>
+			<td>Fecha</td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for cita in object_list %}
+		<tr>
+			<td>{{ cita.asunto }}</td>
+			<td>{{ cita.paciente }}</td>
+			<td>{{ cita.fecha }}</td>
+			<td><a href="#">Ver detalles</a></td>
+		</tr>
+		{% endfor %}
+		
+		{% else %}
+		<h1>No hay registros de pacientes</h1>
+		{% endif %}
+	</tbody>
+</div>
+{% endblock %}

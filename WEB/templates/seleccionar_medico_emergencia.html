@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% block content %}
+
+
+<br>
+<section id="im" class="col-12">
+	<img src="https://via.placeholder.com/1920x320" alt="placeholder" class="col-12"/>
+</section>
+<br>
+<section>
+	<div class="row">
+        <div id="in1" class="col-xl-12 col-sm-12">
+          <p>Consulta médica por emergencia</p>
+        </div>
+		<div class="col-12">
+			<div class="row">
+                <div class="col-6">
+				    Médicos Disponibles
+                </div>
+                <div class="col-3">
+                    Buscar
+                </div>
+                <div class="col-3">
+                    Filtro
+                </div>
+			</div>
+            <br>
+            <br>
+            <div class="col 12 col-xl-12">
+                <!--{% if object_list %}
+                {% for noticia in object_list %}-->
+                
+                <div class="col 12 col-xl-12">
+                    <div class="row" id="select_med_emergencia">
+                       <div class="col-2">
+                            <img src="https://via.placeholder.com/30x30" alt="placeholder"/>
+                            <!--{{medico.foto}}-->
+                        </div>
+                        <div class="col-6">
+                            <p>Nombre médico<!--{{medico.nombre}}--></p>
+                        </div>
+                        <div class="col-3">
+                            <a href="#">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+                <!--{% endfor %}
+                {% endif %}-->
+            </div>
+		</div>
+        	
+    </div>
+</section>
+{% endblock %}

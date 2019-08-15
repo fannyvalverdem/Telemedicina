@@ -24,3 +24,22 @@ def index_medico(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'index_medico.html', dictionary)
 
+def agendar_emergencia(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'agendar_emergencia.html', dictionary)
+
+def selec_med_emergencia(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'seleccionar_medico_emergencia.html', dictionary)
+
+def confirmacion_emergencia(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'confirmar_cita_emergencia.html', dictionary)
+
+def conteo_citas(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'conteo_citas_doctor.html', dictionary)
