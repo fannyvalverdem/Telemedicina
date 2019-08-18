@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Persona(models.Model):
+class Usuario(models.Model):
 	user=models.EmailField()
 	password=models.CharField(max_length=250)
 

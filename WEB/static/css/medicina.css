@@ -1,0 +1,43 @@
+
+img[id="img-tele"]{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 75%;
+}
+
+div#inicio{
+	display: inline-block;
+	background-color: #8bcebd;
+	text-align: center
+	border-radius: 25px 25px 25px 25px;
+	-moz-border-radius: 25px 25px 25px 25px;
+	-webkit-border-radius: 25px 25px 25px 25px;
+	border: 0px solid #000000;
+}
+
+#titulo-inicio h2, #lineas h4, #contra a, #des-app h4{
+	display: inline-block;
+	margin:auto;
+	text-align: center;
+}
+
+img[id="imgstore"]{
+	width:200px;
+	height:75px;
+}
+
+img[id="imgplay"]{
+	width:200px;
+	height:75px;
+}
+
+button[id="btn-inicio"] {
+	background-color: #0074a5;
+	color: white;
+	display: inline-block;
+	text-align: center;
+	border-radius: 8px;
+	width: 100%;
+	border:none;
+}

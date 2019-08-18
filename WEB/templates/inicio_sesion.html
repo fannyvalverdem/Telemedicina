@@ -3,63 +3,78 @@
 
 
 {% block base %}
-<br><br><br><br><br><br><br>
-<div class="row">
-	<div id="l-tele" class="col-xl-8">
-	  <img src="https://via.placeholder.com/400x400" alt="logo"/>
-	</div>
+<br><br>
+<div class="container-fluid">
+	<div class="row">
+		<div id="l-tele" class="col-xl-7">
+		 	<img id="img-tele" src="{% static 'imagenes/logo-movil.png' %}" alt="logo"/>
+		</div>
 
-	<div id="inicio" class="col-xl-4">
-		<div class="row">
-			<h2>TELEMEDICINA</h2>
-			<br><br>
-		</div>
-		<div class="row">
-			<form action="/paciente/" method="post">
-				{% csrf_token %}
-				{{ form }}
-				<input type="submit" value="Iniciar Sesion" />
-			</form>
-		</div>
-		<br>
-		<div class="row">
-		  <h4>--------------- o ---------------</h4>
-		</div>
-		<br>
-		<div class="row">
-		  <h3>FACEBOOK</h3>
-		</div>
-		<br>
-		<div class="row">
-		  <h3>GOOGLE</h3>
-		</div>
-		<br>
-		<div class="row">
-		  <h4>¿No tienes cuenta?</h4>
-		  <a href="{% url 'registro' %}">Registrarse</a>
-		</div>
-		<br>
-		<div class="row">
-		  <a href="">¿Has olvidado tu contraseña</a>
-		</div>
-		<br>
-		<div class="row">
-		  <h4>Descarga la aplicación</h4>
-		</div>
-		<br>
-		<div class="row">
-			<div id="store" class="col-xl-6">
-		  		<a tittle="app-store" href=""><img src="{% static 'imagenes/App-Store.png' %}" alt="logo"/></a>
-		  	</div>
-		  	<div id="play" class="col-xl-6">
-		  		<a tittle="google-play" href=""><img src="{% static 'imagenes/google-play.png' %}" alt="logo"/></a>
+		<div class="col-xl-5">
+			<div class="row">
+				<div class="col-xl-1">	
+				</div>
+				<div id="inicio" class="col-xl-8">
+					<div id="titulo-inicio" class="row">
+						<h2>TELEMEDICINA</h2>
+						<br><br>
+					</div>
+					<br><br>
+					<div class="row">
+						<div class="col-xl-12">
+							{% load crispy_forms_tags %}
+							<form action="/paciente/" method="post">
+								{% csrf_token %}
+								{{ form|crispy }}
+								<button type="submit" id="btn-inicio">Inicio Sesión</button>
+							</form>
+						</div>
+					</div>
+					<br>
+					<div id="lineas" class="row">
+					  <h4>--------------- o ---------------</h4>
+					</div>
+					<br>
+					<div class="row">
+					  <h3>FACEBOOK</h3>
+					</div>
+					<br>
+					<div class="row">
+					  <h3>GOOGLE</h3>
+					</div>
+					<br>
+					<div id="no-cuenta" class="row">
+					  <h4>¿No tienes cuenta?</h4>
+					  <a href="{% url 'registro' %}">Registrarse</a>
+					</div>
+					<br>
+					<div id="contra" class="row">
+					  <a href="">¿Has olvidado tu contraseña</a>
+					</div>
+					<br>
+					<div id="des-app" class="row">
+					  <h4>Descarga la aplicación</h4>
+					</div>
+					<br>
+					<div id="apps" class="row">
+						<div id="store" class="col-xl-6">
+					  		<a tittle="app-store" href=""><img id="imgstore" src="{% static 'imagenes/App-Store.png' %}"/></a>
+					  	</div>
+					  	<div id="play" class="col-xl-6">
+					  		<a tittle="google-play" href=""><img id="imgplay" src="{% static 'imagenes/google-play.png' %}"/></a>
+						</div>
+					</div>
+						<br>
+						<br>
+					
+				</div>
+				<div class="col-xl-3">	
+				</div>
 			</div>
 		</div>
-		
+
 	</div>
-
 </div>
-
 
 
 {% endblock %}
