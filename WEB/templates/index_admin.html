@@ -19,7 +19,32 @@
 </ul>
 {% endblock %}
 
-{% block navs %}
-{% endblock %}
-{% block contenido %}
+{% block content %}
+
+<div class="row">
+    <nav class="col-12">
+      <br>
+
+        <div class="row">
+          <div id="menu-int" class="col-xl-12 col-12 list-inline">
+            {% block navs %}
+			{% endblock %}
+          </div> 
+        </div>
+    </nav>
+  </div>
+
+<div class="row">
+	<div class="col-xl-1">
+		
+	</div>
+	<div id="contenido" class="col-xl-10">
+		{% block contenido %}
+		{% endblock %}
+	</div>
+	<div class="col-xl-1">
+		
+	</div>
+</div>
+
 {% endblock %}
