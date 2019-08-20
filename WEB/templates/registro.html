@@ -3,84 +3,86 @@
 
 
 {% block base %}
-<br>
-<div class="row">
-	<div class="col-xl-4">
-	</div>
-
-	<div class="col-xl-4">
-		<div class="row">
-			<div class="col-xl-1">
-			</div>
-			<div class="col-xl-10">
-				<div class="row">
-					<div id="inicio" class="col-xl-12">
-						<div id="titulo-inicio" class="row">
-							<h2>TELEMEDICINA</h2>
-							<br><br>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-xl-12">
-								{% load crispy_forms_tags %}
-								<form action="/paciente/" method="post">
-									{% csrf_token %}
-									{{ form|crispy }}
-									<input type="submit" value="Registrarse" />
-								</form>
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-xl-1">
-							</div>
-							<div class="col-xl-10">
-								<h5>Al regitrarte, aceptas nuestras condiciones, la política de datos y la politica de cookies</h5>
-							</div>
-							<div class="col-xl-1">
-							</div>
-						 
-						</div>
-						<br>
-					</div>
-				</div>
-				<br>
-				<div class="row">	
-				</div>
-				<div id="cuenta" class="row">
-					<div id="cuenta" class="col-xl-12">
-						<div class="row">
-							<div class="col-xl-6">
-								<h4>¿Tienes cuenta?</h4>
-							</div>
-							<div class="col-xl-6">
-						  		<a href="{% url 'inicio' %}">Entrar</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br>
-				<div class="row">
-					<div id="des-app" class="col-xl-12">
-				  		<h4>Descarga la aplicacion</h4>
-					</div>
-				</div>
-				<br>
-				<div id="apps" class="row">
-					<div id="store" class="col-xl-6">
-				  		<a tittle="app-store" href=""><img id="imgstore" src="{% static 'imagenes/App-Store.png' %}"/></a>
-				  	</div>
-				  	<div id="play" class="col-xl-6">
-				  		<a tittle="google-play" href=""><img id="imgplay" src="{% static 'imagenes/google-play.png' %}"/></a>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-xl-1">
-			</div>
+<div class="container-fluid">
+	<br>
+	<div class="row">
+		<div class="col-xl-4">
 		</div>
 
 		<div class="col-xl-4">
+			<div class="row">
+				<div class="col-xl-1">
+				</div>
+				<div class="col-xl-10">
+					<div class="row">
+						<div id="inicio" class="col-xl-12">
+							<br>
+							<div id="titulo-inicio" class="row">
+								<h2>TELEMEDICINA</h2>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-xl-12">
+									{% load crispy_forms_tags %}
+									<form action="/paciente/" method="post">
+										{% csrf_token %}
+										{{ form|crispy }}
+										<button type="submit" id="btn-registro">Registrarse</button>
+									</form>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col-xl-1">
+								</div>
+								<div class="col-xl-10">
+									<h5>Al regitrarte, aceptas nuestras condiciones, la política de datos y la politica de cookies</h5>
+								</div>
+								<div class="col-xl-1">
+								</div>
+							 
+							</div>
+							<br>
+						</div>
+					</div>
+					<br>
+					<div class="row">	
+					</div>
+					<div class="row">
+						<div id="cuenta" class="col-xl-12">
+							<br>
+							<div class="row">
+								<div class="col-xl-6">
+									<h4>¿Tienes cuenta?</h4>
+								</div>
+								<div class="col-xl-6">
+							  		<a href="{% url 'inicio' %}">Entrar</a>
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+					<br>
+					<div id="des-app" class="row">
+					  	<h4>Descarga la aplicacion</h4>
+					</div>
+					<br>
+					<div id="apps" class="row">
+						<div id="store" class="col-xl-6">
+					  		<a tittle="app-store" href=""><img id="imgstore" src="{% static 'imagenes/App-Store.png' %}"/></a>
+					  	</div>
+					  	<div id="play" class="col-xl-6">
+					  		<a tittle="google-play" href=""><img id="imgplay" src="{% static 'imagenes/google-play.png' %}"/></a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-xl-1">
+				</div>
+			</div>
+
+			<div class="col-xl-4">
+			</div>
 		</div>
 	</div>
 </div>
