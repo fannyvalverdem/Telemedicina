@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.template.context_processors import csrf 
-from .forms import SignupForm, RegistroForm
+from .forms import *
 
 # Create your views here.
 @csrf_exempt 
@@ -76,3 +76,24 @@ def conteo_citas(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'conteo_citas_doctor.html', dictionary)
+
+def tarifas(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'tarifas.html', dictionary)
+
+def ingresar_paquete(request):
+	if request.method == 'POST':
+		print("POST")
+	form = RegistroForm(request.POST)
+	
+	#checking the form is valid or not 
+	if form.is_valid():
+		dictionary = dict(request=request) 
+		dictionary.update(csrf(request)) 
+		return render(request,'index_admin.html', dictionary)
+	else:
+	#creating a new form
+		form = PaqueteForm()
+			#returning form 
+	return render(request, 'ingreso_paquetes.html', {'form':form});

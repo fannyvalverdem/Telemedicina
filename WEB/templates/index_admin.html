@@ -4,17 +4,35 @@
 
 {% block menu %}
 <ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link" href="" >Especialidad</a>
+	<li class="nav-item dropdown">
+		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Especialidad</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Ingresar</a>
+          <a class="dropdown-item" href="#">Visualizar</a>
+        </div>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="">Médicos</a>
+	<li class="nav-item dropdown">
+		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Médicos</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Ingresar</a>
+          <a class="dropdown-item" href="#">Visualizar</a>
+        </div>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="" >Reportes</a>
+	<li class="nav-item dropdown">
+		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Reportes</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Por Medico</a>
+          <a class="dropdown-item" href="#">Por Publicidad</a>
+          <a class="dropdown-item" href="#">Por Especialidad</a>
+          <a class="dropdown-item" href="#">Por Paciente</a>
+        </div>
 	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="" >Tarifas</a>
+	<li class="nav-item dropdown">
+		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tarifas</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="tarifa">Ingresar</a>
+          <a class="dropdown-item" href="#">Visualizar</a>
+        </div>
 	</li>
 </ul>
 {% endblock %}
@@ -26,7 +44,10 @@
       <br>
 
         <div class="row">
-          <div id="menu-int" class="col-xl-12 col-12 list-inline">
+        	<div class="col-xl-1">
+        		
+        	</div>
+          <div id="menu-int" class="col-xl-3 list-inline">
             {% block navs %}
 			{% endblock %}
           </div> 
