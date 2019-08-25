@@ -85,15 +85,31 @@ def tarifas(request):
 def ingresar_paquete(request):
 	if request.method == 'POST':
 		print("POST")
-	form = RegistroForm(request.POST)
+	form = PaqueteForm(request.POST)
 	
 	#checking the form is valid or not 
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
-		return render(request,'index_admin.html', dictionary)
+		return render(request,'tarifas.html', dictionary)
 	else:
 	#creating a new form
 		form = PaqueteForm()
 			#returning form 
 	return render(request, 'ingreso_paquetes.html', {'form':form});
+
+def ingresar_tarifa(request):
+	if request.method == 'POST':
+		print("POST")
+	form = TarifaForm(request.POST)
+	
+	#checking the form is valid or not 
+	if form.is_valid():
+		dictionary = dict(request=request) 
+		dictionary.update(csrf(request)) 
+		return render(request,'tarifas.html', dictionary)
+	else:
+	#creating a new form
+		form = TarifaForm()
+			#returning form 
+	return render(request, 'ingresar_tarifa.html', {'form':form});

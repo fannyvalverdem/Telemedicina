@@ -13,6 +13,7 @@ urlpatterns = [
 	url(r'^conteo_citas/$', views.conteo_citas, name='conteo_citas'),
 	url(r'^tarifas/', views.tarifas, name='tarifas'),
 	url(r'^ing_paquete/$', views.ingresar_paquete, name='ing-paquete'),
+	url(r'^ing_tarifa/$', views.ingresar_tarifa, name='ing-tarifa'),
 	url(r'^registro/', views.registro, name='registro'),
 	url(r'^paciente/$', views.index_paciente, name='index_paciente'),
 	url(r'^medico/$', views.index_medico, name='index_medico'),
