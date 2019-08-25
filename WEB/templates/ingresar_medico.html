@@ -1,0 +1,45 @@
+{% extends 'index_admin.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="row">
+	<h2>Ingresar Médico</h2>
+</div>
+<div class="row">
+	<div class="col-xl-12">
+		{% load crispy_forms_tags %}
+		<form action="/administrador/" method="post">
+			<div class="row">
+				{% csrf_token %}
+				<div class="col-xl-5">
+
+					{{ form.name|as_crispy_field }}
+					{{ form.documento_id|as_crispy_field }}
+					{{ form.email|as_crispy_field }}
+					{{ form.direccion|as_crispy_field }}
+					{{ form.ciudad|as_crispy_field }}
+					{{ form.especialidad|as_crispy_field }}
+					{{ form.tarifa|as_crispy_field }}
+					{{ form.licencia_med|as_crispy_field }}
+				</div>
+				<div class="col-xl-2">
+					
+				</div>
+				<div class="col-xl-5">
+					{{ form.apellido|as_crispy_field}}
+					{{ form.num_doc|as_crispy_field }}
+					{{ form.password|as_crispy_field }}
+					{{ form.phone|as_crispy_field }}
+					{{ form.celular|as_crispy_field }}
+					{{ form.foto|as_crispy_field }}
+					{{ form.documentos|as_crispy_field }}
+				</div>
+				</div>
+
+			</div>
+
+			<button type="submit" id="btn-guardar">Guardar</button>
+		</form>
+	</div>
+</div>
+{% endblock %}

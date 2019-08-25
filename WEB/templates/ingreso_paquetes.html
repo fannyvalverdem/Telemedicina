@@ -6,11 +6,25 @@
 	<h2>Ingresar Paquetes</h2>
 </div>
 <div class="row">
-	<div class="col-xl-6">
+	<div class="col-xl-12">
 		{% load crispy_forms_tags %}
 		<form action="/administrador/" method="post">
-			{% csrf_token %}
-			{{ form|crispy }}
+			<div class="row">
+				{% csrf_token %}
+				<div class="col-xl-5">
+					{{ form.nombre|as_crispy_field }}
+					{{ form.precio|as_crispy_field }}
+					{{ form.especialidad|as_crispy_field }}
+					{{ form.citas|as_crispy_field }}
+					{{ form.examenes|as_crispy_field }}
+				</div>
+				<div class="col-xl-2">
+					
+				</div>
+				<div class="col-xl-5">
+					{{ form.descripcion|as_crispy_field}}
+				</div>
+				</div>
 			<button type="submit" id="btn-guardar">Guardar</button>
 		</form>
 	</div>
