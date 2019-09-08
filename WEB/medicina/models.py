@@ -38,7 +38,7 @@ class Historial_consulta(models.Model):
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 
 class Calificacion(models.Model):
-	valor=model.IntegerField()
+	valor=models.IntegerField()
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)	
 

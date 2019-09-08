@@ -88,7 +88,7 @@ class DoctorForm(forms.Form):
 
 class HorarioForm(forms.Form):
 	mensual=forms.BooleanField()
-	lunes=forms.BooleanField()
+	lunes=forms.BooleanField(widget=forms.CheckboxInput(attrs={'onclick':'myFunction()', 'name':'check'}))
 	martes=forms.BooleanField()
 	miercoles=forms.BooleanField()
 	jueves=forms.BooleanField()

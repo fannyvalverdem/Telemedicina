@@ -12,6 +12,22 @@
 			{% csrf_token %}
 			{{ form.mensual|as_crispy_field}}
 			{{ form.lunes|as_crispy_field}}
+			<div class="row" id="horario" style="display:none">
+				<div class="col-12">
+					<p>Horario</p>
+				</div>
+				<div class="row">
+					<div class="col-2">
+						{{ form.hora|as_crispy_field}}
+					</div>
+					<div class="col-2">
+						{{ form.minutos|as_crispy_field}}
+					</div>
+					<div class="col-2">
+						{{ form.zona|as_crispy_field}}
+					</div>
+				</div>
+			</div>
 			{{ form.martes|as_crispy_field}}
 			{{ form.miercoles|as_crispy_field}}
 			{{ form.jueves|as_crispy_field}}
@@ -19,22 +35,7 @@
 			{{ form.sabado|as_crispy_field}}
 			{{ form.domingo|as_crispy_field}}
 			
-			<div class="row" id="horario">
-				<div class="col-xl-12">
-					<p>Horario</p>
-				</div>
-				<div class="row">
-					<div class="col-xl-4">
-						{{ form.hora|as_crispy_field}}
-					</div>
-					<div class="col-xl-4">
-						{{ form.minutos|as_crispy_field}}
-					</div>
-					<div class="col-xl-4">
-						{{ form.zona|as_crispy_field}}
-					</div>
-				</div>
-			</div>
+		
 			
 			
 			<button type="submit" id="btn-guardar">Guardar</button>
