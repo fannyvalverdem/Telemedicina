@@ -65,7 +65,8 @@ CREATE TABLE consulta(
 	FOREIGN KEY(id_doctor) REFERENCES doctor(id),
 	FOREIGN KEY(id_paciente) REFERENCES paciente(id),
 	FOREIGN KEY(id_detalle) REFERENCES detalle_consulta(id),
-	FOREIGN KEY(id_llamada) REFERENCES llamada(id)
+	FOREIGN KEY(id_llamada) REFERENCES llamada(id),
+	estado varchar(30)
 
 	
 );
@@ -82,11 +83,10 @@ CREATE TABLE calificacion(
 
 CREATE TABLE recetas(
 	id serial NOT NULL PRIMARY KEY,
-	id_doctor int,
-	id_paciente int,
-	FOREIGN KEY(id_doctor) REFERENCES doctor(id),
-	FOREIGN KEY(id_paciente) REFERENCES paciente(id),
-	detalle varchar(500)
+	id_consulta int,
+	FOREIGN KEY(id_consulta) REFERENCES consulta(id),
+	detalle varchar(500),
+	
 	
 );
 
