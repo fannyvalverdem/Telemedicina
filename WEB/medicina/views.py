@@ -129,3 +129,19 @@ def ingresar_medico(request):
 		form = DoctorForm()
 			#returning form 
 	return render(request, 'ingresar_medico.html', {'form':form});
+
+def ingresar_horario(request):
+	if request.method == 'POST':
+		print("POST")
+	form = HorarioForm(request.POST)
+	
+	#checking the form is valid or not 
+	if form.is_valid():
+		dictionary = dict(request=request) 
+		dictionary.update(csrf(request)) 
+		return render(request,'index_admin.html', dictionary)
+	else:
+	#creating a new form
+		form = HorarioForm()
+			#returning form 
+	return render(request, 'ingresar_horario_medico.html', {'form':form});
