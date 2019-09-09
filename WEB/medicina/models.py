@@ -14,7 +14,7 @@ class Persona(models.Model):
 	direccion=models.CharField(max_length=250)
 
 class Usuario(models.Model):
-	user=models.EmailField()
+	email=models.EmailField()
 	username= models.CharField(max_length=50)
 	password=models.CharField(max_length=250)
 	persona_id=models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
