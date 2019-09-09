@@ -1,4 +1,6 @@
 {% extends 'base_main.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
 {% load static %}
 
 
@@ -34,15 +36,18 @@
 							</div>
 							<br>
 							<div id="lineas" class="row">
-							  <h4>--------------- o ---------------</h4>
+								<h4>--------------- o ---------------</h4>
+							</div>
+							<br>
+							{{user}}
+							<div class="row">
+	        					<button><a href="{% provider_login_url 'facebook' method='oauth2' %}">Inicia sesiòn con Facebook</a>
+
+	        					</button>
 							</div>
 							<br>
 							<div class="row">
-							  <h3>FACEBOOK</h3>
-							</div>
-							<br>
-							<div class="row">
-							  <h3>GOOGLE</h3>
+								<button><a href="{% provider_login_url 'google' %}">Google Login</a></button>
 							</div>
 							<br>
 							<div id="contra" class="row">
