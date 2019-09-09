@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.template.context_processors import csrf
+from django.contrib.auth import logout
 
 from django.contrib import auth
 from .forms import *
@@ -12,9 +13,9 @@ def base(request):
   dictionary.update(csrf(request)) 
   return render(request,'base.html', dictionary)
 
-#def login(request):
-#	if request.user.is_authenticated():
-        #return redirect('inicio')
+def cerrar_sesion(request):
+	logout(request)
+	return render(request, "inicio_sesion.html")
 
 def inicio(request):
 	if request.user.is_authenticated:
