@@ -14,15 +14,19 @@ class Persona(models.Model):
 	direccion=models.CharField(max_length=250)
 
 class Usuario(models.Model):
-	email=models.EmailField()
+	user=models.EmailField()
 	username= models.CharField(max_length=50)
 	password=models.CharField(max_length=250)
 	persona_id=models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
 
+class Especialidad(models.Model):
+	nombre= models.CharField(max_length=100)
+	descripcion=models.TextField()
 
 class Doctor(models.Model):
 	identificador_medico=models.CharField(max_length=250)
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
 
 class Paciente(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
@@ -65,13 +69,9 @@ class Receta(models.Model):
 	descripcion=models.TextField()
 	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
 
-class Especialidad(models.Model):
-	nombre= models.CharField(max_length=100)
-	descripcion=models.TextField()
-
 class Paquete(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
 	precio=models.FloatField()
 	duracion= models.IntegerField()
-	especialidad_id=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
+	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
