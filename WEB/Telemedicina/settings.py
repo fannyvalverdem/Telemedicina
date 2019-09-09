@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'medicina',
+    'api',
     #allauth
 	'django.contrib.sites',
 	'allauth',
@@ -48,6 +49,8 @@ INSTALLED_APPS = [
 	'allauth.socialaccount.providers.facebook',
 	'allauth.socialaccount.providers.google',
     'crispy_forms',
+    'rest_framework',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
