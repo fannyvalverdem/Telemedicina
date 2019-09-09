@@ -6,7 +6,7 @@
 	<li class="nav-item dropdown">
 		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Agendar citas</a>
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Cita de emergencia</a>
+          <a class="dropdown-item" href="{% url 'agendar_emergencia' %}">Cita de emergencia</a>
           <a class="dropdown-item" href="#">Agendar cita</a>
           <a class="dropdown-item" href="#">Junta médica</a>
         </div>
@@ -20,5 +20,43 @@
 	<li class="nav-item">
 		<a class="nav-link" href="" >Historial</a>
 	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="" >Cerrar Sesión</a>
+	</li>
 </ul>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <nav class="col-12">
+      <br>
+
+        <div class="row">
+        	<div class="col-xl-1">
+        		
+        	</div>
+          <div id="menu-int" class="col-xl-3 list-inline">
+            {% block navs %}
+			{% endblock %}
+          </div> 
+        </div>
+    </nav>
+  </div>
+
+<div class="row">
+	<div class="col-xl-1">
+		
+	</div>
+	<div id="contenido" class="col-xl-10">
+		<br><br>
+		{% block contenido %}
+		{% endblock %}
+		<br><br>
+	</div>
+	<div class="col-xl-1">
+		
+	</div>
+</div>
+
 {% endblock %}
