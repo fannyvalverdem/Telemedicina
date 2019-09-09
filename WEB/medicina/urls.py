@@ -15,6 +15,7 @@ urlpatterns = [
 	url(r'^ing_paquete/$', views.ingresar_paquete, name='ing-paquete'),
 	url(r'^ing_tarifa/$', views.ingresar_tarifa, name='ing-tarifa'),
 	url(r'^ing_medico/$', views.ingresar_medico, name='ing-medico'),
+	url(r'^ing_horario/$', views.ingresar_horario, name='ing-horario'),
 	url(r'^registro/', views.registro, name='registro'),
 	url(r'^paciente/$', views.index_paciente, name='index_paciente'),
 	url(r'^medico/$', views.index_medico, name='index_medico'),
