@@ -15,13 +15,18 @@ class Persona(models.Model):
 
 class Usuario(models.Model):
 	user=models.EmailField()
+	username= models.CharField(max_length=50)
 	password=models.CharField(max_length=250)
 	persona_id=models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
 
+class Especialidad(models.Model):
+	nombre= models.CharField(max_length=100)
+	descripcion=models.TextField()
 
 class Doctor(models.Model):
 	identificador_medico=models.CharField(max_length=250)
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
 
 class Paciente(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
@@ -34,7 +39,7 @@ class Historial_consulta(models.Model):
 	peso=models.FloatField()
 	estatura=models.FloatField()
 	fecha=models.DateField()
-	documento=models.TextField()
+	documento=models.TextField()	
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 
 class Calificacion(models.Model):
@@ -42,25 +47,31 @@ class Calificacion(models.Model):
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)	
 
-class Detalle_Consulta(models.Model):
-	fecha=models.DateField()
-	precio=models.FloatField()
-	calificacion=models.IntegerField()
-
-class Llamada(models.Model):
-	tipo=models.TextField()
-	precio=models.IntegerField()
-	calificacion=models.IntegerField()
-
-
 class Consulta(models.Model):
 	estado=models.TextField()
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
-	detalle_id=models.ForeignKey(Detalle_Consulta, null=True, blank=True, on_delete=models.CASCADE)
-	llamada_id=models.ForeignKey(Llamada, null=True, blank=True, on_delete=models.CASCADE)
 
+class Llamada(models.Model):
+	tipo=models.TextField()
+	duracion=models.IntegerField()
+	calificacion=models.IntegerField()
+	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
+
+class Detalle_Consulta(models.Model):
+	fecha_reser=models.DateField()
+	fecha_prog=models.DateField()
+	precio=models.FloatField()
+	calificacion=models.IntegerField()
+	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
 
 class Receta(models.Model):	
 	descripcion=models.TextField()
 	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
+
+class Paquete(models.Model):
+	nombre= models.CharField(max_length=100)
+	descripcion=models.TextField()
+	precio=models.FloatField()
+	duracion= models.IntegerField()
+	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)

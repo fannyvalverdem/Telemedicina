@@ -1,5 +1,10 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'index_medico.html' %}
+{% block contenido %}
+<div id="titulo" class="row">
+	<h2>Citas Realizadas</h2>
+</div>
+<br>
+<br>
 <div class="col-12">
 	<div class="row">
         <div class="col-3">
@@ -15,6 +20,8 @@
             Número de citas: 
         </div>
 	</div>
+	<br>
+	<br>
 	<thead>
 		<tr>
 			<td>Asunto</td>
@@ -35,7 +42,7 @@
 		{% endfor %}
 		
 		{% else %}
-		<h1>No hay registros de pacientes</h1>
+		<h5>No hay registros de pacientes</h5>
 		{% endif %}
 	</tbody>
 </div>

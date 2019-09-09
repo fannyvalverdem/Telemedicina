@@ -25,6 +25,11 @@ div#inicio, div#cuenta, div#no-cuenta, div#contenido{
 	text-align: center;
 }
 
+img[id="foto_doc"]{
+	display:block;
+	margin:auto;
+}
+
 img[id="imgstore"]{
 	width:200px;
 	height:75px;
@@ -45,7 +50,7 @@ button[id="btn-inicio"], button[id="btn-registro"]{
 	border:none;
 }
 
-button[id="btn-guardar"] {
+button[id="btn-guardar"], button[id="btn-continuar"] {
 	background-color: #0074a5;
 	color: white;
 	text-align: center;

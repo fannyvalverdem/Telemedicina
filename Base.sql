@@ -12,6 +12,7 @@ CREATE TABLE persona(
 
 CREATE TABLE usuario(
 	id serial NOT NULL PRIMARY KEY,
+	correo varchar(100),
 	user varchar(20),
 	password varchar(50),
 	id_persona int NOT NULL,
@@ -40,11 +41,15 @@ CREATE TABLE admin(
 	FOREIGN KEY(id_user) REFERENCES usuario(id)
 );
 
-CREATE TABLE detalle_consulta(
+
+CREATE TABLE consulta(
 	id serial NOT NULL PRIMARY KEY,
-	fecha date,
-	precio int,
-	calificacion int
+	id_doctor int,
+	id_paciente int,
+	FOREIGN KEY(id_doctor) REFERENCES doctor(id),
+	FOREIGN KEY(id_paciente) REFERENCES paciente(id),
+	estado varchar(30)
+
 	
 );
 
@@ -52,22 +57,20 @@ CREATE TABLE llamada(
 	id serial NOT NULL PRIMARY KEY,
 	tipo varchar(20),
 	duracion int,
-	calificacion int
+	calificacion int,
+	id_consulta int,
+	FOREIGN KEY(id_consulta) REFERENCES consulta(id)
 	
 );
 
-CREATE TABLE consulta(
+CREATE TABLE detalle_consulta(
 	id serial NOT NULL PRIMARY KEY,
-	id_doctor int,
-	id_paciente int,
-	id_detalle int,
-	llamada int,
-	FOREIGN KEY(id_doctor) REFERENCES doctor(id),
-	FOREIGN KEY(id_paciente) REFERENCES paciente(id),
-	FOREIGN KEY(id_detalle) REFERENCES detalle_consulta(id),
-	FOREIGN KEY(id_llamada) REFERENCES llamada(id),
-	estado varchar(30)
-
+	fecha_reser date,
+	fecha_prog date,
+	precio decimal(10,2),
+	calificacion int
+	id_consulta int NOT NULL,
+	FOREIGN KEY(id_consulta) REFERENCES consulta(id)
 	
 );
 
@@ -87,6 +90,22 @@ CREATE TABLE recetas(
 	FOREIGN KEY(id_consulta) REFERENCES consulta(id),
 	detalle varchar(500),
 	
-	
 );
 
+CREATE TABLE especialidad(
+	id serial NOT NULL PRIMARY KEY,
+	nombre varchar(100),
+	descripcion varchar(300)
+);
+
+
+CREATE TABLE paquete(
+	id serial NOT NULL PRIMARY KEY,
+	nombre varchar(100),
+	descripcion varchar(300),
+	precio decimal(10,2),
+	duracion int,
+	id_especialidad int,
+	FOREIGN KEY(id_especialidad) REFERENCES especialidad(id)
+	
+);

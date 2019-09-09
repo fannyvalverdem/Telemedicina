@@ -93,7 +93,8 @@ class DoctorForm(forms.Form):
 	tarifa=forms.ChoiceField(required=False, choices=DOC_ID, label='Tarifa:')
 	licencia_med=forms.CharField(label='Número de licencia médica:',max_length=100,widget=forms.TextInput())
 	foto=forms.FileField(label='Foto:')
-	documentos=forms.FileField(label='Documentos:')
+	documentos=forms.FileField(label='Documentos:',widget=forms.ClearableFileInput(attrs={'multiple': True}))
+
 
 class HorarioForm(forms.Form):
 	mensual=forms.BooleanField(required=False)

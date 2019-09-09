@@ -1,0 +1,13 @@
+{% extends 'index_admin.html' %}
+{% load static %}
+
+{% block navs %}
+<ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'ver_tarifas' %}" >Tarifa</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'ver_paquetes' %}">Paquetes</a>
+	</li>
+</ul>
+{% endblock %}

@@ -92,6 +92,16 @@ def tarifas(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'tarifas.html', dictionary)
 
+def ver_tarifas(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_tarifas.html', dictionary)
+
+def ver_paquetes(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_paquete.html', dictionary)
+
 def ingresar_paquete(request):
 	if request.method == 'POST':
 		print("POST")
