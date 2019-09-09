@@ -1,0 +1,52 @@
+{% extends 'index_paciente.html' %}
+{% block contenido %}
+
+	<div class="row">
+        <div id="titulo" class="col-xl-12">
+          <h2>Consulta médica por emergencia</h2>
+          <br>
+            <br>
+        </div>
+        <div class="row">
+        	<div class="col-6">
+        		<img src="https://via.placeholder.com/300x300" alt="placeholder" class="col-12"/>
+        	</div>
+        	<div class="col-6">
+        		{% load crispy_forms_tags %}
+        		<form action="/paciente/" method="post">
+	        		<div class="row">
+		        		{% csrf_token %}
+		        		<div class="col-12">
+		        			{{ form.especialidad|as_crispy_field}}
+		        		</div>
+		        		<div class="col-12">
+		        			<input id="datepicker" width="100"/>
+							<script>
+								$("#datepicker").datepicker();
+							</script>
+		        		</div>
+		        		<div class="col-12">
+		        			<div class="col-2">
+								{{ form.hora|as_crispy_field}}
+							</div>
+							<div class="col-2">
+								{{ form.minutos|as_crispy_field}}
+							</div>
+							<div class="col-2">
+								{{ form.zona|as_crispy_field}}
+							</div>
+		        		</div>
+		        	</div>
+	        	</form>
+        	</div>
+        	<div class="col-12">
+            <br>
+            <br>
+	        <div class="col-12">
+	        	<button><a href="#">Continuar</a></button>
+	        </div>
+	    </div>
+    </div
+
+
+{% endblock %}

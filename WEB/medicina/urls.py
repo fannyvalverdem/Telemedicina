@@ -20,4 +20,5 @@ urlpatterns = [
 	url(r'^paciente/$', views.index_paciente, name='index_paciente'),
 	url(r'^medico/$', views.index_medico, name='index_medico'),
 	url(r'^administrador/', views.index_admin, name='index_admin'),
+	url(r'^agendar_cita/$', views.agendar_cita, name='ag-cita'),
 ]

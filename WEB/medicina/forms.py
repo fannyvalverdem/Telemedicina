@@ -26,6 +26,14 @@ HORA=[
 	(12,'12'),
 ]
 
+MINUTOS_CITAS=[
+	(1,'00'),
+	(2,'15'),
+	(3,'30'),
+	(4,'45'),
+]
+
+
 MINUTOS=[
 	(1,'00'),
 	(2,'05'),
@@ -99,3 +107,10 @@ class HorarioForm(forms.Form):
 	hora=forms.ChoiceField(required=True, choices=HORA,label='')
 	minutos=forms.ChoiceField(required=True, choices=MINUTOS,label='')
 	zona=forms.ChoiceField(required=True, choices=ZONE,label='')
+
+class CitasForms(forms.Form):
+	especialidad=forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Especialidad'}))
+	hora=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos=forms.ChoiceField(required=True, choices=MINUTOS_CITAS,label='')
+	zona=forms.ChoiceField(required=True, choices=ZONE,label='')
+
