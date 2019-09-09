@@ -2,11 +2,11 @@
 {% block contenido %}
 
 <section>
-	<div id="titulo" class="row">
-          <h2>Consulta médica por emergencia</h2>
+	<div class="row">
+        <div id="titulo" class="col-xl-12">
+          <h2>Consulta médica</h2>
           <br>
-    </div>
-    <div class="row">
+        </div>
         <div class="col-xl-12">
             <br>
           <h5>Seleccione el medico de su preferencia.</h5>
@@ -31,13 +31,16 @@
                 {% for noticia in object_list %}-->
                 
                 <div class="col 12 col-xl-12">
-                    <div class="row" id="select_med_emergencia">
+                    <div class="row" id="select_med">
                        <div class="col-2">
                             <img src="https://via.placeholder.com/30x30" alt="placeholder"/>
                             <!--{{medico.foto}}-->
                         </div>
-                        <div class="col-6">
+                        <div class="col-5">
                             <p>Nombre médico<!--{{medico.nombre}}--></p>
+                        </div>
+                        <div class="col-3">
+                            <p>hh:mm<!--{{medico.hora}}--></p>
                         </div>
                         <div class="col-3">
                             <a href="#">Seleccionar</a>

@@ -165,3 +165,22 @@ def ingresar_horario(request):
 		form = HorarioForm()
 			#returning form 
 	return render(request, 'ingresar_horario_medico.html', {'form':form});
+
+
+def agendar_cita(request):
+	if request.method == 'POST':
+		print("POST")
+	form = CitasForms(request.POST)
+	if form.is_valid():
+		dictionary = dict(request=request) 
+		dictionary.update(csrf(request)) 
+		return render(request,'seleccionar_medico.html', dictionary)
+	else:
+	#creating a new form
+		form = CitasForms()
+			#returning form 
+	return render(request, 'agendar_cita.html', {'form':form});
+
+
+
+
