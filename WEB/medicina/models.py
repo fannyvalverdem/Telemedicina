@@ -43,18 +43,16 @@ class Calificacion(models.Model):
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)	
 
+class Consulta(models.Model):
+	estado=models.TextField()
+	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
+	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
 class Llamada(models.Model):
 	tipo=models.TextField()
 	duracion=models.IntegerField()
 	calificacion=models.IntegerField()
 	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
-
-
-class Consulta(models.Model):
-	estado=models.TextField()
-	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
-	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
 class Detalle_Consulta(models.Model):
 	fecha_reser=models.DateField()

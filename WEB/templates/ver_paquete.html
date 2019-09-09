@@ -1,0 +1,26 @@
+{% extends 'tarifas_menu_ver.html' %}
+{% load static %}
+
+{% block contenido %}
+<div id="titulo" class="row">
+	<h2>Paquetes</h2>
+</div>
+<div class="row">
+	<div class="col-xl-12">
+		{% if object_list %}
+		{% for paquete in object_list %}
+		<div>
+			<div class="col-xl-4">
+				{{ paquete.nombre }}
+				{{ paquete.descripcion }}
+				{{ paquete.precio }}
+			</div>
+		</div>
+		{% endfor %}
+		
+		{% else %}
+		<h5>No hay registros de pacientes</h5>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
