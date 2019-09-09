@@ -67,7 +67,7 @@ CREATE TABLE detalle_consulta(
 	id serial NOT NULL PRIMARY KEY,
 	fecha_reser date,
 	fecha_prog date,
-	precio int,
+	precio decimal(10,2),
 	calificacion int
 	id_consulta int NOT NULL,
 	FOREIGN KEY(id_consulta) REFERENCES consulta(id)
@@ -90,6 +90,21 @@ CREATE TABLE recetas(
 	FOREIGN KEY(id_consulta) REFERENCES consulta(id),
 	detalle varchar(500),
 	
-	
 );
 
+CREATE TABLE especialidad(
+	id serial NOT NULL PRIMARY KEY,
+	nombre varchar(100),
+	descripcion varchar(300)
+);
+
+
+CREATE TABLE paquete(
+	id serial NOT NULL PRIMARY KEY,
+	descripcion varchar(300),
+	precio decimal(10,2),
+	duracion int,
+	id_especialidad int,
+	FOREIGN KEY(id_especialidad) REFERENCES especialidad(id)
+	
+);

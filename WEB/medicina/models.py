@@ -35,7 +35,7 @@ class Historial_consulta(models.Model):
 	peso=models.FloatField()
 	estatura=models.FloatField()
 	fecha=models.DateField()
-	documento=models.TextField()
+	documento=models.TextField()	
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 
 class Calificacion(models.Model):
@@ -66,3 +66,13 @@ class Detalle_Consulta(models.Model):
 class Receta(models.Model):	
 	descripcion=models.TextField()
 	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
+
+class Especialidad(models.Model):
+	nombre= models.CharField(max_length=100)
+	descripcion=models.TextField()
+
+class Paquete(models.Model):
+	descripcion=models.TextField()
+	precio=models.FloatField()
+	duracion= models.IntegerField()
+	especialidad_id=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
