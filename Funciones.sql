@@ -14,7 +14,7 @@ VALUES('fmvalverde@gmail.com','fmvalverde','telemedicina123',1),
 ('roberto@gmail.com','robertom','contrasena',5);
 
 INSERT INTO doctor(identificador_medico, user_id)
-VALUES(5);
+VALUES('0000000001',5);
 
 INSERT INTO admin(user_id)
 VALUES(1),
@@ -38,3 +38,12 @@ INSERT INTO detalle_consulta(fecha_reser,fecha_prog,precio,calificacion,consulta
 VALUES('2019-01-16','2019-09-05',100,0,1),
 ('2019-01-16','2019-09-02',50,5,2),
 ('2019-01-16','2019-09-03',75,4,3);
+
+INSERT INTO especialidad(nombre,descripcion)
+VALUES('Cardiologia','Especializacion en problemas del corazon y derivados'),
+('Ginecologia','Especializacion en cuidado intimo femenino y tratamientos de embarazo '),
+('Cirugia General','Especializacion en operaciones de tejidos musculares y organos');
+
+INSERTO INTO paquete(nombre,descripcion,precio,duracion,especialidad_id)
+VALUES('Chequeos y cuidados trimestrales','Controles de fertilidad y atencion general',200.00,12,2),
+('Chequeos de presion arterial','Controles de presion y cuidados del corazon',200.00,12,1),

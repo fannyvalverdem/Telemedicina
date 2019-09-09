@@ -101,6 +101,7 @@ CREATE TABLE especialidad(
 
 CREATE TABLE paquete(
 	id serial NOT NULL PRIMARY KEY,
+	nombre varchar(100),
 	descripcion varchar(300),
 	precio decimal(10,2),
 	duracion int,

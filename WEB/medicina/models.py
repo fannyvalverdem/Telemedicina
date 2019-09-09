@@ -72,6 +72,7 @@ class Especialidad(models.Model):
 	descripcion=models.TextField()
 
 class Paquete(models.Model):
+	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
 	precio=models.FloatField()
 	duracion= models.IntegerField()
