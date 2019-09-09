@@ -1,15 +1,17 @@
 {% extends 'index_paciente.html' %}
 {% block contenido %}
 
-	<div class="row">
-        <div id="titulo" class="col-xl-12">
+	<div id="titulo" class="row">
           <h2>Consulta médica por emergencia</h2>
           <br>
             <br>
-        </div>
+    </div>
+    <br>
+            <br>
         <div class="row">
+
         	<div class="col-6">
-        		<img src="https://via.placeholder.com/300x300" alt="placeholder" class="col-12"/>
+        		<img id="foto_doc" src="https://via.placeholder.com/300x300" alt="placeholder"/>
         	</div>
         	<div class="col-6">
         		<div class="col-12">
@@ -38,10 +40,25 @@
         <div class="col-12">
             <br>
             <br>
-	        <div class="col-12">
-	        	<button><a href="#">Continuar</a></button>
-	        	<button><a href="#">Buscar otro médico</a></button>
+	        <div class="row">
+                <div class="col-3">
+                    
+                </div>
+                <div class="col-3">
+                    <form action="{% url 'confirmacion_emergencia' %}">
+                      <button id="btn-continuar">Continuar</button>
+                    </form>  
+                </div>
+	        	<div class="col-3">
+                    <form action="{% url 'selec_med_emergencia' %}">
+                      <button id="btn-continuar">Buscar otro médico</button>
+                    </form> 
+                </div>
+
+                <div class="col-3">
+                    
+                </div>
+                
 	        </div>
 	    </div>
-    </div>
 {% endblock %}
