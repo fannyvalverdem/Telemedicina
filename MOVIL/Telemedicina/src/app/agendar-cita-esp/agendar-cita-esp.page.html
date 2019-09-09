@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-img src="assets/telemedicina_movil.jpg"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar>
+    <ion-icon routerLink="../principal" name="arrow-round-back"></ion-icon>
+    <ion-title>Agendamiento de consulta medica</ion-title>
+  </ion-toolbar>
+  <ion-card>
+      <ion-label>Especialidad:</ion-label>
+      <ion-select>
+        <ion-select-option value="bird" selected>General</ion-select-option>
+        <ion-select-option value="cat">Traumatologia</ion-select-option>
+        <ion-select-option value="dog" selected>Cardiologia</ion-select-option>
+        <ion-select-option value="honeybadger">Oftalmologia</ion-select-option>
+      </ion-select>
+      <ion-label>Fecha:</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" placeholder="01/01/2020" max="2020-12-09"></ion-datetime>
+      <ion-label>Hora:</ion-label>
+      <ion-datetime displayFormat="HH:mm" placeholder="00:00"></ion-datetime>
+      <ion-button routerLink="../agendar-cita-med">Continuar</ion-button>
+    </ion-card>
+</ion-content>
