@@ -1,18 +1,11 @@
-{% extends 'base.html' %}
-{% load socialaccount %}
-{% providers_media_js %}
-{% block content %}
+{% extends 'index_paciente.html' %}
+{% block contenido %}
 
-
-<br>
-<section id="im" class="col-12">
-	<img src="https://via.placeholder.com/1920x320" alt="placeholder" class="col-12"/>
-</section>
-<br>
-<section>
 	<div class="row">
-        <div id="in1" class="col-xl-12 col-sm-12">
-          <p>Consulta médica por emergencia</p>
+        <div id="titulo" class="col-xl-12">
+          <h2>Consulta médica por emergencia</h2>
+          <br>
+            <br>
         </div>
         <div class="row">
         	<div class="col-6">
@@ -43,15 +36,12 @@
         	</div>
         </div>
         <div class="col-12">
+            <br>
+            <br>
 	        <div class="col-12">
 	        	<button><a href="#">Continuar</a></button>
 	        	<button><a href="#">Buscar otro médico</a></button>
-	        	<!--
-	        	<button><a href="{% provider_login_url 'google' %}">Google Login</a></button>
-	        	<button><a href="{% provider_login_url 'facebook' method='oauth2' %}">Facebook Login</a></button>
-	-->
 	        </div>
 	    </div>
     </div>
-</section>
 {% endblock %}

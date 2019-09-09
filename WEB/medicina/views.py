@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.template.context_processors import csrf 
+from django.template.context_processors import csrf
+from django.contrib.auth import logout
+
+from django.contrib import auth
 from .forms import *
 
 # Create your views here.
@@ -10,7 +13,14 @@ def base(request):
   dictionary.update(csrf(request)) 
   return render(request,'base.html', dictionary)
 
+def cerrar_sesion(request):
+	logout(request)
+	return render(request, "inicio_sesion.html")
+
 def inicio(request):
+	if request.user.is_authenticated:
+		return render(request, "index_paciente.html")
+	
 	if request.method == 'POST':
 		print("POST")
 	form = SignupForm(request.POST)
@@ -129,3 +139,19 @@ def ingresar_medico(request):
 		form = DoctorForm()
 			#returning form 
 	return render(request, 'ingresar_medico.html', {'form':form});
+
+def ingresar_horario(request):
+	if request.method == 'POST':
+		print("POST")
+	form = HorarioForm(request.POST)
+	
+	#checking the form is valid or not 
+	if form.is_valid():
+		dictionary = dict(request=request) 
+		dictionary.update(csrf(request)) 
+		return render(request,'index_admin.html', dictionary)
+	else:
+	#creating a new form
+		form = HorarioForm()
+			#returning form 
+	return render(request, 'ingresar_horario_medico.html', {'form':form});

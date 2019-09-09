@@ -19,7 +19,7 @@ div#inicio, div#cuenta, div#no-cuenta, div#contenido{
 	border: 0px solid #000000;
 }
 
-#titulo-inicio h2, #lineas h4, #contra a, #des-app h4{
+#titulo-inicio h2, #lineas h4, #contra a, #des-app h4, #titulo h2{
 	display: inline-block;
 	margin:auto;
 	text-align: center;
@@ -35,7 +35,7 @@ img[id="imgplay"]{
 	height:75px;
 }
 
-button[id="btn-inicio"], button[id="btn-registro"] {
+button[id="btn-inicio"], button[id="btn-registro"]{
 	background-color: #0074a5;
 	color: white;
 	display: inline-block;
@@ -43,6 +43,18 @@ button[id="btn-inicio"], button[id="btn-registro"] {
 	border-radius: 8px;
 	width: 100%;
 	border:none;
+}
+
+button[id="btn-guardar"] {
+	background-color: #0074a5;
+	color: white;
+	text-align: center;
+	border-radius: 8px;
+	border:none;
+	width: 144px;
+	display: block;
+	max-width: 300px;
+	margin: auto; 
 }
 
 img[id="banner"]{
