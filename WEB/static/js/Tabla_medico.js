@@ -80,6 +80,36 @@ $('#data_table_paquete').DataTable({
     ],
 });
 
+$('#data_table_tarifa').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/tarifas/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "nombre"},
+        { data: "descripcion"},
+        { data: "precio"}
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+    ],
+});
+
+
 $('#data_table_citas').DataTable({
     "destroy": true,
     "ajax": 
