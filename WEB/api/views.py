@@ -25,8 +25,8 @@ class PaqueteViewset(generics.ListAPIView):
 	serializer_class = serializers.PaquetesSerializer
 
 class ConsultaViewset(generics.ListAPIView):
-	queryset = models.Consulta.objects.all()
-	serializer_class = serializers.ConsultaSerializer
+	queryset = models.Detalle_Consulta.objects.all()
+	serializer_class = serializers.DetalleConsultaSerializer
 
 class EspecialidadViewset(generics.ListAPIView):
 	queryset = models.Especialidad.objects.all()
