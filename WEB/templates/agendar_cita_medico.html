@@ -1,24 +1,35 @@
-{% extends 'index_paciente.html' %}
+{% extends 'index_medico.html' %}
 {% block contenido %}
 <div class="container">
 	<div class="row">
         <div id="titulo" class="col-xl-12">
-          <h2>Consulta médica por emergencia</h2>
+          <h2>Programar nueva cita:</h2>
           <br>
             <br>
         </div>
         <div class="row">
-        	<div class="col-6">
-        		<img src="https://via.placeholder.com/300x300" alt="placeholder" class="col-12"/>
+        	<div class="col-12">
+        		{% load crispy_forms_tags %}
+        		<form action="/medico/" method="post">
+	        		<div class="row">Datos del Paciente
+		        		<div class="col-12">Nombres:
+		        		</div>
+		        		<div class="col-12">Apellidos:
+		        		</div>
+		        		<div class="col-12">Especialidad:
+		        		</div>
+		        	</div>
+
+	        	</form>
         	</div>
-        	<div class="col-6">
+
+    </div>
+
+        <div class="row">
+        	<div class="col-12">
         		{% load crispy_forms_tags %}
         		<form action="/paciente/" method="post">
 	        		<div class="row">
-		        		{% csrf_token %}
-		        		<div class="col-12">Especialidad:
-		        			{{ form.especialidad|as_crispy_field}}
-		        		</div>
 		        		<div class="col-12">Fecha y hora:
 							
 							<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
@@ -36,30 +47,13 @@
 
 
 		        		</div>
-
-		        		<!--
-		        		<div class="row">
-			        		<div class="col-12">
-			        			<div class="col-12">Hora:
-			        			<div class="col-3">
-									{{ form.hora|as_crispy_field}}
-								</div>
-								<div class="col-3">
-									{{ form.minutos|as_crispy_field}}
-								</div>
-								<div class="col-3">
-									{{ form.zona|as_crispy_field}}
-								</div>
-							</div>
-			        		</div>
-		        		</div>-->
 		        	</div>
 		        	<div class="col-12">
 				        <div class="col-12">
 			                <br>
 			                <br>
 			                <form action="#">
-				        	  <button id="btn-continuar">Continuar</button>
+				        	  <button id="btn-continuar">Confirmar Cita</button>
 			                </form>
 				        </div>
 				    </div>
