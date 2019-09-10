@@ -53,7 +53,7 @@ def add_registro(request):
 	  	Add(insertarpersona)
 	  	insertarusuario = {"email": str(request.POST.get("email")), "username":str(request.POST.get("username")), "password":str(request.POST.get("password")), "persona_id":insertarpersona}
 	  	Add(insertarusuario)
-  	return redirect('')  
+  	return redirect('index_paciente')  
 	else:    
 		return render(request, 'add.html', context)
 
