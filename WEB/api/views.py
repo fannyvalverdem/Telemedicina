@@ -24,6 +24,10 @@ class PaqueteViewset(generics.ListAPIView):
 	queryset = models.Paquete.objects.all()
 	serializer_class = serializers.PaquetesSerializer
 
+class TarifaViewset(generics.ListAPIView):
+	queryset = models.Tarifa.objects.all()
+	serializer_class = serializers.TarifasSerializer
+
 class ConsultaViewset(generics.ListAPIView):
 	queryset = models.Detalle_Consulta.objects.all()
 	serializer_class = serializers.DetalleConsultaSerializer
