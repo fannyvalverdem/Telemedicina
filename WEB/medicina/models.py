@@ -15,6 +15,7 @@ class Persona(models.Model):
 	telefono=models.CharField(max_length=250)
 	ciudad=models.CharField(max_length=250)
 	direccion=models.CharField(max_length=250)
+	imagen=models.ImageField(upload_to=imagen_up)
 
 class Usuario(models.Model):
 	email=models.EmailField()
@@ -26,10 +27,20 @@ class Especialidad(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
 
+class Dias(models.Model):
+	nombre= models.CharField(max_length=100)
+		
+class Horario(models.Model):
+	hora_entrada=models.TimeField()
+	hora_salida=models.TimeField()
+	dias=models.ForeignKey(Dias, null=True, blank=True, on_delete=models.CASCADE)
+
 class Doctor(models.Model):
 	identificador_medico=models.CharField(max_length=250)
+	documento=models.FileField()
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
+	horario=models.ForeignKey(Horario, null=True, blank=True, on_delete=models.CASCADE)
 
 class Paciente(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
@@ -72,9 +83,20 @@ class Receta(models.Model):
 	descripcion=models.TextField()
 	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
 
+class Examenes(models.Model):
+	nombre=models.CharField(max_length=100)
+	descripcion=models.CharField(max_length=100)
+
 class Paquete(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
 	precio=models.FloatField()
 	duracion= models.IntegerField()
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
+	examen=models.ForeignKey(Examenes, null=True, blank=True, on_delete=models.CASCADE)
+
+class Tarifa(models.Model):
+	nombre= models.CharField(max_length=100)
+	descripcion=models.TextField()
+	precio=models.FloatField()
+		
