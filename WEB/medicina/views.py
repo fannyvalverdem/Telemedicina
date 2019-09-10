@@ -67,10 +67,25 @@ def index_medico(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'index_medico.html', dictionary)
 
+def agendar_consulta(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'agendar_cita.html', dictionary)
+
 def agendar_cita_medico(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'agendar_cita_medico.html', dictionary)
+
+def selec_medico(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'seleccionar_medico.html', dictionary)
+
+def confirmacion_cita(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'confirmar_cita.html', dictionary)
 
 def agendar_emergencia(request):
 	dictionary = dict(request=request) 
