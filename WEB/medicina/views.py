@@ -10,6 +10,7 @@ from django.contrib import auth
 from django.contrib.auth import login as auth_login
 from .forms import *
 from django.contrib.auth.models import User
+from .controller import ListarNoticias, Add
 import requests,json
 
 # Create your views here.
@@ -42,6 +43,20 @@ def inicio(request):
 		form = SignupForm()
 			#returning form 
 	return render(request, 'inicio_sesion.html', {'form':form});
+
+def add_registro(request): 
+	usuario=Listar("usuario")
+	persona=Listar("personas")
+	context= {'usuario': usuario, 'personas':persona}
+	if request.method == "POST":
+	  	insertarpersona={"nombre": str(request.POST.get("nombre")), "apellido":str(request.POST.get("apellido")), "telefono":str(request.POST.get("telefono"))}
+	  	Add(insertarpersona)
+	  	insertarusuario = {"email": str(request.POST.get("email")), "username":str(request.POST.get("username")), "password":str(request.POST.get("password")), "persona_id":insertarpersona}
+	  	Add(insertarusuario)
+  	return redirect('')  
+	else:    
+		return render(request, 'add.html', context)
+
 
 def registro(request):
 	if request.method == 'POST':
