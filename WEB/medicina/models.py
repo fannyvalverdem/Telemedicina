@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 def imagen_up(instance,filename):
 	return "usuarios/%s" %(filename)
 
+def doc_up(instance,filename):
+	return "documento/%s" %(filename)
+
 class Persona(models.Model):
 	nombre=models.CharField(max_length=250) 
 	apellido=models.CharField(max_length=250) 
@@ -37,7 +40,7 @@ class Horario(models.Model):
 
 class Doctor(models.Model):
 	identificador_medico=models.CharField(max_length=250)
-	documento=models.FileField()
+	documento=models.FileField(upload_to=doc_up,null=True)
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
 	horario=models.ForeignKey(Horario, null=True, blank=True, on_delete=models.CASCADE)
