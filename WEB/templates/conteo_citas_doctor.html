@@ -1,49 +1,43 @@
 {% extends 'index_medico.html' %}
+{% load static %}
 {% block contenido %}
+
 <div id="titulo" class="row">
 	<h2>Citas Realizadas</h2>
 </div>
 <br>
 <br>
-<div class="col-12">
-	<div class="row">
-        <div class="col-3">
-		    Buscar por nombre
+<div class="row">
+         <div class="col-xl-1">
+             
+         </div>
+         <div class="col-xl-10">
+            <div class="table-container">
+            <table id="data_table_citas" class="table table-striped table-bordered dt-body-center">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Fecha de Reserva</th>
+                        <th>Fecha de la cita</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
-        <div class="col-3">
-            Buscar por paciente
-        </div>
-        <div class="col-3">
-            Filtro
-        </div>
-        <div class="col-3">
-            Número de citas: 
-        </div>
-	</div>
-	<br>
-	<br>
-	<thead>
-		<tr>
-			<td>Asunto</td>
-			<td>Paciente</td>
-			<td>Fecha</td>
-			<td></td>
-		</tr>
-	</thead>
-	<tbody>
-		{% if object_list %}
-		{% for cita in object_list %}
-		<tr>
-			<td>{{ cita.asunto }}</td>
-			<td>{{ cita.paciente }}</td>
-			<td>{{ cita.fecha }}</td>
-			<td><a href="#">Ver detalles</a></td>
-		</tr>
-		{% endfor %}
-		
-		{% else %}
-		<h5>No hay registros de pacientes</h5>
-		{% endif %}
-	</tbody>
-</div>
+    </div>
+    <div class="col-xl-1">
+             
+         </div>
+   </div>
+{% endblock %}
+{% block script %}
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{% static 'js/Tabla_medico.js' %}"></script>
+    
 {% endblock %}
