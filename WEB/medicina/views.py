@@ -67,6 +67,11 @@ def index_medico(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'index_medico.html', dictionary)
 
+def agendar_cita_medico(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'agendar_cita_medico.html', dictionary)
+
 def agendar_emergencia(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
@@ -180,7 +185,3 @@ def agendar_cita(request):
 		form = CitasForms()
 			#returning form 
 	return render(request, 'agendar_cita.html', {'form':form});
-
-
-
-
