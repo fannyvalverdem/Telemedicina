@@ -11,14 +11,14 @@ def doc_up(instance,filename):
 class Persona(models.Model):
 	nombre=models.CharField(max_length=250) 
 	apellido=models.CharField(max_length=250) 
-	tipo_documento=models.CharField(max_length=250) 
-	numero_documento=models.CharField(max_length=250)
-	fecha_nac=models.DateField()
-	sexo=models.CharField(max_length=250)
-	telefono=models.CharField(max_length=250)
-	ciudad=models.CharField(max_length=250)
-	direccion=models.CharField(max_length=250)
-	imagen=models.ImageField(upload_to=imagen_up)
+	tipo_documento=models.CharField(max_length=250, null=True) 
+	numero_documento=models.CharField(max_length=250,null=True)
+	fecha_nac=models.DateField(null=True)
+	sexo=models.CharField(max_length=250,null=True)
+	telefono=models.CharField(max_length=250,null=True)
+	ciudad=models.CharField(max_length=250,null=True)
+	direccion=models.CharField(max_length=250,null=True)
+	imagen=models.ImageField(upload_to=imagen_up,null=True)
 
 class Usuario(models.Model):
 	email=models.EmailField()

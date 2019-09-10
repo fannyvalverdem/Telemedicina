@@ -10,7 +10,7 @@ from django.contrib import auth
 from django.contrib.auth import login as auth_login
 from .forms import *
 from django.contrib.auth.models import User
-from .controller import ListarNoticias, Add
+from .controller import Listar, Add
 import requests,json
 
 # Create your views here.
@@ -53,7 +53,7 @@ def add_registro(request):
 	  	Add(insertarpersona)
 	  	insertarusuario = {"email": str(request.POST.get("email")), "username":str(request.POST.get("username")), "password":str(request.POST.get("password")), "persona_id":insertarpersona}
 	  	Add(insertarusuario)
-  	return redirect('index_paciente')  
+	  	return redirect('index_paciente')  
 	else:    
 		return render(request, 'add.html', context)
 
