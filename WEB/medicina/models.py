@@ -2,6 +2,9 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 
+def imagen_up(instance,filename):
+	return "usuarios/%s" %(filename)
+
 class Persona(models.Model):
 	nombre=models.CharField(max_length=250) 
 	apellido=models.CharField(max_length=250) 

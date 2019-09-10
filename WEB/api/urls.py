@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'^doctor/$', views.DoctorViewset.as_view(), name='doctor_api'),
 	url(r'^paquete/$', views.PaqueteViewset.as_view(), name='paquete_api'),
 	url(r'^consulta/$', views.ConsultaViewset.as_view(), name='consulta_api'),
+	url(r'^usuario/$', views.UsuarioViewset.as_view(), name='usuario_api'),
 ]

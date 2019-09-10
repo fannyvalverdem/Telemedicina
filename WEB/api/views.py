@@ -12,6 +12,10 @@ class PersonaViewset(generics.ListAPIView):
     queryset = models.Persona.objects.all()
     serializer_class = serializers.PersonaSerializer
 
+class UsuarioViewset(generics.ListAPIView):
+    queryset = models.Usuario.objects.all()
+    serializer_class = serializers.UsuarioSerializer
+
 class DoctorViewset(generics.ListAPIView):
 	queryset = models.Doctor.objects.all()
 	serializer_class = serializers.MedicoSerializer

@@ -6,21 +6,29 @@
 	<h2>Paquetes</h2>
 </div>
 <div class="row">
-	<div class="col-xl-12">
-		{% if object_list %}
-		{% for paquete in object_list %}
-		<div>
-			<div class="col-xl-4">
-				{{ paquete.nombre }}
-				{{ paquete.descripcion }}
-				{{ paquete.precio }}
-			</div>
-		</div>
-		{% endfor %}
-		
-		{% else %}
-		<h5>No hay registros de paquetes</h5>
-		{% endif %}
-	</div>
-</div>
+         <div class="col-xl-1">
+             
+         </div>
+         <div class="col-xl-10">
+            <div class="table-container">
+            <table id="data_table_paquete" class="table table-striped table-bordered dt-body-center">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Especialidad</th>
+                        <th>Duracion</th>
+                        <th>Precio</th>
+                        <th>Ver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xl-1">
+             
+         </div>
+   </div>
 {% endblock %}
