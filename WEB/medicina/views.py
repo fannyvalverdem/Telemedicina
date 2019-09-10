@@ -2,9 +2,15 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.template.context_processors import csrf
 from django.contrib.auth import logout
-
+from django.contrib.auth import authenticate 
+from django.http import HttpResponseRedirect
+from django.urls import reverse 
+from django.contrib.auth.decorators import login_required
 from django.contrib import auth
+from django.contrib.auth import login as auth_login
 from .forms import *
+from django.contrib.auth.models import User
+import requests,json
 
 # Create your views here.
 @csrf_exempt 
@@ -15,7 +21,8 @@ def base(request):
 
 def cerrar_sesion(request):
 	logout(request)
-	return render(request, "inicio_sesion.html")
+	form = SignupForm(request.POST)
+	return render(request, "inicio_sesion.html", {'form':form})
 
 def inicio(request):
 	if request.user.is_authenticated:
@@ -40,11 +47,19 @@ def registro(request):
 	if request.method == 'POST':
 		print("POST")
 	form = RegistroForm(request.POST)
-	
+	print("<<<<<<<<<<<<<<<<<<")
 	#checking the form is valid or not 
 	if form.is_valid():
+		email =form.cleaned_data['email']
+		password = form.cleaned_data['password']
+		user = User.objects.create_user(username=email,
+		                                 email=email,
+		                                 password=password)
+		print(user,"<<<<<<<<<<<<<<<<<<")
+		user = authenticate(username=username, password=password)
+		auth_login(request=request, user=user)
 		dictionary = dict(request=request) 
-		dictionary.update(csrf(request)) 
+		dictionary.update(csrf(request))
 		return render(request,'index_paciente.html', dictionary)
 	else:
 	#creating a new form
@@ -66,11 +81,6 @@ def index_medico(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'index_medico.html', dictionary)
-
-def agendar_consulta(request):
-	dictionary = dict(request=request) 
-	dictionary.update(csrf(request)) 
-	return render(request,'agendar_cita.html', dictionary)
 
 def agendar_cita_medico(request):
 	dictionary = dict(request=request) 
@@ -200,3 +210,34 @@ def agendar_cita(request):
 		form = CitasForms()
 			#returning form 
 	return render(request, 'agendar_cita.html', {'form':form});
+
+
+def login(request): 
+    print(request.method,"<<<<<<<<<<")
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = SignupForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+	        username =form.cleaned_data['email']
+	        password = form.cleaned_data['password']
+	        user = authenticate(username=username,password=password)
+
+
+	        """auth_login(request=request, user=user)
+	        print(user,"<<<<<<<<")
+	        response = requests.get('http://127.0.0.1:8000/api/usuario/')
+	        data = response.json()
+	        for i in range(0,len(data)):
+	        	if username==data[i]['email'] and password==data[i]['password']:
+	        		return render(request, "index_paciente.html",{'form':form})
+	        print(user,data[0]['email'],"<<<<<<<<")
+	        """
+	        if user is not None:
+	        	auth_login(request=request, user=user)
+	        	return HttpResponseRedirect(reverse('inicio'))
+	        else: 
+	            msg_to_html = custom_message('Invalid Credentials', TagType.danger) 
+	            dictionary = dict(request=request, messages = msg_to_html) 
+	            dictionary.update(csrf(request))
+	        return render(request,'inicio_sesion.html', dictionary)

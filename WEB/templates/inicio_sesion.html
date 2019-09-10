@@ -27,7 +27,7 @@
 							<div class="row">
 								<div class="col-xl-12">
 									{% load crispy_forms_tags %}
-									<form action="/paciente/" method="post">
+									<form action="/login/" method="post">
 										{% csrf_token %}
 										{{ form|crispy }}
 										<button type="submit" id="btn-inicio">Inicio Sesión</button>

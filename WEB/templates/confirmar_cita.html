@@ -1,12 +1,8 @@
 {% extends 'index_paciente.html' %}
-{% block content %}
+{% block contenido %}
 
 
-<br>
-<section id="im" class="col-12">
-	<img src="https://via.placeholder.com/1920x320" alt="placeholder" class="col-12"/>
-</section>
-<br>
+
 <section>
 	<div class="row">
         <div id="in1" class="col-xl-12 col-sm-12">
@@ -57,11 +53,14 @@
         	</div>
         </div>
         <div class="col-12">
-	        <div class="col-12">
-	        	<button><a href="#">Continuar</a></button>
-
-	        </div>
-	    </div>
+            <div class="col-12">
+                <br>
+                <br>
+                <form action="#">
+                  <button id="btn-continuar">Continuar</button>
+                </form>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}
