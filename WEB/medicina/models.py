@@ -30,6 +30,12 @@ class Especialidad(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
 
+class Doctor(models.Model):
+	identificador_medico=models.CharField(max_length=250)
+	documento=models.FileField(upload_to=doc_up,null=True)
+	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
+
 class Dias(models.Model):
 	nombre= models.CharField(max_length=100)
 		
@@ -37,13 +43,8 @@ class Horario(models.Model):
 	hora_entrada=models.TimeField()
 	hora_salida=models.TimeField()
 	dias=models.ForeignKey(Dias, null=True, blank=True, on_delete=models.CASCADE)
+	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
-class Doctor(models.Model):
-	identificador_medico=models.CharField(max_length=250)
-	documento=models.FileField(upload_to=doc_up,null=True)
-	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
-	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
-	horario=models.ForeignKey(Horario, null=True, blank=True, on_delete=models.CASCADE)
 
 class Paciente(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
