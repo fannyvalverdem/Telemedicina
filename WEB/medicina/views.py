@@ -12,6 +12,7 @@ from .forms import *
 from django.contrib.auth.models import User
 from .controller import Listar, Add
 import requests,json
+from .utility import * 
 
 # Create your views here.
 @csrf_exempt 
@@ -48,34 +49,48 @@ def add_registro(request):
 	usuario=Listar("usuario")
 	persona=Listar("personas")
 	context= {'usuario': usuario, 'personas':persona}
+	if form.is_valid():
+	        username =form.cleaned_data['email']
+	        email =form.cleaned_data['email']
+	        password = form.cleaned_data['password']
+	        nombre = form.cleaned_data['nombre']
+	        apellido = form.cleaned_data['apellido']
+	        telefono = form.cleaned_data['telefono']
 	if request.method == "POST":
-	  	insertarpersona={"nombre": str(request.POST.get("nombre")), "apellido":str(request.POST.get("apellido")), "telefono":str(request.POST.get("telefono"))}
+	  	insertarpersona={"nombre": nombre, "apellido":apellido, "telefono":telefono}
 	  	Add(insertarpersona)
-	  	insertarusuario = {"email": str(request.POST.get("email")), "username":str(request.POST.get("username")), "password":str(request.POST.get("password")), "persona_id":insertarpersona}
+	  	insertarusuario = {"email": email, "username":username, "password":password, "persona_id":insertarpersona}
 	  	Add(insertarusuario)
 	  	return redirect('index_paciente')  
 	else:    
 		return render(request, 'add.html', context)
 
-
 def registro(request):
 	if request.method == 'POST':
 		print("POST")
+	usuario=Listar("usuario")
+	context= {'usuario': usuario}
 	form = RegistroForm(request.POST)
 	print("<<<<<<<<<<<<<<<<<<")
 	#checking the form is valid or not 
 	if form.is_valid():
+		username =form.cleaned_data['email']
 		email =form.cleaned_data['email']
 		password = form.cleaned_data['password']
-		user = User.objects.create_user(username=email,
-		                                 email=email,
-		                                 password=password)
-		print(user,"<<<<<<<<<<<<<<<<<<")
-		user = authenticate(username=username, password=password)
-		auth_login(request=request, user=user)
+		nombre = form.cleaned_data['name']
+		apellido = form.cleaned_data['apellido']
+		telefono = form.cleaned_data['phone']
+		print(username,email,password,nombre,apellido,telefono,"<###")
+		#user = User.objects.create_user(username=email,email=email,password=password)
+		insertarpersona={"nombre": str(nombre), "apellido":str(apellido), "telefono":str(telefono)}
+		insertarusuario = {"email": str(email), "username":str(username), "password":str(password), "persona_id":insertarpersona}
+		Add('usuario',insertarusuario)
+		#print(user,"<<<<<<<<<<<<<<<<<<")
+		#user = authenticate(username=username, password=password)
+		#auth_login(request=request, user=user)
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request))
-		return render(request,'index_paciente.html', dictionary)
+		return render(request,'index_paciente.html', context)
 	else:
 	#creating a new form
 		form = RegistroForm()
@@ -237,22 +252,17 @@ def login(request):
 	        username =form.cleaned_data['email']
 	        password = form.cleaned_data['password']
 	        user = authenticate(username=username,password=password)
-
-
-	        """auth_login(request=request, user=user)
-	        print(user,"<<<<<<<<")
-	        response = requests.get('http://127.0.0.1:8000/api/usuario/')
-	        data = response.json()
-	        for i in range(0,len(data)):
-	        	if username==data[i]['email'] and password==data[i]['password']:
-	        		return render(request, "index_paciente.html",{'form':form})
-	        print(user,data[0]['email'],"<<<<<<<<")
-	        """
 	        if user is not None:
-	        	auth_login(request=request, user=user)
-	        	return HttpResponseRedirect(reverse('inicio'))
-	        else: 
-	            msg_to_html = custom_message('Invalid Credentials', TagType.danger) 
-	            dictionary = dict(request=request, messages = msg_to_html) 
-	            dictionary.update(csrf(request))
+	        	auth_login(request=request,user=user)
+	        	response_doctor = requests.get('http://127.0.0.1:8000/api/doctor/')
+	        	data_doctor = response_doctor.json()
+	        	for i in range(0,len(data_doctor)):
+	        		if username==data_doctor[i]['user_id']['email'] and password==data_doctor[i]['user_id']['password']:
+	        			return render(request, "index_doctor.html",{'form':form})
+	        		else:
+	        			return render(request, "index_paciente.html",{'form':form})
+	        else:
+	        	msg_to_html = custom_message('Invalid Credentials', TagType.danger)
+	        	dictionary = dict(request=request, messages = msg_to_html)
+	        	dictionary.update(csrf(request))
 	        return render(request,'inicio_sesion.html', dictionary)
