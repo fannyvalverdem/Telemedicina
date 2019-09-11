@@ -112,6 +112,11 @@ $('#data_table_tarifa').DataTable({
 
 $('#data_table_citas').DataTable({
     "destroy": true,
+    rowCallback: function( row, data, index ) {
+        if (data['consulta_id']['estado'] != "realizada") {
+            $(row).hide();
+        }
+    },
     "ajax": 
         {
         "method": "GET",
@@ -126,19 +131,20 @@ $('#data_table_citas').DataTable({
         },
     
     },
+
+        "columns": [
+            { data: "consulta_id.paciente_id.user_id.persona_id.nombre"},
+            { data: "consulta_id.paciente_id.user_id.persona_id.apellido"},
+            { data: "fecha_reser"},
+            { data: "fecha_prog"},
+            { data: "precio"}
+        ],
+        columnDefs: [
+            { width: 100, targets: 0},
+            { width: 150, targets: 1},
+            { width: 150, targets: 2},
+            { width: 150, targets: 3},
+            { width: 150, targets: 4},
+        ],
     
-    "columns": [
-        { data: "consulta_id.paciente_id.user_id.persona_id.nombre"},
-        { data: "consulta_id.paciente_id.user_id.persona_id.apellido"},
-        { data: "fecha_reser"},
-        { data: "fecha_prog"},
-        { data: "precio"}
-    ],
-    columnDefs: [
-        { width: 100, targets: 0},
-        { width: 150, targets: 1},
-        { width: 150, targets: 2},
-        { width: 150, targets: 3},
-        { width: 150, targets: 4},
-    ],
 });
