@@ -5,6 +5,7 @@ from django.contrib.auth import logout
 
 from django.contrib import auth
 from .forms import *
+from .models import *
 
 # Create your views here.
 @csrf_exempt 
@@ -188,15 +189,19 @@ def ingresar_horario(request):
 
 
 def agendar_cita(request):
+	list_especialidades = Especialidad.objects.all()
+	
 	if request.method == 'POST':
 		print("POST")
 	form = CitasForms(request.POST)
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
-		return render(request,'seleccionar_medico.html', dictionary)
+		return render(request,'seleccionar_medico.html', context)
 	else:
 	#creating a new form
 		form = CitasForms()
 			#returning form 
-	return render(request, 'agendar_cita.html', {'form':form});
+	context = {'especialidades': list_especialidades, 'form':form}
+	return render(request, 'agendar_cita.html', context );
+

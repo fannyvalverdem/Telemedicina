@@ -36,7 +36,7 @@ $('#data_table').DataTable({
         { width: 150, targets: 2},
         { width: 150, targets: 3},
         { width: 150, className: "text-center", targets: 4, render: function(data){
-            return `<a href="/confirmacion_emergencia/" class="btn btn-primary" role="button"></a>
+            return `<a href="/confirmacion_cita/" class="btn btn-primary" role="button"></a>
                  `
         }},
     ],
