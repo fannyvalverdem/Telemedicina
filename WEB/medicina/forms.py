@@ -70,7 +70,7 @@ class PaqueteForm(forms.Form):
 	nombre=forms.CharField(label='Nombre: ',max_length=100,widget=forms.TextInput())
 	precio=forms.FloatField(label='Precio: ')
 	especialidad=forms.ChoiceField(choices=DOC_ID, label='Especialidad')
-	descripcion=forms.CharField(label='Descripcion del paquete: ', widget=forms.Textarea())
+	descripcion=forms.CharField(label='Descripcion del Paquete: ', widget=forms.Textarea())
 	citas=forms.IntegerField(label='Numero de citas: ')
 	examenes=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'onclick':'myFunction8()'}) )
 	lista_exam=forms.TypedMultipleChoiceField(label='Lista de examenes: ',choices=CHOICES)
@@ -78,6 +78,7 @@ class PaqueteForm(forms.Form):
 class TarifaForm(forms.Form):
 	nombre=forms.CharField(label='Nombre: ',max_length=100,widget=forms.TextInput())
 	precio=forms.FloatField(label='Precio: ')
+	descripcion=forms.CharField(label='Descripcion de la Tarifa: ', widget=forms.Textarea(attrs={'cols': 10, 'rows': 5}))
 
 class DoctorForm(forms.Form):
 	name = forms.CharField(label='Nombre:',max_length=100,widget=forms.TextInput())

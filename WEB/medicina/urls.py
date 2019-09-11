@@ -13,6 +13,9 @@ urlpatterns = [
 
 	url(r'^selec_medico/$', views.selec_medico, name='selec_medico'),
 	url(r'^confirmacion_cita/$', views.confirmacion_cita, name='confirmacion_cita'),
+	url(r'^login/$', views.login, name='login'),
+	url(r'^cerrar_sesion/$', views.cerrar_sesion, name='cerrar_sesion'),
+
 
 	url(r'^agendar_cita_medico/$', views.agendar_cita_medico, name='agendar_cita_medico'),
 

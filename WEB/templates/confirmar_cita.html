@@ -1,68 +1,64 @@
 {% extends 'index_paciente.html' %}
 {% block contenido %}
-{% if error %}
-<!--<div id="componente_modal_info">
-	<modal-info v-if="showModal" url_redirect="">
-		<h3 slot="header">Error</h3>
-		<div slot="body">
-			<p>Existen algunos errores en los siguientes campos:</p>
-			{% for campo,e in error.items %}
-			<h5>{{campo}}</h5>
-			{{e}}
-			{% endfor %}
-		</div>
-	</modal-info>
-</div>
-{% endif %}
-{% if success %}
-<div id="componente_modal_info">
-	<modal-info v-if="showModal" url_redirect="{% url 'medicina:transmisiones' %}">
-		<h3 slot="header">Información</h3>
-		<p slot="body">{{success}}</p>
-	</modal-info>
-</div>
-{% endif %}-->
 
-<div id="titulo" class="row">
-	<h2>Agendamiento de consulta médica</h2>
-	<br>
-	<br>
-</div>
-<br>
-<br>
-<div class="row">
-	<div class="col-6">
-		<img id="foto_doc" src="https://via.placeholder.com/300x300" alt="placeholder" />
-	</div>
-	<div class="col-6">
-		<div class="row info">
-			<label class="col-sm-12"><b>Confirmacion de cita: </b></label>
-		</div>
-		<div class="row info">
-			<label class="col-sm-3"><b>Especialidad: </b></label>
-			<label class="col-sm-9">f</label>
-		</div>
-		<div class="row info">
-			<label class="col-sm-3"><b>Medico:</b></label>
-			<label class="col-sm-9">f</label>
-		</div>
-		<div class="row info">
-			<label class="col-sm-3"><b>Fecha: </b></label>
-			<label class="col-sm-9">f</label>
-		</div>
-		<div class="row info">
-			<label class="col-sm-3"><b>Hora: </b></label>
-			<label class="col-sm-9">f</label>
-		</div>
-	</div>
-</div>
-<div class="col-12">
-	<div class="col-12">
-		<br>
-		<br>
-		<form action="#">
-			<button type=submit id="btn-continuar">Confirmar</button>
-		</form>
-	</div>
-</div>
+<section>
+	<div class="row">
+        <div id="in1" class="col-xl-12 col-sm-12">
+          <p>Consulta médica</p>
+        </div>
+        <div class="row">
+        	<div class="col-6">
+        		<img src="https://via.placeholder.com/300x300" alt="placeholder" class="col-12"/>
+        	</div>
+        	<div class="col-6">
+        		<div class="col-12">
+        			<div class="row">
+        				Confirmación cita  
+        			</div>
+        			<div class="row">
+        				<div class="col-6">
+        					Especialidad:
+        				</div>
+        				<div class="col-6">
+        					Especialidad1
+        				</div>
+        			</div>
+        			<div class="row">
+        				<div class="col-6">
+        					Médico
+        				</div>
+        				<div class="col-6">
+        					Médico1
+        				</div>
+        			</div>
+                    <div class="row">
+                        <div class="col-6">
+                            Fecha
+                        </div>
+                        <div class="col-6">
+                            dd mm aaaa
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            Hora
+                        </div>
+                        <div class="col-6">
+                            hh:mm
+                        </div>
+                    </div>
+        		</div>
+        	</div>
+        </div>
+        <div class="col-12">
+            <div class="col-12">
+                <br>
+                <br>
+                <form action="#">
+                  <button id="btn-continuar">Continuar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

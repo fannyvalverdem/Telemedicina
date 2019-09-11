@@ -109,3 +109,13 @@ CREATE TABLE paquete(
 	FOREIGN KEY(id_especialidad) REFERENCES especialidad(id)
 	
 );
+
+CREATE FUNCTION usuarios_auth() RETURNS TRIGGER AS $usuarios_auth$  
+    BEGIN  
+        INSERT INTO auth_user(password, username, is_superuser, is_staff, is_active, date_joined, first_name, last_name, email) SELECT password,username,'f','f','t',NOW(),nombre,apellido,email FROM medicina_usuario mu, medicina_persona mp WHERE mp.id=mu.persona_id_id;
+        RETURN NEW;   
+    END;
+$usuarios_auth$ LANGUAGE plpgsql;
+
+CREATE TRIGGER usuarios_auth AFTER INSERT ON medicina_usuario
+    FOR EACH ROW EXECUTE PROCEDURE usuarios_auth(); 

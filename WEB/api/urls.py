@@ -8,6 +8,8 @@ urlpatterns = [
 	url(r'^especialidad/$', views.EspecialidadViewset.as_view(), name='especialidad_api'),
 	url(r'^doctor/$', views.DoctorViewset.as_view(), name='doctor_api'),
 	url(r'^paquete/$', views.PaqueteViewset.as_view(), name='paquete_api'),
+	url(r'^tarifas/$', views.TarifaViewset.as_view(), name='tarifa_api'),
 	url(r'^consulta/$', views.ConsultaViewset.as_view(), name='consulta_api'),
 	url(r'^usuario/$', views.UsuarioViewset.as_view(), name='usuario_api'),
+	url(r'^crear_usuario/$', views.CreateUser.as_view(), name='crear_usuario_api'),
 ]

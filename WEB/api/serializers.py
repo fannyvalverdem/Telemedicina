@@ -41,7 +41,6 @@ class PaquetesSerializer(serializers.ModelSerializer):
 		fields=("nombre","descripcion","precio","duracion","especialidad")
 
 class TarifasSerializer(serializers.ModelSerializer):
-	
 	class Meta:
 		model= models.Tarifa
 		fields=("nombre","descripcion","precio")

@@ -74,49 +74,14 @@ $('#data_table_paquete').DataTable({
         { width: 150, targets: 3},
         { width: 150, targets: 4},
         { width: 150, className: "text-center", targets: 5, render: function(data){
-            return `<a href="/confirmacion_emergencia/" class="btn btn-primary" role="button"><i class="fas fa-eye"></i></a>
+            return `<a href="/confirmacion_cita/" class="btn btn-primary" role="button"><i class="fas fa-eye"></i></a>
                  `
         }},
     ],
 });
 
-$('#data_table_tarifa').DataTable({
-    "destroy": true,
-    "ajax": 
-        {
-        "method": "GET",
-        "url": "/api/tarifas/",
-        "dataSrc": "",
-        "error": function(xhr, status, error) {
-            console.log("readyState: " + xhr.readyState);
-            console.log("responseText: "+ xhr.responseText);
-            console.log("status: " + xhr.status);
-            console.log("text status: " + status);
-            console.log("error: " + error);
-        },
-    
-    },
-    
-    "columns": [
-        { data: "nombre"},
-        { data: "descripcion"},
-        { data: "precio"}
-    ],
-    columnDefs: [
-        { width: 100, targets: 0},
-        { width: 100, targets: 1},
-        { width: 100, targets: 2},
-    ],
-});
-
-
 $('#data_table_citas').DataTable({
     "destroy": true,
-    rowCallback: function( row, data, index ) {
-        if (data['consulta_id']['estado'] != "realizada") {
-            $(row).hide();
-        }
-    },
     "ajax": 
         {
         "method": "GET",
@@ -131,20 +96,19 @@ $('#data_table_citas').DataTable({
         },
     
     },
-
-        "columns": [
-            { data: "consulta_id.paciente_id.user_id.persona_id.nombre"},
-            { data: "consulta_id.paciente_id.user_id.persona_id.apellido"},
-            { data: "fecha_reser"},
-            { data: "fecha_prog"},
-            { data: "precio"}
-        ],
-        columnDefs: [
-            { width: 100, targets: 0},
-            { width: 150, targets: 1},
-            { width: 150, targets: 2},
-            { width: 150, targets: 3},
-            { width: 150, targets: 4},
-        ],
     
+    "columns": [
+        { data: "consulta_id.paciente_id.user_id.persona_id.nombre"},
+        { data: "consulta_id.paciente_id.user_id.persona_id.apellido"},
+        { data: "fecha_reser"},
+        { data: "fecha_prog"},
+        { data: "precio"}
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 150, targets: 1},
+        { width: 150, targets: 2},
+        { width: 150, targets: 3},
+        { width: 150, targets: 4},
+    ],
 });
