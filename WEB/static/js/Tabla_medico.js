@@ -1,5 +1,11 @@
 $('#data_table').DataTable({
     "destroy": true,
+    rowCallback: function( row, data, index ) {
+        if (data['especialidad']['nombre'] != "Cardiologia") {
+            $(row).hide();
+        }
+    },
+    
     "ajax": 
         {
         "method": "GET",
@@ -113,8 +119,8 @@ $('#data_table_tarifa').DataTable({
 $('#data_table_citas').DataTable({
     "destroy": true,
     rowCallback: function( row, data, index ) {
-        var id_doc=str($('#id_usuario_doc').html())
-        if (data['consulta_id']['estado'] != "realizada" and data['consulta_id']['doctor_id']['user_id']['username']==id_doc) {
+        var id_doc=String($('#id_usuario_doc').html())
+        if (data['consulta_id']['estado'] == "agendada" || data['consulta_id']['doctor_id']['user_id']['username']!=id_doc) {
             $(row).hide();
         }
     },

@@ -302,7 +302,10 @@ def agendar_cita(request):
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
-		return render(request,'seleccionar_medico.html', context)
+		text = form.cleaned_data['especialidad']
+		d = {'form':form, 'text':text}
+		
+		return render(request,'seleccionar_medico.html', d)
 	else:
 	#creating a new form
 		form = CitasForms()
@@ -329,11 +332,14 @@ def login(request):
 	        	for i in range(0,len(data_doctor)):
 	        		print(data_doctor[i]['user_id']['email'])
 	        		if username==str(data_doctor[i]['user_id']['email']) and password==str(data_doctor[i]['user_id']['password']):
-	        			return render(request, "index_doctor.html",{'form':form})
-	        		elif username==str(data_admin[i]['user_id']['email']) and str(password==data_admin[i]['user_id']['password']):
-	        			return render(request, "index_admin.html",{'form':form})
-	        		else:
-	        			return render(request, "index_paciente.html",{'form':form})
+	        			return redirect('index_medico')
+	        	for i in range(0,len(data_admin)):
+	        		if username==str(data_admin[i]['user_id']['email']) and str(password==data_admin[i]['user_id']['password']):
+	        			return redirect('index_admin')
+	        	
+	        	return redirect('index_paciente')
+
+
 	        else:
 	        	form = SignupForm()
 	        	msg_to_html = custom_message('Invalid Credentials', TagType.danger)
