@@ -327,6 +327,7 @@ def login(request):
 	        	response_admin = requests.get('http://127.0.0.1:8000/api/administrador/')
 	        	data_admin = response_admin.json()
 	        	for i in range(0,len(data_doctor)):
+	        		print(data_doctor[i]['user_id']['email'])
 	        		if username==str(data_doctor[i]['user_id']['email']) and password==str(data_doctor[i]['user_id']['password']):
 	        			return render(request, "index_doctor.html",{'form':form})
 	        		elif username==str(data_admin[i]['user_id']['email']) and str(password==data_admin[i]['user_id']['password']):
