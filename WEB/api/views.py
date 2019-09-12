@@ -50,6 +50,12 @@ class PaqueteViewset(generics.ListAPIView):
 class TarifaViewset(generics.ListAPIView):
 	queryset = models.Tarifa.objects.all()
 	serializer_class = serializers.TarifasSerializer
+	def post(self, request, format=None):
+		serializer = serializers.TarifasSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
 
 class ConsultaViewset(generics.ListAPIView):
 	queryset = models.Detalle_Consulta.objects.all()
