@@ -37,7 +37,7 @@ class MedicoSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model= models.Doctor
-		fields=("identificador_medico","user_id","especialidad")
+		fields=("id","identificador_medico","user_id","especialidad")
 
 class PacienteSerializer(serializers.ModelSerializer):
 	user_id=UsuarioSerializer()
