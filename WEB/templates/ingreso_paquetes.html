@@ -8,24 +8,21 @@
 <div class="row">
 	<div class="col-xl-12">
 		{% load crispy_forms_tags %}
-		<form action="/administrador/" method="post">
+		<form action="" method="post">
 			<div class="row">
 				{% csrf_token %}
 				<div class="col-xl-5">
 					{{ form.nombre|as_crispy_field }}
 					{{ form.precio|as_crispy_field }}
 					{{ form.especialidad|as_crispy_field }}
-					{{ form.citas|as_crispy_field }}
-					{{ form.examenes|as_crispy_field }}
+					{{ form.duracion|as_crispy_field }}
 				</div>
 				<div class="col-xl-2">
 					
 				</div>
 				<div class="col-xl-5">
 					{{ form.descripcion|as_crispy_field}}
-					<div id="lista_exams" style="display:none">
-						{{ form.lista_exam|as_crispy_field}}	
-					</div>
+					
 				</div>
 				</div>
 			<button type="submit" id="btn-guardar">Guardar</button>

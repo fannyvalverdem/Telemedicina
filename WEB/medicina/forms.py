@@ -69,7 +69,7 @@ class RegistroForm(forms.Form):
 class PaqueteForm(forms.Form):
 	nombre=forms.CharField(label='Nombre: ',max_length=100,widget=forms.TextInput())
 	precio=forms.FloatField(label='Precio: ')
-	especialidad=ModelChoiceField(label='Especialidad',queryset=models.Especialidad.objects.all(),required=False)
+	especialidad=forms.ModelChoiceField(label='Especialidad',queryset=Especialidad.objects.all(),required=False)
 	descripcion=forms.CharField(label='Descripcion del Paquete: ', widget=forms.Textarea())
 	duracion=forms.IntegerField(label='Duración de paquetes: ')
 
