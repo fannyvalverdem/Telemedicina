@@ -15,7 +15,7 @@ from .controller import Listar, Add
 import requests,json
 from .utility import *
 from django.http import QueryDict
-from .models import Persona, Paquete
+from .models import Persona, Paquete,Dias,Doctor
 from django.shortcuts import redirect
 
 # Create your views here.
@@ -268,10 +268,9 @@ def ingresar_medico(request):
 		)
 
 		doc.save()
-		return redirect('ver_paquetes')
+		return redirect('ing-horario')
 	else:
 	#creating a new form
-		print(form.errors)
 		form = DoctorForm()
 			#returning form 
 	return render(request, 'ingresar_medico.html', {'form':form});
@@ -283,9 +282,155 @@ def ingresar_horario(request):
 	
 	#checking the form is valid or not 
 	if form.is_valid():
-		dictionary = dict(request=request) 
-		dictionary.update(csrf(request)) 
-		return render(request,'index_admin.html', dictionary)
+		lunes=form.cleaned_data["lunes"]
+		martes=form.cleaned_data["martes"]
+		miercoles=form.cleaned_data["miercoles"]
+		jueves=form.cleaned_data["jueves"]
+		sabado=form.cleaned_data["sabado"]
+		domingo=form.cleaned_data["domingo"]
+		viernes=form.cleaned_data["viernes"]
+
+		if(lunes==True):
+			dia=Dias.objects.get(nombre__iexact='Lunes')
+			doctor=Doctor.objects.last()
+			hora_entrada_lunes=form.cleaned_data["hora_entrada_lunes"]
+			minutos_entrada_lunes=form.cleaned_data["minutos_entrada_lunes"]
+			hora_salida_lunes=form.cleaned_data["hora_salida_lunes"]
+			minutos_salida_lunes=form.cleaned_data["minutos_salida_lunes"]
+
+			entrada=hora_entrada_lunes+":"+minutos_entrada_lunes+":00"
+			salida=hora_salida_lunes+":"+minutos_salida_lunes+":00"
+
+			horario=Horario(
+				hora_entrada=entrada,
+				hora_salida=salida,
+				dias=dia,
+				doctor=doctor
+			)
+
+			horario.save()
+
+		if(martes==True):
+			dia=Dias.objects.get(nombre__iexact='Martes')
+			doctor=Doctor.objects.last()
+			hora_entrada_martes=form.cleaned_data["hora_entrada_martes"]
+			minutos_entrada_martes=form.cleaned_data["minutos_entrada_martes"]
+			hora_salida_martes=form.cleaned_data["hora_salida_martes"]
+			minutos_salida_martes=form.cleaned_data["minutos_salida_martes"]
+
+			entrada=hora_entrada_martes+":"+minutos_entrada_martes+":00"
+			salida=hora_salida_martes+":"+minutos_salida_martes+":00"
+
+			horario2=Horario(
+				hora_entrada=entrada,
+				hora_salida=salida,
+				dias=dia,
+				doctor=doctor
+			)
+
+			horario2.save()
+
+		if(miercoles==True):
+			dia=Dias.objects.get(nombre__iexact='Miercoles')
+			doctor=Doctor.objects.last()
+			hora_entrada_miercoles=form.cleaned_data["hora_entrada_miercoles"]
+			minutos_entrada_miercoles=form.cleaned_data["minutos_entrada_miercoles"]
+			hora_salida_miercoles=form.cleaned_data["hora_salida_miercoles"]
+			minutos_salida_miercoles=form.cleaned_data["minutos_salida_miercoles"]
+
+			entrada=hora_entrada_miercoles+":"+minutos_entrada_miercoles+":00"
+			salida=hora_salida_miercoles+":"+minutos_salida_miercoles+":00"
+
+			horario3=Horario(
+				hora_entrada=entrada,
+				hora_salida=salida,
+				dias=dia,
+				doctor=doctor
+			)
+
+			horario3.save()
+
+		if(jueves==True):
+			dia=Dias.objects.get(nombre__iexact='Jueves')
+			doctor=Doctor.objects.last()
+			hora_entrada_jueves=form.cleaned_data["hora_entrada_jueves"]
+			minutos_entrada_jueves=form.cleaned_data["minutos_entrada_jueves"]
+			hora_salida_jueves=form.cleaned_data["hora_salida_jueves"]
+			minutos_salida_jueves=form.cleaned_data["minutos_salida_jueves"]
+
+			entrada=hora_entrada_jueves+":"+minutos_entrada_jueves+":00"
+			salida=hora_salida_jueves+":"+minutos_salida_jueves+":00"
+
+			horario4=Horario(
+				hora_entrada=entrada,
+				hora_salida=salida,
+				dias=dia,
+				doctor=doctor
+			)
+
+			horario4.save()
+
+		if(viernes==True):
+			dia=Dias.objects.get(nombre__iexact='Viernes')
+			doctor=Doctor.objects.last()
+			hora_entrada_viernes=form.cleaned_data["hora_entrada_viernes"]
+			minutos_entrada_viernes=form.cleaned_data["minutos_entrada_viernes"]
+			hora_salida_viernes=form.cleaned_data["hora_salida_viernes"]
+			minutos_salida_viernes=form.cleaned_data["minutos_salida_viernes"]
+
+			entrada=hora_entrada_viernes+":"+minutos_entrada_viernes+":00"
+			salida=hora_salida_viernes+":"+minutos_salida_viernes+":00"
+
+			horario5=Horario(
+				hora_entrada=entrada,
+				hora_salida=salida,
+				dias=dia,
+				doctor=doctor
+			)
+
+			horario5.save()
+
+		if(sabado==True):
+			dia=Dias.objects.get(nombre__iexact='Sabado')
+			doctor=Doctor.objects.last()
+			hora_entrada_sabado=form.cleaned_data["hora_entrada_sabado"]
+			minutos_entrada_sabado=form.cleaned_data["minutos_entrada_sabado"]
+			hora_salida_sabado=form.cleaned_data["hora_salida_sabado"]
+			minutos_salida_sabado=form.cleaned_data["minutos_salida_sabado"]
+
+			entrada=hora_entrada_sabado+":"+minutos_entrada_sabado+":00"
+			salida=hora_salida_sabado+":"+minutos_salida_sabado+":00"
+
+			horario6=Horario(
+				hora_entrada=entrada,
+				hora_salida=salida,
+				dias=dia,
+				doctor=doctor
+			)
+
+			horario6.save()
+
+		if(domingo==True):
+			dia=Dias.objects.get(nombre__iexact='Domingo')
+			doctor=Doctor.objects.last()
+			hora_entrada_domingo=form.cleaned_data["hora_entrada_domingo"]
+			minutos_entrada_domingo=form.cleaned_data["minutos_entrada_domingo"]
+			hora_salida_domingo=form.cleaned_data["hora_salida_domingo"]
+			minutos_salida_domingo=form.cleaned_data["minutos_salida_domingo"]
+
+			entrada=hora_entrada_domingo+":"+minutos_entrada_domingo+":00"
+			salida=hora_salida_domingo+":"+minutos_salida_domingo+":00"
+
+			horario7=Horario(
+				hora_entrada=entrada,
+				hora_salida=salida,
+				dias=dia,
+				doctor=doctor
+			)
+
+			horario7.save()
+
+		return redirect('index_admin')
 	else:
 	#creating a new form
 		form = HorarioForm()
