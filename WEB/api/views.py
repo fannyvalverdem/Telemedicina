@@ -39,6 +39,16 @@ class UsuarioViewset(generics.ListAPIView):
     		return Response(serializer.data, status=status.HTTP_201_CREATED)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
 
+class AdministradorViewset(generics.ListAPIView):
+    queryset = models.Administrador.objects.all()
+    serializer_class = serializers.AdministradorSerializer
+    def post(self, request, format=None):
+    	serializer = serializers.AdministradorSerializer(data=request.data)
+    	if serializer.is_valid():
+    		serializer.save()
+    		return Response(serializer.data, status=status.HTTP_201_CREATED)
+    	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class DoctorViewset(generics.ListAPIView):
 	queryset = models.Doctor.objects.all()
 	serializer_class = serializers.MedicoSerializer

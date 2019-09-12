@@ -265,13 +265,18 @@ def login(request):
 	        	auth_login(request=request,user=user)
 	        	response_doctor = requests.get('http://127.0.0.1:8000/api/doctor/')
 	        	data_doctor = response_doctor.json()
+	        	response_admin = requests.get('http://127.0.0.1:8000/api/doctor/')
+	        	data_admin = response_admin.json()
 	        	for i in range(0,len(data_doctor)):
 	        		if username==data_doctor[i]['user_id']['email'] and password==data_doctor[i]['user_id']['password']:
 	        			return render(request, "index_doctor.html",{'form':form})
+	        		elif username==data_admin[i]['user_id']['email'] and password==data_admin[i]['user_id']['password']:
+	        			return render(request, "index_admin.html",{'form':form})
 	        		else:
 	        			return render(request, "index_paciente.html",{'form':form})
 	        else:
+	        	form = SignupForm()
 	        	msg_to_html = custom_message('Invalid Credentials', TagType.danger)
 	        	dictionary = dict(request=request, messages = msg_to_html)
 	        	dictionary.update(csrf(request))
-	        return render(request,'inicio_sesion.html', dictionary)
+	        return render(request,'inicio_sesion.html', {'form':form})
