@@ -271,7 +271,6 @@ def ingresar_medico(request):
 		return redirect('ing-horario')
 	else:
 	#creating a new form
-		print(form.errors)
 		form = DoctorForm()
 			#returning form 
 	return render(request, 'ingresar_medico.html', {'form':form});
