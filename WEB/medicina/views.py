@@ -302,7 +302,10 @@ def agendar_cita(request):
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
-		return render(request,'seleccionar_medico.html', context)
+		text = form.cleaned_data['especialidad']
+		d = {'form':form, 'text':text}
+		
+		return render(request,'seleccionar_medico.html', d)
 	else:
 	#creating a new form
 		form = CitasForms()
