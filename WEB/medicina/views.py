@@ -15,7 +15,8 @@ from .controller import Listar, Add
 import requests,json
 from .utility import *
 from django.http import QueryDict
-from .models import Persona
+from .models import Persona, Paquete
+from django.shortcuts import redirect
 
 # Create your views here.
 @csrf_exempt 
@@ -175,9 +176,22 @@ def ingresar_paquete(request):
 	
 	#checking the form is valid or not 
 	if form.is_valid():
-		dictionary = dict(request=request) 
-		dictionary.update(csrf(request)) 
-		return render(request,'tarifas.html', dictionary)
+		nombre =form.cleaned_data['nombre']
+		precio =form.cleaned_data['precio']
+		especialidad = form.cleaned_data['especialidad']
+		duracion =form.cleaned_data['duracion']
+		descripcion = form.cleaned_data['descripcion']
+
+		paquete=Paquete(
+			nombre=nombre,
+			precio=precio,
+			descripcion=descripcion,
+			especialidad=especialidad,
+			duracion=duracion
+		)
+
+		paquete.save()
+		return redirect('ver_paquetes') 
 	else:
 	#creating a new form
 		form = PaqueteForm()
@@ -195,6 +209,7 @@ def ingresar_tarifa(request):
 		descripcion = form.cleaned_data['descripcion']
 		insertartarifa={"nombre":str(nombre),"descripcion":str(descripcion),"precio":float(precio)}
 		Add('tarifas',insertartarifa)
+		return redirect('ver_tarifas') 
 	else:
 	#creating a new form
 		form = TarifaForm()
@@ -208,11 +223,55 @@ def ingresar_medico(request):
 	
 	#checking the form is valid or not 
 	if form.is_valid():
-		dictionary = dict(request=request) 
-		dictionary.update(csrf(request)) 
-		return render(request,'index_admin.html', dictionary)
+		nombre =form.cleaned_data['name']
+		apellido =form.cleaned_data['apellido']
+		especialidad = form.cleaned_data['especialidad']
+		documento_id =form.cleaned_data['documento_id']
+		num_doc = form.cleaned_data['num_doc']
+		email =form.cleaned_data['email']
+		password =form.cleaned_data['password']
+		direccion = form.cleaned_data['direccion']
+		ciudad =form.cleaned_data['ciudad']
+		phone = form.cleaned_data['phone']
+		celular =form.cleaned_data['celular']
+		tarifa =form.cleaned_data['tarifa']
+		licencia_med = form.cleaned_data['licencia_med']
+
+
+		person=Persona(
+			nombre=nombre,
+			apellido=apellido,
+			tipo_documento=documento_id,
+			numero_documento=num_doc,
+			telefono=phone,
+			ciudad=ciudad,
+			direccion=direccion
+		)
+
+		person.save()
+
+		user=Usuario(
+			email=email,
+			username=email,
+			password=password,
+			persona_id=person
+		)
+
+		user.save()
+
+		User.objects.create_user(username=email,email=email,password=password)
+
+		doc=Doctor(
+			identificador_medico=licencia_med,
+			user_id=user,
+			especialidad=especialidad
+		)
+
+		doc.save()
+		return redirect('ver_paquetes')
 	else:
 	#creating a new form
+		print(form.errors)
 		form = DoctorForm()
 			#returning form 
 	return render(request, 'ingresar_medico.html', {'form':form});

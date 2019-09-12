@@ -89,11 +89,11 @@ class DoctorForm(forms.Form):
 	ciudad=forms.CharField(label='Ciudad:',max_length=100,widget=forms.TextInput())
 	phone = forms.CharField(label='Teléfono:',max_length=100,widget=forms.TextInput())
 	celular=forms.CharField(label='Celular:',max_length=100,widget=forms.TextInput())
-	especialidad=forms.ChoiceField(required=False, choices=DOC_ID, label='Especialidad:')
-	tarifa=forms.ChoiceField(required=False, choices=DOC_ID, label='Tarifa:')
+	especialidad=forms.ModelChoiceField(required=False,queryset=Especialidad.objects.all(), label='Especialidad:')
+	tarifa=forms.ModelChoiceField(required=False,queryset=Tarifa.objects.all(), label='Tarifa:')
 	licencia_med=forms.CharField(label='Número de licencia médica:',max_length=100,widget=forms.TextInput())
-	foto=forms.FileField(label='Foto:')
-	documentos=forms.FileField(label='Documentos:',widget=forms.ClearableFileInput(attrs={'multiple': True}))
+	#foto=forms.FileField(label='Foto:')
+	#documentos=forms.FileField(label='Documentos:',widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
 
 class HorarioForm(forms.Form):
