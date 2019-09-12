@@ -9,10 +9,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth import login as auth_login
 from .forms import *
+from .models import *
 from django.contrib.auth.models import User
 from .controller import Listar, Add
 import requests,json
-from .utility import * 
+from .utility import *
 from django.http import QueryDict
 from .models import Persona
 
@@ -238,19 +239,21 @@ def ingresar_horario(request):
 
 
 def agendar_cita(request):
+	list_especialidades = Especialidad.objects.all()
+	
 	if request.method == 'POST':
 		print("POST")
 	form = CitasForms(request.POST)
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
-		return render(request,'seleccionar_medico.html', dictionary)
+		return render(request,'seleccionar_medico.html', context)
 	else:
 	#creating a new form
 		form = CitasForms()
 			#returning form 
-	return render(request, 'agendar_cita.html', {'form':form});
-
+	context = {'especialidades': list_especialidades, 'form':form}
+	return render(request, 'agendar_cita.html', context );
 
 def login(request): 
     print(request.method,"<<<<<<<<<<")

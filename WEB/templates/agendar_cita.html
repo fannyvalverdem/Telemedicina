@@ -2,42 +2,52 @@
 {% block contenido %}
 <div class="container">
 	<div class="row">
-        <div id="titulo" class="col-xl-12">
-          <h2>Consulta médica por emergencia</h2>
-          <br>
-            <br>
-        </div>
-        <div class="row">
-        	<div class="col-6">
-        		<img src="https://via.placeholder.com/300x300" alt="placeholder" class="col-12"/>
-        	</div>
-        	<div class="col-6">
-        		{% load crispy_forms_tags %}
-        		<form action="/selec_medico/" method="post">
-	        		<div class="row">
-		        		{% csrf_token %}
-		        		<div class="col-12">Especialidad:
-		        			{{ form.especialidad|as_crispy_field}}
-		        		</div>
-		        		<div class="col-12">Fecha y hora:
-							
+		<div id="titulo" class="col-xl-12">
+			<h2>Agendamiento de consulta medica</h2>
+			<br>
+			<br>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<img src="https://via.placeholder.com/300x300" alt="placeholder" class="col-12" />
+			</div>
+			<div class="col-6">
+				{% load crispy_forms_tags %}
+				<form action="/selec_medico/" method="post">
+					<div class="row">
+						{% csrf_token %}
+						<div class="col-12">Especialidad:
+							<select id="equipo2" class="custom-select form-control" name="equipo2"
+								oninvalid="this.setCustomValidity('Ingrese una especialidad de la lista')" required
+								oninput="this.setCustomValidity('')">
+								<option disabled selected></option>
+								{% for especialidad in especialidades %}
+								<option value="{{ especialidad }}">{{ especialidad.nombre }}</option>
+								{% endfor %}
+							</select>
+							{{ form.especialidad|as_crispy_field }}
+						</div>
+						<div class="col-12">Fecha y hora:
+
 							<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-						      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-						      <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-						        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-						      </div>
-						    </div>
+								<input type="text" class="form-control datetimepicker-input"
+									data-target="#datetimepicker1" />
+								<div class="input-group-append" data-target="#datetimepicker1"
+									data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div>
 
-						    <script>
-						      $(function () {
-						        $("#datetimepicker1").datetimepicker();
-						      });
-						    </script>
+							<script>
+								$(function () {
+									$("#datetimepicker1").datetimepicker();
+								});
+							</script>
 
 
-		        		</div>
+						</div>
 
-		        		<!--
+						<!--
 		        		<div class="row">
 			        		<div class="col-12">
 			        			<div class="col-12">Hora:
@@ -53,21 +63,21 @@
 							</div>
 			        		</div>
 		        		</div>-->
-		        	</div>
-		        	<div class="col-12">
-				        <div class="col-12">
-			                <br>
-			                <br>
-			                <form action="#">
-				        	  <button id="btn-continuar">Continuar</button>
-			                </form>
-				        </div>
-				    </div>
-	        	</form>
-        	</div>
+					</div>
+					<div class="col-12">
+						<div class="col-12">
+							<br>
+							<br>
 
-    </div>
-</div>
+							<button id="btn-continuar">Continuar</button>
+
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
 
 
-{% endblock %}
+	{% endblock %}

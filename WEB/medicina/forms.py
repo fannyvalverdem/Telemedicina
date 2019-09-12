@@ -1,4 +1,5 @@
 from django import forms
+from .models import *
 
 #creating our forms
 CHOICES=[
@@ -109,7 +110,8 @@ class HorarioForm(forms.Form):
 	zona=forms.ChoiceField(required=True, choices=ZONE,label='')
 
 class CitasForms(forms.Form):
-	especialidad=forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Especialidad'}))
+	especialidad = forms.ModelChoiceField(queryset=Especialidad.objects.all())
+	#especialidad=forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Especialidad'}))
 	date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
 	hora=forms.ChoiceField(required=True, choices=HORA,label='')
 	minutos=forms.ChoiceField(required=True, choices=MINUTOS_CITAS,label='')
