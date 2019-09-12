@@ -12,5 +12,5 @@ urlpatterns = [
 	url(r'^consulta/$', views.ConsultaViewset.as_view(), name='consulta_api'),
 	url(r'^usuario/$', views.UsuarioViewset.as_view(), name='usuario_api'),
 	url(r'^horario/$', views.HorarioViewset.as_view(), name='horario_api'),
-	url(r'^crear_usuario/$', views.CreateUser.as_view(), name='crear_usuario_api'),
+	url(r'^administrador/$', views.AdministradorViewset.as_view(), name='administrador_api'),
 ]

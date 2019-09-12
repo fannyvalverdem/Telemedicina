@@ -119,7 +119,8 @@ $('#data_table_tarifa').DataTable({
 $('#data_table_citas').DataTable({
     "destroy": true,
     rowCallback: function( row, data, index ) {
-        if (data['consulta_id']['estado'] != "realizada") {
+        var id_doc=String($('#id_usuario_doc').html())
+        if (data['consulta_id']['estado'] == "agendada" || data['consulta_id']['doctor_id']['user_id']['username']!=id_doc) {
             $(row).hide();
         }
     },

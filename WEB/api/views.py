@@ -5,7 +5,7 @@ from . import serializers
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+import requests,json
 
 # Create your views here.
 class PersonaViewset(generics.ListAPIView):
@@ -19,10 +19,31 @@ class PersonaViewset(generics.ListAPIView):
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UsuarioViewset(generics.ListAPIView):
-    queryset = models.Usuario.objects.all()
-    serializer_class = serializers.UsuarioSerializer
+	queryset = models.Usuario.objects.all()
+	serializer_class = serializers.UsuarioSerializer
+	def post(self, request, format=None):
+		persona=models.Persona.objects.all().last()
+		myDict = dict(request.data)
+		myDict["persona_id"] = serializers.PersonaSerializer(myDict)
+		serializer = serializers.UsuarioSerializer(data=myDict)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+"""
+    def put(self,request,user_id):
+    	serializer=UsuarioSerializer(data=request.data)
+
+    	if serializer.is_valid():
+    		serializer.save()
+    		return Response(serializer.data, status=status.HTTP_201_CREATED)
+    	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
+
+class AdministradorViewset(generics.ListAPIView):
+    queryset = models.Administrador.objects.all()
+    serializer_class = serializers.AdministradorSerializer
     def post(self, request, format=None):
-    	serializer = serializers.UsuarioSerializer(data=request.data)
+    	serializer = serializers.AdministradorSerializer(data=request.data)
     	if serializer.is_valid():
     		serializer.save()
     		return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -44,6 +65,12 @@ class PaqueteViewset(generics.ListAPIView):
 class TarifaViewset(generics.ListAPIView):
 	queryset = models.Tarifa.objects.all()
 	serializer_class = serializers.TarifasSerializer
+	def post(self, request, format=None):
+		serializer = serializers.TarifasSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
 
 class ConsultaViewset(generics.ListAPIView):
 	queryset = models.Detalle_Consulta.objects.all()
@@ -52,14 +79,3 @@ class ConsultaViewset(generics.ListAPIView):
 class EspecialidadViewset(generics.ListAPIView):
 	queryset = models.Especialidad.objects.all()
 	serializer_class = serializers.EspecialidadSerializer
-
-class CreateUser(generics.CreateAPIView):
-	serializer_class = serializers.UsuarioSerializer
-	def post(self, request, format=None):
-		serializer = serializers.UsuarioSerializer(data=request.data)
-		if serializer.is_valid():
-
-			serializer.save()
-
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

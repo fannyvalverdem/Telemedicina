@@ -4,19 +4,32 @@ from medicina import models
 class PersonaSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Persona
-		fields=("nombre","apellido","tipo_documento","numero_documento","fecha_nac","sexo","telefono","ciudad","direccion")
+		fields=("id","nombre","apellido","tipo_documento","numero_documento","fecha_nac","sexo","telefono","ciudad","direccion")
 
 class UsuarioSerializer(serializers.ModelSerializer):
 	persona_id=PersonaSerializer()
 	class Meta:
 		model= models.Usuario
-		fields=("email","username","password","persona_id")
+		fields=("id","email","username","password","persona_id")
+
+	def create(self, validated_data):
+		persona_id = validated_data.pop('persona_id')
+		usuario = models.Usuario.objects.create(**validated_data)
+		for persona in persona_id:
+			models.Persona.objects.create(**persona, usuario=usuario)
+		return usuario
 
 
 class EspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Especialidad
 		fields=("nombre","descripcion")
+
+class AdministradorSerializer(serializers.ModelSerializer):
+	user_id=UsuarioSerializer()
+	class Meta:
+		model= models.Administrador
+		fields=("id","user_id")
 
 class MedicoSerializer(serializers.ModelSerializer):
 	user_id=UsuarioSerializer()
@@ -31,7 +44,6 @@ class PacienteSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Doctor
 		fields=("id","user_id")
-
 
 class PaquetesSerializer(serializers.ModelSerializer):
 	especialidad=EspecialidadSerializer()

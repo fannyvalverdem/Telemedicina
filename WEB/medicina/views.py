@@ -13,7 +13,10 @@ from .models import *
 from django.contrib.auth.models import User
 from .controller import Listar, Add
 import requests,json
-from .utility import * 
+from .utility import *
+from django.http import QueryDict
+from .models import Persona, Paquete
+from django.shortcuts import redirect
 
 # Create your views here.
 @csrf_exempt 
@@ -46,31 +49,13 @@ def inicio(request):
 			#returning form 
 	return render(request, 'inicio_sesion.html', {'form':form});
 
-def add_registro(request): 
-	usuario=Listar("usuario")
-	persona=Listar("personas")
-	context= {'usuario': usuario, 'personas':persona}
-	if form.is_valid():
-	        username =form.cleaned_data['email']
-	        email =form.cleaned_data['email']
-	        password = form.cleaned_data['password']
-	        nombre = form.cleaned_data['nombre']
-	        apellido = form.cleaned_data['apellido']
-	        telefono = form.cleaned_data['telefono']
-	if request.method == "POST":
-	  	insertarpersona={"nombre": nombre, "apellido":apellido, "telefono":telefono}
-	  	Add(insertarpersona)
-	  	insertarusuario = {"email": email, "username":username, "password":password, "persona_id":insertarpersona}
-	  	Add(insertarusuario)
-	  	return redirect('index_paciente')  
-	else:    
-		return render(request, 'add.html', context)
 
 def registro(request):
 	if request.method == 'POST':
 		print("POST")
 	usuario=Listar("usuario")
-	context= {'usuario': usuario}
+	persona=Listar("personas")
+	context= {'usuario':usuario,'persona':persona}
 	form = RegistroForm(request.POST)
 	print("<<<<<<<<<<<<<<<<<<")
 	#checking the form is valid or not 
@@ -82,16 +67,37 @@ def registro(request):
 		apellido = form.cleaned_data['apellido']
 		telefono = form.cleaned_data['phone']
 		print(username,email,password,nombre,apellido,telefono,"<###")
-		#user = User.objects.create_user(username=email,email=email,password=password)
-		insertarpersona={"nombre": str(nombre), "apellido":str(apellido), "telefono":str(telefono)}
-		insertarusuario = {"email": str(email), "username":str(username), "password":str(password), "persona_id":insertarpersona}
-		Add('usuario',insertarusuario)
-		#print(user,"<<<<<<<<<<<<<<<<<<")
-		#user = authenticate(username=username, password=password)
-		#auth_login(request=request, user=user)
+		persona=Persona(
+			nombre=nombre,
+			apellido=apellido,
+			telefono=telefono,
+		)
+		persona.save()
+		usuario=Usuario(
+			username=username,
+			email=email,
+			password=password,
+			persona_id=persona
+		)
+		usuario.save()
+		user = User.objects.create_user(username=email,email=email,password=password)
+		user = authenticate(username=username, password=password)
+		auth_login(request=request, user=user)
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request))
 		return render(request,'index_paciente.html', context)
+		#user = User.objects.create_user(username=email,email=email,password=password)
+		#insertarpersona={"nombre":str(nombre),"apellido":str(apellido),"telefono":str(telefono)}
+		#Add('personas',insertarpersona)
+		#objeto_persona=None
+		#response_persona = requests.get('http://127.0.0.1:8000/api/personas/')
+		#data_persona = response_persona.json()
+		#qs = Persona.objects.filter(id = len(data_persona))
+		#print(qs,"<<<<<<")
+		#insertarusuario = {"email": str(email), "username":str(username), "password":str(password),"persona_id":None}
+		#insertarusuario['persona_id']=insertarpersona
+		#Add('usuario',insertarusuario)
+		#print(user,"<<<<<<<<<<<<<<<<<<")
 	else:
 	#creating a new form
 		form = RegistroForm()
@@ -170,9 +176,22 @@ def ingresar_paquete(request):
 	
 	#checking the form is valid or not 
 	if form.is_valid():
-		dictionary = dict(request=request) 
-		dictionary.update(csrf(request)) 
-		return render(request,'tarifas.html', dictionary)
+		nombre =form.cleaned_data['nombre']
+		precio =form.cleaned_data['precio']
+		especialidad = form.cleaned_data['especialidad']
+		duracion =form.cleaned_data['duracion']
+		descripcion = form.cleaned_data['descripcion']
+
+		paquete=Paquete(
+			nombre=nombre,
+			precio=precio,
+			descripcion=descripcion,
+			especialidad=especialidad,
+			duracion=duracion
+		)
+
+		paquete.save()
+		return redirect('ver_paquetes') 
 	else:
 	#creating a new form
 		form = PaqueteForm()
@@ -182,18 +201,20 @@ def ingresar_paquete(request):
 def ingresar_tarifa(request):
 	if request.method == 'POST':
 		print("POST")
-	form = TarifaForm(request.POST)
-	
+	form = TarifaForm(request.POST)	
 	#checking the form is valid or not 
 	if form.is_valid():
-		dictionary = dict(request=request) 
-		dictionary.update(csrf(request)) 
-		return render(request,'tarifas.html', dictionary)
+		nombre =form.cleaned_data['nombre']
+		precio =form.cleaned_data['precio']
+		descripcion = form.cleaned_data['descripcion']
+		insertartarifa={"nombre":str(nombre),"descripcion":str(descripcion),"precio":float(precio)}
+		Add('tarifas',insertartarifa)
+		return redirect('ver_tarifas') 
 	else:
 	#creating a new form
 		form = TarifaForm()
 			#returning form 
-	return render(request, 'ingresar_tarifa.html', {'form':form});
+	return render(request, 'ingresar_tarifa.html', {'form':TarifaForm()});
 
 def ingresar_medico(request):
 	if request.method == 'POST':
@@ -202,11 +223,55 @@ def ingresar_medico(request):
 	
 	#checking the form is valid or not 
 	if form.is_valid():
-		dictionary = dict(request=request) 
-		dictionary.update(csrf(request)) 
-		return render(request,'index_admin.html', dictionary)
+		nombre =form.cleaned_data['name']
+		apellido =form.cleaned_data['apellido']
+		especialidad = form.cleaned_data['especialidad']
+		documento_id =form.cleaned_data['documento_id']
+		num_doc = form.cleaned_data['num_doc']
+		email =form.cleaned_data['email']
+		password =form.cleaned_data['password']
+		direccion = form.cleaned_data['direccion']
+		ciudad =form.cleaned_data['ciudad']
+		phone = form.cleaned_data['phone']
+		celular =form.cleaned_data['celular']
+		tarifa =form.cleaned_data['tarifa']
+		licencia_med = form.cleaned_data['licencia_med']
+
+
+		person=Persona(
+			nombre=nombre,
+			apellido=apellido,
+			tipo_documento=documento_id,
+			numero_documento=num_doc,
+			telefono=phone,
+			ciudad=ciudad,
+			direccion=direccion
+		)
+
+		person.save()
+
+		user=Usuario(
+			email=email,
+			username=email,
+			password=password,
+			persona_id=person
+		)
+
+		user.save()
+
+		User.objects.create_user(username=email,email=email,password=password)
+
+		doc=Doctor(
+			identificador_medico=licencia_med,
+			user_id=user,
+			especialidad=especialidad
+		)
+
+		doc.save()
+		return redirect('ver_paquetes')
 	else:
 	#creating a new form
+		print(form.errors)
 		form = DoctorForm()
 			#returning form 
 	return render(request, 'ingresar_medico.html', {'form':form});
@@ -262,13 +327,22 @@ def login(request):
 	        	auth_login(request=request,user=user)
 	        	response_doctor = requests.get('http://127.0.0.1:8000/api/doctor/')
 	        	data_doctor = response_doctor.json()
+	        	response_admin = requests.get('http://127.0.0.1:8000/api/administrador/')
+	        	data_admin = response_admin.json()
 	        	for i in range(0,len(data_doctor)):
-	        		if username==data_doctor[i]['user_id']['email'] and password==data_doctor[i]['user_id']['password']:
-	        			return render(request, "index_doctor.html",{'form':form})
-	        		else:
-	        			return render(request, "index_paciente.html",{'form':form})
+	        		print(data_doctor[i]['user_id']['email'])
+	        		if username==str(data_doctor[i]['user_id']['email']) and password==str(data_doctor[i]['user_id']['password']):
+	        			return redirect('index_medico')
+	        	for i in range(0,len(data_admin)):
+	        		if username==str(data_admin[i]['user_id']['email']) and str(password==data_admin[i]['user_id']['password']):
+	        			return redirect('index_admin')
+	        	
+	        	return redirect('index_paciente')
+
+
 	        else:
+	        	form = SignupForm()
 	        	msg_to_html = custom_message('Invalid Credentials', TagType.danger)
 	        	dictionary = dict(request=request, messages = msg_to_html)
 	        	dictionary.update(csrf(request))
-	        return render(request,'inicio_sesion.html', dictionary)
+	        return render(request,'inicio_sesion.html', {'form':form})

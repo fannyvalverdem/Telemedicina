@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="col-xl-12">
 		{% load crispy_forms_tags %}
-		<form action="/administrador/" method="post">
+		<form action="" method="post">
 			<div class="row">
 				{% csrf_token %}
 				<div class="col-xl-5">
@@ -31,8 +31,6 @@
 					{{ form.password|as_crispy_field }}
 					{{ form.phone|as_crispy_field }}
 					{{ form.celular|as_crispy_field }}
-					{{ form.foto|as_crispy_field }}
-					{{ form.documentos|as_crispy_field }}
 				</div>
 				</div>
 
