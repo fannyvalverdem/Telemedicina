@@ -60,7 +60,7 @@ function myFunction6() {
 
 function myFunction7() {
   var checkBox = document.getElementById("id_domingo");
-  var text = document.getElementById("horario");
+  var text = document.getElementById("horario7");
   if (checkBox.checked == true){
     text.style.display = "block";
   } else {

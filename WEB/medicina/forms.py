@@ -105,9 +105,12 @@ class HorarioForm(forms.Form):
 	viernes=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'onclick':'myFunction5()'}))
 	sabado=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'onclick':'myFunction6()'}))
 	domingo=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'onclick':'myFunction7()'}))
-	hora=forms.ChoiceField(required=True, choices=HORA,label='')
-	minutos=forms.ChoiceField(required=True, choices=MINUTOS,label='')
-	zona=forms.ChoiceField(required=True, choices=ZONE,label='')
+	hora_entrada=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_entrada=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	zona_entrada=forms.ChoiceField(required=True, choices=ZONE,label='')
+	hora_salida=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_salida=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	zona_salida=forms.ChoiceField(required=True, choices=ZONE,label='')
 
 class CitasForms(forms.Form):
 	especialidad = forms.ModelChoiceField(queryset=Especialidad.objects.all())
