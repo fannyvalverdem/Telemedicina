@@ -25,6 +25,12 @@ class EspecialidadSerializer(serializers.ModelSerializer):
 		model= models.Especialidad
 		fields=("nombre","descripcion")
 
+class AdministradorSerializer(serializers.ModelSerializer):
+	user_id=UsuarioSerializer()
+	class Meta:
+		model= models.Administrador
+		fields=("id","user_id")
+
 class MedicoSerializer(serializers.ModelSerializer):
 	user_id=UsuarioSerializer()
 	especialidad=EspecialidadSerializer()
@@ -38,7 +44,6 @@ class PacienteSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Doctor
 		fields=("id","user_id")
-
 
 class PaquetesSerializer(serializers.ModelSerializer):
 	especialidad=EspecialidadSerializer()

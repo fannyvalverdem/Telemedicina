@@ -19,17 +19,13 @@ class PersonaViewset(generics.ListAPIView):
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UsuarioViewset(generics.ListAPIView):
-	print(models.Persona.objects.all().last(),"#########################")
 	queryset = models.Usuario.objects.all()
-
 	serializer_class = serializers.UsuarioSerializer
 	def post(self, request, format=None):
 		persona=models.Persona.objects.all().last()
 		myDict = dict(request.data)
 		myDict["persona_id"] = serializers.PersonaSerializer(myDict)
-		print(myDict,"<<<<<<<<<##########")
 		serializer = serializers.UsuarioSerializer(data=myDict)
-		print(serializer,"<<<<<SERIALIZER>>>>")
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -42,6 +38,16 @@ class UsuarioViewset(generics.ListAPIView):
     		serializer.save()
     		return Response(serializer.data, status=status.HTTP_201_CREATED)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
+
+class AdministradorViewset(generics.ListAPIView):
+    queryset = models.Administrador.objects.all()
+    serializer_class = serializers.AdministradorSerializer
+    def post(self, request, format=None):
+    	serializer = serializers.AdministradorSerializer(data=request.data)
+    	if serializer.is_valid():
+    		serializer.save()
+    		return Response(serializer.data, status=status.HTTP_201_CREATED)
+    	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DoctorViewset(generics.ListAPIView):
 	queryset = models.Doctor.objects.all()
