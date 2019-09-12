@@ -68,11 +68,9 @@ class RegistroForm(forms.Form):
 class PaqueteForm(forms.Form):
 	nombre=forms.CharField(label='Nombre: ',max_length=100,widget=forms.TextInput())
 	precio=forms.FloatField(label='Precio: ')
-	especialidad=forms.ChoiceField(choices=DOC_ID, label='Especialidad')
+	especialidad=ModelChoiceField(label='Especialidad',queryset=models.Especialidad.objects.all(),required=False)
 	descripcion=forms.CharField(label='Descripcion del Paquete: ', widget=forms.Textarea())
-	citas=forms.IntegerField(label='Numero de citas: ')
-	examenes=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'onclick':'myFunction8()'}) )
-	lista_exam=forms.TypedMultipleChoiceField(label='Lista de examenes: ',choices=CHOICES)
+	duracion=forms.IntegerField(label='Duración de paquetes: ')
 
 class TarifaForm(forms.Form):
 	nombre=forms.CharField(label='Nombre: ',max_length=100,widget=forms.TextInput())

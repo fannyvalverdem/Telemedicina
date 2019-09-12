@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from .controller import Listar, Add
 import requests,json
 from .utility import * 
+from django.http import QueryDict
+from .models import Persona
 
 # Create your views here.
 @csrf_exempt 
@@ -69,7 +71,8 @@ def registro(request):
 	if request.method == 'POST':
 		print("POST")
 	usuario=Listar("usuario")
-	context= {'usuario': usuario}
+	persona=Listar("personas")
+	context= {'usuario':usuario,'persona':persona}
 	form = RegistroForm(request.POST)
 	print("<<<<<<<<<<<<<<<<<<")
 	#checking the form is valid or not 
@@ -82,8 +85,15 @@ def registro(request):
 		telefono = form.cleaned_data['phone']
 		print(username,email,password,nombre,apellido,telefono,"<###")
 		#user = User.objects.create_user(username=email,email=email,password=password)
-		insertarpersona={"nombre": str(nombre), "apellido":str(apellido), "telefono":str(telefono)}
-		insertarusuario = {"email": str(email), "username":str(username), "password":str(password), "persona_id":insertarpersona}
+		insertarpersona={"nombre":str(nombre),"apellido":str(apellido),"telefono":str(telefono)}
+		Add('personas',insertarpersona)
+		objeto_persona=None
+		response_persona = requests.get('http://127.0.0.1:8000/api/personas/')
+		data_persona = response_persona.json()
+		qs = Persona.objects.filter(id = len(data_persona))
+		print(qs,"<<<<<<")
+		insertarusuario = {"email": str(email), "username":str(username), "password":str(password),"persona_id":None}
+		#insertarusuario['persona_id']=insertarpersona
 		Add('usuario',insertarusuario)
 		#print(user,"<<<<<<<<<<<<<<<<<<")
 		#user = authenticate(username=username, password=password)

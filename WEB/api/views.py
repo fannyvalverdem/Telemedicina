@@ -5,7 +5,7 @@ from . import serializers
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+import requests,json
 
 # Create your views here.
 class PersonaViewset(generics.ListAPIView):
@@ -19,14 +19,29 @@ class PersonaViewset(generics.ListAPIView):
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UsuarioViewset(generics.ListAPIView):
-    queryset = models.Usuario.objects.all()
-    serializer_class = serializers.UsuarioSerializer
-    def post(self, request, format=None):
-    	serializer = serializers.UsuarioSerializer(data=request.data)
+	print(models.Persona.objects.all().last(),"#########################")
+	queryset = models.Usuario.objects.all()
+
+	serializer_class = serializers.UsuarioSerializer
+	def post(self, request, format=None):
+		persona=models.Persona.objects.all().last()
+		myDict = dict(request.data)
+		myDict["persona_id"] = serializers.PersonaSerializer(myDict)
+		print(myDict,"<<<<<<<<<##########")
+		serializer = serializers.UsuarioSerializer(data=myDict)
+		print(serializer,"<<<<<SERIALIZER>>>>")
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+"""
+    def put(self,request,user_id):
+    	serializer=UsuarioSerializer(data=request.data)
+
     	if serializer.is_valid():
     		serializer.save()
     		return Response(serializer.data, status=status.HTTP_201_CREATED)
-    	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)"""
 
 class DoctorViewset(generics.ListAPIView):
 	queryset = models.Doctor.objects.all()
@@ -47,14 +62,3 @@ class ConsultaViewset(generics.ListAPIView):
 class EspecialidadViewset(generics.ListAPIView):
 	queryset = models.Especialidad.objects.all()
 	serializer_class = serializers.EspecialidadSerializer
-
-class CreateUser(generics.CreateAPIView):
-	serializer_class = serializers.UsuarioSerializer
-	def post(self, request, format=None):
-		serializer = serializers.UsuarioSerializer(data=request.data)
-		if serializer.is_valid():
-
-			serializer.save()
-
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
