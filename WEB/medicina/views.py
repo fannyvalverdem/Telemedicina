@@ -327,12 +327,16 @@ def login(request):
 	        	response_admin = requests.get('http://127.0.0.1:8000/api/administrador/')
 	        	data_admin = response_admin.json()
 	        	for i in range(0,len(data_doctor)):
+	        		print(data_doctor[i]['user_id']['email'])
 	        		if username==str(data_doctor[i]['user_id']['email']) and password==str(data_doctor[i]['user_id']['password']):
-	        			return render(request, "index_doctor.html",{'form':form})
-	        		elif username==str(data_admin[i]['user_id']['email']) and str(password==data_admin[i]['user_id']['password']):
-	        			return render(request, "index_admin.html",{'form':form})
-	        		else:
-	        			return render(request, "index_paciente.html",{'form':form})
+	        			return redirect('index_medico')
+	        	for i in range(0,len(data_admin)):
+	        		if username==str(data_admin[i]['user_id']['email']) and str(password==data_admin[i]['user_id']['password']):
+	        			return redirect('index_admin')
+	        	
+	        	return redirect('index_paciente')
+
+
 	        else:
 	        	form = SignupForm()
 	        	msg_to_html = custom_message('Invalid Credentials', TagType.danger)
