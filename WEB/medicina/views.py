@@ -192,18 +192,19 @@ def ingresar_paquete(request):
 def ingresar_tarifa(request):
 	if request.method == 'POST':
 		print("POST")
-	form = TarifaForm(request.POST)
-	
+	form = TarifaForm(request.POST)	
 	#checking the form is valid or not 
 	if form.is_valid():
-		dictionary = dict(request=request) 
-		dictionary.update(csrf(request)) 
-		return render(request,'tarifas.html', dictionary)
+		nombre =form.cleaned_data['nombre']
+		precio =form.cleaned_data['precio']
+		descripcion = form.cleaned_data['descripcion']
+		insertartarifa={"nombre":str(nombre),"descripcion":str(descripcion),"precio":float(precio)}
+		Add('tarifas',insertartarifa)
 	else:
 	#creating a new form
 		form = TarifaForm()
 			#returning form 
-	return render(request, 'ingresar_tarifa.html', {'form':form});
+	return render(request, 'ingresar_tarifa.html', {'form':TarifaForm()});
 
 def ingresar_medico(request):
 	if request.method == 'POST':
