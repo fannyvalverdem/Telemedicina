@@ -28,6 +28,11 @@ class UsuarioViewset(generics.ListAPIView):
     		return Response(serializer.data, status=status.HTTP_201_CREATED)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class HorarioViewset(generics.ListAPIView):
+	queryset = models.Horario.objects.all()
+	serializer_class = serializers.HorarioSerializer
+
 class DoctorViewset(generics.ListAPIView):
 	queryset = models.Doctor.objects.all()
 	serializer_class = serializers.MedicoSerializer

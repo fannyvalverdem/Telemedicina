@@ -9,14 +9,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth import login as auth_login
 from .forms import *
-<<<<<<< HEAD
 from .models import *
-=======
 from django.contrib.auth.models import User
 from .controller import Listar, Add
 import requests,json
 from .utility import * 
->>>>>>> eb5d05bf24a908c4d51a228ac5bec8c7768d90cc
 
 # Create your views here.
 @csrf_exempt 
@@ -240,7 +237,10 @@ def agendar_cita(request):
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
-		return render(request,'seleccionar_medico.html', context)
+		text = form.cleaned_data['especialidad']
+		d = {'form':form, 'text':text}
+		
+		return render(request,'seleccionar_medico.html', d)
 	else:
 	#creating a new form
 		form = CitasForms()

@@ -16,8 +16,9 @@
 				<form action="/selec_medico/" method="post">
 					<div class="row">
 						{% csrf_token %}
+						<h2> {{ text }} </h2>
 						<div class="col-12">Especialidad:
-							<select id="equipo2" class="custom-select form-control" name="equipo2"
+							<select id="especialidad" class="custom-select form-control" name="especialidad"
 								oninvalid="this.setCustomValidity('Ingrese una especialidad de la lista')" required
 								oninput="this.setCustomValidity('')">
 								<option disabled selected></option>
@@ -81,3 +82,5 @@
 
 
 	{% endblock %}
+
+	

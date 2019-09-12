@@ -1,5 +1,11 @@
 $('#data_table').DataTable({
     "destroy": true,
+    rowCallback: function( row, data, index ) {
+        if (data['especialidad']['nombre'] != "Cardiologia") {
+            $(row).hide();
+        }
+    },
+    
     "ajax": 
         {
         "method": "GET",
