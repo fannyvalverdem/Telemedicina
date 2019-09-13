@@ -1,7 +1,8 @@
 $('#data_table').DataTable({
     "destroy": true,
     rowCallback: function( row, data, index ) {
-        if (data['especialidad']['nombre'] != "Cardiologia") {
+        var especialidad=String($('#id_usuario_doc').html())
+        if (data['especialidad']['nombre'] == especialidad) {
             $(row).hide();
         }
     },

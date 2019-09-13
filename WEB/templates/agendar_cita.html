@@ -8,12 +8,9 @@
 			<br>
 		</div>
 		<div class="row">
-			<div class="col-6">
-				<img src="https://via.placeholder.com/300x300" alt="placeholder" class="col-12" />
-			</div>
-			<div class="col-6">
+			<div class="col-12">
 				{% load crispy_forms_tags %}
-				<form action="/selec_medico/" method="post">
+				<form method="post">
 					<div class="row">
 						{% csrf_token %}
 						<h2> {{ text }} </h2>
@@ -23,7 +20,7 @@
 								oninput="this.setCustomValidity('')">
 								<option disabled selected></option>
 								{% for especialidad in especialidades %}
-								<option value="{{ especialidad }}">{{ especialidad.nombre }}</option>
+								<option value="{{ especialidad.id }}">{{ especialidad.nombre }}</option>
 								{% endfor %}
 							</select>
 							{{ form.especialidad|as_crispy_field }}
@@ -70,7 +67,7 @@
 							<br>
 							<br>
 
-							<button id="btn-continuar">Continuar</button>
+							<button type="submit" id="btn-continuar">Continuar</button>
 
 						</div>
 					</div>

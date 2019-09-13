@@ -298,14 +298,16 @@ def agendar_cita(request):
 	
 	if request.method == 'POST':
 		print("POST")
+		
 	form = CitasForms(request.POST)
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
 		text = form.cleaned_data['especialidad']
+		console.log(text)
 		d = {'form':form, 'text':text}
 		
-		return render(request,'seleccionar_medico.html', d)
+		return render(request,'agendar_cita.html', d)
 	else:
 	#creating a new form
 		form = CitasForms()
