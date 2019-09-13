@@ -25,6 +25,18 @@ HORA=[
 	(10,'10'),
 	(11,'11'),
 	(12,'12'),
+	(13,'13'),
+	(14,'14'),
+	(15,'15'),
+	(16,'16'),
+	(17,'17'),
+	(18,'18'),
+	(19,'19'),
+	(20,'20'),
+	(21,'21'),
+	(22,'22'),
+	(23,'23'),
+	(0,'00'),
 ]
 
 MINUTOS_CITAS=[
@@ -36,18 +48,18 @@ MINUTOS_CITAS=[
 
 
 MINUTOS=[
-	(1,'00'),
-	(2,'05'),
-	(3,'10'),
-	(4,'15'),
-	(5,'20'),
-	(6,'25'),
-	(7,'30'),
-	(8,'35'),
-	(9,'40'),
-	(10,'45'),
-	(11,'50'),
-	(12,'55'),
+	(0,'00'),
+	(5,'05'),
+	(10,'10'),
+	(15,'15'),
+	(20,'20'),
+	(25,'25'),
+	(30,'30'),
+	(35,'35'),
+	(40,'40'),
+	(45,'45'),
+	(50,'50'),
+	(55,'55'),
 ]
 
 ZONE=[
@@ -105,9 +117,34 @@ class HorarioForm(forms.Form):
 	viernes=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'onclick':'myFunction5()'}))
 	sabado=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'onclick':'myFunction6()'}))
 	domingo=forms.BooleanField(required=False,widget=forms.CheckboxInput(attrs={'onclick':'myFunction7()'}))
-	hora=forms.ChoiceField(required=True, choices=HORA,label='')
-	minutos=forms.ChoiceField(required=True, choices=MINUTOS,label='')
-	zona=forms.ChoiceField(required=True, choices=ZONE,label='')
+	hora_entrada_lunes=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_entrada_lunes=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_salida_lunes=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_salida_lunes=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_entrada_martes=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_entrada_martes=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_salida_martes=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_salida_martes=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_entrada_miercoles=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_entrada_miercoles=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_salida_miercoles=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_salida_miercoles=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_entrada_jueves=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_entrada_jueves=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_salida_jueves=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_salida_jueves=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_entrada_viernes=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_entrada_viernes=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_salida_viernes=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_salida_viernes=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_entrada_sabado=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_entrada_sabado=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_salida_sabado=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_salida_sabado=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_entrada_domingo=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_entrada_domingo=forms.ChoiceField(required=True, choices=MINUTOS,label='')
+	hora_salida_domingo=forms.ChoiceField(required=True, choices=HORA,label='')
+	minutos_salida_domingo=forms.ChoiceField(required=True, choices=MINUTOS,label='')
 
 class CitasForms(forms.Form):
 	especialidad = forms.ModelChoiceField(queryset=Especialidad.objects.all())

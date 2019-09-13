@@ -5,34 +5,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-button routerLink="../emergencia">Cita por emergencia</ion-button>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item routerLink="../agendar-cita-esp">
+    <ion-row class="ion-justify-content-center">
+      <ion-button routerLink="../emergencia">Cita por emergencia</ion-button>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="5" size-sm class="ion-align-self-center" >
+        <ion-row class="ion-justify-content-center" routerLink="../agendar-cita-esp">
           <ion-img class="imagenes" src="assets/calendario.png"></ion-img>
-          <ion-label>Agendar cita</ion-label>
-        </ion-item>
+          <ion-label>Agendar cita</ion-label> 
+        </ion-row>        
       </ion-col>
-      <ion-col>
-        <ion-item routerLink="../principal">
+      <ion-col size="5" size-sm class="ion-align-self-center">
+        <ion-row class="ion-justify-content-center" routerLink="../principal">
           <ion-img class="imagenes" src="assets/estetoscopio.png"></ion-img>
           <ion-label>Iniciar Consulta</ion-label>
-        </ion-item>
+        </ion-row>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item routerLink="../principal">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="5" size-sm class="ion-align-self-center" >
+        <ion-row class="ion-justify-content-center" routerLink="../principal">        
           <ion-img class="imagenes" src="assets/doctor.png"></ion-img>
           <ion-label>Doctores Favoritos</ion-label>
-        </ion-item>
+        </ion-row>
       </ion-col>
-      <ion-col>
-        <ion-item routerLink="../principal">
-          <ion-img class="imagenes" src="assets/historial.png"></ion-img>
+      <ion-col size="5" size-sm class="ion-align-self-center">
+        <ion-row class="ion-justify-content-center" routerLink="../principal">        
+          <ion-img class="imagenes" src="assets/doctor.png"></ion-img>
           <ion-label>Historial</ion-label>
-        </ion-item>
+        </ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>

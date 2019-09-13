@@ -14,15 +14,8 @@
 					<div class="row">
 						{% csrf_token %}
 						<h2> {{ text }} </h2>
-						<div class="col-12">Especialidad:
-							<select id="especialidad" class="custom-select form-control" name="especialidad"
-								oninvalid="this.setCustomValidity('Ingrese una especialidad de la lista')" required
-								oninput="this.setCustomValidity('')">
-								<option disabled selected></option>
-								{% for especialidad in especialidades %}
-								<option value="{{ especialidad.id }}">{{ especialidad.nombre }}</option>
-								{% endfor %}
-							</select>
+						<div class="col-12">
+							
 							{{ form.especialidad|as_crispy_field }}
 						</div>
 						<div class="col-12">Fecha y hora:
