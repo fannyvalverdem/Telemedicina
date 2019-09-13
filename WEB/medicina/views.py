@@ -491,3 +491,6 @@ def login(request):
 	        	dictionary = dict(request=request, messages = msg_to_html)
 	        	dictionary.update(csrf(request))
 	        return render(request,'inicio_sesion.html', {'form':form})
+
+def crear_cita(request):
+	return redirect('index_paciente')
