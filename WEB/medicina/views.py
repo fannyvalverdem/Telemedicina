@@ -439,7 +439,7 @@ def ingresar_horario(request):
 
 
 def agendar_cita(request):
-	list_especialidades = Especialidad.objects.all()
+	list_especialidades = Especialidad.objects.values_list('nombre',flat=True)
 	
 	if request.method == 'POST':
 		print("POST")

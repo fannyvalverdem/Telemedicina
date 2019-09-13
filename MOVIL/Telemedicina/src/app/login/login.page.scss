@@ -1,4 +1,28 @@
 ion-img{
     width: 350px; 
-    height: 50px;
+    height: 150px;
+    margin: auto;
+    display: block;
+    
+}
+
+ion-toolbar{
+    --background: blue;
+    
+}
+
+ion-button{
+    --background: purple;
+}
+
+ion-col{
+    padding: 10px;
+}
+
+ion-row{
+    padding: 5px;
+}
+
+ion-label{
+    padding: 5px;
 }
