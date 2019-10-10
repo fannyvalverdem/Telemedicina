@@ -16,7 +16,7 @@ urlpatterns = [
 	url(r'^login/$', views.login, name='login'),
 	url(r'^cerrar_sesion/$', views.cerrar_sesion, name='cerrar_sesion'),
 
-
+	url(r'^zoom_video/$', views.zoom, name='zoom_video'),
 	url(r'^agendar_cita_medico/$', views.agendar_cita_medico, name='agendar_cita_medico'),
 
 	url(r'^conteo_citas/$', views.conteo_citas, name='conteo_citas'),

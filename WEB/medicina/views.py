@@ -169,6 +169,11 @@ def ver_paquetes(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'ver_paquete.html', dictionary)
 
+def zoom(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'zoom.html', dictionary)
+
 def ingresar_paquete(request):
 	if request.method == 'POST':
 		print("POST")
