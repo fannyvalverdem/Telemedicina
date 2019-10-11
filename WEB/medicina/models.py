@@ -34,7 +34,10 @@ class Doctor(models.Model):
 	identificador_medico=models.CharField(max_length=250)
 	documento=models.FileField(upload_to=doc_up,null=True)
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+
+class MatchEspecialidades(models.Model):
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
+	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
 class Dias(models.Model):
 	nombre= models.CharField(max_length=100)
