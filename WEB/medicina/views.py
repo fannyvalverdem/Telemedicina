@@ -49,6 +49,40 @@ def inicio(request):
 			#returning form 
 	return render(request, 'inicio_sesion.html', {'form':form});
 
+def match_especialidad(request):
+	if request.method == 'POST':
+		print("POST")
+	form= MatchEspecialidad(request.POST)
+	if form.is_valid():
+		opciones = form.cleaned_data.get('opciones')
+		especialidad=Especialidad.objects.last()
+		print(opciones[0],"<<<<<<<<<<<<<<")
+		for doctor in opciones:
+			match=MatchEspecialidades(
+				especialidad=especialidad,
+				doctor=doctor,
+			)
+
+			match.save()
+		return redirect('index_admin')
+	else:
+		form=MatchEspecialidad()
+	return render(request, 'match_especialidad.html', {'form':form});
+
+def ingresar_especialidad(request):
+	if request.method == 'POST':
+		print("POST")
+	form= Especialidades(request.POST)
+	if form.is_valid():
+		nombre =form.cleaned_data['especialidad']
+		especialidad=Especialidad(
+			nombre=nombre
+			)
+		especialidad.save()
+		return redirect('match_especialidad')
+	else:
+		form=Especialidades()
+	return render(request, 'ingresar_especialidad.html', {'form':form});
 
 def registro(request):
 	if request.method == 'POST':

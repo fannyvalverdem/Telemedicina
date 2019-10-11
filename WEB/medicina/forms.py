@@ -153,3 +153,12 @@ class CitasForms(forms.Form):
 	hora=forms.ChoiceField(required=True, choices=HORA,label='')
 	minutos=forms.ChoiceField(required=True, choices=MINUTOS_CITAS,label='')
 	zona=forms.ChoiceField(required=True, choices=ZONE,label='')
+
+class Especialidades(forms.Form):
+	especialidad=forms.CharField(label='Especialidad:',max_length=100,widget=forms.TextInput())
+
+class MatchEspecialidad(forms.Form):
+	opciones = forms.ModelMultipleChoiceField(
+                       widget = forms.CheckboxSelectMultiple,
+                       queryset = Doctor.objects.all()
+               )
