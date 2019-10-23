@@ -535,3 +535,8 @@ def login(request):
 
 def crear_cita(request):
 	return redirect('index_paciente')
+
+def boton_pago(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'boton_pago.html', dictionary)
