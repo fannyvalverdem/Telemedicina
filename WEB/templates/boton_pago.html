@@ -1,0 +1,144 @@
+{% extends 'index_paciente.html' %}
+{% block contenido %}
+<div class="container">
+	<div class="row">
+		<div id="titulo" class="col-xl-12" style="text-align: center;">
+			<h2>Realizar pago</h2>
+			<br>
+			<br>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="col-8" style="display: block; margin-left: auto; margin-right: auto;">
+					<br>
+					<div class="paymentez-form"
+					id="my-card"
+					data-capture-name="true"
+					data-capture-email="true"
+					data-capture-cellphone="true"
+					data-icon-colour="#569B29"
+					data-use-dropdowns="true" style="text-align: center;"></div>
+
+				</div>
+				<div class="col-12">
+					<br>
+					<br>
+
+					<button type="submit" id="btn-continuar">Continuar</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+	<script>
+		var myCard = $('#my-card');
+		var cardToSave = myCard.PaymentezForm('card');
+		if(cardToSave == null){
+		  alert("Invalid Card Data");
+		}
+
+
+	//Init library
+
+	/**
+	  * Init library
+	  *
+	  * @param env_mode `prod`, `stg`, `local` to change environment. Default is `stg`
+	  * @param paymentez_client_app_code provided by Paymentez.
+	  * @param paymentez_client_app_key provided by Paymentez.
+	  */
+	Paymentez.init('stg', 'PAYMENTEZ_CLIENT_APP_CODE', 'PAYMENTEZ_CLIENT_APP_KEY');
+
+
+	//addCard
+
+	/* Add Card converts sensitive card data to a single-use token which you can safely pass to your server to charge the user.
+	 *
+	 * @param uid User identifier. This is the identifier you use inside your application; you will receive it in notifications.
+	 * @param email Email of the user initiating the purchase. Format: Valid e-mail format.
+	 * @param card the Card used to create this payment token
+	 * @param success_callback a callback to receive the token
+	 * @param failure_callback a callback to receive an error
+	 */
+	Paymentez.addCard(uid, email, cardToSave, successHandler, errorHandler);
+
+	var successHandler = function(cardResponse) {
+	  console.log(cardResponse.card);
+	  if(cardResponse.card.status === 'valid'){
+	    $('#messages').html('Card Successfully Added<br>'+
+	                  'status: ' + cardResponse.card.status + '<br>' +
+	                  "Card Token: " + cardResponse.card.token + "<br>" +
+	                  "transaction_reference: " + cardResponse.card.transaction_reference
+	                );    
+	  }else if(cardResponse.card.status === 'review'){
+	    $('#messages').html('Card Under Review<br>'+
+	                  'status: ' + cardResponse.card.status + '<br>' +
+	                  "Card Token: " + cardResponse.card.token + "<br>" +
+	                  "transaction_reference: " + cardResponse.card.transaction_reference
+	                ); 
+	  }else if(cardResponse.card.status === 'pending'){
+	    $('#messages').html('Card Pending To Approve<br>'+
+	                  'status: ' + cardResponse.card.status + '<br>' +
+	                  "Card Token: " + cardResponse.card.token + "<br>" +
+	                  "transaction_reference: " + cardResponse.card.transaction_reference
+	                ); 
+	  }else{
+	    $('#messages').html('Error<br>'+
+	                  'status: ' + cardResponse.card.status + '<br>' +
+	                  "message Token: " + cardResponse.card.message + "<br>"
+	                ); 
+	  }
+	  submitButton.removeAttr("disabled");
+	  submitButton.text(submitInitialText);
+	};
+
+	var errorHandler = function(err) {    
+	  console.log(err.error);
+	  $('#messages').html(err.error.type);    
+	  submitButton.removeAttr("disabled");
+	  submitButton.text(submitInitialText);
+	};
+
+
+	//getSessionId
+	var session_id = Paymentez.getSessionId();
+
+	//Reading Values
+	var myCard = $('#my-card');
+	var cardNumber = myCard.PaymentezForm('cardNumber');
+	var cardType = myCard.PaymentezForm('cardType');
+	var name = myCard.PaymentezForm('name');
+	var expiryMonth = myCard.PaymentezForm('expiryMonth');
+	var expiryYear = myCard.PaymentezForm('expiryYear');
+	var fiscalNumber = myCard.PaymentezForm('fiscalNumber');
+	var validationOption = myCard.PaymentezForm('validationOption');
+
+	//Functions
+	$('#my-card').PaymentezForm('function')
+
+	//Card Type from Card Number
+	var cardNumber = '4242 4242 4242 4242'; // Spacing is not important
+	var cardType = PaymentezForm.cardTypeFromNumber(cardNumber);
+	
+
+	//Cleaning and Masking
+	
+	// var formatMask = 'XXXX XXXX XXXX XXXX'; // You can manually define an input mask
+	// var formatMask = 'XX+X X XXXX XXXX XXXX'; // You can add characters other than spaces to the mask
+	var formatMask = PaymentezForm.CREDIT_CARD_NUMBER_VISA_MASK; // Or use a standard mask.
+	var cardNumber = '424 2424242 42   42 42';
+	var cardNumberWithoutSpaces = PaymentezForm.numbersOnlyString(cardNumber);
+	var formattedCardNumber = PaymentezForm.applyFormatMask(cardNumberWithoutSpaces, formatMask);
+
+
+	//Card expiration date
+	var month = "3";
+	var year = "19";
+	var valid = PaymentezForm.isExpiryValid(month, year);
+
+	</script>
+{% endblock %}
