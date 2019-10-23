@@ -107,3 +107,6 @@ class Tarifa(models.Model):
 	descripcion=models.TextField()
 	precio=models.FloatField()
 		
+class Medicamento(models.Model):
+	nombre= models.CharField(max_length=100)
+	precio=models.FloatField()

@@ -1,0 +1,40 @@
+{% extends 'base_main.html' %}
+{% load static %}
+
+{% block base %}
+
+<div class="container">
+	<div class="row">
+		<div id="titulo" class="col-xl-12" style="text-align: center;">
+			<h2>Escribir receta médica</h2>
+			<br>
+			<br>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				{% load crispy_forms_tags %}
+				<form method="post">
+					<div class="row">
+						{% csrf_token %}
+						<div class="col-12">
+							{{ form.name|as_crispy_field }}
+							{{ form.apellido|as_crispy_field }}
+							{{ form.especialidad|as_crispy_field }}
+							{{ form.medicamentos|as_crispy_field }}
+							{{ form.descripcion|as_crispy_field }}
+						</div>
+						<div class="col-12">
+						<br>
+						<br>
+
+						<button type="submit" id="btn-continuar">Guardar</button>
+
+					</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

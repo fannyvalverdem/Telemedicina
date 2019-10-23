@@ -540,3 +540,8 @@ def boton_pago(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'boton_pago.html', dictionary)
+
+def escribir_receta(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'escribir_receta.html', dictionary)
