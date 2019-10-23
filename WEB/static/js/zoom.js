@@ -37,7 +37,7 @@
             meetingNumber: parseInt(document.getElementById('meeting_number').value),
             userName: document.getElementById('display_name').value,
             passWord: "",
-            leaveUrl: "https://zoom.us",
+            leaveUrl: "http://www.google.com",
             role: 0
         };
 
