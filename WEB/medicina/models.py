@@ -107,3 +107,10 @@ class Tarifa(models.Model):
 	descripcion=models.TextField()
 	precio=models.FloatField()
 		
+class Medicamento(models.Model):
+	nombre= models.CharField(max_length=100)
+	precio=models.FloatField()
+
+class RecetarMedicamentos(models.Model):
+	receta=models.ForeignKey(Receta, null=True, blank=True, on_delete=models.CASCADE)
+	medicamento=models.ForeignKey(Medicamento, null=True, blank=True, on_delete=models.CASCADE)

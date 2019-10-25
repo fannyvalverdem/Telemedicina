@@ -162,3 +162,13 @@ class MatchEspecialidad(forms.Form):
                        widget = forms.CheckboxSelectMultiple,
                        queryset = Doctor.objects.all()
                )
+
+class Receta(forms.Form):
+	name = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Nombre'}))
+	apellido = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Apellido'}))
+	especialidad = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Especialidad'}))
+	descripcion=forms.CharField(label='Descripcion de la receta: ', widget=forms.Textarea(attrs={'cols': 10, 'rows': 5}))
+	medicamentos = forms.ModelMultipleChoiceField(
+                       widget = forms.CheckboxSelectMultiple,
+                       queryset = Medicamento.objects.all()
+               )

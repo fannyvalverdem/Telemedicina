@@ -20,6 +20,7 @@ urlpatterns = [
 	url(r'^agendar_cita_medico/$', views.agendar_cita_medico, name='agendar_cita_medico'),
 
 	url(r'^boton_pago/$', views.boton_pago, name='boton_pago'),
+	url(r'^escribir_receta/$', views.escribir_receta, name='escribir_receta'),
 
 	url(r'^conteo_citas/$', views.conteo_citas, name='conteo_citas'),
 	url(r'^ver_tarifas/', views.ver_tarifas, name='ver_tarifas'),

@@ -540,3 +540,40 @@ def boton_pago(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'boton_pago.html', dictionary)
+
+def escribir_receta(request):
+	if request.method == 'POST':
+		print("POST")
+		
+	form= Receta(request.POST)
+	if form.is_valid():
+		name =form.cleaned_data['name']
+		apellido =form.cleaned_data['apellido']
+		cedula=form.cleaned_data['cedula']
+		especialidad =form.cleaned_data['especialidad']
+		descripcion =form.cleaned_data['descripcion']
+		medicamentos = form.cleaned_data.get('medicamentos')
+		
+		persona=Persona.objects.get(numero_documento=cedula)
+		usuario=Usuario.objects.get(persona_id=persona)
+		paciente=Paciente.objets.get(user_id=usuario)
+		consulta=Consulta.objects.get(paciente_id=paciente)
+
+		receta=Receta(
+			descripcion=descripcion,
+			consulta_id=consulta
+			)
+		receta.save()
+
+		for med in medicamentos:
+			escribir=RecetarMedicamentos(
+				receta=receta,
+				medicamento=med,
+			)
+
+			escribir.save()
+
+		return redirect('index_medico')
+	else:
+		form=Receta()
+	return render(request, 'escribir_receta.html', {'form':form})
