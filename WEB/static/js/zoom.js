@@ -23,19 +23,11 @@
     var API_SECRET = 't1CUHWdU2bzbVmL1aT9HFdfuke0SRP8Og6VZ';
 
 
-    document.getElementById('join_meeting').addEventListener('click', function(e){
-        e.preventDefault();
-
-        if(!this.form.checkValidity()){
-            alert("Enter Name and Meeting Number");
-            return false;
-        }
-
         var meetConfig = {
             apiKey: API_KEY,
             apiSecret: API_SECRET,
-            meetingNumber: parseInt(document.getElementById('meeting_number').value),
-            userName: document.getElementById('display_name').value,
+            meetingNumber: 896339310,
+            userName: "Paciente",
             passWord: "",
             leaveUrl: "http://www.google.com",
             role: 0
@@ -78,7 +70,5 @@
                 console.log(res);
             }
         });
-
-    });
 
 })();
