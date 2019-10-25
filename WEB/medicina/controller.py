@@ -39,7 +39,8 @@ def add_meeting(usuario,nombre,fecha,hora,token):
 def get_meeting(id_cita,token):
 	url = "https://api.zoom.us/v2/meetings/"+id_cita+""
 
-	headers = {'authorization': "Bearer "+token+""}
+	headers = {'authorization': "Bearer "+token+""
+	}
 
 	response = requests.request("GET", url, headers=headers)
 

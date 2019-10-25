@@ -208,6 +208,11 @@ def zoom(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'zoom.html', dictionary)
 
+def citas_medico(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'citas_medico.html', dictionary)
+
 def ingresar_paquete(request):
 	if request.method == 'POST':
 		print("POST")
