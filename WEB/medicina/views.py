@@ -545,7 +545,7 @@ def escribir_receta(request):
 	if request.method == 'POST':
 		print("POST")
 		
-	form= Receta(request.POST)
+	form= RecetaForm(request.POST)
 	if form.is_valid():
 		name =form.cleaned_data['name']
 		apellido =form.cleaned_data['apellido']
@@ -575,5 +575,5 @@ def escribir_receta(request):
 
 		return redirect('index_medico')
 	else:
-		form=Receta()
+		form=RecetaForm()
 	return render(request, 'escribir_receta.html', {'form':form})
