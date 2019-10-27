@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-img src="assets/telemedicina_movil.jpg"></ion-img>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-toolbar>
+      <ion-icon routerLink="../agendar-cita-med" name="arrow-round-back"></ion-icon>
+      <ion-title>Agendamiento de consulta medica</ion-title>
+    </ion-toolbar>
+    <ion-item>
+    	<ion-input type="text" placeholder="Nombres y Apellidos"></ion-input>
+  	</ion-item>
+  	<ion-item>
+    	<ion-input type="text" placeholder="Cédula de Identidad"></ion-input>
+  	</ion-item>
+  	<ion-item>
+    	<ion-input type="tel" placeholder="Numero de Tarjeta" minlength=9 maxlength=10></ion-input>
+  	</ion-item>
+  	<ion-item>
+    	<ion-input type="email" placeholder="Fecha de Vencimiento (MM/AA)"></ion-input>
+  	</ion-item>
+  	<ion-item>
+    	<ion-input type="password" placeholder="Correo Electronico" minlength=8></ion-input>
+  	</ion-item>
+    
+      <ion-button routerLink="../pago">Confirmar pago</ion-button>
+   
+  </ion-content>
