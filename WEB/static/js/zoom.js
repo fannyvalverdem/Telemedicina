@@ -26,10 +26,10 @@
         var meetConfig = {
             apiKey: API_KEY,
             apiSecret: API_SECRET,
-            meetingNumber: 896339310,
-            userName: "Paciente",
+            meetingNumber: 591867443,
+            userName: "",
             passWord: "",
-            leaveUrl: "http://www.google.com",
+            leaveUrl: "http://127.0.0.1:8000/",
             role: 0
         };
 
@@ -45,7 +45,7 @@
         });
 
         ZoomMtg.init({
-            leaveUrl: 'http://www.google.com',
+            leaveUrl: 'http://127.0.0.1:8000/',
             isSupportAV: true,
             success: function () {
                 ZoomMtg.join(
