@@ -551,18 +551,43 @@ def escribir_receta(request):
 		print("POST")
 		
 	form= RecetaForm(request.POST)
+
+	consulta=Consulta.objects.last()
+	field_value = getattr(consulta, 'paciente_id')
+	print(field_value,"<<<<<<<")
+	#paciente=Paciente.objects.get(id=field_value)
+	#field_value1 = getattr(paciente, 'id')
+	field_value1 = getattr(field_value, 'id')
+	print(field_value1,"<<<<<<<")
+	usuario=Usuario.objects.get(id=field_value1)
+	field_value2 = getattr(usuario, 'id')
+	print(field_value2,"<<<<<<<")
+	persona=Persona.objects.get(id=field_value2)
+	form= RecetaForm(initial={'name': getattr(persona, 'nombre')})
+	
 	if form.is_valid():
-		name =form.cleaned_data['name']
-		apellido =form.cleaned_data['apellido']
+		consulta=Consulta.objects.last()
+		field_value = getattr(consulta, 'id')
+		paciente=Paciente.objets.get(user_id=field_value)
+		field_value1 = getattr(paciente, 'id')
+		usuario=Usuario.objects.get(persona_id=field_value1)
+		field_value2 = getattr(usuario, 'id')
+		persona=Persona.objects.get(numero_documento=field_value2)
+
+		print(persona,"<><><><>")
+		form.cleaned_data['name']=getattr(persona, 'name')
+		form.cleaned_data['apellido']=getattr(persona, 'apellido')
+		form.cleaned_data['cedula']=getattr(persona, 'cedula')
 		cedula=form.cleaned_data['cedula']
-		especialidad =form.cleaned_data['especialidad']
+
+		form.cleaned_data['especialidad']='Especialidad'
 		descripcion =form.cleaned_data['descripcion']
 		medicamentos = form.cleaned_data.get('medicamentos')
 		
-		persona=Persona.objects.get(numero_documento=cedula)
-		usuario=Usuario.objects.get(persona_id=persona)
-		paciente=Paciente.objets.get(user_id=usuario)
-		consulta=Consulta.objects.get(paciente_id=paciente)
+		# persona=Persona.objects.get(numero_documento=cedula)
+		# usuario=Usuario.objects.get(persona_id=persona)
+		# paciente=Paciente.objets.get(user_id=usuario)
+		# consulta=Consulta.objects.get(paciente_id=paciente)
 
 		receta=Receta(
 			descripcion=descripcion,
