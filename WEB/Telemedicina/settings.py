@@ -25,7 +25,7 @@ SECRET_KEY = '$r)5-ju@v_m(flzvsd%t!9oojo3oz&h!^jydp5^jzr7b-@!98$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,19 +39,32 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'medicina',
     'api',
-    #allauth
 	'django.contrib.sites',
 	'allauth',
 	'allauth.account',
 	'allauth.socialaccount',
-
-	#providers
 	'allauth.socialaccount.providers.facebook',
 	'allauth.socialaccount.providers.google',
     'crispy_forms',
     'rest_framework',
-
+    'rest_framework.authtoken',
+    'rest_auth',
+    'rest_auth.registration',
 ]
+
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        # 'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
