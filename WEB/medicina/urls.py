@@ -7,7 +7,6 @@ from . import views
 urlpatterns = [
 	url(r'^$', views.inicio, name='inicio'),
 	url(r'^agendar_emergencia/$', views.agendar_emergencia, name='agendar_emergencia'),
-	url(r'^accounts/$', include('allauth.urls')),
 	url(r'^medico_emergencia/$', views.selec_med_emergencia, name='selec_med_emergencia'),
 	url(r'^confirmacion_emergencia/$', views.confirmacion_emergencia, name='confirmacion_emergencia'),
 
