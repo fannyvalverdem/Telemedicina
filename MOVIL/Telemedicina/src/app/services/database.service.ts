@@ -26,7 +26,7 @@ export class DatabaseService {
   
   login(user) {
 		return new Promise((resolve,reject) => {
-			this.http.post(this.apiUrl+'authenticate/', user).subscribe(data => {
+			this.http.post(this.apiUrl+'api/rest-auth/login', user).subscribe(data => {
 				resolve(data);
 				console.log(data);
 			}, err => {
