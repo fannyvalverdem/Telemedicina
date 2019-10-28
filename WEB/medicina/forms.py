@@ -163,12 +163,13 @@ class MatchEspecialidad(forms.Form):
                        queryset = Doctor.objects.all()
                )
 
-class Receta(forms.Form):
+class RecetaForm(forms.Form):
 	name = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Nombre'}))
 	apellido = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Apellido'}))
+	cedula=forms.CharField(label='Cedula:',max_length=100,widget=forms.TextInput())
 	especialidad = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Especialidad'}))
 	descripcion=forms.CharField(label='Descripcion de la receta: ', widget=forms.Textarea(attrs={'cols': 10, 'rows': 5}))
 	medicamentos = forms.ModelMultipleChoiceField(
-                       widget = forms.CheckboxSelectMultiple,
+                       widget = forms.SelectMultiple,
                        queryset = Medicamento.objects.all()
                )
