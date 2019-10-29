@@ -546,6 +546,11 @@ def boton_pago(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'boton_pago.html', dictionary)
 
+def acciones_consulta(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'acciones_consulta.html', dictionary)
+
 def escribir_receta(request):
 	if request.method == 'POST':
 		print("POST")

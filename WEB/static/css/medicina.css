@@ -95,3 +95,19 @@ li{
     background-color: #8bcebd;
     color: black;
 }
+
+
+#vertical-menu-medico a {
+    background-color: #9baec8; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    font-family: 'Ubuntu',Sans-Serif;
+    font-size: 1.75em;
+    text-decoration: none; /* Remove underline from links */
+    width: 300px;
+}
+
+#vertical-menu-medico a:hover {
+    background-color: #ebebeb; /* Dark grey background on mouse-over */
+}
