@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.template.context_processors import csrf
 from django.contrib.auth import logout
 from django.contrib.auth import authenticate 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse 
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -17,6 +17,7 @@ from .utility import *
 from django.http import QueryDict
 from .models import Persona, Paquete,Dias,Doctor
 from django.shortcuts import redirect
+from .controller import zoom_auth
 
 # Create your views here.
 @csrf_exempt 
@@ -540,6 +541,17 @@ def login(request):
 
 def crear_cita(request):
 	return redirect('index_paciente')
+
+def auth_zoom(request):
+	zoom_auth()
+	request.session["code"] = request.GET.get("code", "NO CODE")
+	return HttpResponse('Hola Mundo')
+
+def test_view(request):
+	print(request.session.get("code"))
+	return HttpResponse('Adios Mundo')
+
+
 
 def boton_pago(request):
 	dictionary = dict(request=request) 

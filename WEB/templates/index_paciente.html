@@ -5,6 +5,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script src="{% static 'js/menu.css' %}"></script>
 {% endblock %}
 
 {% block menu %}
@@ -13,13 +14,8 @@
 	<li class="nav-item">
 		<a class="nav-link" href="">Inicio</a>
 	</li>
-	<li class="nav-item dropdown">
-		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Agendar citas</a>
-		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'agendar_emergencia' %}">Cita de emergencia</a>
-          <a class="dropdown-item" href="{% url 'ag-cita' %}">Agendar cita</a>
-          <a class="dropdown-item" href="">Junta médica</a>
-        </div>
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'ag-cita' %}">Agendar</a>
 	</li>
 	<li class="nav-item dropdown">
 		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Citas</a>
@@ -61,7 +57,7 @@
         	<div class="col-xl-1">
         		
         	</div>
-          <div id="menu-int" class="col-xl-3 list-inline">
+          <div id="menu-int" class="col-xl-5 list-inline">
             {% block navs %}
 			{% endblock %}
           </div> 

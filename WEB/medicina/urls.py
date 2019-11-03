@@ -39,4 +39,7 @@ urlpatterns = [
 
 	url(r'^ingresar_especialidad/$', views.ingresar_especialidad, name='ingresar_especialidad'),
 	url(r'^match_especialidad/$', views.match_especialidad, name='match_especialidad'),
+
+	url(r'^auth_zoom/$', views.auth_zoom, name='auth_zoom'),
+	url(r'^prueba_auth/$', views.test_view, name='prueba_auth'),
 ]
