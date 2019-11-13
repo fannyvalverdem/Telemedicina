@@ -214,6 +214,11 @@ def citas_medico(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'citas_medico.html', dictionary)
 
+def reporte_medico(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'reporte_medico.html', dictionary)
+
 def ingresar_paquete(request):
 	if request.method == 'POST':
 		print("POST")

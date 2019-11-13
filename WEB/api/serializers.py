@@ -18,7 +18,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
 		for persona in persona_id:
 			models.Persona.objects.create(**persona, usuario=usuario)
 		return usuario
-
+		
 
 class EspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -36,12 +36,19 @@ class MedicoSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model= models.Doctor
-		fields=("id","identificador_medico","user_id")
+		fields=("id","identificador_medico","calificacion_total","citas_realizadas","user_id")
+
+class MatchEspecialidadSerializer(serializers.ModelSerializer):
+	doctor=MedicoSerializer()
+	especialidad=EspecialidadSerializer()
+	class Meta:
+		model= models.MatchEspecialidades
+		fields=("id","doctor","especialidad")
 
 class PacienteSerializer(serializers.ModelSerializer):
 	user_id=UsuarioSerializer()
 	class Meta:
-		model= models.Doctor
+		model= models.Paciente
 		fields=("id","user_id")
 
 class PaquetesSerializer(serializers.ModelSerializer):

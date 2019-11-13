@@ -13,6 +13,7 @@ urlpatterns = [
 	url(r'^usuario/$', views.UsuarioViewset.as_view(), name='usuario_api'),
 	url(r'^horario/$', views.HorarioViewset.as_view(), name='horario_api'),
 	url(r'^administrador/$', views.AdministradorViewset.as_view(), name='administrador_api'),
+	url(r'^match_especialidades/$', views.MatchEspecialidadesViewset.as_view(), name='administrador_api'),
 	url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls'))
 ]
