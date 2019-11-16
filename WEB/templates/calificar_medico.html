@@ -1,0 +1,40 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+
+{% block import %}
+<script src="{% static 'js/starrr.css' %}"></script>
+<link href="{% static 'css/starrr.css' %}" rel=stylesheet/>
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="modal">
+	<div class="contenido">
+		<input type="checkbox" id="cerrar">
+		<label for="cerrar" id="btn-cerrar"></label>
+		<h2>Calificación de Médico</h2>
+		<h6>Calificación de la atención médica</h6>
+		<hr/>
+        Calificar: <span id="Estrellas"></span>
+        <hr/>
+	</div>
+</div>
+
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+   $('#Estrellas').starrr({
+       rating:0,
+       change:function(e,valor){
+           alert(valor);
+           
+       }
+       
+   });
+    
+    </script>
+{% endblock %}

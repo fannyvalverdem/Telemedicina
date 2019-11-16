@@ -115,6 +115,10 @@ def registro(request):
 			persona_id=persona
 		)
 		usuario.save()
+		paciente=Paciente(
+			user_id=usuario
+		)	
+		paciente.save()
 		user = User.objects.create_user(username=email,email=email,password=password)
 		user = authenticate(username=username, password=password)
 		auth_login(request=request, user=user)
