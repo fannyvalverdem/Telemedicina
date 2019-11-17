@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class StorageHandlerService {
 
 	key: any;
-  id: any;
-  esUsuario: boolean;
+	id: any;
+	email: string;
+	username: string;
+	esUsuario: boolean;
 	isStudent: boolean;
 	isStaff: boolean;
 	isTutor: boolean;
 	zoomUserId: string;
 	zoomToken: string;
-	zoomAccessToken :string;
+	zoomAccessToken: string;
 
 	constructor(private storage: Storage) {
 		this.zoomUserId = "";
@@ -22,23 +24,17 @@ export class StorageHandlerService {
 		this.zoomAccessToken = "";
 	}
 
-	setAll(key,id,isStudent,isStaff,isTutor,esUsuario){
-		this.key = key;
-    this.id = id;
-    this.esUsuario = esUsuario;
-		this.isStaff = isStaff;
-		this.isStudent = isStudent;
-		this.isTutor = isTutor;
-		this.writeInStorage("key",key);
-    this.writeInStorage("id",id);
-    this.writeInStorage("esUsuario",esUsuario)
-		this.writeInStorage("isStaff",isStaff);
-		this.writeInStorage("isStudent",isStudent);
-		this.writeInStorage("isTutor",isTutor);
+	setAll(id, email, username) {
+		this.id = id;
+		this.email = email;
+		this.username = username;
+		this.writeInStorage("id", id);
+		this.writeInStorage("email", email)
+		this.writeInStorage("username", username);
 	}
 
 	writeInStorage(key: string, value: any) {
-		this.storage.set(key,value);
+		this.storage.set(key, value);
 	}
 
 	public async getValuePromise(key) {
@@ -56,7 +52,7 @@ export class StorageHandlerService {
 
 	setKey(value) {
 		this.key = value;
-		this.writeInStorage("key",value);
+		this.writeInStorage("key", value);
 	}
 
 	getId() {
@@ -65,16 +61,16 @@ export class StorageHandlerService {
 
 	setId(value) {
 		this.id = value;
-		this.writeInStorage("id",value);
-  }
+		this.writeInStorage("id", value);
+	}
 
-  getEsUsuario() {
+	getEsUsuario() {
 		return this.esUsuario;
 	}
 
 	setEsUsuario(value) {
 		this.esUsuario = value;
-		this.writeInStorage("esUsuario",value);
+		this.writeInStorage("esUsuario", value);
 	}
 
 	getIsStudent() {
@@ -83,7 +79,7 @@ export class StorageHandlerService {
 
 	setIsStudent(value) {
 		this.isStudent = value;
-		this.writeInStorage("isStudent",value);
+		this.writeInStorage("isStudent", value);
 	}
 
 	getIsTutor() {
@@ -92,7 +88,7 @@ export class StorageHandlerService {
 
 	setIsTutor(value) {
 		this.isTutor = value;
-		this.writeInStorage("isTutor",value);
+		this.writeInStorage("isTutor", value);
 	}
 
 	getIsStaff() {
@@ -101,13 +97,13 @@ export class StorageHandlerService {
 
 	setIsStaff(value) {
 		this.isStaff = value;
-		this.writeInStorage("isStaff",value);
+		this.writeInStorage("isStaff", value);
 	}
 
 	async clear() {
 		this.key = null;
-    this.id = null;
-    this.esUsuario = null;
+		this.id = null;
+		this.esUsuario = null;
 		this.isStaff = null;
 		this.isStudent = null;
 		this.isTutor = null;
@@ -123,24 +119,24 @@ export class StorageHandlerService {
 		})*/
 	}
 
-	getZoomUserId(){
+	getZoomUserId() {
 		return this.zoomUserId;
 	}
 
-	getZoomToken(){
+	getZoomToken() {
 		return this.zoomToken;
 	}
 
 	async isEmpty() {
 		var longitud = await this.storage.length();
 		if (longitud != 0) return false;
-		return true; 
+		return true;
 	}
 
 	async fillVariables() {
 		this.key = await this.getValuePromise('key');
-    this.id = await this.getValuePromise('id');
-    this.id = await this.getValuePromise('esUsuario');
+		this.id = await this.getValuePromise('id');
+		this.id = await this.getValuePromise('esUsuario');
 		this.isStaff = await this.getValuePromise('isStaff');
 		this.isTutor = await this.getValuePromise('isTutor');
 		this.isStudent = await this.getValuePromise('isStudent');
@@ -154,11 +150,11 @@ export class StorageHandlerService {
 		this.zoomToken = zoomToken;
 	}
 
-	getZoomAccessToken(){
+	getZoomAccessToken() {
 		return this.zoomAccessToken;
 	}
 
-	setZoomAccessToken(token){
-		this.zoomAccessToken = token; 
+	setZoomAccessToken(token) {
+		this.zoomAccessToken = token;
 	}
 }

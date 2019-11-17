@@ -36,14 +36,12 @@ export class LoginPage implements OnInit {
       await this.restProvider.login(this.user)
         .then(data => {
           this.storageHandler.setAll(
-            JSON.parse(JSON.stringify(data))['key'],
+            // JSON.parse(JSON.stringify(data))['key'],
             JSON.parse(JSON.stringify(data))['id'],
-            JSON.parse(JSON.stringify(data))['es_usuario'],
-            JSON.parse(JSON.stringify(data))['is_student'],
-            JSON.parse(JSON.stringify(data))['is_staff'],
-            JSON.parse(JSON.stringify(data))['is_tutor']);
+            JSON.parse(JSON.stringify(data))['email'],
+            JSON.parse(JSON.stringify(data))['username']);
           this.showAlert("Inició sesión de forma correcta");
-          this.router.navigate(['/home'], { skipLocationChange: true, replaceUrl: true });
+          this.router.navigate(['/principal'], { skipLocationChange: true, replaceUrl: true });
           retorno = true; //Retorna True si inició sesión de forma correcta
         }, err => {
           this.showAlert(JSON.parse(JSON.stringify(err))['error']['non_field_errors'][0]);
@@ -68,7 +66,7 @@ export class LoginPage implements OnInit {
   }
 
   irARegistrar() {
-    this.router.navigate(['/authentication/register']);
+    this.router.navigate(['registro']);
   }
 
   inputsVacios() {
