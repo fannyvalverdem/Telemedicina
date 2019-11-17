@@ -5,31 +5,32 @@
 
 
 {% block base %}
-<div class="container-fluid">
+<div class="container-fluid" id="inicio-cont">
 	<br>
 	<div class="row">
-		<div id="l-tele" class="col-xl-7">
-		 	<img id="img-tele" src="{% static 'imagenes/logo-movil.png' %}" alt="logo"/>
+		<div class="col-1">
 		</div>
 
-		<div class="col-xl-5">
+		<div class="col-10">
 			<div class="row">
 				<div class="col-xl-1">	
 				</div>
-				<div class="col-xl-8">
+				<div class="col-xl-4">
 					<div class="row">
 						<div id="inicio" class="col-xl-12">
 							<br>
 							<div id="titulo-inicio" class="row">
-								<h2>TELEMEDICINA</h2>
+								<img id="logo-ini" src="{% static 'imagenes/logo_2.png' %}" alt="logo"/>
 							</div>
 							<br>
+
 							<div class="row">
 								<div class="col-xl-12">
 									{% load crispy_forms_tags %}
 									<form action="/login/" method="post">
 										{% csrf_token %}
 										{{ form|crispy }}
+<<<<<<< HEAD
 										{% for message in messages %}
                 							<small><i class="fas fa-exclamation-triangle"></i>{{ message }}</small>
                 						{% endfor %}
@@ -42,53 +43,48 @@
 					                        <input type="password" class="form-control" id="password" name="password">
 					                    </div> -->
 										<button type="submit" id="btn-inicio">Inicio Sesión</button>
+=======
+										<div id="contra" class="row">
+										  <a href="">¿Olvidaste tu contraseña?</a>
+										</div>
+										<button type="submit" id="btn-inicio" style="text-align:center;">Inicio Sesión</button>
+>>>>>>> fad016dbf53022260091fe70aae42a116eef4bbf
 									</form>
 								</div>
 							</div>
+							
 							<br>
-							<div id="lineas" class="row">
-								<h4>--------------- o ---------------</h4>
+							<br>
+							<div class="row" id="ingresa-con">
+								<p>Ingresa con</p>
 							</div>
+							<div class="row">
+								<div class="col-6">
+									<a href="{% provider_login_url 'facebook' method='oauth2' %}"><img id="logo-redes" src="{% static 'imagenes/facebook.png' %}" alt="logo"/ align="right"></a>
+								</div>
+								<div class="col-6">
+									<a href="{% provider_login_url 'google' %}"><img id="logo-redes2" src="{% static 'imagenes/google.png' %}" alt="logo"/></a>
+								</div>
+	        					
+							</div>
+							<br>
 							<br>
 							<div class="row">
-	        					<button><a href="{% provider_login_url 'facebook' method='oauth2' %}">Inicia sesiòn con Facebook</a>
-
-	        					</button>
+								<div class="col-12" id="nuevo-user">
+							  		<a href="{% url 'registro' %}" align="right">¿Nuevo Usuario? ¡Regístrate aquí!</a>
+								</div>	
 							</div>
-							<br>
-							<div class="row">
-								<button><a href="{% provider_login_url 'google' %}">Google Login</a></button>
-							</div>
-							<br>
-							<div id="contra" class="row">
-							  <a href="">¿Has olvidado tu contraseña</a>
-							</div>
-							<br>
 						</div>
 					</div>
 					<div class="row">	
 					</div>
 					<br>
-						<div class="row">
-							<div id="no-cuenta" class="col-xl-12">
-								<br>
-								<div class="row">
-									<div class="col-xl-8">
-										<h4>¿No tienes cuenta?</h4>
-									</div>
-									<div class="col-xl-4">
-								  		<a href="{% url 'registro' %}">Regitrarse</a>
-									</div>
-								</div>
-								<br>
-							</div>
-						</div>
 						<br>
 						<div id="des-app" class="row">
-						  	<h4>Descarga la aplicacion</h4>
+						  	<h4>Descarga la app</h4>
 						</div>
 						<br>
-						<div id="apps" class="row">
+						<div id="apps" class="row" align="right">
 							<div id="store" class="col-xl-6">
 						  		<a tittle="app-store" href=""><img id="imgstore" src="{% static 'imagenes/App-Store.png' %}"/></a>
 						  	</div>
@@ -100,7 +96,7 @@
 							<br>
 				</div>
 				</div>
-				<div class="col-xl-3">	
+				<div class="col-1">	
 				</div>
 			</div>
 		</div>

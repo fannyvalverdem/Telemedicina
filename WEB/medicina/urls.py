@@ -37,6 +37,11 @@ urlpatterns = [
 	url(r'^administrador/', views.index_admin, name='index_admin'),
 	url(r'^agendar_cita/$', views.agendar_cita, name='ag-cita'),
 
+	url(r'^reporte_medico/$', views.reporte_medico, name='r_medico'),
+
 	url(r'^ingresar_especialidad/$', views.ingresar_especialidad, name='ingresar_especialidad'),
 	url(r'^match_especialidad/$', views.match_especialidad, name='match_especialidad'),
+
+	url(r'^auth_zoom/$', views.auth_zoom, name='auth_zoom'),
+	url(r'^prueba_auth/$', views.test_view, name='prueba_auth'),
 ]

@@ -1,4 +1,5 @@
 import requests,json
+from django.shortcuts import redirect
 
 def Add(entidad,registro):
 	response=requests.post('http://127.0.0.1:8000/api/'+entidad+'/',registro)
@@ -8,6 +9,13 @@ def Listar(entidad):
 	response = requests.get('http://127.0.0.1:8000/api/'+entidad+'/')
 	data = response.json()
 	return data
+
+def zoom_auth():
+	response = requests.get('https://zoom.us/oauth/authorize?response_type=code&client_id=WgCo2Mo8RkupkAANM8Wxdg&redirect_uri=http://127.0.0.1:8000/auth_zoom')
+	print(dir(response))
+	# print(response.content)
+	print(response.url)
+	return response
 
 def listar_meeting(usuario,token):
 	url = "https://api.zoom.us/v2/users/"+usuario+"/meetings"

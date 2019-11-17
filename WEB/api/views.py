@@ -79,3 +79,7 @@ class ConsultaViewset(generics.ListAPIView):
 class EspecialidadViewset(generics.ListAPIView):
 	queryset = models.Especialidad.objects.all()
 	serializer_class = serializers.EspecialidadSerializer
+
+class MatchEspecialidadesViewset(generics.ListAPIView):
+	queryset = models.MatchEspecialidades.objects.all()
+	serializer_class = serializers.MatchEspecialidadSerializer

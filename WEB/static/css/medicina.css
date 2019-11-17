@@ -1,5 +1,5 @@
 .container-fluid {
-	background-color: #f3f3f3;
+	background-color: #ffffff;
 }
 
 img[id="img-tele"]{
@@ -9,21 +9,44 @@ img[id="img-tele"]{
 	width: 75%;
 }
 
-div#inicio, div#cuenta, div#no-cuenta, div#contenido{
+div#inicio-cont{
+	background-color: #65b4c3;
+}
+
+div#inicio, div#cuenta, div#no-cuenta{
 	display: inline-block;
-	background-color: #8bcebd;
+	background-color: #ffffff;
 	text-align: center
 	border-radius: 25px 25px 25px 25px;
 	-moz-border-radius: 25px 25px 25px 25px;
 	-webkit-border-radius: 25px 25px 25px 25px;
 	border: 0px solid #000000;
 }
+div#ingresa-con{
+	color: #727176;
+	text-align: center;
+}
 
-#titulo-inicio h2, #lineas h4, #contra a, #des-app h4, #titulo h2{
+#titulo-inicio h2, #lineas h4, #des-app h4, #titulo h2{
 	display: inline-block;
 	margin:auto;
 	text-align: center;
 }
+
+#nuevo-user a{
+	display: inline-block;
+	margin:auto;
+	text-align: right;
+	color: #65b4c3;
+}
+
+#contra a{
+	display: inline-block;
+	margin:auto;
+	text-align: right;
+	color: #e53956;
+}
+
 
 img[id="foto_doc"]{
 	display:block;
@@ -40,18 +63,33 @@ img[id="imgplay"]{
 	height:75px;
 }
 
+img[id="logo2"]{
+	width:200px;
+}
+
+img[id="logo-ini"]{
+	width:400px;
+}
+
+img[id="logo-redes"]{
+	width:18px;
+}
+
+img[id="logo-redes2"]{
+	width:50px;
+}
+
 button[id="btn-inicio"], button[id="btn-registro"]{
-	background-color: #0074a5;
+	background-color: #e53956;
 	color: white;
 	display: inline-block;
 	text-align: center;
 	border-radius: 8px;
-	width: 100%;
 	border:none;
 }
 
 button[id="btn-guardar"], button[id="btn-continuar"] {
-	background-color: #0074a5;
+	background-color: #e53956;
 	color: white;
 	text-align: center;
 	border-radius: 8px;
@@ -64,38 +102,56 @@ button[id="btn-guardar"], button[id="btn-continuar"] {
 
 img[id="banner"]{
 	width:100%;
-	height:100%;
+}
+
+#superior-banner{
+	background-color: #65b4c3;
 }
 
 #menu {
 	font-size: medium;
 	text-align: center;
-	display: inline-block;
+	display: inline;
 	margin-top: auto;
 	margin-bottom: auto;
 	margin-left: auto;
-	background-color:#f3f3f3;
 	color:black;
 
 }
 
 li{
-	display: inline-block;
+	display: inline;
 	margin-right: auto;
 	text-align: center;
     text-decoration: none;
 
 }
 
-#menu a:hover{
-	 background-color: #ebebeb;
+#menu ul li a{
+	color: #ffffff;
 }
 
-#menu a#active {
-    background-color: #8bcebd;
-    color: black;
+#menu-int ul li a{
+	color: black;
 }
 
+#menu ul li a:hover{
+	 color: #e53956;
+}
+
+#menu ul li a#active{
+    color: #e53956;
+}
+
+#menu-int ul li a#active {
+    color: #e53956;
+}
+
+#footer_bajo{
+	color: #65b4c3;
+	text-align: center;
+	margin:auto;
+}
 
 #vertical-menu-medico a {
     background-color: #9baec8; /* Grey background color */
@@ -110,4 +166,44 @@ li{
 
 #vertical-menu-medico a:hover {
     background-color: #ebebeb; /* Dark grey background on mouse-over */
+}
+
+.modal{
+	width: 100%;
+	height: 100vh;
+	background: rgba(0,0,0,0.8);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	display: flex;
+}
+
+
+
+.contenido{
+	margin: auto;
+	width: 40%;
+	height: 40%;
+	background: white:
+	border-radius:10px;
+}
+
+#cerrar {
+	display: none;
+	color: #fff;
+	font-size: 25px;
+	z-index: 50;
+	background: darkred;
+	height: 40px;
+	width: 40px;
+	line-height: 40px;
+	border-radius: 50px;
+	
+
+}
+
+#cerrar + label {
+	position: absolute;
 }
