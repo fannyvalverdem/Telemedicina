@@ -30,25 +30,13 @@
 									<form action="/login/" method="post">
 										{% csrf_token %}
 										{{ form|crispy }}
-<<<<<<< HEAD
 										{% for message in messages %}
                 							<small><i class="fas fa-exclamation-triangle"></i>{{ message }}</small>
                 						{% endfor %}
-										<!-- <div class="form-group">
-                        					<label>Nombre de usuario</label>
-                        					<input type="email" class="form-control" id="username" name="username">
-                    					</div>
-					                    <div class="form-group">
-					                        <label>Contraseña</label>
-					                        <input type="password" class="form-control" id="password" name="password">
-					                    </div> -->
-										<button type="submit" id="btn-inicio">Inicio Sesión</button>
-=======
 										<div id="contra" class="row">
 										  <a href="">¿Olvidaste tu contraseña?</a>
 										</div>
 										<button type="submit" id="btn-inicio" style="text-align:center;">Inicio Sesión</button>
->>>>>>> fad016dbf53022260091fe70aae42a116eef4bbf
 									</form>
 								</div>
 							</div>
