@@ -17,11 +17,8 @@ from .utility import *
 from django.http import QueryDict
 from .models import Persona, Paquete,Dias,Doctor
 from django.shortcuts import redirect
-<<<<<<< HEAD
 from django.contrib import messages
-=======
 from .controller import zoom_auth
->>>>>>> fad016dbf53022260091fe70aae42a116eef4bbf
 
 # Create your views here.
 @csrf_exempt 

@@ -23,10 +23,6 @@ class UsuarioSerializer(serializers.ModelSerializer):
 		
 		usuario.save()
 		return usuario
-<<<<<<< HEAD
-=======
-		
->>>>>>> fad016dbf53022260091fe70aae42a116eef4bbf
 
 class EspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:
