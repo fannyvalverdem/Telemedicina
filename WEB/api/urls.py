@@ -13,7 +13,9 @@ urlpatterns = [
 	url(r'^usuario/$', views.UsuarioViewset.as_view(), name='usuario_api'),
 	url(r'^horario/$', views.HorarioViewset.as_view(), name='horario_api'),
 	url(r'^administrador/$', views.AdministradorViewset.as_view(), name='administrador_api'),
-	url(r'^match_especialidades/$', views.MatchEspecialidadesViewset.as_view(), name='administrador_api'),
+	url(r'^match_especialidades/$', views.MatchEspecialidadesViewset.as_view(), name='match_espe_api'),
+	url(r'^pagos_paciente/$', views.PagosViewset.as_view(), name='pagos_paciente_api'),
+	url(r'^detalles_especialidad/$', views.DetallesEspecialidadViewset.as_view(), name='detalles_especialidad_api'),
 	url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls'))
 ]

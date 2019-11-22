@@ -223,6 +223,17 @@ def reporte_medico(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'reporte_medico.html', dictionary)
 
+def reporte_paciente(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'reporte_paciente.html', dictionary)
+
+def reporte_especialidad(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'reporte_especialidad.html', dictionary)
+
+
 def ingresar_paquete(request):
 	if request.method == 'POST':
 		print("POST")

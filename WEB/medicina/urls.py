@@ -38,6 +38,8 @@ urlpatterns = [
 	url(r'^agendar_cita/$', views.agendar_cita, name='ag-cita'),
 
 	url(r'^reporte_medico/$', views.reporte_medico, name='r_medico'),
+	url(r'^reporte_paciente/$', views.reporte_paciente, name='r_paciente'),
+	url(r'^reporte_especialidad/$', views.reporte_especialidad, name='r_especialidad'),
 
 	url(r'^ingresar_especialidad/$', views.ingresar_especialidad, name='ingresar_especialidad'),
 	url(r'^match_especialidad/$', views.match_especialidad, name='match_especialidad'),

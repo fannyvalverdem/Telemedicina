@@ -83,3 +83,11 @@ class EspecialidadViewset(generics.ListAPIView):
 class MatchEspecialidadesViewset(generics.ListAPIView):
 	queryset = models.MatchEspecialidades.objects.all()
 	serializer_class = serializers.MatchEspecialidadSerializer
+
+class PagosViewset(generics.ListAPIView):
+	queryset = models.Pagos_Paciente.objects.all()
+	serializer_class = serializers.PagosPacienteSerializer
+
+class DetallesEspecialidadViewset(generics.ListAPIView):
+	queryset = models.Detalles_Especialidad.objects.all()
+	serializer_class = serializers.DetallesEspecialidadSerializer

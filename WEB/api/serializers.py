@@ -49,7 +49,7 @@ class PacienteSerializer(serializers.ModelSerializer):
 	user_id=UsuarioSerializer()
 	class Meta:
 		model= models.Paciente
-		fields=("id","user_id")
+		fields=("id","user_id","citas_realizadas")
 
 class PaquetesSerializer(serializers.ModelSerializer):
 	especialidad=EspecialidadSerializer()
@@ -94,3 +94,19 @@ class DetalleConsultaSerializer(serializers.ModelSerializer):
 #	class Meta:
 #		model= models.Recetas
 #		fields=("fecha","paciente_id","doctor_id")
+
+class PagosPacienteSerializer(serializers.ModelSerializer):
+	paciente=PacienteSerializer()
+	class Meta:
+		model= models.Pagos_Paciente
+		fields=("id","pago_total","paciente")
+
+
+class DetallesEspecialidadSerializer(serializers.ModelSerializer):
+	especialidad=EspecialidadSerializer()
+	class Meta:
+		model=models.Detalles_Especialidad
+		fields=("id","pagos_total","total_doctor","citas_realizadas","especialidad")
+			
+		
+	
