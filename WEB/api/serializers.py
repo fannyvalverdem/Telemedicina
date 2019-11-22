@@ -7,6 +7,7 @@ class PersonaSerializer(serializers.ModelSerializer):
 		fields=("id","nombre","apellido","tipo_documento","numero_documento","fecha_nac","sexo","telefono","ciudad","direccion")
 
 class UsuarioSerializer(serializers.ModelSerializer):
+	password = serializers.CharField(write_only=True)
 	persona_id=PersonaSerializer()
 	class Meta:
 		model= models.Usuario
@@ -15,10 +16,13 @@ class UsuarioSerializer(serializers.ModelSerializer):
 	def create(self, validated_data):
 		persona_id = validated_data.pop('persona_id')
 		usuario = models.Usuario.objects.create(**validated_data)
+		usuario.set_password(validated_data['password'])
+        
 		for persona in persona_id:
-			models.Persona.objects.create(**persona, usuario=usuario)
-		return usuario
+			person = models.Persona.objects.create(**persona, usuario=usuario)
 		
+		usuario.save()
+		return usuario
 
 class EspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:

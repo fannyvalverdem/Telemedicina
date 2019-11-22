@@ -17,6 +17,7 @@ from .utility import *
 from django.http import QueryDict
 from .models import Persona, Paquete,Dias,Doctor
 from django.shortcuts import redirect
+from django.contrib import messages
 from .controller import zoom_auth
 
 # Create your views here.
@@ -554,7 +555,9 @@ def login(request):
 
 	        else:
 	        	form = SignupForm()
+	        	print("NO VALIDO")
 	        	msg_to_html = custom_message('Invalid Credentials', TagType.danger)
+	        	messages.error(request, 'Nombre de usuario o contraseña incorrecto')
 	        	dictionary = dict(request=request, messages = msg_to_html)
 	        	dictionary.update(csrf(request))
 	        return render(request,'inicio_sesion.html', {'form':form})
