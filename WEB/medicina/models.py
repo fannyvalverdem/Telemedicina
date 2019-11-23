@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 def imagen_up(instance,filename):
 	return "usuarios/%s" %(filename)
@@ -20,12 +21,10 @@ class Persona(models.Model):
 	direccion=models.CharField(max_length=250,null=True)
 	imagen=models.ImageField(upload_to=imagen_up,null=True)
 
-class Usuario(models.Model):
+class Usuario(AbstractUser):
 	email=models.EmailField()
-	username= models.CharField(max_length=50)
-	password=models.CharField(max_length=250)
+	username= models.CharField(max_length=50, unique=True)
 	persona_id=models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
-
 class Especialidad(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()

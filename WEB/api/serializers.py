@@ -9,13 +9,13 @@ class PersonaSerializer(serializers.ModelSerializer):
 class UsuarioSerializer(serializers.ModelSerializer):
 	password = serializers.CharField(write_only=True)
 	persona_id=PersonaSerializer()
-	class Meta:
-		model= models.Usuario
-		fields=("id","email","username","password","persona_id")
-
+	
 	def create(self, validated_data):
 		persona_id = validated_data.pop('persona_id')
-		usuario = models.Usuario.objects.create(**validated_data)
+		usuario = models.Usuario.objects.create(
+			email=validated_data['email'],
+			username= validated_data['username']
+		)
 		usuario.set_password(validated_data['password'])
         
 		for persona in persona_id:
@@ -23,6 +23,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
 		
 		usuario.save()
 		return usuario
+
+	class Meta:
+		fields=("id","email","username","password","persona_id")
+		model= models.Usuario
 
 class EspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:

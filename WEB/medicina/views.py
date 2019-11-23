@@ -92,37 +92,46 @@ def registro(request):
 	usuario=Listar("usuario")
 	persona=Listar("personas")
 	context= {'usuario':usuario,'persona':persona}
-	form = RegistroForm(request.POST)
-	print("<<<<<<<<<<<<<<<<<<")
-	#checking the form is valid or not 
+	form = PersonaForm(request.POST)
+	form1 = RegistroForm(request.POST)
 	if form.is_valid():
-		username =form.cleaned_data['email']
-		email =form.cleaned_data['email']
-		password = form.cleaned_data['password']
 		nombre = form.cleaned_data['name']
 		apellido = form.cleaned_data['apellido']
 		telefono = form.cleaned_data['phone']
-		print(username,email,password,nombre,apellido,telefono,"<###")
 		persona=Persona(
 			nombre=nombre,
 			apellido=apellido,
 			telefono=telefono,
 		)
 		persona.save()
+	
+	print("Persona ok")
+	#checking the form is valid or not 
+	if form1.is_valid():
+		# username =form.cleaned_data['email']
+		username = form1.cleaned_data['username']
+		email =form1.cleaned_data['email']
+		# password = form.cleaned_data['password']
+		password1 = form1.cleaned_data['password1']
+		password2 = form1.cleaned_data['password2']
+		
+		print(username,email,password1,password2,nombre,apellido,telefono,"<###")
+		persona=Persona.objects.order_by('-id')[0]
 		usuario=Usuario(
 			username=username,
 			email=email,
-			password=password,
 			persona_id=persona
 		)
+		usuario.set_password(password1)
 		usuario.save()
 		paciente=Paciente(
 			user_id=usuario
 		)	
 		paciente.save()
-		user = User.objects.create_user(username=email,email=email,password=password)
-		user = authenticate(username=username, password=password)
-		auth_login(request=request, user=user)
+		print("------------------GUARDO---------")
+		# user = User.objects.create_user(username=email,email=email,password=password)
+		# user = authenticate(username=username, password=password)
+		# auth_login(request=request, user=user)
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request))
 		return render(request,'index_paciente.html', context)
@@ -140,9 +149,14 @@ def registro(request):
 		#print(user,"<<<<<<<<<<<<<<<<<<")
 	else:
 	#creating a new form
-		form = RegistroForm()
-			#returning form 
-	return render(request, 'registro.html', {'form':form});
+		context['error'] = form1.errors
+		print(context['error'])
+		form = PersonaForm()
+		form1 = RegistroForm()
+		context = {'form':form, 'form1':form1}
+		print("NO ENTRO")
+			#returning form 
+	return render(request, 'registro.html', context)
 
 def index_paciente(request):
 	dictionary = dict(request=request) 
