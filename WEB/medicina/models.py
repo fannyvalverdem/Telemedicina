@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 def imagen_up(instance,filename):
 	return "usuarios/%s" %(filename)
@@ -20,12 +21,10 @@ class Persona(models.Model):
 	direccion=models.CharField(max_length=250,null=True)
 	imagen=models.ImageField(upload_to=imagen_up,null=True)
 
-class Usuario(models.Model):
+class Usuario(AbstractUser):
 	email=models.EmailField()
-	username= models.CharField(max_length=50)
-	password=models.CharField(max_length=250)
+	username= models.CharField(max_length=50, unique=True)
 	persona_id=models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
-
 class Especialidad(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
@@ -53,6 +52,7 @@ class Horario(models.Model):
 
 class Paciente(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+	citas_realizadas=models.IntegerField(default=0,null=True)
 
 class Administrador(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
@@ -87,6 +87,7 @@ class Detalle_Consulta(models.Model):
 	precio=models.FloatField()
 	calificacion=models.IntegerField()
 	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
+	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
 
 class Receta(models.Model):	
 	descripcion=models.TextField()
@@ -116,3 +117,13 @@ class Medicamento(models.Model):
 class RecetarMedicamentos(models.Model):
 	receta=models.ForeignKey(Receta, null=True, blank=True, on_delete=models.CASCADE)
 	medicamento=models.ForeignKey(Medicamento, null=True, blank=True, on_delete=models.CASCADE)
+
+class Pagos_Paciente(models.Model):	
+	pago_total=models.FloatField(default=0,null=True)
+	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
+
+class Detalles_Especialidad(models.Model):
+	pagos_total=models.FloatField(default=0,null=True)
+	total_doctor=models.IntegerField(default=0,null=True)
+	citas_realizadas=models.IntegerField(default=0,null=True)
+	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)

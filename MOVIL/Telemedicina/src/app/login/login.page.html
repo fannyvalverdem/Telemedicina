@@ -1,43 +1,47 @@
 <ion-header>
   <ion-toolbar>
-      <ion-img src="assets/telemedicina_movil.jpg"></ion-img>
+    <ion-img src="assets/telemedicina_movil.jpg"></ion-img>
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="light" padding>
+<ion-content color="light" class="padding">
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-       <ion-input type="email" placeholder="Correo Electrónico" required clearInput [(ngModel)]="user.username" name="username"></ion-input>
+        <ion-input type="email" placeholder="Correo Electrónico" required clearInput [(ngModel)]="user.username"
+          name="username"></ion-input>
       </ion-col>
     </ion-row>
-    <ion-row >
-      <ion-col col-12 >
-        <ion-input type="password" placeholder="Contraseña" required clearInput [(ngModel)]="user.password" name="password"></ion-input>
+    <ion-row>
+      <ion-col col-12>
+        <ion-input type="password" placeholder="Contraseña" required clearInput [(ngModel)]="user.password"
+          name="password"></ion-input>
       </ion-col>
-    </ion-row >
+    </ion-row>
     <ion-row class="ion-justify-content-center">
-        <ion-button type="submit" routerLink="principal" (click)="iniciarSesion()">Iniciar Sesión</ion-button> 
+      <ion-button type="submit" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
+      <!-- routerLink="principal" -->
     </ion-row>
-    
-  <ion-row class="ion-justify-content-center">
-    <ion-button>
-      <ion-icon slot="start" name="logo-facebook"></ion-icon>Iniciar sesion con Facebook
-    </ion-button>
-  </ion-row>
-  <ion-row class="ion-justify-content-center">
-    <ion-button>
-      <ion-icon slot="start" name="logo-googleplus"></ion-icon>Iniciar sesion con Gmail
-    </ion-button>
-  </ion-row>
-  <ion-row class="ion-justify-content-center">
+
+    <ion-row class="ion-justify-content-center">
+      <ion-button>
+        <ion-icon slot="start" name="logo-facebook"></ion-icon>Iniciar sesion con Facebook
+      </ion-button>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-button>
+        <ion-icon slot="start" name="logo-googleplus"></ion-icon>Iniciar sesion con Gmail
+      </ion-button>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
       <ion-label>¿Has olvidado tu contraseña?</ion-label>
     </ion-row>
-  <ion-item>
-    <ion-label>¿No tienes cuenta?</ion-label>
-    <ion-button routerLink="registro" (click)="irARegistrar()">Regístrate</ion-button>
-  </ion-item>
-</ion-grid>
+    <ion-item>
+      <ion-label>¿No tienes cuenta?</ion-label>
+      <ion-button  (click)="irARegistrar()">Regístrate</ion-button>
+      <!-- routerLink="registro" -->
+    </ion-item>
+  </ion-grid>
 
 
 </ion-content>

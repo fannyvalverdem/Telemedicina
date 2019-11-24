@@ -30,6 +30,9 @@
 									<form action="/login/" method="post">
 										{% csrf_token %}
 										{{ form|crispy }}
+										{% for message in messages %}
+                							<small><i class="fas fa-exclamation-triangle"></i>{{ message }}</small>
+                						{% endfor %}
 										<div id="contra" class="row">
 										  <a href="">¿Olvidaste tu contraseña?</a>
 										</div>

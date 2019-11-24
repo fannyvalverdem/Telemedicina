@@ -191,3 +191,66 @@ $('#data_table_rmedico').DataTable({
         { width: 100, targets: 5},
     ],
 });
+
+$('#data_table_rpaciente').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/pagos_paciente/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "paciente.user_id.persona_id.nombre"},
+        { data: "paciente.user_id.persona_id.apellido"},
+        { data: "paciente.citas_realizadas"},
+        { data: "pago_total"}
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+        { width: 100, targets: 3},
+    ],
+});
+
+
+$('#data_table_respecialidad').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/detalles_especialidad/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "especialidad.nombre"},
+        { data: "citas_realizadas"},
+        { data: "pagos_total"},
+        { data: "total_doctor"}
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+        { width: 100, targets: 3},
+    ],
+});

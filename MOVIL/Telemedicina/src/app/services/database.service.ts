@@ -9,7 +9,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 })
 export class DatabaseService {
   
-  apiUrl = "http://localhost:8102/";  //por el momento localmente
+  apiUrl = "http://127.0.0.1:8000/";  //por el momento localmente
   zoomApiUrl = "https://api.zoom.us/v2/";
   
   constructor(private http: HttpClient, private storage: StorageHandlerService,
@@ -26,7 +26,7 @@ export class DatabaseService {
   
   login(user) {
 		return new Promise((resolve,reject) => {
-			this.http.post(this.apiUrl+'api/rest-auth/login', user).subscribe(data => {
+			this.http.get(this.apiUrl+'api/usuario', user).subscribe(data => {
 				resolve(data);
 				console.log(data);
 			}, err => {
