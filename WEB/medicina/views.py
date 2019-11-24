@@ -15,7 +15,7 @@ from .controller import Listar, Add
 import requests,json
 from .utility import *
 from django.http import QueryDict
-from .models import Persona, Paquete,Dias,Doctor
+from .models import Persona, Paquete,Dias,Doctor, Tarifa
 from django.shortcuts import redirect
 from django.contrib import messages
 from .controller import zoom_auth
@@ -288,8 +288,14 @@ def ingresar_tarifa(request):
 		nombre =form.cleaned_data['nombre']
 		precio =form.cleaned_data['precio']
 		descripcion = form.cleaned_data['descripcion']
-		insertartarifa={"nombre":str(nombre),"descripcion":str(descripcion),"precio":float(precio)}
-		Add('tarifas',insertartarifa)
+		
+		tarifa=Tarifa(
+			nombre=nombre,
+			precio=precio,
+			descripcion=descripcion
+		)
+
+		tarifa.save()
 		return redirect('ver_tarifas') 
 	else:
 	#creating a new form

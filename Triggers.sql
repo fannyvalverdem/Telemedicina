@@ -205,7 +205,7 @@ CREATE FUNCTION actualizar_detalles_paquetes()
 RETURNS trigger AS $$
 BEGIN
 
-INSERT INTO medicina_detalles_paquetes(pagos_total,total_paciente,paquetes_id)
+INSERT INTO medicina_detalles_paquetes(pagos_total,total_pacientes,paquetes_id)
 VALUES (0,0,NEW.id);
 
 RETURN NULL;
@@ -242,3 +242,5 @@ AFTER INSERT OR UPDATE ON medicina_matchpaquetes
 FOR EACH ROW
 EXECUTE PROCEDURE actualizar_total_pacientes_paquete();
 
+
+DROP TRIGGER 
