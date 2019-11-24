@@ -662,3 +662,8 @@ def escribir_receta(request):
 	else:
 		form=RecetaForm()
 	return render(request, 'escribir_receta.html', {'form':form})
+
+def calificar_medico(request):
+  dictionary = dict(request=request) 
+  dictionary.update(csrf(request)) 
+  return render(request,'calificar_medico.html', dictionary)
