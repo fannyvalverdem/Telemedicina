@@ -94,20 +94,21 @@ def registro(request):
 	context= {'usuario':usuario,'persona':persona}
 	form = PersonaForm(request.POST)
 	form1 = RegistroForm(request.POST)
-	if form.is_valid():
-		nombre = form.cleaned_data['name']
-		apellido = form.cleaned_data['apellido']
-		telefono = form.cleaned_data['phone']
-		persona=Persona(
-			nombre=nombre,
-			apellido=apellido,
-			telefono=telefono,
-		)
-		persona.save()
-	
-	print("Persona ok")
 	#checking the form is valid or not 
 	if form1.is_valid():
+		if  form.is_valid():
+			nombre = form.cleaned_data['name']
+			apellido = form.cleaned_data['apellido']
+			telefono = form.cleaned_data['phone']
+			persona=Persona(
+				nombre=nombre,
+				apellido=apellido,
+				telefono=telefono,
+			)
+			persona.save()
+		
+			print("Persona ok")
+
 		# username =form.cleaned_data['email']
 		username = form1.cleaned_data['username']
 		email =form1.cleaned_data['email']
@@ -661,8 +662,3 @@ def escribir_receta(request):
 	else:
 		form=RecetaForm()
 	return render(request, 'escribir_receta.html', {'form':form})
-
-def calificar_medico(request):
-  dictionary = dict(request=request) 
-  dictionary.update(csrf(request)) 
-  return render(request,'calificar_medico.html', dictionary)
