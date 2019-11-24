@@ -128,3 +128,12 @@ class Detalles_Especialidad(models.Model):
 	total_doctor=models.IntegerField(default=0,null=True)
 	citas_realizadas=models.IntegerField(default=0,null=True)
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
+
+class MatchPaquetes(models.Model):
+	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
+	paquete=models.ForeignKey(Paquete, null=True, blank=True, on_delete=models.CASCADE)
+
+class Detalles_Paquetes(models.Model):
+	pagos_total=models.FloatField(default=0,null=True)
+	total_pacientes=models.IntegerField(default=0,null=True)
+	paquetes=models.ForeignKey(Paquete, null=True, blank=True, on_delete=models.CASCADE)
