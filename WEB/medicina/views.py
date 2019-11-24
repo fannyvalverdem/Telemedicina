@@ -15,7 +15,6 @@ from .controller import Listar, Add
 import requests,json
 from .utility import *
 from django.http import QueryDict
-from .models import Persona, Paquete,Dias,Doctor, Tarifa
 from django.shortcuts import redirect
 from django.contrib import messages
 from .controller import zoom_auth
@@ -344,17 +343,23 @@ def ingresar_medico(request):
 			persona_id=person
 		)
 
+		user.set_password(password)
 		user.save()
-
-		User.objects.create_user(username=email,email=email,password=password)
 
 		doc=Doctor(
 			identificador_medico=licencia_med,
-			user_id=user,
-			especialidad=especialidad
+			user_id=user
 		)
 
 		doc.save()
+
+		matchesp=MatchEspecialidades(
+			doctor=doc,
+			especialidad=especialidad
+		)
+
+		matchesp.save()
+
 		return redirect('ing-horario')
 	else:
 	#creating a new form
