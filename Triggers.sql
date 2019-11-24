@@ -142,8 +142,8 @@ BEGIN
 
 update medicina_detalles_especialidad
 set pagos_total=(SELECT SUM(precio)
-FROM medicina_detalle_consulta
-Where especialidad_id=NEW.especialidad_id
+FROM medicina_detalle_consulta MDC,medicina_consulta MC
+Where MC.id=MDC.consulta_id_id AND estado='realizada' AND especialidad_id=NEW.especialidad_id
 GROUP BY especialidad_id)
 WHERE especialidad_id=NEW.especialidad_id;
 
@@ -160,9 +160,89 @@ AFTER INSERT ON medicina_detalle_consulta
 FOR EACH ROW
 EXECUTE PROCEDURE actualizar_pagos_especialidad();
 
+CREATE FUNCTION actualizar_total_doc_especialidad()
+RETURNS trigger AS $$
+BEGIN
+
+update medicina_detalles_especialidad
+set total_doctor=(SELECT COUNT(*)
+FROM medicina_matchespecialidades
+WHERE especialidad_id=NEW.especialidad_id
+GROUP BY especialidad_id)
+WHERE especialidad_id=NEW.especialidad_id;
+
+UPDATE medicina_detalles_especialidad
+set total_doctor=0
+WHERE total_doctor IS NULL;
+
+RETURN NULL;
+END; 
+$$ LANGUAGE 'plpgsql'
+
+CREATE TRIGGER trigger_actualizar_doc_especialidad
+AFTER INSERT OR UPDATE ON medicina_matchespecialidades
+FOR EACH ROW
+EXECUTE PROCEDURE actualizar_total_doc_especialidad();
+
+CREATE FUNCTION actualizar_detalles_especialidad()
+RETURNS trigger AS $$
+BEGIN
+
+INSERT INTO medicina_detalles_especialidad(pagos_total,total_doctor,citas_realizadas,especialidad_id)
+VALUES (0,0,0,NEW.id);
+
+RETURN NULL;
+END; 
+$$ LANGUAGE 'plpgsql'
+
+CREATE TRIGGER trigger_actualizar_detalles_especialidad
+AFTER INSERT ON medicina_especialidad
+FOR EACH ROW
+EXECUTE PROCEDURE actualizar_detalles_especialidad();
 
 
+CREATE FUNCTION actualizar_detalles_paquetes()
+RETURNS trigger AS $$
+BEGIN
 
-DROP trigger trigger_actualizar_citas_especialidad On medicina_detalle_consulta;
+INSERT INTO medicina_detalles_paquetes(pagos_total,total_paciente,paquetes_id)
+VALUES (0,0,NEW.id);
 
-DROP FUNCTION actualizar_citas_especialidad()
+RETURN NULL;
+END; 
+$$ LANGUAGE 'plpgsql'
+
+CREATE TRIGGER trigger_actualizar_detalles_paquetes
+AFTER INSERT ON medicina_paquete
+FOR EACH ROW
+EXECUTE PROCEDURE actualizar_detalles_paquetes();
+
+
+CREATE FUNCTION actualizar_total_pacientes_paquete()
+RETURNS trigger AS $$
+BEGIN
+
+update medicina_detalles_paquetes
+set total_pacientes=(SELECT COUNT(*)
+FROM medicina_matchpaquetes
+WHERE paquete_id=NEW.paquete_id
+GROUP BY paquete_id)
+WHERE paquete_id=NEW.paquete_id;
+
+UPDATE medicina_detalles_paquetes
+set total_pacientes=0
+WHERE total_pacientes IS NULL;
+
+RETURN NULL;
+END; 
+$$ LANGUAGE 'plpgsql'
+
+CREATE TRIGGER trigger_actualizar_total_pacientes_paquete
+AFTER INSERT OR UPDATE ON medicina_matchpaquetes
+FOR EACH ROW
+EXECUTE PROCEDURE actualizar_total_pacientes_paquete();
+
+
+DROP trigger trigger_actualizar_pacientes_paquete On medicina_matchpaquetes;
+
+DROP FUNCTION actualizar_total_pacientes_paquete();
