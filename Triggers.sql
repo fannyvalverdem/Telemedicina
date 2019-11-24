@@ -11,7 +11,7 @@ WHERE id=NEW.doctor_id_id;
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_calificacion
 AFTER INSERT ON medicina_calificacion
@@ -35,7 +35,7 @@ WHERE citas_realizadas IS NULL;
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_citas
 AFTER INSERT OR UPDATE ON medicina_consulta
@@ -60,7 +60,7 @@ WHERE citas_realizadas IS NULL;
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_citas_paciente
 AFTER INSERT OR UPDATE ON medicina_consulta
@@ -85,7 +85,7 @@ WHERE citas_realizadas IS NULL;
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_citas_especialidad
 AFTER INSERT OR UPDATE ON medicina_detalle_consulta
@@ -111,7 +111,7 @@ WHERE pago_total IS NULL;
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_pagos_totales
 AFTER INSERT OR UPDATE ON medicina_consulta
@@ -128,7 +128,7 @@ VALUES (0,NEW.id);
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_paciente_pagos
 AFTER INSERT ON medicina_paciente
@@ -153,7 +153,7 @@ WHERE pagos_total IS NULL;
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_pagos_especialidad
 AFTER INSERT ON medicina_detalle_consulta
@@ -177,7 +177,7 @@ WHERE total_doctor IS NULL;
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_doc_especialidad
 AFTER INSERT OR UPDATE ON medicina_matchespecialidades
@@ -193,7 +193,7 @@ VALUES (0,0,0,NEW.id);
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_detalles_especialidad
 AFTER INSERT ON medicina_especialidad
@@ -210,7 +210,7 @@ VALUES (0,0,NEW.id);
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_detalles_paquetes
 AFTER INSERT ON medicina_paquete
@@ -235,14 +235,10 @@ WHERE total_pacientes IS NULL;
 
 RETURN NULL;
 END; 
-$$ LANGUAGE 'plpgsql'
+$$ LANGUAGE 'plpgsql';
 
 CREATE TRIGGER trigger_actualizar_total_pacientes_paquete
 AFTER INSERT OR UPDATE ON medicina_matchpaquetes
 FOR EACH ROW
 EXECUTE PROCEDURE actualizar_total_pacientes_paquete();
 
-
-DROP trigger trigger_actualizar_pacientes_paquete On medicina_matchpaquetes;
-
-DROP FUNCTION actualizar_total_pacientes_paquete();
