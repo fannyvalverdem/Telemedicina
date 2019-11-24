@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
 
 #creating our forms
 CHOICES=[
@@ -71,13 +72,25 @@ class SignupForm(forms.Form):
 	email = forms.EmailField(label='',max_length=100,widget= forms.EmailInput(attrs={'placeholder':'Email'}))
 	password = forms.CharField(label='',widget=forms.PasswordInput(attrs={'placeholder':'Contrasena'}))
 
-class RegistroForm(forms.Form):
+class PersonaForm(forms.Form):
 	name = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Nombre'}))
 	apellido = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Apellido'}))
 	phone = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Telefono'}))
+	
+class RegistroForm(UserCreationForm):
+	class Meta:
+		model = Usuario
+		fields = ['username', 'email', 'password1', 'password2']
+		
+	# name = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Nombre'}))
+	# apellido = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Apellido'}))
+	# phone = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Telefono'}))
 	email = forms.EmailField(label='',max_length=100, widget= forms.EmailInput(attrs={'placeholder':'Email'}))
-	password = forms.CharField(label='',widget=forms.PasswordInput(attrs={'placeholder':'Contrasena'}))
-
+	username = forms.EmailField(label='',max_length=100, widget= forms.EmailInput(attrs={'placeholder':'Username'}))
+	password1 = forms.CharField(label='',widget=forms.PasswordInput(attrs={'placeholder':'Contrasena'}))
+	password2 = forms.CharField(label='',widget=forms.PasswordInput(attrs={'placeholder':'Contrasena'}))
+	# password = forms.CharField(label='',widget=forms.PasswordInput(attrs={'placeholder':'Contrasena'}))
+	
 class PaqueteForm(forms.Form):
 	nombre=forms.CharField(label='Nombre: ',max_length=100,widget=forms.TextInput())
 	precio=forms.FloatField(label='Precio: ')

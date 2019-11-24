@@ -168,6 +168,7 @@ li{
     background-color: #ebebeb; /* Dark grey background on mouse-over */
 }
 
+/*
 .modal{
 	width: 100%;
 	height: 100vh;
@@ -178,6 +179,11 @@ li{
 	left: 0;
 
 	display: flex;
+
+	animation: modal 2s 3s forwards;
+	visibility: hidden;
+	opacity: 0;
+
 }
 
 
@@ -192,6 +198,10 @@ li{
 
 #cerrar {
 	display: none;
+}
+
+#cerrar + label {
+	position: absolute;
 	color: #fff;
 	font-size: 25px;
 	z-index: 50;
@@ -200,10 +210,22 @@ li{
 	width: 40px;
 	line-height: 40px;
 	border-radius: 50px;
-	
+	right: 10px;
+	cursor: pointer;
+
+	animation: modal 2s 3s forwards;
+	visibility: hidden;
+	opacity: 0;
+}
+
+#cerrar:checked + label, #cerrar:checked ~ modal {
+	display: none;
 
 }
 
-#cerrar + label {
-	position: absolute;
-}
+ @keyframes modal{
+ 	100%{
+ 		visibility: hidden;
+		opacity: 1;
+ 	}
+ }*/
