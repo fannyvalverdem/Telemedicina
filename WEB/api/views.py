@@ -91,3 +91,7 @@ class PagosViewset(generics.ListAPIView):
 class DetallesEspecialidadViewset(generics.ListAPIView):
 	queryset = models.Detalles_Especialidad.objects.all()
 	serializer_class = serializers.DetallesEspecialidadSerializer
+
+class DetallesPaquetesViewset(generics.ListAPIView):
+	queryset = models.Detalles_Paquetes.objects.all()
+	serializer_class = serializers.DetallesPaquetesSerializer

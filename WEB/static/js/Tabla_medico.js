@@ -254,3 +254,38 @@ $('#data_table_respecialidad').DataTable({
         { width: 100, targets: 3},
     ],
 });
+
+$('#data_table_rpaquetes').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/detalles_paquetes/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "paquetes.nombre"},
+        { data: "paquetes.descripcion"},
+        { data: "paquetes.precio"},
+        { data: "paquetes.especialidad.nombre"},
+        { data: "total_pacientes"},
+        { data: "pagos_total"}
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+        { width: 100, targets: 3},
+        { width: 100, targets: 4},
+        { width: 100, targets: 5},
+    ],
+});
