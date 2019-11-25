@@ -17,6 +17,7 @@ urlpatterns = [
 	url(r'^cerrar_sesion/$', views.cerrar_sesion, name='cerrar_sesion'),
 
 	url(r'^calificar_medico/$', views.calificar_medico, name='calificar_medico'),
+	url(r'^calificar_cita/$', views.calificar_cita, name='calificar_cita'),
 	
 
 	url(r'^zoom_video/$', views.zoom, name='zoom_video'),

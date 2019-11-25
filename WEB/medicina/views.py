@@ -678,3 +678,8 @@ def calificar_medico(request):
   dictionary = dict(request=request) 
   dictionary.update(csrf(request)) 
   return render(request,'calificar_medico.html', dictionary)
+
+ def calificar_cita(request):
+  dictionary = dict(request=request) 
+  dictionary.update(csrf(request)) 
+  return render(request,'calificar_cita.html', dictionary)
