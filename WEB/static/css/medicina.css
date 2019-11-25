@@ -9,6 +9,13 @@ img[id="img-tele"]{
 	width: 75%;
 }
 
+img[id="avatar"]{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
 div#inicio-cont{
 	background-color: #65b4c3;
 }

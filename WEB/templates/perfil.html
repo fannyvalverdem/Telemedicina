@@ -1,0 +1,131 @@
+{% extends 'index_paciente.html' %}
+{% load staticfiles %}
+
+{% block contenido %}
+<div class="row">
+	<div class="col-4">
+		<img id="avatar" src="{% static 'imagenes/avatar.png' %}"/>
+	</div>
+	<div class="col-4">
+		<br>
+		<div class="row">
+			<div class="col-12">
+				<p>{{persona.nombre}} {{persona.apellido}} </p>
+			</div>
+			<div class="col-12">
+				<a href="">Editar perfil</a>
+			</div>
+			
+		</div>		
+	</div>
+</div>
+<br><br>
+<br><br>
+<div class="row">
+	<div class="col-5">
+		<div class="row">
+			<div class="col-6">
+				<p>Nombres:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.nombre}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Apellidos:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.apellido}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Tipo de Documento:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.tipo_documento}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Número de Documento:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.numero_documento}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Género:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.sexo}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Edad:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.edad}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Fecha Nacimiento:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.fecha_nac}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>País:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.pais}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Ciudad:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.ciudad}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Dirección:</p>
+			</div>
+			<div class="col-6">
+				<p>{{persona.direccion}}</p>
+			</div>
+		</div>
+		
+	</div>
+	<div class="col-2">
+	</div>
+	<div class="col-5">
+		<div class="row">
+			<div class="col-6">
+				<p>Correo Electrónico:</p>
+			</div>
+			<div class="col-6">
+				<p>{{usuario.email}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Contraseña:</p>
+			</div>
+			<div class="col-6">
+				<p>***********</p>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+{% endblock %}

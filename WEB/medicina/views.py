@@ -253,6 +253,15 @@ def reporte_paquete(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'reporte_paquetes.html', dictionary)
 
+def perfil(request):
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	persona=Persona.objects.get(id=user_ac_person_id)
+	usuario=Usuario.objects.get(id=user_ac_id)
+	return render(request,"perfil.html",{'persona':persona,'usuario':usuario})
+
+
 def ingresar_paquete(request):
 	if request.method == 'POST':
 		print("POST")
