@@ -261,6 +261,63 @@ def perfil(request):
 	usuario=Usuario.objects.get(id=user_ac_id)
 	return render(request,"perfil.html",{'persona':persona,'usuario':usuario})
 
+def editar_perfil(request):
+	if request.method == 'POST':
+		print("POST")
+	form= EditarPerfilForm(request.POST)
+	if form.is_valid():
+		print("VALIDO")
+		current_user = request.user
+		user_ac_id=current_user.id
+		user_ac_person_id=current_user.persona_id.id
+		persona=Persona.objects.get(id=user_ac_person_id)
+		usuario=Usuario.objects.get(id=user_ac_id)
+
+		if form.cleaned_data['nombres']:
+			persona.nombre=form.cleaned_data['nombres']
+			persona.save()
+
+		if form.cleaned_data['apellido']:
+			persona.apellido=form.cleaned_data['apellido']
+			persona.save()
+
+		if form.cleaned_data['tipo_doc']:
+			tipo=form.cleaned_data['tipo_doc']
+			if tipo=="1":
+				persona.tipo_documento="Cedula"
+			else:
+				persona.tipo_documento="Pasaporte"
+			persona.save()
+
+		if form.cleaned_data['num_doc']:
+			persona.numero_documento=form.cleaned_data['num_doc']
+			persona.save()
+
+		if form.cleaned_data['genero']:
+			persona.sexo=form.cleaned_data['genero']
+			persona.save()
+
+		if form.cleaned_data['fecha_nac']:
+			persona.fecha_nac=form.cleaned_data['fecha_nac']
+			persona.save()
+
+		if form.cleaned_data['pais']:
+			persona.pais=form.cleaned_data['pais']
+			persona.save()
+
+		if form.cleaned_data['ciudad']:
+			persona.ciudad=form.cleaned_data['ciudad']
+			persona.save()
+
+		if form.cleaned_data['direccion']:
+			persona.direccion=form.cleaned_data['direccion']
+			persona.save()
+
+		#return redirect('perfil')
+	else:
+		form=EditarPerfilForm()
+	
+	return render(request, 'editar_perfil.html', {'form':form});
 
 def ingresar_paquete(request):
 	if request.method == 'POST':

@@ -1,0 +1,37 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="row">
+	<div class="col-xl-12">
+		{% load crispy_forms_tags %}
+		<form action="" method="post">
+			<div class="row">
+				{% csrf_token %}
+				<div class="col-xl-5">
+					{{ form.nombres|as_crispy_field }}
+					{{ form.apellido|as_crispy_field }}
+					{{ form.tipo_doc|as_crispy_field }}
+					{{ form.num_doc|as_crispy_field }}
+					{{ form.genero|as_crispy_field }}
+					{{ form.fecha_nac|as_crispy_field }}
+					{{ form.pais|as_crispy_field }}
+					{{ form.ciudad|as_crispy_field }}
+					{{ form.direccion|as_crispy_field }}
+				</div>
+				<div class="col-xl-2">
+					
+				</div>
+				<div class="col-xl-5">
+				</div>
+				</div>
+
+			</div>
+
+			<button type="submit" id="btn-guardar">Guardar</button>
+		</form>
+		<<br>
+		<br>
+	</div>
+</div>
+{% endblock %}
