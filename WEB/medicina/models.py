@@ -34,7 +34,7 @@ class Doctor(models.Model):
 	documento=models.FileField(upload_to=doc_up,null=True)
 	calificacion_total=models.FloatField(default=0,null=True)
 	citas_realizadas=models.IntegerField(default=0,null=True)
-	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)	
 
 class MatchEspecialidades(models.Model):
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
@@ -48,7 +48,6 @@ class Horario(models.Model):
 	hora_salida=models.TimeField()
 	dias=models.ForeignKey(Dias, null=True, blank=True, on_delete=models.CASCADE)
 	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
-
 
 class Paciente(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)

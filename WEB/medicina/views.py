@@ -675,11 +675,14 @@ def escribir_receta(request):
 	return render(request, 'escribir_receta.html', {'form':form})
 
 def calificar_medico(request):
-  dictionary = dict(request=request) 
-  dictionary.update(csrf(request)) 
-  return render(request,'calificar_medico.html', dictionary)
+	if request.method == 'GET':
+		print(request.GET.get("Estrellas"),"<<<<<<<<")
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'calificar_medico.html', dictionary)
+
 
 def calificar_cita(request):
-  dictionary = dict(request=request) 
-  dictionary.update(csrf(request)) 
-  return render(request,'calificar_cita.html', dictionary)
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'calificar_cita.html', dictionary)
