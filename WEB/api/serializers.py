@@ -115,6 +115,12 @@ class DetallesEspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:
 		model=models.Detalles_Especialidad
 		fields=("id","pagos_total","total_doctor","citas_realizadas","especialidad")
+
+class DetallesPaquetesSerializer(serializers.ModelSerializer):
+	paquetes=PaquetesSerializer()
+	class Meta:
+		model=models.Detalles_Paquetes
+		fields=("id","pagos_total","total_pacientes","paquetes")
 			
 		
 	

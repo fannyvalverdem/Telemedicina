@@ -248,6 +248,10 @@ def reporte_especialidad(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'reporte_especialidad.html', dictionary)
 
+def reporte_paquete(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'reporte_paquetes.html', dictionary)
 
 def ingresar_paquete(request):
 	if request.method == 'POST':
