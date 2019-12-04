@@ -6,8 +6,16 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import requests,json
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 
 # Create your views here.
+class AutenticarUsuario(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        response = super(AutenticarUsuario, self).post(request, *args, **kwargs)
+        token = Token.objects.get(key=response.data['token'])
+        return Response({'token': token.key, 'id': token.user_id})
+		
 class PersonaViewset(generics.ListAPIView):
     queryset = models.Persona.objects.all()
     serializer_class = serializers.PersonaSerializer
