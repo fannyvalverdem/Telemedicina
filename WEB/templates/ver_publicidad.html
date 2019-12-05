@@ -1,0 +1,45 @@
+{% extends 'menu_publicidad.html' %}
+{% load staticfiles %}
+{% block contenido %}
+<div class="row">
+         <div class="col-xl-1">
+             
+         </div>
+         <div class="col-xl-10">
+            <div class="table-container">
+            <table id="data_table_publicidad" class="table table-striped table-bordered dt-body-center">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Imagen</th>
+                        <th>Fecha</th>
+                        <th>Dueño</th>
+                        <th>Precio</th>
+                        <th>Telefono</th>
+                        <th>Ciudad</th>
+                        <th>Dirección</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xl-1">
+             
+         </div>
+   </div>
+{% endblock %}
+
+{% block script %}
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/datatables.min.css"/>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-html5-1.6.1/b-print-1.6.1/datatables.min.js"></script>
+    <script src="{% static 'js/Tabla_medico.js' %}"></script>
+    
+{% endblock %}

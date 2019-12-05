@@ -139,6 +139,18 @@ class Detalles_Paquetes(models.Model):
 	total_pacientes=models.IntegerField(default=0,null=True)
 	paquetes=models.ForeignKey(Paquete, null=True, blank=True, on_delete=models.CASCADE)
 
+
 class Grupo_Familiar(models.Model):	
 	usuario_titular=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
 	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
+
+class Publicidad(models.Model):
+	imagen=models.ImageField(upload_to = 'static/imagenes', default='static/imagenes/no-img.jpg')
+	name = models.CharField(max_length=100)
+	fecha=models.DateTimeField(auto_now_add=True, blank=True)
+	dueno=models.CharField(max_length=100)
+	precio=models.FloatField()
+	telefono=models.CharField(max_length=250,null=True)
+	ciudad=models.CharField(max_length=250,null=True)
+	direccion=models.CharField(max_length=250,null=True)
+		

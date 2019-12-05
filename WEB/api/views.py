@@ -105,6 +105,11 @@ class DetallesPaquetesViewset(generics.ListAPIView):
 	queryset = models.Detalles_Paquetes.objects.all()
 	serializer_class = serializers.DetallesPaquetesSerializer
 
+
 class GrupoFamiliarViewset(generics.ListAPIView):
 	queryset = models.Grupo_Familiar.objects.all()
 	serializer_class = serializers.GrupoFamiliarSerializer
+
+class PublicidadViewset(generics.ListAPIView):
+	queryset = models.Publicidad.objects.all()
+	serializer_class = serializers.PublicidadSerializer

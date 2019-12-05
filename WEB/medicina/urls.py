@@ -35,6 +35,7 @@ urlpatterns = [
 	url(r'^citas_medico/$', views.citas_medico, name='citas_medico'),
 	url(r'^conteo_citas/$', views.conteo_citas, name='conteo_citas'),
 	url(r'^citas_previas/$', views.citas_previas, name='citas_prev'),
+	url(r'^citas_proxima/$', views.citas_proximas, name='citas_prox'),
 	url(r'^ver_tarifas/', views.ver_tarifas, name='ver_tarifas'),
 	url(r'^ver_paquetes/', views.ver_paquetes, name='ver_paquetes'),
 	url(r'^ing_paquete/$', views.ingresar_paquete, name='ing-paquete'),
@@ -46,6 +47,9 @@ urlpatterns = [
 	url(r'^medico/$', views.index_medico, name='index_medico'),
 	url(r'^administrador/', views.index_admin, name='index_admin'),
 	url(r'^agendar_cita/$', views.agendar_cita, name='ag-cita'),
+
+	url(r'^ingresar_publicidad/$', views.publicidad_ingresar, name='ing-publicidad'),
+	url(r'^ver_publicidad/$', views.ver_publicidad, name='ver-publicidad'),
 
 	url(r'^reporte_medico/$', views.reporte_medico, name='r_medico'),
 	url(r'^reporte_paciente/$', views.reporte_paciente, name='r_paciente'),
