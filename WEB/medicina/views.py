@@ -848,3 +848,22 @@ def calificar_cita(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'calificar_cita.html', dictionary)
+
+def cambiar_cuenta(request):
+	if request.method == 'POST':
+		print("POST")
+	
+	# username =form.cleaned_data['email']
+ #    password = form.cleaned_data['password']
+ #    user = authenticate(username=username,password=password)
+ #    if user is not None:
+ #    	auth_login(request=request,user=user)
+	# 	return redirect('inicio')
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return redirect('cuentas_vinculadas')
+
+def resumen_consulta(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return redirect('cuentas_vinculadas')

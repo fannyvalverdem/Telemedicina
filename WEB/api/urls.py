@@ -14,6 +14,13 @@ urlpatterns = [
 	url(r'^horario/$', views.HorarioViewset.as_view(), name='horario_api'),
 
 	url(r'^grupofamiliar/$', views.GrupoFamiliarViewset.as_view(), name='grupofamiliar'),
+	url(r'^recetas_consulta/$', views.RecetasViewset.as_view(), name='recetas_api'),
+
+
+	url(r'^medi_consulta/$', views.MedicamentosViewset.as_view(), name='medi_api'),
+	url(r'^recetar_consulta/$', views.RecetarMedicamentoViewset.as_view(), name='recetar_api'),
+	url(r'^examenes_consulta/$', views.ExamenesViewset.as_view(), name='examenes_api'),
+
 
 	url(r'^publicidad/$', views.PublicidadViewset.as_view(), name='publicidad_api'),
 
