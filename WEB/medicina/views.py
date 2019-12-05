@@ -336,6 +336,10 @@ def editar_perfil(request):
 			persona.sexo=form.cleaned_data['genero']
 			persona.save()
 
+		if form.cleaned_data['edad']:
+			persona.edad=form.cleaned_data['edad']
+			persona.save()
+
 		if form.cleaned_data['fecha_nac']:
 			persona.fecha_nac=form.cleaned_data['fecha_nac']
 			persona.save()
