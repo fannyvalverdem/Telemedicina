@@ -138,3 +138,14 @@ class Detalles_Paquetes(models.Model):
 	pagos_total=models.FloatField(default=0,null=True)
 	total_pacientes=models.IntegerField(default=0,null=True)
 	paquetes=models.ForeignKey(Paquete, null=True, blank=True, on_delete=models.CASCADE)
+
+class Publicidad(models.Model):
+	imagen=models.ImageField(upload_to = 'static/imagenes', default='static/imagenes/no-img.jpg')
+	name = models.CharField(max_length=100)
+	fecha=models.DateTimeField(auto_now_add=True, blank=True)
+	dueno=models.CharField(max_length=100)
+	precio=models.FloatField()
+	telefono=models.CharField(max_length=250,null=True)
+	ciudad=models.CharField(max_length=250,null=True)
+	direccion=models.CharField(max_length=250,null=True)
+		

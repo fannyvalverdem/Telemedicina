@@ -269,6 +269,28 @@ def citas_proximas(request):
 	print(cita_prox)
 	return render(request,"citas_proxima_paciente.html",{'cita_prox':cita_prox})
 
+def ver_publicidad(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_publicidad.html', dictionary)
+
+def publicidad_ingresar(request):
+	if request.method == 'GET':
+		return render(request, 'ingresar_publicidad.html')
+	elif request.method == 'POST':
+		form = ImageForm(request.POST, request.FILES)
+		if form.is_valid():
+			new_image=Publicidad(
+				imagen=form.cleaned_data["imagen"],
+				name=form.cleaned_data["name"],
+				dueno=form.cleaned_data["dueno"],
+				precio=form.cleaned_data["precio"],
+				telefono=form.cleaned_data["telefono"],
+				ciudad=form.cleaned_data["ciudad"],
+				direccion=form.cleaned_data["direccion"]
+				)
+			new_image.save()
+			return HttpResponseRedirect('/imagenes/publicidad/')
 
 def perfil(request):
 	current_user = request.user

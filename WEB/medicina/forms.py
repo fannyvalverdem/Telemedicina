@@ -197,3 +197,8 @@ class EditarPerfilForm(forms.Form):
 	pais=forms.CharField(required=False,label='País:',max_length=100,widget=forms.TextInput())
 	ciudad=forms.CharField(required=False,label='Ciudad:',max_length=100,widget=forms.TextInput())
 	direccion=forms.CharField(required=False,label='Dirección:',max_length=100,widget=forms.TextInput())
+
+class ImageForm(forms.ModelForm):
+   class Meta:
+      model = Publicidad
+      fields = ['imagen','name','dueno','precio','telefono','ciudad','direccion']

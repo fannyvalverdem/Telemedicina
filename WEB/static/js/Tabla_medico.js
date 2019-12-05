@@ -289,3 +289,42 @@ $('#data_table_rpaquetes').DataTable({
         { width: 100, targets: 5},
     ],
 });
+
+$('#data_table_publicidad').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/publicidad/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "nombre"},
+        { data: "imagen"},
+        { data: "fecha"},
+        { data: "dueno"},
+        { data: "precio"},
+        { data: "telefono"},
+        { data: "ciudad"},
+        { data: "direccion"}
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+        { width: 100, targets: 3},
+        { width: 100, targets: 4},
+        { width: 100, targets: 5},
+        { width: 100, targets: 6},
+        { width: 100, targets: 7},
+    ],
+});

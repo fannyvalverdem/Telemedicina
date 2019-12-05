@@ -45,6 +45,9 @@ urlpatterns = [
 	url(r'^administrador/', views.index_admin, name='index_admin'),
 	url(r'^agendar_cita/$', views.agendar_cita, name='ag-cita'),
 
+	url(r'^ingresar_publicidad/$', views.publicidad_ingresar, name='ing-publicidad'),
+	url(r'^ver_publicidad/$', views.ver_publicidad, name='ver-publicidad'),
+
 	url(r'^reporte_medico/$', views.reporte_medico, name='r_medico'),
 	url(r'^reporte_paciente/$', views.reporte_paciente, name='r_paciente'),
 	url(r'^reporte_especialidad/$', views.reporte_especialidad, name='r_especialidad'),

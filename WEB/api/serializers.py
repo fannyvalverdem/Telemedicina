@@ -121,6 +121,10 @@ class DetallesPaquetesSerializer(serializers.ModelSerializer):
 	class Meta:
 		model=models.Detalles_Paquetes
 		fields=("id","pagos_total","total_pacientes","paquetes")
-			
+
+class PublicidadSerializer(serializers.ModelSerializer):
+	class Meta:
+		model=models.Publicidad
+		fields=("id","name","imagen","fecha","dueno","precio","telefono","ciudad","direccion")
 		
 	
