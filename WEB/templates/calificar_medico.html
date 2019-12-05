@@ -61,7 +61,7 @@
 
   <!-- Modal content -->
   <div class="modal-content">
-    <form action="#">
+    <form action="/calificar_cita">
       <span class="close">&times;</span>
       <h4>Calificación de médico</h4>
       <h6>Calificación de la atención médica</h6>
@@ -107,8 +107,7 @@
     rating:0,
     change:function(e,valor){
       document.getElementById("Estrellas").value =valor;
-      alert(document.getElementById("Estrellas").value);
-      alert(valor);
+      console.log(document.getElementById("Estrellas").value);
            
        }
        

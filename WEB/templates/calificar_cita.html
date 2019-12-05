@@ -61,13 +61,16 @@
 
   <!-- Modal content -->
   <div class="modal-content">
+    <form action="/paciente">
     <span class="close">&times;</span>
-    <h1>Calificación de médico</h1>
-    <h6>Calificación de la atención médica</h6>
+    <h1>Calificación de Cita</h1>
+    <h6>Calificación de la cita médica</h6>
     <h6>(de 1 a 5 estrellas)</h6>
     <span id="Estrellas"></span>
-    
+    <br>
+      <button id="btn-guardar-calif-medico">Guardar</button>
     <hr/>
+  </form>
 
   </div>
 
@@ -104,7 +107,7 @@
    $('#Estrellas').starrr({
        rating:0,
        change:function(e,valor){
-           alert(valor);
+           console.log(valor);
            
        }
        

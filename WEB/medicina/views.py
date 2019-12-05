@@ -261,6 +261,7 @@ def citas_previas(request):
 	print(cita_prev)
 	return render(request,"citas_previas_paciente.html",{'cita_prev':cita_prev})
 
+
 def citas_proximas(request):
 	current_user = request.user
 	user_ac_id=current_user.id
@@ -291,6 +292,7 @@ def publicidad_ingresar(request):
 				)
 			new_image.save()
 			return HttpResponseRedirect('/imagenes/publicidad/')
+
 
 def perfil(request):
 	current_user = request.user
@@ -361,6 +363,57 @@ def editar_perfil(request):
 		form=EditarPerfilForm()
 	
 	return render(request, 'editar_perfil.html', {'form':form});
+
+def crear_grupo_familiar(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	current_user = request.user
+	user_ac_person_id=current_user.persona_id.id
+	persona=Persona.objects.get(id=user_ac_person_id)
+	#return render(request,'grupo_familiar.html', {'persona':persona})
+	return redirect('grupo_familiar')
+
+def grupo_familiar(request):
+	if request.method == 'POST':
+		print("POST")
+	current_user = request.user
+	user_ac_username=str(current_user.username)
+	user_ac_person_id=current_user.persona_id.id
+	persona=Persona.objects.get(id=user_ac_person_id)
+	form=GrupoFamiliarForm(request.POST)
+	if form.is_valid():
+		correo_vincular=form.cleaned_data['email']
+		#correo_vincular = request.POST['correo_vinculacion']
+		#is_private = request.POST['is_private']
+		#terms=request.POST['terms']
+		
+		print("llego aca")
+		print(correo_vincular,"correo_vincular")
+		usuario=Usuario.objects.get(username=correo_vincular)
+		print(usuario,"<---")
+		usuario_titular=Usuario.objects.get(persona_id=persona)
+		paciente=Paciente.objects.get(user_id=usuario)
+		
+		print(paciente,"<---")
+		grupo_fam=Grupo_Familiar(
+			usuario_titular=usuario_titular,
+			paciente=paciente
+			)
+		grupo_fam.save()
+		return redirect('perfil')
+	
+	
+	return render(request,'grupo_familiar.html', {'form':GrupoFamiliarForm(),'persona':persona})
+	#return redirect('grupo_familiar')
+	
+
+def cuentas_vinculadas(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	current_user = request.user
+	user_ac_person_id=current_user.persona_id.id
+	persona=Persona.objects.get(id=user_ac_person_id)
+	return render(request,'cuentas_vinculadas.html', {'persona':persona})
 
 def ingresar_paquete(request):
 	if request.method == 'POST':
@@ -799,3 +852,22 @@ def calificar_cita(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'calificar_cita.html', dictionary)
+
+def cambiar_cuenta(request):
+	if request.method == 'POST':
+		print("POST")
+	
+	# username =form.cleaned_data['email']
+ #    password = form.cleaned_data['password']
+ #    user = authenticate(username=username,password=password)
+ #    if user is not None:
+ #    	auth_login(request=request,user=user)
+	# 	return redirect('inicio')
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return redirect('cuentas_vinculadas')
+
+def resumen_consulta(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return redirect('cuentas_vinculadas')

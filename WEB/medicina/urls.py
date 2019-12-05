@@ -21,6 +21,11 @@ urlpatterns = [
 	url(r'^calificar_medico/$', views.calificar_medico, name='calificar_medico'),
 	url(r'^calificar_cita/$', views.calificar_cita, name='calificar_cita'),
 	
+	
+	url(r'^cambiar_cuenta/$', views.cambiar_cuenta, name='cambiar_cuenta'),
+	url(r'^cuentas_vinculadas/$', views.cuentas_vinculadas, name='cuentas_vinculadas'),
+	url(r'^crear_grupo_familiar/$', views.crear_grupo_familiar, name='crear_grupo_familiar'),
+	url(r'^grupo_familiar/$', views.grupo_familiar, name='grupo_familiar'),
 
 	url(r'^zoom_video/$', views.zoom, name='zoom_video'),
 	url(r'^agendar_cita_medico/$', views.agendar_cita_medico, name='agendar_cita_medico'),
