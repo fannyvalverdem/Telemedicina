@@ -3,7 +3,7 @@
 
 {% block contenido %}
 
-{% for cita in cita_prev %}
+{% for cita in cita_prox %}
 	<div id="citas-prev" class="row">
 		<div class="col-10">
 			<div class="row">
@@ -37,10 +37,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-2">
+				<div class="col-1">
+					<br><br>
+					<form action="{% url 'zoom_video' %}">
+		            	<button id="btn-continuar">Iniciar cita</button>
+		            </form> 
+				</div>
+				<div class="col-1">
+				</div>
+				<div class="col-1">
 					<br><br>
 					<form action="">
-		            	<button id="btn-continuar">Resumen</button>
+		            	<button id="btn-continuar">Cancelar cita</button>
 		            </form> 
 				</div>
 				

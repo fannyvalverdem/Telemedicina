@@ -32,6 +32,7 @@ urlpatterns = [
 	url(r'^citas_medico/$', views.citas_medico, name='citas_medico'),
 	url(r'^conteo_citas/$', views.conteo_citas, name='conteo_citas'),
 	url(r'^citas_previas/$', views.citas_previas, name='citas_prev'),
+	url(r'^citas_proxima/$', views.citas_proximas, name='citas_prox'),
 	url(r'^ver_tarifas/', views.ver_tarifas, name='ver_tarifas'),
 	url(r'^ver_paquetes/', views.ver_paquetes, name='ver_paquetes'),
 	url(r'^ing_paquete/$', views.ingresar_paquete, name='ing-paquete'),

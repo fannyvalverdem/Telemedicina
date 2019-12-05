@@ -4,10 +4,10 @@
 {% block navs %}
 <ul class="nav nav-tabs">
 	<li class="nav-item active">
-		<a class="nav-link" href="" >Próximas</a>
+		<a class="nav-link" href="{% url 'citas_prox' %}" >Próximas</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="{% url 'agendar_emergencia' %}" >Previas</a>
+		<a class="nav-link" href="{% url 'citas_prev' %}" >Previas</a>
 	</li>
 </ul>
 {% endblock %}

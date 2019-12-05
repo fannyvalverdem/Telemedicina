@@ -257,9 +257,17 @@ def citas_previas(request):
 	current_user = request.user
 	user_ac_id=current_user.id
 	paciente=Paciente.objects.get(user_id=user_ac_id)
-	cita_prev=Consulta.objects.filter(paciente_id=paciente.id)
+	cita_prev=Consulta.objects.filter(paciente_id=paciente.id,estado='realizada')
 	print(cita_prev)
 	return render(request,"citas_previas_paciente.html",{'cita_prev':cita_prev})
+
+def citas_proximas(request):
+	current_user = request.user
+	user_ac_id=current_user.id
+	paciente=Paciente.objects.get(user_id=user_ac_id)
+	cita_prox=Consulta.objects.filter(paciente_id=paciente.id,estado='agendada')
+	print(cita_prox)
+	return render(request,"citas_proxima_paciente.html",{'cita_prox':cita_prox})
 
 
 def perfil(request):
