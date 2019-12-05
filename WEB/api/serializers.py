@@ -122,5 +122,8 @@ class DetallesPaquetesSerializer(serializers.ModelSerializer):
 		model=models.Detalles_Paquetes
 		fields=("id","pagos_total","total_pacientes","paquetes")
 			
-		
-	
+class GrupoFamiliarSerializer(serializers.ModelSerializer):
+	paciente=PacienteSerializer()
+	class Meta:
+		model= models.Grupo_Familiar
+		fields=("id","usuario_titular","paciente")

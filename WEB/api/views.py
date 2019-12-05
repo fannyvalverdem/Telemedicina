@@ -104,3 +104,7 @@ class DetallesEspecialidadViewset(generics.ListAPIView):
 class DetallesPaquetesViewset(generics.ListAPIView):
 	queryset = models.Detalles_Paquetes.objects.all()
 	serializer_class = serializers.DetallesPaquetesSerializer
+
+class GrupoFamiliarViewset(generics.ListAPIView):
+	queryset = models.Grupo_Familiar.objects.all()
+	serializer_class = serializers.GrupoFamiliarSerializer

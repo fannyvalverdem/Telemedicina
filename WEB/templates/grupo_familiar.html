@@ -1,0 +1,52 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+{% load staticfiles %}
+
+
+{% block contenido %}
+<div class="row">
+	<div class="col-4">
+		<img id="avatar" src="{% static 'imagenes/avatar.png' %}"/>
+	</div>
+	<div class="col-4">
+		<br>
+		<div class="row">
+			<div class="col-12">
+				<p>{{persona.nombre}} {{persona.apellido}} </p>
+			</div>
+			
+		</div>		
+	</div>
+	<br>
+	<br>
+	<div class="col-12">
+		{% load crispy_forms_tags %}
+		<form action="{% url 'grupo_familiar' %}" method="post">
+			{% csrf_token %}
+				<div class="col-xl-12">
+					{{ form|crispy }}
+				</div>
+		  <!--Correo a vincular: <input type="text" name="correo_vinculacion"><br>-->
+		  <input type="checkbox" required name="terms"> I accept the <u>Terms and Conditions</u>
+		  <input type="submit" value="Vincular cuenta">
+		</form>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+  function checkForm(form)
+  {
+    ...
+    if(!form.terms.checked) {
+      alert("Please indicate that you accept the Terms and Conditions");
+      form.terms.focus();
+      return false;
+    }
+    return true;
+  }
+
+</script>
+{% endblock %}

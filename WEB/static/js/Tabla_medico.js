@@ -192,6 +192,44 @@ $('#data_table_rmedico').DataTable({
     ],
 });
 
+
+$('#data_table_vinculadas').DataTable({
+    "destroy": true,
+    // rowCallback: function( row, data, index ) {
+    //     var usuario={{ usuario.username }};
+    //     if (data['paciente']['user_id']['username'] == usuario) {
+    //         $(row).hide();
+    //     }
+    // },
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/grupofamiliar/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "paciente.user_id.persona_id.nombre"},
+        { data: "paciente.user_id.persona_id.apellido"},
+        { data: "paciente.user_id.username"},
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+    ],
+});
+
+
+
 $('#data_table_rpaciente').DataTable({
     "destroy": true,
     "ajax": 

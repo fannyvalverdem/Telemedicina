@@ -138,3 +138,7 @@ class Detalles_Paquetes(models.Model):
 	pagos_total=models.FloatField(default=0,null=True)
 	total_pacientes=models.IntegerField(default=0,null=True)
 	paquetes=models.ForeignKey(Paquete, null=True, blank=True, on_delete=models.CASCADE)
+
+class Grupo_Familiar(models.Model):	
+	usuario_titular=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
