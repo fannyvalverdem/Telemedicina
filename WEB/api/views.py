@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, status
 from medicina import models
 from . import serializers
+from rest_framework import filters
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -103,3 +104,28 @@ class DetallesEspecialidadViewset(generics.ListAPIView):
 class DetallesPaquetesViewset(generics.ListAPIView):
 	queryset = models.Detalles_Paquetes.objects.all()
 	serializer_class = serializers.DetallesPaquetesSerializer
+
+
+class GrupoFamiliarViewset(generics.ListAPIView):
+	queryset = models.Grupo_Familiar.objects.all()
+	serializer_class = serializers.GrupoFamiliarSerializer
+
+class PublicidadViewset(generics.ListAPIView):
+	queryset = models.Publicidad.objects.all()
+	serializer_class = serializers.PublicidadSerializer
+
+class RecetasViewset(generics.ListAPIView):
+	queryset = models.Receta.objects.all()
+	serializer_class = serializers.RecetaSerializer
+
+class MedicamentosViewset(generics.ListAPIView):
+	queryset = models.Medicamento.objects.all()
+	serializer_class = serializers.MedicamentosSerializer
+
+class RecetarMedicamentoViewset(generics.ListAPIView):
+	queryset = models.RecetarMedicamentos.objects.all()
+	serializer_class = serializers.RecetarMedicamentoSerializer
+
+class ExamenesViewset(generics.ListAPIView):
+	queryset = models.Examenes.objects.all()
+	serializer_class = serializers.ExamenesSerializer

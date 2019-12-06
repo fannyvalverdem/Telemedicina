@@ -121,6 +121,40 @@ class DetallesPaquetesSerializer(serializers.ModelSerializer):
 	class Meta:
 		model=models.Detalles_Paquetes
 		fields=("id","pagos_total","total_pacientes","paquetes")
+
 			
+class GrupoFamiliarSerializer(serializers.ModelSerializer):
+	paciente=PacienteSerializer()
+	class Meta:
+		model= models.Grupo_Familiar
+		fields=("id","usuario_titular","paciente")
+
+
+class PublicidadSerializer(serializers.ModelSerializer):
+	class Meta:
+		model=models.Publicidad
+		fields=("id","name","imagen","fecha","dueno","precio","telefono","ciudad","direccion")
 		
-	
+class RecetaSerializer(serializers.ModelSerializer):
+	paciente=PacienteSerializer()
+	doctor_id=MedicoSerializer()
+	class Meta:
+		model=models.Receta
+		fields=("estado","doctor_id","paciente","detalle")
+
+class ExamenesSerializer(serializers.ModelSerializer):
+	class Meta:
+		model=models.Examenes
+		fields=("nombre","descripcion")
+
+class MedicamentosSerializer(serializers.ModelSerializer):
+	class Meta:
+		model=models.Examenes
+		fields=("nombre","precio")
+
+class RecetarMedicamentoSerializer(serializers.ModelSerializer):
+	receta=RecetaSerializer()
+	medicamento=MedicamentosSerializer()
+	class Meta:
+		model=models.RecetarMedicamentos
+		fields=("medicamento","receta")

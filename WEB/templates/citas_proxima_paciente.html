@@ -1,0 +1,63 @@
+{% extends 'menu_citas.html' %}
+{% load staticfiles %}
+
+{% block contenido %}
+
+{% for cita in cita_prox %}
+	<div id="citas-prev" class="row">
+		<div class="col-10">
+			<div class="row">
+				<div class="col-3">
+					<img id="avatar" src="{% static 'imagenes/doctor.png' %}" alt="">
+				</div>
+				<div class="col-6">
+					<br>
+					<div class="row">
+						<div class="col-12">
+							<p>{{ cita.doctor_id.user_id.persona_id.nombre}} {{ cita.doctor_id.user_id.persona_id.apellido}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<p>Especialidad: {{ cita.detalle.especialidad.nombre}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-2">
+							<img id="avatar" src="{% static 'imagenes/fecha.png' %}" alt="">
+						</div>
+						<div class="col-3">
+							<p>{{ cita.detalle.fecha_prog}}</p>
+						</div>
+						<div class="col-2">
+							<img id="avatar" src="{% static 'imagenes/hora.png' %}" alt="">
+						</div>
+						<div class="col-3">
+							<p>{{ cita.detalle.hora}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-1">
+					<br><br>
+					<form action="{% url 'zoom_video' %}">
+		            	<button id="btn-continuar">Iniciar cita</button>
+		            </form> 
+				</div>
+				<div class="col-1">
+				</div>
+				<div class="col-1">
+					<br><br>
+					<form action="">
+		            	<button id="btn-continuar">Cancelar cita</button>
+		            </form> 
+				</div>
+				
+			</div>
+			<br><br><br><br>
+		</div>
+			
+		</div>
+		
+{% endfor %}
+
+{% endblock %}

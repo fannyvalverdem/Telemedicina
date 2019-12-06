@@ -37,7 +37,7 @@ class Doctor(models.Model):
 	documento=models.FileField(upload_to=doc_up,null=True)
 	calificacion_total=models.FloatField(default=0,null=True)
 	citas_realizadas=models.IntegerField(default=0,null=True)
-	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)	
+	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
 
 class MatchEspecialidades(models.Model):
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
@@ -72,24 +72,25 @@ class Calificacion(models.Model):
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)	
 
+class Detalle_Consulta(models.Model):
+	fecha_reser=models.DateField()
+	fecha_prog=models.DateField()
+	hora=models.TimeField()
+	precio=models.FloatField()
+	calificacion=models.IntegerField()
+	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
+
 class Consulta(models.Model):
 	estado=models.TextField()
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
+	detalle=models.ForeignKey(Detalle_Consulta, null=True, blank=True, on_delete=models.CASCADE)
 
 class Llamada(models.Model):
 	tipo=models.TextField()
 	duracion=models.IntegerField()
 	calificacion=models.IntegerField()
 	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
-
-class Detalle_Consulta(models.Model):
-	fecha_reser=models.DateField()
-	fecha_prog=models.DateField()
-	precio=models.FloatField()
-	calificacion=models.IntegerField()
-	consulta_id=models.ForeignKey(Consulta, null=True, blank=True, on_delete=models.CASCADE)
-	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
 
 class Receta(models.Model):	
 	descripcion=models.TextField()
@@ -138,3 +139,19 @@ class Detalles_Paquetes(models.Model):
 	pagos_total=models.FloatField(default=0,null=True)
 	total_pacientes=models.IntegerField(default=0,null=True)
 	paquetes=models.ForeignKey(Paquete, null=True, blank=True, on_delete=models.CASCADE)
+
+
+class Grupo_Familiar(models.Model):	
+	usuario_titular=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
+
+class Publicidad(models.Model):
+	imagen=models.ImageField(upload_to = 'static/imagenes', default='static/imagenes/no-img.jpg')
+	name = models.CharField(max_length=100)
+	fecha=models.DateTimeField(auto_now_add=True, blank=True)
+	dueno=models.CharField(max_length=100)
+	precio=models.FloatField()
+	telefono=models.CharField(max_length=250,null=True)
+	ciudad=models.CharField(max_length=250,null=True)
+	direccion=models.CharField(max_length=250,null=True)
+		

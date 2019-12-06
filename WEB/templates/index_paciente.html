@@ -17,13 +17,10 @@
 	<li class="nav-item">
 		<a class="nav-link" href="{% url 'ag-cita' %}">Agendar</a>
 	</li>
-	<li class="nav-item dropdown">
-		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Citas</a>
-		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'zoom_video' %}">Realizar Cita</a>
-          <a class="dropdown-item" href="">Citas Agendadas</a>
-        </div>
+	<li class="nav-item">
+		<a class="nav-link" href="{% url 'citas_prev' %}">Citas</a>
 	</li>
+          <!--<a class="dropdown-item" href="{% url 'zoom_video' %}">Realizar Cita</a>-->
 	<li class="nav-item">
 		<a class="nav-link" href="" >Doctores Favoritos</a>
 	</li>

@@ -193,7 +193,18 @@ class EditarPerfilForm(forms.Form):
 	tipo_doc=forms.ChoiceField(required=False, choices=DOC_ID, label='Tipo de Documento:')
 	num_doc=forms.CharField(required=False,label='Cedula:',max_length=100,widget=forms.TextInput())
 	genero=forms.CharField(required=False,label='Género:',max_length=100,widget=forms.TextInput())
+	edad=forms.IntegerField(required=False,label='Edad:')
 	fecha_nac=forms.DateField(required=False,label='Fecha de Nacimiento:')
 	pais=forms.CharField(required=False,label='País:',max_length=100,widget=forms.TextInput())
 	ciudad=forms.CharField(required=False,label='Ciudad:',max_length=100,widget=forms.TextInput())
 	direccion=forms.CharField(required=False,label='Dirección:',max_length=100,widget=forms.TextInput())
+
+
+class GrupoFamiliarForm(forms.Form):
+	email = forms.EmailField(label='Email:',max_length=100, widget= forms.EmailInput())
+
+class ImageForm(forms.ModelForm):
+   class Meta:
+      model = Publicidad
+      fields = ['imagen','name','dueno','precio','telefono','ciudad','direccion']
+

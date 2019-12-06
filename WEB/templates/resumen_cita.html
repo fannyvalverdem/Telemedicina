@@ -1,0 +1,44 @@
+{% extends 'index_paciente.html' %}
+{% load staticfiles %}
+
+{% block import %}
+<script src="{% static 'js/Tabla_medico.js' %}"></script>
+{% endblock %}
+{% block contenido %}
+<div class="row">
+         <div class="col-xl-1">
+             
+         </div>
+         <div class="col-xl-10">
+            <div class="table-container">
+            <table id="data_table_resumen_medicinas" class="table table-striped table-bordered dt-body-center">
+                <thead>
+                    <tr>
+                        <th>Medicamento</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-container">
+            <table id="data_table_resumen_examenes" class="table table-striped table-bordered dt-body-center">
+                <thead>
+                    <tr>
+                        <th>Examenes</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="col-xl-1">
+             
+         </div>
+   </div>
+
+{% endblock %}
