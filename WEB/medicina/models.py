@@ -27,6 +27,7 @@ class Usuario(AbstractUser):
 	email=models.EmailField()
 	username= models.CharField(max_length=50, unique=True)
 	persona_id=models.ForeignKey(Persona, null=True, blank=True, on_delete=models.CASCADE)
+	
 class Especialidad(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
