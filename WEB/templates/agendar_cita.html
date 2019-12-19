@@ -1,6 +1,6 @@
 {% extends 'menu_agendar.html' %}
+{% load static %}
 {% block contenido %}
-<div class="container">
 	<div class="row">
 		<div class="row">
 			<div class="col-12">
@@ -32,23 +32,6 @@
 
 
 						</div>
-
-						<!--
-		        		<div class="row">
-			        		<div class="col-12">
-			        			<div class="col-12">Hora:
-			        			<div class="col-3">
-									{{ form.hora|as_crispy_field}}
-								</div>
-								<div class="col-3">
-									{{ form.minutos|as_crispy_field}}
-								</div>
-								<div class="col-3">
-									{{ form.zona|as_crispy_field}}
-								</div>
-							</div>
-			        		</div>
-		        		</div>-->
 					</div>
 					<div class="col-12">
 						<div class="col-12">
@@ -63,9 +46,8 @@
 			</div>
 
 		</div>
-	</div>
 
 
-	{% endblock %}
+{% endblock %}
 
 	

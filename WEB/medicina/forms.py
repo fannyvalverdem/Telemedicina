@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
+import requests
 
 #creating our forms
 CHOICES=[
@@ -198,7 +199,6 @@ class EditarPerfilForm(forms.Form):
 	pais=forms.CharField(required=False,label='País:',max_length=100,widget=forms.TextInput())
 	ciudad=forms.CharField(required=False,label='Ciudad:',max_length=100,widget=forms.TextInput())
 	direccion=forms.CharField(required=False,label='Dirección:',max_length=100,widget=forms.TextInput())
-
 
 class GrupoFamiliarForm(forms.Form):
 	email = forms.EmailField(label='Email:',max_length=100, widget= forms.EmailInput())

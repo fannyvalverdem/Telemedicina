@@ -303,9 +303,14 @@ def perfil(request):
 	return render(request,"perfil.html",{'persona':persona,'usuario':usuario})
 
 def editar_perfil(request):
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	persona=Persona.objects.get(id=user_ac_person_id)
+	usuario=Usuario.objects.get(id=user_ac_id)
 	if request.method == 'POST':
 		print("POST")
-	form= EditarPerfilForm(request.POST)
+	form= EditarPerfilForm(request.POST,request)
 	if form.is_valid():
 		print("VALIDO")
 		current_user = request.user
@@ -360,9 +365,9 @@ def editar_perfil(request):
 
 		#return redirect('perfil')
 	else:
-		form=EditarPerfilForm()
+		form=EditarPerfilForm(request)
 	
-	return render(request, 'editar_perfil.html', {'form':form});
+	return render(request, 'editar_perfil.html', {'form':form,'persona':persona,'usuario':usuario});
 
 def crear_grupo_familiar(request):
 	dictionary = dict(request=request) 

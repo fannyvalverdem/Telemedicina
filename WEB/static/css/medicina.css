@@ -33,7 +33,7 @@ div#inicio-cont{
 	background-color: #65b4c3;
 }
 
-div#inicio, div#cuenta, div#no-cuenta{
+div#inicio, div#cuenta, div#no-cuenta, div#registro{
 	display: inline-block;
 	background-color: #ffffff;
 	text-align: center

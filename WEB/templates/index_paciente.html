@@ -12,7 +12,7 @@
 <ul class="nav nav-tabs">
 
 	<li class="nav-item">
-		<a class="nav-link" href="">Inicio</a>
+		<a class="nav-link" href="{% url 'index_paciente' %}">Inicio</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="{% url 'ag-cita' %}">Agendar</a>
@@ -24,13 +24,8 @@
 	<li class="nav-item">
 		<a class="nav-link" href="" >Doctores Favoritos</a>
 	</li>
-	<li class="nav-item dropdown">
-		<a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Historial</a>
-		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="">Historial de citas</a>
-          <a class="dropdown-item" href="">Historial de consulta</a>
-          <a class="dropdown-item" href="">Historial de pago</a>
-        </div>
+	<li class="nav-item">
+		<a class="nav-link" href="" >Historial</a>
 	</li>
 	<li class="nav-item">
 		<a class="nav-link" href="">Mis paquetes</a>
