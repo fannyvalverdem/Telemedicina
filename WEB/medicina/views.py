@@ -793,6 +793,9 @@ def login(request):
 	        username =form.cleaned_data['email']
 	        password = form.cleaned_data['password']
 	        user = authenticate(username=username,password=password)
+	        print(username)
+	        print(password)
+	        print(user)
 	        if user is not None:
 	        	auth_login(request=request,user=user)
 	        	response_doctor = requests.get('http://127.0.0.1:8000/api/doctor/')
@@ -801,10 +804,10 @@ def login(request):
 	        	data_admin = response_admin.json()
 	        	for i in range(0,len(data_doctor)):
 	        		print(data_doctor[i]['user_id']['email'])
-	        		if username==str(data_doctor[i]['user_id']['email']) and password==str(data_doctor[i]['user_id']['password']):
+	        		if username==str(data_doctor[i]['user_id']['email']):
 	        			return redirect('index_medico')
 	        	for i in range(0,len(data_admin)):
-	        		if username==str(data_admin[i]['user_id']['email']) and str(password==data_admin[i]['user_id']['password']):
+	        		if username==str(data_admin[i]['user_id']['email']):
 	        			return redirect('index_admin')
 	        	
 	        	return redirect('index_paciente')
