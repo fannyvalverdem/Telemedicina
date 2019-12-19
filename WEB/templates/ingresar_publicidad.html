@@ -4,34 +4,76 @@
     {% load crispy_forms_tags %}
     <form action="{% url 'ing-publicidad' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <p>
-          <input id="id_image" type="file" accept="image/*" name="imagen" required>
-      </p>
-      <p>
-          Nombre:
-          <input id="id_name" type="text" name="name" required>
-      </p>
-      <p>
-          Dueño:
-          <input id="id_dueno" type="text" name="dueno" required>
-      </p>
-      <p>
-          Precio:
-          <input id="id_precio" type="text" name="precio" required>
-      </p>
-      <p>
-          Teléfono:
-          <input id="id_telefono" type="text" name="telefono" required>
-      </p>
-      <p>
-          Ciudad:
-          <input id="id_ciudad" type="text" name="ciudad" required>
-      </p>
-      <p>
-          Direccion:
-          <input id="id_direccion" type="text" name="direccion" required>
-      </p>
+      <div class="row">
+        <div class="col-xl-6"> 
+          <p>
+            <input id="id_image" type="file" accept="image/*" name="imagen" required>
+          </p>
+        </div>
+        
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xl-1">
+          <p>Nombre:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_name" type="text" name="name" required></p>
+        </div>
+        <div class="col-xl-1">
+        </div>
+        <div class="col-xl-1">
+          <p>Teléfono:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_telefono" type="text" name="telefono" required></p>
+        </div>
 
-      <input type="submit" value="Submit" />
+
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xl-1">
+          <p>Dueño:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_dueno" type="text" name="dueno" required></p>
+        </div>
+         <div class="col-xl-1">
+        </div>
+        <div class="col-xl-1">
+          <p>Ciudad:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_ciudad" type="text" name="ciudad" required></p>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xl-1">
+          <p>Precio:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_precio" type="text" name="precio" required></p>
+        </div>
+        <div class="col-xl-1">
+        </div>
+        <div class="col-xl-1">
+          <p>Direccion:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_direccion" type="text" name="direccion" required></p>
+        </div>
+      </div>
+      <br>
+      <br>
+
+      <button type="submit" id="btn-guardar">Guardar</button>
     </form>
 {% endblock %}

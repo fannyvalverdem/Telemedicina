@@ -7,88 +7,129 @@
 {% block base %}
 <div class="container-fluid" id="inicio-cont">
 	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<div class="row">
-		<div class="col-1">
+		<div class="col-xl-4">
 		</div>
-
-		<div class="col-10">
+		<div class="col-xl-4">
 			<div class="row">
-				<div class="col-xl-1">	
+				<div class="col-xl-1">
 				</div>
-				<div class="col-xl-4">
-					<div class="row">
-						<div id="inicio" class="col-xl-12">
-							<br>
-							<div id="titulo-inicio" class="row">
-								<img id="logo-ini" src="{% static 'imagenes/logo_2.png' %}" alt="logo"/>
-							</div>
-							<br>
+				<div class="col-xl-10">
+					<div id="registro" class="row">
+						<div class="col-xl-12">
+							<div class="row">
 
-							<div class="row">
 								<div class="col-xl-12">
-									{% load crispy_forms_tags %}
-									<form action="/login/" method="post">
-										{% csrf_token %}
-										{{ form|crispy }}
-										{% for message in messages %}
-                							<small><i class="fas fa-exclamation-triangle"></i>{{ message }}</small>
-                						{% endfor %}
-										<div id="contra" class="row">
-										  <a href="">¿Olvidaste tu contraseña?</a>
+									<br>
+									<div id="titulo-inicio" class="row">
+										<img id="logo-ini" src="{% static 'imagenes/logo_2.png' %}" alt="logo"/>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-xl-1">
 										</div>
-										<button type="submit" id="btn-inicio" style="text-align:center;">Inicio Sesión</button>
-									</form>
+										<div class="col-xl-10">
+											{% load crispy_forms_tags %}
+											<form action="/login/" method="post">
+												<div class="row">
+													<div class="col-xl-12">
+														{% csrf_token %}
+														{{ form|crispy }}
+														{{ form1|crispy }}
+														{% for message in messages %}
+				                							<small><i class="fas fa-exclamation-triangle"></i>{{ message }}</small>
+				                						{% endfor %}
+				                					</div>
+												</div>
+												<br>
+												<div id="contra" class="row">
+												  <a href="">¿Olvidaste tu contraseña?</a>
+												</div>
+												<br>
+												<div class="row">
+													<div class="col-4">
+													</div>
+													<div class="col-4">
+														<button type="submit" id="btn-inicio">Inicio Sesión</button>
+													</div>
+													<div class="col-4">
+													</div>
+													
+												</div>
+												
+											</form>
+										</div>
+										<div class="col-xl-1">
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-xl-5">
+											<hr>
+										</div>
+										<div id="o_ini" class="col-xl-2">
+											<h6>ó</h6>
+										</div>
+										<div class="col-xl-5">
+											<hr id="separador">
+										</div>
+										
+									</div>
+									<br>
+									<div class="row">
+
+										<div class="col-xl-6">
+											<a href="{% provider_login_url 'facebook' method='oauth2' %}"><img id="logo-redes" src="{% static 'imagenes/facebook.png' %}" alt="logo"/ align="right"></a>
+										</div>
+										<div class="col-xl-6">
+											<a href="{% provider_login_url 'google' %}"><img id="logo-redes2" src="{% static 'imagenes/google.png' %}" alt="logo"/></a>
+										</div>
+			        					
+									</div>
+									<br>
 								</div>
 							</div>
-							
-							<br>
-							<br>
-							<div class="row" id="ingresa-con">
-								<p>Ingresa con</p>
-							</div>
-							<div class="row">
-								<div class="col-6">
-									<a href="{% provider_login_url 'facebook' method='oauth2' %}"><img id="logo-redes" src="{% static 'imagenes/facebook.png' %}" alt="logo"/ align="right"></a>
-								</div>
-								<div class="col-6">
-									<a href="{% provider_login_url 'google' %}"><img id="logo-redes2" src="{% static 'imagenes/google.png' %}" alt="logo"/></a>
-								</div>
-	        					
-							</div>
-							<br>
-							<br>
-							<div class="row">
+						<br>
+						<div class="row">	
+						</div>
+						<div class="row">
 								<div class="col-12" id="nuevo-user">
 							  		<a href="{% url 'registro' %}" align="right">¿Nuevo Usuario? ¡Regístrate aquí!</a>
 								</div>	
 							</div>
 						</div>
 					</div>
-					<div class="row">	
-					</div>
-					<br>
-						<br>
-						<div id="des-app" class="row">
-						  	<h4>Descarga la app</h4>
-						</div>
-						<br>
-						<div id="apps" class="row" align="right">
-							<div id="store" class="col-xl-6">
-						  		<a tittle="app-store" href=""><img id="imgstore" src="{% static 'imagenes/App-Store.png' %}"/></a>
-						  	</div>
-						  	<div id="play" class="col-xl-6">
-						  		<a tittle="google-play" href=""><img id="imgplay" src="{% static 'imagenes/google-play.png' %}"/></a>
-							</div>
-						</div>
-							<br>
-							<br>
 				</div>
 				</div>
-				<div class="col-1">	
+				
+				<div class="col-xl-1">
 				</div>
 			</div>
 		</div>
 
+		<div id="des_aplicaciones" class="col-xl-4">
+			<br>
+			<div id="des-app" class="row">
+			  	<h6>¡Descarga la App aquí!</h6>
+			</div>
+			<br>
+			<div id="apps" class="row">
+				<div id="store" class="col-xl-6">
+			  		<a tittle="app-store" href=""><img id="imgstore" src="{% static 'imagenes/App-Store.png' %}"/></a>
+			  	</div>
+			  	<div id="play" class="col-xl-6">
+			  		<a tittle="google-play" href=""><img id="imgplay" src="{% static 'imagenes/google-play.png' %}"/></a>
+				</div>
+			</div>
+		</div>
+		<br>
+	<br><br>
+	<br>
+	<br>
 	</div>
 </div>
 

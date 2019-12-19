@@ -36,21 +36,44 @@ div#inicio-cont{
 div#inicio, div#cuenta, div#no-cuenta, div#registro{
 	display: inline-block;
 	background-color: #ffffff;
-	text-align: center
+	text-align: center;
+	border: 0px solid #000000;
+}
+
+#id_name, #id_apellido,#id_phone, #id_username, #id_email, #id_password, #id_password1, #id_password2, #id_dueno, #id_precio, #id_telefono, #id_ciudad, #id_direccion, #id_especialidad, #id_tarifa, #id_licencia_med, #num_doc, #id_celular, #id_nombre, #id_descripcion{
 	border-radius: 25px 25px 25px 25px;
 	-moz-border-radius: 25px 25px 25px 25px;
 	-webkit-border-radius: 25px 25px 25px 25px;
-	border: 0px solid #000000;
+	border: 1px solid #65b4c3;
 }
+
 div#ingresa-con{
 	color: #727176;
 	text-align: center;
 }
 
-#titulo-inicio h2, #lineas h4, #des-app h4, #titulo h2{
+div#mensaje{
+	color: #727176;
+	text-align: center;
+}
+
+#ingresa_cuenta a{
+	color: #65b4c3;
+}
+#ingresa_cuenta, #nuevo-user, #contra{
+	text-align:right;
+}
+
+
+#titulo-inicio h2, #lineas h4, #des-app h6, #titulo h2, #o_ini{
 	display: inline-block;
 	margin:auto;
 	text-align: center;
+}
+
+#des-app h6{
+	font-family: 'Montserrat', sans-serif;
+	color: #ffffff
 }
 
 #nuevo-user a{
@@ -83,20 +106,31 @@ img[id="imgplay"]{
 	height:75px;
 }
 
+div#des_aplicaciones{
+	position:absolute;
+	bottom: 10px;
+	right: 40px;
+}
+
 img[id="logo2"]{
 	width:200px;
 }
 
 img[id="logo-ini"]{
-	width:400px;
+	max-width: 100%;
 }
 
 img[id="logo-redes"]{
 	width:18px;
+	display: block;	
+	margin-left: auto;
+	margin-right: auto;
 }
 
 img[id="logo-redes2"]{
 	width:50px;
+	display: block;	
+	align-content:left;
 }
 
 button[id="btn-inicio"], button[id="btn-registro"]{
@@ -105,6 +139,7 @@ button[id="btn-inicio"], button[id="btn-registro"]{
 	display: inline-block;
 	text-align: center;
 	border-radius: 8px;
+	width:max-content;
 	border:none;
 }
 
