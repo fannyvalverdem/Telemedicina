@@ -1,5 +1,5 @@
 {% extends 'index_medico.html' %}
-
+{% load static %}
 {% block import %}
 
 {% endblock %}
@@ -30,8 +30,62 @@
 		<div class="col-1">
 		</div>
 		<div class="col-5">
-			<button class="button"onclick="window.open('{% url 'zoom_video' %}','popUpWindow','height=700,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');"><a href="{% url 'acciones_consulta' %}">Iniciar Consulta</a></button>
 		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-8">
+			{% for cita in cita_prox %}
+				<div id="citas-prev" class="row">
+					<div class="col-10">
+						<div class="row">
+							<div class="col-3">
+								<img id="avatar" src="{% static 'imagenes/doctor.png' %}" alt="">
+							</div>
+							<div class="col-8">
+								<br>
+								<div class="row">
+									<div class="col-12">
+										<p>{{ cita.doctor_id.user_id.persona_id.nombre}} {{ cita.doctor_id.user_id.persona_id.apellido}}</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12">
+										<p>Especialidad: {{ cita.detalle.especialidad.nombre}}</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-2">
+										<img id="avatar" src="{% static 'imagenes/fecha.png' %}" alt="">
+									</div>
+									<div class="col-3">
+										<p>{{ cita.detalle.fecha_prog}}</p>
+									</div>
+									<div class="col-2">
+										<img id="avatar" src="{% static 'imagenes/hora.png' %}" alt="">
+									</div>
+									<div class="col-3">
+										<p>{{ cita.detalle.hora}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-1">
+					            <button id="btn-continuar" class="button"onclick="window.open('{% url 'zoom_video' %}','popUpWindow','height=700,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');"><a href="{% url 'acciones_consulta' %}">Iniciar Consulta</a></button>
+							</div>
+							<div class="col-1">
+							</div>
+						</div>
+					</div>
+						
+					</div>
+					
+			{% endfor %}
+			
+		</div>
+		
 	</div>
 
 {% endblock %}

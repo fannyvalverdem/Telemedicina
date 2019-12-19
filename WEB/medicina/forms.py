@@ -220,9 +220,3 @@ class ImageForm(forms.ModelForm):
       model = Publicidad
       fields = ['imagen','name','dueno','precio','telefono','ciudad','direccion']
 
-class ConfirmarCitaForm(forms.Form):
-	especialidad = forms.CharField(label='Nombre:',max_length=100,widget=forms.TextInput())
-	nombres = forms.CharField(required=False,label='Nombre',max_length=100,widget=forms.TextInput())
-	apellido = forms.CharField(required=False,label='Apellido',max_length=100,widget=forms.TextInput())
-	documento_id=forms.ChoiceField(required=False, choices=DOC_ID, label='Tipo de Documento:')	
-	date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
