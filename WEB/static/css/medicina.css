@@ -40,7 +40,7 @@ div#inicio, div#cuenta, div#no-cuenta, div#registro{
 	border: 0px solid #000000;
 }
 
-#id_name, #id_apellido,#id_phone, #id_username, #id_email, #id_password, #id_password1, #id_password2, #id_dueno, #id_precio, #id_telefono, #id_ciudad, #id_direccion, #id_especialidad, #id_tarifa, #id_licencia_med, #num_doc, #id_celular, #id_nombre, #id_descripcion{
+#id_name, #id_apellido,#id_phone, #id_username, #id_email, #id_password, #id_password1, #id_password2, #id_dueno, #id_precio, #id_telefono, #id_ciudad, #id_direccion, #id_especialidad, #id_tarifa, #id_licencia_med, #id_num_doc, #id_celular, #id_nombre, #id_descripcion,#id_documento_id{
 	border-radius: 25px 25px 25px 25px;
 	-moz-border-radius: 25px 25px 25px 25px;
 	-webkit-border-radius: 25px 25px 25px 25px;
