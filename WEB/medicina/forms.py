@@ -115,15 +115,11 @@ class DoctorForm(forms.Form):
 	ciudad=forms.CharField(label='Ciudad:',max_length=100,widget=forms.TextInput())
 	phone = forms.CharField(label='Teléfono:',max_length=100,widget=forms.TextInput())
 	celular=forms.CharField(label='Celular:',max_length=100,widget=forms.TextInput())
-	especialidad=forms.ModelChoiceField(required=False,to_field_name="nombre",queryset=None, empty_label="()", label='Especialidad:')
-	tarifa=forms.ModelChoiceField(required=False,queryset=Tarifa.objects.all(),to_field_name="nombre",empty_label="()", label='Tarifa:')
+	especialidad=forms.ModelChoiceField(required=False,queryset=Especialidad.objects.all(), label='Especialidad:')
+	tarifa=forms.ModelChoiceField(required=False,queryset=Tarifa.objects.all(),to_field_name='nombre', label='Tarifa:')
 	licencia_med=forms.CharField(label='Número de licencia médica:',max_length=100,widget=forms.TextInput())
 	#foto=forms.FileField(label='Foto:')
 	#documentos=forms.FileField(label='Documentos:',widget=forms.ClearableFileInput(attrs={'multiple': True}))
-	def __init__(self, *args, **kwargs):
-	    super(DoctorForm, self).__init__(*args, **kwargs)
-
-	    self.fields['especialidad'].queryset = Especialidad.objects.all()
 
 
 class HorarioForm(forms.Form):

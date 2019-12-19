@@ -543,7 +543,6 @@ def ingresar_medico(request):
 		nombre =form.cleaned_data['name']
 		apellido =form.cleaned_data['apellido']
 		especialidad = form.cleaned_data['especialidad']
-		print(especialidad + ".............")
 		documento_id =form.cleaned_data['documento_id']
 		num_doc = form.cleaned_data['num_doc']
 		email =form.cleaned_data['email']

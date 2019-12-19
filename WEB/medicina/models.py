@@ -31,6 +31,8 @@ class Usuario(AbstractUser):
 class Especialidad(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
+	def __str__(self):
+		return self.nombre
 
 class Doctor(models.Model):
 	identificador_medico=models.CharField(max_length=250)
@@ -38,6 +40,8 @@ class Doctor(models.Model):
 	calificacion_total=models.FloatField(default=0,null=True)
 	citas_realizadas=models.IntegerField(default=0,null=True)
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
+	def __str__(self):
+		return self.user_id.persona_id.nombre+" "+self.user_id.persona_id.apellido
 
 class MatchEspecialidades(models.Model):
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
@@ -55,6 +59,8 @@ class Horario(models.Model):
 class Paciente(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
 	citas_realizadas=models.IntegerField(default=0,null=True)
+	def __str__(self):
+		return self.user_id.persona_id.nombre+" "+self.user_id.persona_id.apellido
 
 class Administrador(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
@@ -112,10 +118,14 @@ class Tarifa(models.Model):
 	nombre= models.CharField(max_length=100)
 	descripcion=models.TextField()
 	precio=models.FloatField()
+	def __str__(self):
+		return self.nombre
 		
 class Medicamento(models.Model):
 	nombre= models.CharField(max_length=100)
 	precio=models.FloatField()
+	def __str__(self):
+		return self.nombre
 
 class RecetarMedicamentos(models.Model):
 	receta=models.ForeignKey(Receta, null=True, blank=True, on_delete=models.CASCADE)
