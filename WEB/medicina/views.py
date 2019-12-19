@@ -300,17 +300,24 @@ def perfil(request):
 	user_ac_person_id=current_user.persona_id.id
 	persona=Persona.objects.get(id=user_ac_person_id)
 	usuario=Usuario.objects.get(id=user_ac_id)
-	return render(request,"perfil.html",{'persona':persona,'usuario':usuario})
+	
+	persona_nombre=persona.nombre
+	persona_apellido=persona.apellido
+	persona_telefono=persona.telefono
+	persona_tipo_documento=persona.tipo_documento
+	persona_numero_documento=persona.numero_documento
+	persona_sexo=persona.sexo
+	persona_edad=persona.edad
+	persona_fecha_nac=persona.fecha_nac
+	persona_pais=persona.pais
+	persona_ciudad=persona.ciudad
+	persona_direccion=persona.direccion
 
-def editar_perfil(request):
-	current_user = request.user
-	user_ac_id=current_user.id
-	user_ac_person_id=current_user.persona_id.id
-	persona=Persona.objects.get(id=user_ac_person_id)
-	usuario=Usuario.objects.get(id=user_ac_id)
+	print(persona_nombre,"<-------")
 	if request.method == 'POST':
 		print("POST")
-	form= EditarPerfilForm(request.POST,request)
+	default_data = {'nombres': persona_nombre,'apellido': persona_apellido,'num_doc': persona_numero_documento,'genero': persona_sexo,'edad': persona_edad,'fecha_nac': persona_fecha_nac,'pais': persona_pais,'ciudad': persona_ciudad,'direccion': persona_direccion}
+	form= PerfilForm(default_data,request.POST)
 	if form.is_valid():
 		print("VALIDO")
 		current_user = request.user
@@ -318,25 +325,76 @@ def editar_perfil(request):
 		user_ac_person_id=current_user.persona_id.id
 		persona=Persona.objects.get(id=user_ac_person_id)
 		usuario=Usuario.objects.get(id=user_ac_id)
+		
+		form.fields['nombres'].widget.attrs['readonly'] = True
+		form.fields['apellido'].widget.attrs['readonly'] = True
+		#form.fields['tipo_doc'].widget.attrs['readonly'] = True
+		form.fields['num_doc'].widget.attrs['readonly'] = True
+		form.fields['genero'].widget.attrs['readonly'] = True
+		form.fields['edad'].widget.attrs['readonly'] = True
+		form.fields['fecha_nac'].widget.attrs['readonly'] = True
+		form.fields['pais'].widget.attrs['readonly'] = True
+		form.fields['ciudad'].widget.attrs['readonly'] = True
+		form.fields['direccion'].widget.attrs['readonly'] = True
+	else:
+		form=PerfilForm(request)
+	return render(request,"perfil.html",{'form':form,'persona':persona,'usuario':usuario})
 
+def editar_perfil(request):
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	persona=Persona.objects.get(id=user_ac_person_id)
+	usuario=Usuario.objects.get(id=user_ac_id)
+	persona_nombre=persona.nombre
+	persona_apellido=persona.apellido
+	persona_telefono=persona.telefono
+	#persona_tipo_documento=persona.tipo_documento
+	persona_numero_documento=persona.numero_documento
+	persona_sexo=persona.sexo
+	persona_edad=persona.edad
+	persona_fecha_nac=persona.fecha_nac
+	persona_pais=persona.pais
+	persona_ciudad=persona.ciudad
+	persona_direccion=persona.direccion
+
+	if request.method == 'POST':
+		print("POST")
+	default_data = {'nombres': persona_nombre,'apellido': persona_apellido,'num_doc': persona_numero_documento,'genero': persona_sexo,'edad': persona_edad,'fecha_nac': persona_fecha_nac,'pais': persona_pais,'ciudad': persona_ciudad,'direccion': persona_direccion}
+	form= EditarPerfilForm(request.POST)
+	form2= EditarPerfilForm(default_data,request.POST)
+	if form.is_valid():
+		print("VALIDO")
+
+		current_user = request.user
+		user_ac_id=current_user.id
+		user_ac_person_id=current_user.persona_id.id
+		persona=Persona.objects.get(id=user_ac_person_id)
+		usuario=Usuario.objects.get(id=user_ac_id)
+
+		
 		if form.cleaned_data['nombres']:
 			persona.nombre=form.cleaned_data['nombres']
+			print(persona.nombre,"<<<<<<<<")
 			persona.save()
 
 		if form.cleaned_data['apellido']:
 			persona.apellido=form.cleaned_data['apellido']
 			persona.save()
 
-		if form.cleaned_data['tipo_doc']:
-			tipo=form.cleaned_data['tipo_doc']
-			if tipo=="1":
-				persona.tipo_documento="Cedula"
-			else:
-				persona.tipo_documento="Pasaporte"
-			persona.save()
+		#if form.cleaned_data['tipo_doc']:
+		#	tipo=form.cleaned_data['tipo_doc']
+		#	if tipo=="1":
+		#		persona.tipo_documento="Cedula"
+		#	else:
+		#		persona.tipo_documento="Pasaporte"
+		#	persona.save()
 
 		if form.cleaned_data['num_doc']:
+			persona.tipo_documento="Cedula"
+			persona.save()
 			persona.numero_documento=form.cleaned_data['num_doc']
+			print(persona.numero_documento,"<<<<<<<<")
 			persona.save()
 
 		if form.cleaned_data['genero']:
@@ -362,12 +420,14 @@ def editar_perfil(request):
 		if form.cleaned_data['direccion']:
 			persona.direccion=form.cleaned_data['direccion']
 			persona.save()
-
+		
 		#return redirect('perfil')
+		#return render(request,"perfil.html",{'form':form,'persona':persona,'usuario':usuario})
+
 	else:
-		form=EditarPerfilForm(request)
+		form=EditarPerfilForm(default_data,request)
 	
-	return render(request, 'editar_perfil.html', {'form':form,'persona':persona,'usuario':usuario});
+	return render(request, 'editar_perfil.html', {'form':form2,'persona':persona,'usuario':usuario});
 
 def crear_grupo_familiar(request):
 	dictionary = dict(request=request) 

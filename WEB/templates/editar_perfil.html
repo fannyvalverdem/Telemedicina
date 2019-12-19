@@ -2,16 +2,43 @@
 {% load static %}
 
 {% block contenido %}
+
+<div class="row">
+	<div class="col-4">
+		<img id="avatar" src="{% static 'imagenes/avatar.png' %}"/>
+	</div>
+	<div class="col-4">
+		<br>
+		<div class="row">
+			<div class="col-12">
+				<p>{{persona.nombre}} {{persona.apellido}} </p>
+			</div>
+			<div class="col-12">
+				<a href="{% url 'perfil' %}">Perfil</a>
+			</div>
+			<div class="col-12">
+				<a href="{% url 'cuentas_vinculadas' %}">Cuentas Vinculadas</a>
+			</div>
+			<div class="col-12">
+				<a href="{% url 'crear_grupo_familiar' %}">Crear Grupo Familiar</a>
+			</div>
+			
+		</div>		
+	</div>
+</div>
+<br><br>
+<br><br>
+
 <div class="row">
 	<div class="col-xl-12">
 		{% load crispy_forms_tags %}
-		<form action="" method="post">
+		<form action="/editar_perfil/" method="post">
 			<div class="row">
 				{% csrf_token %}
 				<div class="col-xl-5">
 					{{ form.nombres|as_crispy_field }}
 					{{ form.apellido|as_crispy_field }}
-					{{ form.tipo_doc|as_crispy_field }}
+					<!--{{ form.tipo_doc|as_crispy_field }}-->
 					{{ form.num_doc|as_crispy_field }}
 					{{ form.genero|as_crispy_field }}
 					{{ form.edad|as_crispy_field }}
@@ -26,12 +53,9 @@
 				<div class="col-xl-5">
 				</div>
 				</div>
-
-			</div>
-
 			<button type="submit" id="btn-guardar">Guardar</button>
 		</form>
-		<<br>
+		<br>
 		<br>
 	</div>
 </div>

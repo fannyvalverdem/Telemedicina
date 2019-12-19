@@ -1,4 +1,5 @@
 {% extends 'index_paciente.html' %}
+{% load static %}
 {% load staticfiles %}
 
 {% block contenido %}
@@ -28,110 +29,34 @@
 <br><br>
 <br><br>
 <div class="row">
-	<div class="col-5">
-		<div class="row">
-			<div class="col-6">
-				<p>Nombres:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.nombre}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Apellidos:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.apellido}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Tipo de Documento:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.tipo_documento}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Número de Documento:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.numero_documento}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Género:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.sexo}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Edad:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.edad}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Fecha Nacimiento:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.fecha_nac}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>País:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.pais}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Ciudad:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.ciudad}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Dirección:</p>
-			</div>
-			<div class="col-6">
-				<p>{{persona.direccion}}</p>
-			</div>
-		</div>
-		
-	</div>
-	<div class="col-2">
-	</div>
-	<div class="col-5">
-		<div class="row">
-			<div class="col-6">
-				<p>Correo Electrónico:</p>
-			</div>
-			<div class="col-6">
-				<p>{{usuario.email}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-6">
-				<p>Contraseña:</p>
-			</div>
-			<div class="col-6">
-				<p>***********</p>
-			</div>
-		</div>
-	</div>
+	<div class="col-xl-12">
+		{% load crispy_forms_tags %}
+		<form action="" method="post">
+			<div class="row">
+				{% csrf_token %}
+				<div class="col-xl-5">
+					{{ form.nombres|as_crispy_field }}
+					{{ form.apellido|as_crispy_field }}
+					<!--{{ form.tipo_doc|as_crispy_field }}-->
+					{{ form.num_doc|as_crispy_field }}
+					{{ form.genero|as_crispy_field }}
+					{{ form.edad|as_crispy_field }}
+					{{ form.fecha_nac|as_crispy_field }}
+					{{ form.pais|as_crispy_field }}
+					{{ form.ciudad|as_crispy_field }}
+					{{ form.direccion|as_crispy_field }}
+				</div>
+				<div class="col-xl-2">
+					
+				</div>
+				<div class="col-xl-5">
+				</div>
+				</div>
 
+		</form>
+		<br>
+		<br>
+	</div>
 </div>
 
 {% endblock %}
