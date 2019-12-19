@@ -54,7 +54,7 @@ $('#data_table_emergencia').DataTable({
     "ajax": 
         {
         "method": "GET",
-        "url": "/api/doctor/",
+        "url": "/api/match_especialidades/",
         "dataSrc": "",
         "error": function(xhr, status, error) {
             console.log("readyState: " + xhr.readyState);
@@ -68,8 +68,8 @@ $('#data_table_emergencia').DataTable({
     
     "columns": [
         { data: "imagen"},
-        { data: "user_id.persona_id.nombre"},
-        { data: "user_id.persona_id.apellido"},
+        { data: "doctor.user_id.persona_id.nombre"},
+        { data: "doctor.user_id.persona_id.apellido"},
         { data: "especialidad.nombre"},
     ],
     columnDefs: [
@@ -98,7 +98,7 @@ $('#data_table_confirmar_emergencia').DataTable({
     "ajax": 
         {
         "method": "GET",
-        "url": "/api/doctor/",
+        "url": "/api/match_especialidades/",
         "dataSrc": "",
         "error": function(xhr, status, error) {
             console.log("readyState: " + xhr.readyState);
@@ -112,8 +112,8 @@ $('#data_table_confirmar_emergencia').DataTable({
     
     "columns": [
         { data: "imagen"},
-        { data: "user_id.persona_id.nombre"},
-        { data: "user_id.persona_id.apellido"},
+        { data: "doctor.user_id.persona_id.nombre"},
+        { data: "doctor.user_id.persona_id.apellido"},
         { data: "especialidad.nombre"},
     ],
     columnDefs: [

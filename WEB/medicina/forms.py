@@ -2,8 +2,6 @@ from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 import requests
-from easy_select2 import Select2Multiple
-
 
 #creating our forms
 CHOICES=[
@@ -186,8 +184,7 @@ class RecetaForm(forms.Form):
 	especialidad = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Especialidad'}))
 	descripcion=forms.CharField(label='Descripcion de la receta: ', widget=forms.Textarea(attrs={'cols': 10, 'rows': 5}))
 	medicamentos = forms.ModelMultipleChoiceField(
-                       #widget = forms.SelectMultiple,
-                       widget=Select2Multiple(),
+                       widget = forms.SelectMultiple,
                        queryset = Medicamento.objects.all()
                )
 
@@ -223,9 +220,3 @@ class ImageForm(forms.ModelForm):
       model = Publicidad
       fields = ['imagen','name','dueno','precio','telefono','ciudad','direccion']
 
-class ConfirmarCitaForm(forms.Form):
-	especialidad = forms.CharField(label='Nombre:',max_length=100,widget=forms.TextInput())
-	nombres = forms.CharField(required=False,label='Nombre',max_length=100,widget=forms.TextInput())
-	apellido = forms.CharField(required=False,label='Apellido',max_length=100,widget=forms.TextInput())
-	documento_id=forms.ChoiceField(required=False, choices=DOC_ID, label='Tipo de Documento:')	
-	date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
