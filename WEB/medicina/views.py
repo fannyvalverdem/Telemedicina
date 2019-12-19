@@ -28,8 +28,8 @@ def base(request):
 
 def cerrar_sesion(request):
 	logout(request)
-	form = SignupForm(request.POST)
-	return render(request, "inicio_sesion.html", {'form':form})
+	return redirect(inicio)
+	
 
 def inicio(request):
 	if request.user.is_authenticated:
