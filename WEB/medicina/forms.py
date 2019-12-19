@@ -200,6 +200,18 @@ class EditarPerfilForm(forms.Form):
 	ciudad=forms.CharField(required=False,label='Ciudad:',max_length=100,widget=forms.TextInput())
 	direccion=forms.CharField(required=False,label='Dirección:',max_length=100,widget=forms.TextInput())
 
+class PerfilForm(forms.Form):
+	nombres = forms.CharField(required=False,label='Nombre',max_length=100,widget=forms.TextInput())
+	apellido = forms.CharField(required=False,label='Apellido',max_length=100,widget=forms.TextInput())
+	tipo_doc=forms.ChoiceField(required=False, choices=DOC_ID, label='Tipo de Documento:')
+	num_doc=forms.CharField(required=False,label='Cedula:',max_length=100,widget=forms.TextInput())
+	genero=forms.CharField(required=False,label='Género:',max_length=100,widget=forms.TextInput())
+	edad=forms.IntegerField(required=False,label='Edad:')
+	fecha_nac=forms.DateField(required=False,label='Fecha de Nacimiento:')
+	pais=forms.CharField(required=False,label='País:',max_length=100,widget=forms.TextInput())
+	ciudad=forms.CharField(required=False,label='Ciudad:',max_length=100,widget=forms.TextInput())
+	direccion=forms.CharField(required=False,label='Dirección:',max_length=100,widget=forms.TextInput())
+
 class GrupoFamiliarForm(forms.Form):
 	email = forms.EmailField(label='Email:',max_length=100, widget= forms.EmailInput())
 
