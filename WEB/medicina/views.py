@@ -228,10 +228,13 @@ def zoom(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'zoom.html', dictionary)
 
-def citas_medico(request):
-	dictionary = dict(request=request) 
-	dictionary.update(csrf(request)) 
-	return render(request,'citas_medico.html', dictionary)
+def citas_medico(request): 
+	current_user = request.user
+	user_ac_id=current_user.id
+	doctor=Doctor.objects.get(user_id=user_ac_id)
+	cita_prox=Consulta.objects.filter(doctor_id=doctor.id,estado='agendada')
+	print(cita_prox)
+	return render(request,"citas_medico.html",{'cita_prox':cita_prox})
 
 def reporte_medico(request):
 	dictionary = dict(request=request) 
