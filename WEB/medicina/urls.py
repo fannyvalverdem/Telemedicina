@@ -62,5 +62,5 @@ urlpatterns = [
 	url(r'^match_especialidad/$', views.match_especialidad, name='match_especialidad'),
 
 	url(r'^auth_zoom/$', views.auth_zoom, name='auth_zoom'),
-	url(r'^prueba_auth/$', views.test_view, name='prueba_auth'),
+	url(r'^prueba_auth/$', views.zoom_redirect, name='prueba_auth'),
 ]

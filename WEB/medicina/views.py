@@ -11,13 +11,21 @@ from django.contrib.auth import login as auth_login
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
-from .controller import Listar, Add
+from .controller import Listar, Add, listar_meeting,add_meeting
 import requests,json
 from .utility import *
 from django.http import QueryDict
 from django.shortcuts import redirect
 from django.contrib import messages
-from .controller import zoom_auth
+from django.http import Http404
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
+
+import base64
+import json
+import requests
 
 # Create your views here.
 @csrf_exempt 
@@ -828,10 +836,30 @@ def login(request):
 def crear_cita(request):
 	return redirect('index_paciente')
 
+@api_view(['GET'])
 def auth_zoom(request):
-	zoom_auth()
-	request.session["code"] = request.GET.get("code", "NO CODE")
-	return HttpResponse('Hola Mundo')
+
+
+    url = "https://zoom.us/oauth/token"
+    payload = {
+	"grant_type":"authorization_code",
+	"code":request.query_params.get('code'),
+	"redirect_uri": "http://127.0.0.1:8000/auth_zoom"
+    }
+    # Noten la b""     Aqui v
+    auth = base64.b64encode(b"WgCo2Mo8RkupkAANM8Wxdg:GEQ5hdNoV7UookqET1ngUojTH22xQZPH")
+    headers = {
+        'Authorization': "Basic " + auth.decode("utf-8"),
+    }
+    response = requests.request("POST", url, data=payload, headers=headers)
+    data_json=response.json()
+    #print(data_json['access_token'])
+    #add_meeting('ivinces@espol.edu.ec','Cita','29/12/2019','17:00',data_json['access_token'])
+    listar_meeting('ivinces@espol.edu.ec',data_json['access_token'])
+    return Response(json.loads(response.text))
+
+def zoom_redirect(request):
+	return redirect('https://zoom.us/oauth/authorize?response_type=code&client_id=WgCo2Mo8RkupkAANM8Wxdg&redirect_uri=http://127.0.0.1:8000/auth_zoom')
 
 def test_view(request):
 	print(request.session.get("code"))

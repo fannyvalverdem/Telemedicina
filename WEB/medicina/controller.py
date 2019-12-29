@@ -10,13 +10,6 @@ def Listar(entidad):
 	data = response.json()
 	return data
 
-def zoom_auth():
-	response = requests.get('https://zoom.us/oauth/authorize?response_type=code&client_id=WgCo2Mo8RkupkAANM8Wxdg&redirect_uri=http://127.0.0.1:8000/auth_zoom')
-	print(dir(response))
-	# print(response.content)
-	print(response.url)
-	return response
-
 def listar_meeting(usuario,token):
 	url = "https://api.zoom.us/v2/users/"+usuario+"/meetings"
 
@@ -28,6 +21,7 @@ def listar_meeting(usuario,token):
 	querystring = {"page_number":"1","page_size":"30","type":"upcoming"}
 
 	response = requests.request("GET", url, headers=headers, params=querystring)
+	print(response.text)
 
 
 def add_meeting(usuario,nombre,fecha,hora,token):
