@@ -877,10 +877,41 @@ def acciones_consulta(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'acciones_consulta.html', dictionary)
 
+def ing_receta(request):
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	doctor=Persona.objects.get(id=user_ac_person_id)
+	usuario=Usuario.objects.get(id=user_ac_id)
+	consulta=Consulta.objects.last() #Cambiar
+	paciente=consulta.paciente_id
+	detalles=consulta.detalle
+	especialidad=detalles.especialidad
+
+	if request.method == 'POST':
+		print("POST")
+
+		formset=MedicamentoFormset(request.POST)
+		if formset.is_valid():
+			for form in formset:
+				name = form.cleaned_data.get('nombre')
+				cant = form.cleaned_data.get('cantidad')
+				des = form.cleaned_data.get('descripcion')
+				print(name)
+				print(cant)
+				print(des)
+			return redirect('index_medico')
+	else:
+		form=RecetaForm()
+		formset=MedicamentoFormset()
+
+	return render(request, 'escribir_receta2.html', {'formset':formset,'doctor':doctor,'paciente':paciente,'especialidad':especialidad})
+
+
 def escribir_receta(request):
 	if request.method == 'POST':
 		print("POST")
-		
+	
 	form= RecetaForm(request.POST)
 
 	consulta=Consulta.objects.last()

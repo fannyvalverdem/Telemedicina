@@ -2,6 +2,7 @@ from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 import requests
+from django.forms import formset_factory
 
 #creating our forms
 CHOICES=[
@@ -187,6 +188,13 @@ class RecetaForm(forms.Form):
                        widget = forms.SelectMultiple,
                        queryset = Medicamento.objects.all()
                )
+
+class MedicamentosForm(forms.Form):
+	nombre=forms.ModelChoiceField(queryset=Medicamento.objects.all())
+	cantidad=forms.CharField(max_length=100,widget=forms.TextInput())
+	descripcion=forms.CharField(widget=forms.Textarea(attrs={'cols': 50, 'rows': 1}))
+
+MedicamentoFormset=formset_factory(MedicamentosForm,extra=1)
 
 class EditarPerfilForm(forms.Form):
 	nombres = forms.CharField(required=False,label='Nombre',max_length=100,widget=forms.TextInput())

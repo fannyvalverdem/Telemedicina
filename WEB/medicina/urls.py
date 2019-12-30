@@ -33,6 +33,7 @@ urlpatterns = [
 	url(r'^boton_pago/$', views.boton_pago, name='boton_pago'),
 	url(r'^acciones_consulta/$', views.acciones_consulta, name='acciones_consulta'),
 	url(r'^escribir_receta/$', views.escribir_receta, name='escribir_receta'),
+	url(r'^ing_receta/$', views.ing_receta, name='ing_receta'),
 
 	url(r'^citas_medico/$', views.citas_medico, name='citas_medico'),
 	url(r'^conteo_citas/$', views.conteo_citas, name='conteo_citas'),
