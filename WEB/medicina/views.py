@@ -11,7 +11,7 @@ from django.contrib.auth import login as auth_login
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
-from .controller import Listar, Add, listar_meeting,add_meeting
+from .controller import Listar, Add, listar_meeting,add_meeting,add_user
 import requests,json
 from .utility import *
 from django.http import QueryDict
@@ -21,7 +21,8 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-
+from datetime import datetime,date
+import time
 
 import base64
 import json
@@ -764,7 +765,7 @@ def ingresar_horario(request):
 
 			horario7.save()
 
-		return redirect('index_admin')
+		return redirect('prueba_auth')
 	else:
 	#creating a new form
 		form = HorarioForm()
@@ -854,8 +855,31 @@ def auth_zoom(request):
     response = requests.request("POST", url, data=payload, headers=headers)
     data_json=response.json()
     #print(data_json['access_token'])
-    #add_meeting('ivinces@espol.edu.ec','Cita','29/12/2019','17:00',data_json['access_token'])
-    listar_meeting('ivinces@espol.edu.ec',data_json['access_token'])
+    doctor=Doctor.objects.last()
+    usuario=doctor.user_id
+    persona=usuario.persona_id
+    print(doctor.id)
+    horarios=Horario.objects.filter(doctor_id =doctor.id)
+    print(horarios)
+    for horario in horarios:
+    	print(horario.id)
+    	print(horario.hora_entrada)
+    	entrada = time.strptime(horario.hora_entrada, '%H::%M::%S')
+    	print(horario.hora_salida)
+    	salida=time.strptime(horario.hora_salida, '%H::%M::%S')
+    	print(horario.dias.nombre)
+
+    now = datetime.now()
+    dt_string = now.strftime("%d-%m-%Y %H:%M:%S")
+    print("date and time =", dt_string)
+    today = date.today()
+    fecha = today.strftime("%d-%m-%Y")
+    print("d1 =", fecha)
+
+    
+    #add_user(usuario.email,persona.nombre,persona.apellido,data_json['access_token'])
+    #add_meeting('ivinces@espol.edu.ec','Cita',fecha,horario.hora_entrada,data_json['access_token'])
+    #listar_meeting('ivinces@espol.edu.ec',data_json['access_token'])
     return Response(json.loads(response.text))
 
 def zoom_redirect(request):
