@@ -1,21 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-img src="assets/telemedicina_movil.jpg"></ion-img>
+    <ion-img src="assets/ICONS_APP/ICONS_APP/logo.png"></ion-img>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-toolbar>
-    <ion-icon routerLink="../agendar-cita-esp" name="arrow-round-back"></ion-icon>
+  <ion-grid>
+    <ion-row>
+    <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/agendar_cita_2.png"></ion-img>
     <ion-title>Agendamiento de consulta medica</ion-title>
-  </ion-toolbar>
+  </ion-row>
   <ion-card >
-    <ion-list>
-      <ion-item *ngFor="let entry of form">
-        <ion-label>{{entry.val}}</ion-label>
-        <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
-      </ion-item>
-    </ion-list>
-    <ion-button routerLink="../agendar-cita-conf">Continuar</ion-button>
-  </ion-card>
+      <ion-list>
+       <ion-item *ngFor="let entry of form">
+          <ion-label>{{entry.val}}</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+       </ion-item>
+      </ion-list>
+      <ion-button routerLink="../agendar-cita-conf">Continuar</ion-button>
+    </ion-card>
+  </ion-grid> 
 </ion-content>

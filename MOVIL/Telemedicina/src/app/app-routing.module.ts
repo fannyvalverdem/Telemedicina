@@ -15,7 +15,12 @@ const routes: Routes = [
   { path: 'agendar-cita-conf', loadChildren: './agendar-cita-conf/agendar-cita-conf.module#AgendarCitaConfPageModule' },  { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
   { path: 'videollamada', loadChildren: './videollamada/videollamada.module#VideollamadaPageModule' },
   { path: 'pago', loadChildren: './pago/pago.module#PagoPageModule' },
-  { path: 'receta', loadChildren: './receta/receta.module#RecetaPageModule' }
+  { path: 'receta', loadChildren: './receta/receta.module#RecetaPageModule' },
+  { path: 'doctoresfav', loadChildren: './doctoresfav/doctoresfav.module#DoctoresfavPageModule' },
+  { path: 'historialmed', loadChildren: './historialmed/historialmed.module#HistorialmedPageModule' },
+  { path: 'receta-espec', loadChildren: './receta-espec/receta-espec.module#RecetaEspecPageModule' },
+  { path: 'paquetes', loadChildren: './paquetes/paquetes.module#PaquetesPageModule' },
+  { path: 'contacto', loadChildren: './contacto/contacto.module#ContactoPageModule' }
 
 ];
 @NgModule({
