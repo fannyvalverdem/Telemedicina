@@ -1,3 +1,8 @@
+ion-toolbar{
+    --background: #65b4c3;
+
+}
+
 ion-img{
     width: 350px; 
     height: 100px;
@@ -6,7 +11,16 @@ ion-img{
 }
 
 ion-col{
-    background: turquoise;
+    background: #e53956;
+    
     padding: 5px;
     margin: 5px;
+}
+
+.emergencia{
+    background: #e53956;
+}
+
+.iconemerg{
+    width: 20%;
 }

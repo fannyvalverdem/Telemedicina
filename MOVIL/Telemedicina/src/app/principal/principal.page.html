@@ -1,24 +1,22 @@
 <ion-header>
   <ion-toolbar>
-    <ion-img src="assets/telemedicina_movil.jpg"></ion-img>
+    <ion-img src="assets/ICONS_APP/ICONS_APP/logo.png"></ion-img>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row class="ion-justify-content-center">
-      <ion-button routerLink="../emergencia">Cita por emergencia</ion-button>
-    </ion-row>
+    
     <ion-row class="ion-justify-content-center">
       <ion-col size="5" size-sm class="ion-align-self-center" >
         <ion-row class="ion-justify-content-center" routerLink="../agendar-cita-esp">
-          <ion-img class="imagenes" src="assets/calendario.png"></ion-img>
+          <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/agendar_cita_2.png"></ion-img>
           <ion-label>Agendar cita</ion-label> 
         </ion-row>        
       </ion-col>
       <ion-col size="5" size-sm class="ion-align-self-center">
-        <ion-row class="ion-justify-content-center" routerLink="../principal">
-          <ion-img class="imagenes" src="assets/estetoscopio.png"></ion-img>
+        <ion-row class="ion-justify-content-center" routerLink="../videollamada">
+          <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/iniciar_consulta.png"></ion-img>
           <ion-label>Iniciar Consulta</ion-label>
         </ion-row>
       </ion-col>
@@ -26,16 +24,25 @@
     <ion-row class="ion-justify-content-center">
       <ion-col size="5" size-sm class="ion-align-self-center" >
         <ion-row class="ion-justify-content-center" routerLink="../principal">        
-          <ion-img class="imagenes" src="assets/doctor.png"></ion-img>
+          <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/doctores_fav_2.png"></ion-img>
           <ion-label>Doctores Favoritos</ion-label>
         </ion-row>
       </ion-col>
       <ion-col size="5" size-sm class="ion-align-self-center">
         <ion-row class="ion-justify-content-center" routerLink="../principal">        
-          <ion-img class="imagenes" src="assets/doctor.png"></ion-img>
-          <ion-label>Historial</ion-label>
+          <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/historial_medico_2.png"></ion-img>
+          <ion-label>Historial médico</ion-label>
         </ion-row>
       </ion-col>
     </ion-row>
+
+    <ion-row class="ion-justify-content-center " >
+      <ion-col size="8" size-sm class="ion-align-self-center emergencia" >
+        <ion-row class="ion-justify-content-center" routerLink="../emergencia">        
+          <ion-img class="iconemerg" src="assets/ICONS_APP/ICONS_APP/cita_por_emergencia.png"></ion-img>
+          <ion-label>Cita por emergencia</ion-label>
+        </ion-row>
+      </ion-col>
+    </ion-row>    
   </ion-grid>
 </ion-content>
