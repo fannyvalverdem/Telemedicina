@@ -21,6 +21,9 @@ urlpatterns = [
 	url(r'^calificar_medico/$', views.calificar_medico, name='calificar_medico'),
 	url(r'^calificar_cita/$', views.calificar_cita, name='calificar_cita'),
 	
+	url(r'^ver_info_medica/$', views.ver_info_medica, name='ver_info_medica'),
+	url(r'^ingresar_info_medica/$', views.ingresar_info_medica, name='ingresar_info_medica'),
+
 	
 	url(r'^cambiar_cuenta/$', views.cambiar_cuenta, name='cambiar_cuenta'),
 	url(r'^cuentas_vinculadas/$', views.cuentas_vinculadas, name='cuentas_vinculadas'),

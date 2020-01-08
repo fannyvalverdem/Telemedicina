@@ -406,3 +406,37 @@ $('#data_table_publicidad').DataTable({
         { width: 100, targets: 7},
     ],
 });
+
+
+$('#data_table_info_medica').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/info_medica/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "id"},
+        { data: "peso"},
+        { data: "sys"},
+        { data: "dia"},
+        { data: "pulse"},
+        { data: "glucosa"},
+        { data: "colesterol"}
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+    ],
+});

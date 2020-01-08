@@ -158,3 +158,8 @@ class RecetarMedicamentoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model=models.RecetarMedicamentos
 		fields=("medicamento","receta")
+
+class InfoMedicaSerializer(serializers.ModelSerializer):
+	class Meta:
+		model=models.Info_Medica
+		fields=("id","peso","sys","dia","pulse","glucosa","colesterol")
