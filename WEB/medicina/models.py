@@ -173,6 +173,7 @@ class Info_Medica(models.Model):
 	glucosa=models.FloatField()
 	colesterol=models.FloatField()
 
+
 class Noticias(models.Model):
 	imagen=models.ImageField(upload_to = 'static/imagenes', default='static/imagenes/no-img.jpg')
 	titulo=models.CharField(max_length=250)
@@ -184,3 +185,12 @@ class Consejos(models.Model):
 	titulo=models.CharField(max_length=250)
 	descripcion=models.TextField()
 	fuente=models.CharField(max_length=250)
+
+class Citas_Medico(models.Model):
+	m_id=models.IntegerField()
+	m_url=models.CharField(max_length=300,null=True)
+	m_duration=models.IntegerField()
+	fecha=models.DateField()
+	hora=models.TimeField()
+	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
+
