@@ -8,19 +8,54 @@ ion-img{
     height: 100px;
     margin: auto;
     display: block;
+    
 }
 
 ion-col{
-    background: #e53956;
-    
+    background:rgba(229, 57, 86,0.1);    
     padding: 5px;
     margin: 5px;
 }
 
 .emergencia{
     background: #e53956;
+    
+
 }
 
 .iconemerg{
-    width: 20%;
+    width: 100px; 
+    height: 50px;
 }
+
+#emerg{
+    color: white;
+}
+
+.icon{
+    padding:0px;
+    margin: 0px;
+}
+
+ion-grid {
+    height: 20%;
+  
+    .em{
+        height: 80%;
+
+        .emergencia{
+            height: 80%;
+
+            ion-row{
+                height: 100%;
+                
+                .label{
+                    height: 50%;
+                }
+            }
+
+        }
+
+
+    }
+  }
