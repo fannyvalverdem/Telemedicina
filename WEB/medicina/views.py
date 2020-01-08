@@ -303,7 +303,7 @@ def publicidad_ingresar(request):
 				direccion=form.cleaned_data["direccion"]
 				)
 			new_image.save()
-			return HttpResponseRedirect('/imagenes/publicidad/')
+			return redirect('index_admin')
 
 
 def perfil(request):
@@ -1061,3 +1061,50 @@ def ingresar_info_medica(request):
 		form = InfoMedicaForm()
 			#returning form 
 	return render(request, 'ingresar_info_manual.html', {'form':form});
+
+def consejos_noticias(request):
+	context= {'object_list': Listar("consejos"),'object_list2': Listar("noticias")}
+	return render(request, 'consejos_noticias.html', context)
+
+def ver_consejos(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_consejos.html', dictionary)
+
+def ingresar_consejos(request):
+	if request.method == 'GET':
+		return render(request, 'ingresar_consejos.html')
+	elif request.method == 'POST':
+		form = ConsejosForm(request.POST, request.FILES)
+		if form.is_valid():
+			new_image=Consejos(
+				imagen =form.cleaned_data['imagen'],
+				titulo =form.cleaned_data['titulo'],
+				descripcion = form.cleaned_data['descripcion'],
+				fuente =form.cleaned_data['fuente']
+				)
+			new_image.save()
+			return redirect('ver_consejos')
+
+	
+
+def ver_noticias(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_noticias.html', dictionary)
+
+def ingresar_noticias(request):
+	if request.method == 'GET':
+		return render(request, 'ingresar_noticias.html')
+	elif request.method == 'POST':
+		form = NoticiasForm(request.POST, request.FILES)
+		if form.is_valid():
+			new_image=Noticias(
+				imagen =form.cleaned_data['imagen'],
+				titulo =form.cleaned_data['titulo'],
+				descripcion = form.cleaned_data['descripcion'],
+				fuente =form.cleaned_data['fuente']
+				)
+			new_image.save()
+			return redirect('ver_noticias')
+

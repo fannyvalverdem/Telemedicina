@@ -25,6 +25,14 @@ urlpatterns = [
 	url(r'^ingresar_info_medica/$', views.ingresar_info_medica, name='ingresar_info_medica'),
 
 	
+	url(r'^consejos_noticias/$', views.consejos_noticias, name='consejos_noticias'),
+	
+	url(r'^ingresar_noticias/$', views.ingresar_noticias, name='ingresar_noticias'),
+	url(r'^ver_noticias/$', views.ver_noticias, name='ver_noticias'),
+	url(r'^ingresar_consejos/$', views.ingresar_consejos, name='ingresar_consejos'),
+	url(r'^ver_consejos/$', views.ver_consejos, name='ver_consejos'),
+
+	
 	url(r'^cambiar_cuenta/$', views.cambiar_cuenta, name='cambiar_cuenta'),
 	url(r'^cuentas_vinculadas/$', views.cuentas_vinculadas, name='cuentas_vinculadas'),
 	url(r'^crear_grupo_familiar/$', views.crear_grupo_familiar, name='crear_grupo_familiar'),

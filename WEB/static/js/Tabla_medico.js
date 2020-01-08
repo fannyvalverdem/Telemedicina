@@ -440,3 +440,67 @@ $('#data_table_info_medica').DataTable({
         { width: 100, targets: 2},
     ],
 });
+
+
+$('#data_table_noticias').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/noticias/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "id"},
+        { data: "imagen"},
+        { data: "titulo"},
+        { data: "descripcion"},
+        { data: "fuente"},
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+    ],
+});
+
+
+$('#data_table_consejos').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/consejos/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "id"},
+        { data: "imagen"},
+        { data: "titulo"},
+        { data: "descripcion"},
+        { data: "fuente"},
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+    ],
+});

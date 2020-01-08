@@ -18,6 +18,9 @@ urlpatterns = [
 
 	url(r'^info_medica/$', views.InfoMedicaViewset.as_view(), name='info_medica_api'),
 
+	url(r'^consejos/$', views.ConsejosViewset.as_view(), name='consejos_api'),
+	url(r'^noticias/$', views.NoticiasViewset.as_view(), name='noticias_api'),
+
 
 	url(r'^medi_consulta/$', views.MedicamentosViewset.as_view(), name='medi_api'),
 	url(r'^recetar_consulta/$', views.RecetarMedicamentoViewset.as_view(), name='recetar_api'),

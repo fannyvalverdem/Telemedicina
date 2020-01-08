@@ -235,3 +235,13 @@ class InfoMedicaForm(forms.Form):
 	pulse = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Pulse '}))
 	glucosa = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Glucosa [mmol/l]'}))
 	colesterol = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Colesterol [mmol/l]'}))
+
+class NoticiasForm(forms.ModelForm):
+   class Meta:
+      model = Noticias
+      fields = ['imagen','titulo','descripcion','fuente']
+
+class ConsejosForm(forms.ModelForm):
+   class Meta:
+      model = Consejos
+      fields = ['imagen','titulo','descripcion','fuente']
