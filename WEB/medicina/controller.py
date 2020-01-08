@@ -24,10 +24,11 @@ def listar_meeting(usuario,token):
 	print(response.text)
 
 
-def add_meeting(usuario,nombre,fecha,hora,token):
+def add_meeting(usuario,nombre,fecha,hora,dia,token):
 	url = "https://api.zoom.us/v2/users/"+usuario+"/meetings"
-
-	payload = "{\"topic\":\""+nombre+"\",\"type\":\"2\",\"start_time\":\"["+fecha+" "+hora+"]\",\"duration\":\"15\",\"timezone\":\"America/Bogota\",\"recurrence\":{\"type\":\"2\",\"repeat_interval\":\"3\",\"weekly_days\":\"Lunes\"},\"settings\":{\"join_before_host\":\"false\",\"auto_recording\":\"local\",\"use_pmi\":\"true\"}}"
+	print(">>>>>>>>>"+fecha)
+	print(">>>>>>>>>"+hora)
+	payload = "{\"topic\":\""+nombre+"\",\"type\":\"8\",\"start_time\":\""+fecha+"T"+hora+"\",\"duration\":\"15\",\"timezone\":\"America/Bogota\",\"recurrence\":{\"type\":\"2\",\"repeat_interval\":\"1\",\"weekly_days\":\""+dia+"\",\"end_times\": \"12\"},\"settings\":{\"join_before_host\":\"false\",\"auto_recording\":\"local\",\"use_pmi\":\"true\"}}"
 
 	headers = {
 	    'content-type': "application/json",
@@ -35,8 +36,9 @@ def add_meeting(usuario,nombre,fecha,hora,token):
 	    }
 
 	response = requests.request("POST", url, data=payload, headers=headers)
-
-	print(response.text)
+	data_json=response.json()
+	#print(response.text)
+	return data_json
 
 
 def get_meeting(id_cita,token):
@@ -61,3 +63,37 @@ def add_user(email,nombre,apellido,token):
 	response = requests.request("POST", url, data=payload, headers=headers)
 
 	print(response.text)
+
+def crear_citas(token,horarios,fecha,email):
+	for horario in horarios:
+		entrada=horario.hora_entrada
+		salida=horario.hora_salida
+		minutos=datetime.timedelta(minutes=15)
+		actual=entrada
+		dia=horario.dias.nombre
+		dianum=0
+		if dia=='Domingo':
+			dianum='1'
+		if dia=='Lunes':
+			dianum='2'
+		if dia=='Martes':
+			dianum='3'
+		if dia=='Miercoles':
+			dianum='4'
+		if dia=='Jueves':
+			dianum='5'
+		if dia=='Viernes':
+			dianum='6'
+		if dia=='Sabado':
+			dianum='7'
+		today = date.today()
+		fecha = today.strftime("%Y-%m-%d")
+		actualstr=actual.strftime("%H:%M:%S")
+		add_meeting(email,'Cita',fecha,actualstr,dianum,token)
+		while(actual!=salida):
+			actual=(datetime.datetime.combine(datetime.date(1,1,1),actual) + minutos).time()
+			stractual=actual.strftime("%H:%M:%S")
+			add_meeting(email,'Cita',fecha,stractual,dianum,token)
+
+def guardar_citas(email,token):
+	data=listar_meeting(email,token)
