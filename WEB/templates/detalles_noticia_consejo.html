@@ -1,0 +1,28 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+
+
+{% block contenido %}
+
+{% if object_list %}
+{% for detalles in object_list %}
+      
+<div class="col-12">
+    <div class="row">
+		<section>
+			<h1>{{detalles.titulo}}</h1>
+			<a href={{detalles.fuente}}>
+				<div class="col-12">
+                  <img src={{consejos.imagen}}>
+                </div>
+			</a>
+		  	<p>
+				{{detalles.descripcion}}
+			</p>
+			<div class="col-12">{{detalles.fuente}}</div>
+		</section>
+	</div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
