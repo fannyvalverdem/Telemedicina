@@ -1014,3 +1014,39 @@ def resumen_consulta(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return redirect('cuentas_vinculadas')
+
+def ver_info_medica(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_info_medica.html', dictionary)
+
+def ingresar_info_medica(request):
+	if request.method == 'POST':
+		print("POST")
+	form = InfoMedicaForm(request.POST)
+	
+	#checking the form is valid or not 
+	if form.is_valid():
+		peso =form.cleaned_data['peso']
+		sys =form.cleaned_data['sys']
+		dia = form.cleaned_data['dia']
+		pulse =form.cleaned_data['pulse']
+		glucosa = form.cleaned_data['glucosa']
+		colesterol = form.cleaned_data['colesterol']
+
+		paquete=Info_Medica(
+			peso=peso,
+			sys=sys,
+			dia=dia,
+			pulse=pulse,
+			glucosa=glucosa,
+			colesterol=colesterol
+		)
+
+		paquete.save()
+		return redirect('ver_info_medica') 
+	else:
+	#creating a new form
+		form = InfoMedicaForm()
+			#returning form 
+	return render(request, 'ingresar_info_manual.html', {'form':form});

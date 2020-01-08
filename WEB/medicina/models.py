@@ -165,3 +165,10 @@ class Publicidad(models.Model):
 	ciudad=models.CharField(max_length=250,null=True)
 	direccion=models.CharField(max_length=250,null=True)
 		
+class Info_Medica(models.Model):	
+	peso=models.FloatField()
+	sys=models.FloatField()
+	dia=models.FloatField()
+	pulse= models.IntegerField()
+	glucosa=models.FloatField()
+	colesterol=models.FloatField()
