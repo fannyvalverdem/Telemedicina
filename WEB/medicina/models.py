@@ -172,3 +172,11 @@ class Info_Medica(models.Model):
 	pulse= models.IntegerField()
 	glucosa=models.FloatField()
 	colesterol=models.FloatField()
+
+class Citas_Medico(models.Model):
+	m_id=models.IntegerField()
+	m_url=models.CharField(max_length=300,null=True)
+	m_duration=models.IntegerField()
+	fecha=models.DateField()
+	hora=models.TimeField()
+	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)

@@ -862,14 +862,13 @@ def auth_zoom(request):
     doctor=Doctor.objects.last()
     usuario=doctor.user_id
     persona=usuario.persona_id
-    print(doctor.id)
+    #print(doctor.id)
     horarios=Horario.objects.filter(doctor_id =doctor.id)
-    print(horarios)
-    
-    #crear_citas(token,horarios,fecha,'ivinces@espol.edu.ec')
-    guardar_citas('ivinces@espol.edu.ec',token)
-    
-    return Response(json.loads(response.text))
+    #print(horarios)
+    print(usuario.email)
+    crear_citas(token,horarios,'ivinces@espol.edu.ec',doctor)
+    #guardar_citas('ivinces@espol.edu.ec',token,doctor)
+    return redirect('index_admin')
 
 def zoom_redirect(request):
 	return redirect('https://zoom.us/oauth/authorize?response_type=code&client_id=WgCo2Mo8RkupkAANM8Wxdg&redirect_uri=http://127.0.0.1:8000/auth_zoom')

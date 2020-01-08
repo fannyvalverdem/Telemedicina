@@ -1,5 +1,9 @@
 import requests,json
 from django.shortcuts import redirect
+from .models import *
+from datetime import date, timedelta
+import time
+import datetime
 
 def Add(entidad,registro):
 	response=requests.post('http://127.0.0.1:8000/api/'+entidad+'/',registro)
@@ -21,13 +25,13 @@ def listar_meeting(usuario,token):
 	querystring = {"page_number":"1","page_size":"30","type":"upcoming"}
 
 	response = requests.request("GET", url, headers=headers, params=querystring)
-	print(response.text)
+	#print(response.text)
+	data_json=response.json()
+	return data_json
 
 
 def add_meeting(usuario,nombre,fecha,hora,dia,token):
 	url = "https://api.zoom.us/v2/users/"+usuario+"/meetings"
-	print(">>>>>>>>>"+fecha)
-	print(">>>>>>>>>"+hora)
 	payload = "{\"topic\":\""+nombre+"\",\"type\":\"8\",\"start_time\":\""+fecha+"T"+hora+"\",\"duration\":\"15\",\"timezone\":\"America/Bogota\",\"recurrence\":{\"type\":\"2\",\"repeat_interval\":\"1\",\"weekly_days\":\""+dia+"\",\"end_times\": \"12\"},\"settings\":{\"join_before_host\":\"false\",\"auto_recording\":\"local\",\"use_pmi\":\"true\"}}"
 
 	headers = {
@@ -36,9 +40,6 @@ def add_meeting(usuario,nombre,fecha,hora,dia,token):
 	    }
 
 	response = requests.request("POST", url, data=payload, headers=headers)
-	data_json=response.json()
-	#print(response.text)
-	return data_json
 
 
 def get_meeting(id_cita,token):
@@ -63,8 +64,40 @@ def add_user(email,nombre,apellido,token):
 	response = requests.request("POST", url, data=payload, headers=headers)
 
 	print(response.text)
+    
+def guardar_citas(email,token,doctor):
+	data=listar_meeting(email,token)
+	#print(data)
+	meet=data['meetings']
+	#print(meet)
 
-def crear_citas(token,horarios,fecha,email):
+	for m in meet:
+		m_id=m['id']
+		m_url=m['join_url']
+		m_duration=m['duration']
+		m_starttime=m['start_time']
+		fecha_hora=m_starttime.split('T')
+		fecha=fecha_hora[0]
+		hora=(fecha_hora[1].split('Z'))[0]
+		fecha_completa=fecha+' '+hora
+		horas_resta=datetime.timedelta(hours=5)
+		prueba_hora=datetime.datetime.strptime(fecha_completa, '%Y-%m-%d %H:%M:%S')
+		actual=prueba_hora - horas_resta
+		m_fecha=actual.date()
+		m_hora=actual.time()
+		meeting=Citas_Medico(
+			m_id=m_id,
+			m_url=m_url,
+			m_duration=m_duration,
+			fecha=m_fecha,
+			hora=m_hora,
+			doctor=doctor
+		)
+
+		meeting.save()
+
+
+def crear_citas(token,horarios,email,doctor):
 	for horario in horarios:
 		entrada=horario.hora_entrada
 		salida=horario.hora_salida
@@ -95,5 +128,4 @@ def crear_citas(token,horarios,fecha,email):
 			stractual=actual.strftime("%H:%M:%S")
 			add_meeting(email,'Cita',fecha,stractual,dianum,token)
 
-def guardar_citas(email,token):
-	data=listar_meeting(email,token)
+	guardar_citas(email,token,doctor)
