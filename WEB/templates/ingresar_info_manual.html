@@ -1,0 +1,47 @@
+{% extends 'menu_info_medica.html' %}
+{% load static %}
+
+{% block contenido %}
+<div id="titulo" class="row">
+	<h2>Ingresar Información Manual</h2>
+	<br>
+</div>
+<br>
+<div class="row">
+	<div class="col-xl-12">
+		{% load crispy_forms_tags %}
+		<form action="" method="post">
+			<div class="row">
+				{% csrf_token %}
+				<div class="col-xl-3">
+					
+					{{ form.peso|as_crispy_field }}
+					
+				</div>
+				<div class="col-xl-1">
+					
+				</div>
+				<div class="col-xl-3">
+					{{ form.sys|as_crispy_field }}
+					{{ form.dia|as_crispy_field }}
+					{{ form.pulse|as_crispy_field }}
+					
+				</div>
+				<div class="col-xl-1">
+					
+				</div>
+				<div class="col-xl-3">
+					{{ form.glucosa|as_crispy_field }}
+					{{ form.colesterol|as_crispy_field }}
+					
+				</div>
+				</div>
+			<button type="submit" id="btn-guardar">Guardar</button>
+		</form>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+	<script src="{% static 'js/campos_horarios.js' %}" type="text/javascript"></script>
+{% endblock %}

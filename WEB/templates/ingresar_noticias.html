@@ -1,0 +1,56 @@
+{% extends 'menu_consejos.html' %}
+{% load staticfiles %}
+{% block contenido %}
+    {% load crispy_forms_tags %}
+    <form action="{% url 'ingresar_noticias' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-xl-6"> 
+          <p>
+            <input id="id_image" type="file" accept="image/*" name="imagen" required>
+          </p>
+        </div>
+        
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xl-1">
+          <p>Titulo:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_titulo" type="text" name="titulo" required></p>
+        </div>
+        <div class="col-xl-1">
+        </div>
+        <div class="col-xl-1">
+          <p>Descripcion:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_descripcion" type="text" name="descripcion" required></p>
+        </div>
+
+
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-xl-1">
+          <p>Fuente:</p>
+        </div>
+      
+        <div class="col-xl-4">
+          <p><input id="id_fuente" type="text" name="fuente" required></p>
+        </div>
+         <div class="col-xl-1">
+        </div>
+        
+      
+      </div>
+      <br>
+      <br>
+      <br>
+
+      <button type="submit" id="btn-guardar">Guardar</button>
+    </form>
+{% endblock %}

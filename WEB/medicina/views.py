@@ -11,7 +11,7 @@ from django.contrib.auth import login as auth_login
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
-from .controller import Listar, Add, listar_meeting,add_meeting
+from .controller import Listar, Add, listar_meeting,add_meeting,add_user,crear_citas,guardar_citas
 import requests,json
 from .utility import *
 from django.http import QueryDict
@@ -21,6 +21,10 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+
+from datetime import date
+import time
+import datetime
 
 
 import base64
@@ -302,7 +306,7 @@ def publicidad_ingresar(request):
 				direccion=form.cleaned_data["direccion"]
 				)
 			new_image.save()
-			return HttpResponseRedirect('/imagenes/publicidad/')
+			return redirect('index_admin')
 
 
 def perfil(request):
@@ -764,7 +768,7 @@ def ingresar_horario(request):
 
 			horario7.save()
 
-		return redirect('index_admin')
+		return redirect('prueba_auth')
 	else:
 	#creating a new form
 		form = HorarioForm()
@@ -854,9 +858,17 @@ def auth_zoom(request):
     response = requests.request("POST", url, data=payload, headers=headers)
     data_json=response.json()
     #print(data_json['access_token'])
-    #add_meeting('ivinces@espol.edu.ec','Cita','29/12/2019','17:00',data_json['access_token'])
-    listar_meeting('ivinces@espol.edu.ec',data_json['access_token'])
-    return Response(json.loads(response.text))
+    token=data_json['access_token']
+    doctor=Doctor.objects.last()
+    usuario=doctor.user_id
+    persona=usuario.persona_id
+    #print(doctor.id)
+    horarios=Horario.objects.filter(doctor_id =doctor.id)
+    #print(horarios)
+    print(usuario.email)
+    crear_citas(token,horarios,'ivinces@espol.edu.ec',doctor)
+    #guardar_citas('ivinces@espol.edu.ec',token,doctor)
+    return redirect('index_admin')
 
 def zoom_redirect(request):
 	return redirect('https://zoom.us/oauth/authorize?response_type=code&client_id=WgCo2Mo8RkupkAANM8Wxdg&redirect_uri=http://127.0.0.1:8000/auth_zoom')
@@ -1001,3 +1013,86 @@ def resumen_consulta(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return redirect('cuentas_vinculadas')
+
+def ver_info_medica(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_info_medica.html', dictionary)
+
+def ingresar_info_medica(request):
+	if request.method == 'POST':
+		print("POST")
+	form = InfoMedicaForm(request.POST)
+	
+	#checking the form is valid or not 
+	if form.is_valid():
+		peso =form.cleaned_data['peso']
+		sys =form.cleaned_data['sys']
+		dia = form.cleaned_data['dia']
+		pulse =form.cleaned_data['pulse']
+		glucosa = form.cleaned_data['glucosa']
+		colesterol = form.cleaned_data['colesterol']
+
+		paquete=Info_Medica(
+			peso=peso,
+			sys=sys,
+			dia=dia,
+			pulse=pulse,
+			glucosa=glucosa,
+			colesterol=colesterol
+		)
+
+		paquete.save()
+		return redirect('ver_info_medica') 
+	else:
+	#creating a new form
+		form = InfoMedicaForm()
+			#returning form 
+	return render(request, 'ingresar_info_manual.html', {'form':form});
+
+def consejos_noticias(request):
+	context= {'object_list': Listar("consejos"),'object_list2': Listar("noticias")}
+	return render(request, 'consejos_noticias.html', context)
+
+def ver_consejos(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_consejos.html', dictionary)
+
+def ingresar_consejos(request):
+	if request.method == 'GET':
+		return render(request, 'ingresar_consejos.html')
+	elif request.method == 'POST':
+		form = ConsejosForm(request.POST, request.FILES)
+		if form.is_valid():
+			new_image=Consejos(
+				imagen =form.cleaned_data['imagen'],
+				titulo =form.cleaned_data['titulo'],
+				descripcion = form.cleaned_data['descripcion'],
+				fuente =form.cleaned_data['fuente']
+				)
+			new_image.save()
+			return redirect('ver_consejos')
+
+	
+
+def ver_noticias(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_noticias.html', dictionary)
+
+def ingresar_noticias(request):
+	if request.method == 'GET':
+		return render(request, 'ingresar_noticias.html')
+	elif request.method == 'POST':
+		form = NoticiasForm(request.POST, request.FILES)
+		if form.is_valid():
+			new_image=Noticias(
+				imagen =form.cleaned_data['imagen'],
+				titulo =form.cleaned_data['titulo'],
+				descripcion = form.cleaned_data['descripcion'],
+				fuente =form.cleaned_data['fuente']
+				)
+			new_image.save()
+			return redirect('ver_noticias')
+

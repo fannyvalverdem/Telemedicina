@@ -165,3 +165,32 @@ class Publicidad(models.Model):
 	ciudad=models.CharField(max_length=250,null=True)
 	direccion=models.CharField(max_length=250,null=True)
 		
+class Info_Medica(models.Model):	
+	peso=models.FloatField()
+	sys=models.FloatField()
+	dia=models.FloatField()
+	pulse= models.IntegerField()
+	glucosa=models.FloatField()
+	colesterol=models.FloatField()
+
+
+class Noticias(models.Model):
+	imagen=models.ImageField(upload_to = 'static/imagenes', default='static/imagenes/no-img.jpg')
+	titulo=models.CharField(max_length=250)
+	descripcion=models.TextField()
+	fuente=models.CharField(max_length=250)
+
+class Consejos(models.Model):
+	imagen=models.ImageField(upload_to = 'static/imagenes', default='static/imagenes/no-img.jpg')
+	titulo=models.CharField(max_length=250)
+	descripcion=models.TextField()
+	fuente=models.CharField(max_length=250)
+
+class Citas_Medico(models.Model):
+	m_id=models.IntegerField()
+	m_url=models.CharField(max_length=300,null=True)
+	m_duration=models.IntegerField()
+	fecha=models.DateField()
+	hora=models.TimeField()
+	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
+

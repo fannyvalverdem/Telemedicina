@@ -129,3 +129,15 @@ class RecetarMedicamentoViewset(generics.ListAPIView):
 class ExamenesViewset(generics.ListAPIView):
 	queryset = models.Examenes.objects.all()
 	serializer_class = serializers.ExamenesSerializer
+
+class InfoMedicaViewset(generics.ListAPIView):
+	queryset = models.Info_Medica.objects.all()
+	serializer_class = serializers.InfoMedicaSerializer
+
+class ConsejosViewset(generics.ListAPIView):
+	queryset = models.Consejos.objects.all()
+	serializer_class = serializers.ConsejosSerializer
+
+class NoticiasViewset(generics.ListAPIView):
+	queryset = models.Noticias.objects.all()
+	serializer_class = serializers.NoticiasSerializer
