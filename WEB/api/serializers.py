@@ -173,3 +173,10 @@ class NoticiasSerializer(serializers.ModelSerializer):
 	class Meta:
 		model=models.Noticias
 		fields=("id","imagen","titulo","descripcion","fuente")
+
+class MedicoFavSerializer(serializers.ModelSerializer):
+	medico=MatchEspecialidadSerializer()
+	paciente=PacienteSerializer()
+	class Meta:
+		model=models.Medico_Favorito
+		fields=("medico","paciente")

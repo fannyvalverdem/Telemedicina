@@ -195,3 +195,7 @@ class Citas_Medico(models.Model):
 	hora=models.TimeField()
 	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
+class Medico_Favorito(models.Model):
+	medico=models.ForeignKey(MatchEspecialidades, null=True, blank=True, on_delete=models.CASCADE)
+	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
+

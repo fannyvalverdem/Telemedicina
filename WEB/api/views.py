@@ -141,3 +141,7 @@ class ConsejosViewset(generics.ListAPIView):
 class NoticiasViewset(generics.ListAPIView):
 	queryset = models.Noticias.objects.all()
 	serializer_class = serializers.NoticiasSerializer
+
+class MedicoFavViewset(generics.ListAPIView):
+	queryset = models.Medico_Favorito.objects.all()
+	serializer_class = serializers.MedicoFavSerializer
