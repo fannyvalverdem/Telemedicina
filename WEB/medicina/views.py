@@ -1099,7 +1099,19 @@ def ingresar_noticias(request):
 			return redirect('ver_noticias')
 
 def paquetes_inicio(request):
-	data=Listar("paquete")
+	last_tres = Paquete.objects.order_by('-id')[:3]
+	data=[]
+	for paque in last_tres:
+		paque_id=paque.id
+		nombre=paque.nombre
+		descripcion=paque.descripcion
+		citas=paque.citas
+		duracion=paque.duracion
+		precio=paque.precio
+		paquete={'id':paque_id,'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio}
+		data.append(paquete)
+		print(data)
+
 	context= {'object_list': data}
 	return render(request, 'paquetes_inicio.html', context)
 
@@ -1124,19 +1136,20 @@ def ver_mas_noticias(request):
 	data = [{'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}]
 	context= {'object_list':data}
 	return render(request,'detalles_noticia_consejo.html',context)
-	
+
 def paquete_pago(request):
 	sku = request.GET.get('id')
 	print(sku)
 	paque=Paquete.objects.get(id=sku)
 	print(paque)
+	paque_id=paque.id
 	nombre=paque.nombre
 	descripcion=paque.descripcion
 	citas=paque.citas
 	duracion=paque.duracion
 	precio=paque.precio
 	
-	data = [{'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio}]
+	data = [{'id':paque_id,'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio}]
 	context= {'object_list':data}
 	return render(request,'comprar_paquete.html',context)
 
@@ -1150,6 +1163,7 @@ def ver_medico_fav(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'ver_medico_fav.html', dictionary)
 
+<<<<<<< HEAD
 
 def ingresar_fav(request):
 	current_user = request.user
@@ -1172,3 +1186,50 @@ def ingresar_fav(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'ver_medico_fav.html', dictionary)
+
+def paquete_confirmacion(request):
+	sku = request.GET.get('id')
+	paque=Paquete.objects.get(id=sku)
+
+	current_user = request.user
+	user_ac_id=current_user.id
+	paciente=Paciente.objects.get(user_id=user_ac_id)
+	
+	paque_pac=Paquete_Paciente(
+		citas_disponibles=paque.citas,
+		paciente=paciente,
+		paquete=paque
+		)
+	paque_pac.save()
+
+	nombre=paque.nombre
+	descripcion=paque.descripcion
+	citas=paque.citas
+	duracion=paque.duracion
+	precio=paque.precio
+	
+	data = [{'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio}]
+	context= {'object_list':data}
+	
+	return render(request,'confirmacion_paquete.html',context)
+
+def mis_paquetes(request):
+	current_user = request.user
+	user_ac_id=current_user.id
+	paciente=Paciente.objects.get(user_id=user_ac_id)
+	paque_pac=Paquete_Paciente.objects.filter(paciente=paciente.id)
+	data=[]
+	for paque in paque_pac:
+		nombre=paque.paquete.nombre
+		descripcion=paque.paquete.descripcion
+		citas=paque.paquete.citas
+		duracion=paque.paquete.duracion
+		precio=paque.paquete.precio
+		citas_disponibles=paque.citas_disponibles
+		paquete={'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio,'faltantes':citas_disponibles}
+		data.append(paquete)
+		print(data)
+
+	context= {'object_list':data}
+	return render(request,'mis_paquetes.html',context)
+
