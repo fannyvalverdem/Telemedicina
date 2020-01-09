@@ -210,3 +210,4 @@ class Pagos_Doctor(models.Model):
 	precio=models.FloatField()
 	estado=models.CharField(max_length=200)
 	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
+	

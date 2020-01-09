@@ -528,13 +528,21 @@ $('#data_table_ver_medico_fav').DataTable({
     },
     
     "columns": [
-        { data: "medico.doctor.identificador_medico"},
+        { data: "imagen"},
         { data: "medico.doctor.user_id.persona_id.nombre"},
         { data: "medico.doctor.user_id.persona_id.apellido"},
         { data: "medico.especialidad.nombre"},
     ],
     columnDefs: [
-        { width: 100, targets: 0},
+        { width: 100, targets: 0, render: function(data) {
+            var image = '';
+            if (data == null){
+                image = `<img src="https://via.placeholder.com/300x300" width="100%">`;
+            } else {
+                image = '<img src="' + data + '" width="100%">';
+            }
+            return image;
+        }},
         { width: 100, targets: 1},
         { width: 100, targets: 2},
         { width: 100, targets: 3},
@@ -547,7 +555,7 @@ $('#data_table_ingresar_medico_fav').DataTable({
     "ajax": 
         {
         "method": "GET",
-        "url": "/api/medico_favorito/",
+        "url": "/api/consulta/",
         "dataSrc": "",
         "error": function(xhr, status, error) {
             console.log("readyState: " + xhr.readyState);
@@ -560,22 +568,28 @@ $('#data_table_ingresar_medico_fav').DataTable({
     },
     
     "columns": [
-        { data: "medico.doctor.identificador_medico"},
-        { data: "medico.doctor.user_id.persona_id.nombre"},
-        { data: "medico.doctor.user_id.persona_id.apellido"},
-        { data: "medico.especialidad.nombre"},
-        { data: "aceptar"},
+        { data: "imagen"},
+        { data: "doctor_id.user_id.persona_id.nombre"},
+        { data: "doctor_id.user_id.persona_id.apellido"},
+        { data: "detalle.calificacion"},
+        { data: "doctor_id.id"},
     ],
     columnDefs: [
-        { width: 100, targets: 0},
+        { width: 100, targets: 0, render: function(data) {
+            var image = '';
+            if (data == null){
+                image = `<img src="https://via.placeholder.com/300x300" width="100%">`;
+            } else {
+                image = '<img src="' + data + '" width="100%">';
+            }
+            return image;
+        }},
         { width: 100, targets: 1},
         { width: 100, targets: 2},
-        { width: 150, className: "text-center", targets: 3, render: function(data){
+        { width: 100, targets: 3},
+        { width: 150, className: "text-center", targets: 4, render: function(data){
             
-            
-            //alert(doctor_id['id'])
-
-            return '<a href="/ingresar_fav/" class="btn btn-primary" role="button"></a>'
+            return '<a href="/ingresar_fav/?id=' + data + '" class="btn btn-primary" role="button"></a>'
         }},
     ],
 });
