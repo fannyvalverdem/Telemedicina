@@ -88,7 +88,7 @@ class DetalleConsultaSerializer(serializers.ModelSerializer):
 	
 	class Meta:
 		model= models.Detalle_Consulta
-		fields=("fecha_reser","fecha_prog","precio","calificacion")
+		fields=("fecha_reser","fecha_prog","precio","hora","calificacion")
 
 class ConsultaSerializer(serializers.ModelSerializer):
 	doctor_id=MedicoSerializer()
@@ -181,3 +181,9 @@ class MedicoFavSerializer(serializers.ModelSerializer):
 	class Meta:
 		model=models.Medico_Favorito
 		fields=("medico","paciente")
+
+class PagosMedicoSerializer(serializers.ModelSerializer):
+	doctor=MedicoSerializer()
+	class Meta:
+		model= models.Pagos_Doctor
+		fields=("id","fecha","hora","precio","estado","doctor")

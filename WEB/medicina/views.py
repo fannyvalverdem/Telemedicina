@@ -1235,3 +1235,8 @@ def valores_cobrar(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'valores_cobrar.html', dictionary)
+
+def pagos_realizado(request):	
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'pagos_realizados.html', dictionary)

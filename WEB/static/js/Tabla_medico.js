@@ -116,7 +116,12 @@ $('#data_table_tarifa').DataTable({
 
 $('#data_table_citas').DataTable({
     "destroy": true,
-    
+    rowCallback: function( row, data, index ) {
+        var id_doc=String($('#id_usuario_doc').html())
+        if (data['estado'] == "agendada" || data['doctor_id']['user_id']['email']!=id_doc) {
+            $(row).hide();
+        }
+    },
     "ajax": 
         {
         "method": "GET",
@@ -579,14 +584,14 @@ $('#data_table_cobrar').DataTable({
     "destroy": true,
     rowCallback: function( row, data, index ) {
         var id_doc=String($('#id_usuario_doc').html())
-        if (data['consulta_id']['estado'] == "agendada" || data['consulta_id']['doctor_id']['user_id']['username']!=id_doc) {
+        if (data['estado'] == "pagado" || data['doctor']['user_id']['email']!=id_doc) {
             $(row).hide();
         }
     },
     "ajax": 
         {
         "method": "GET",
-        "url": "/api/consulta/",
+        "url": "/api/pagos_medico/",
         "dataSrc": "",
         "error": function(xhr, status, error) {
             console.log("readyState: " + xhr.readyState);
@@ -599,18 +604,51 @@ $('#data_table_cobrar').DataTable({
     },
 
         "columns": [
-            { data: "consulta_id.paciente_id.user_id.persona_id.nombre"},
-            { data: "consulta_id.paciente_id.user_id.persona_id.apellido"},
-            { data: "fecha_reser"},
-            { data: "fecha_prog"},
+            { data: "fecha"},
+            { data: "hora"},
             { data: "precio"}
         ],
         columnDefs: [
             { width: 100, targets: 0},
             { width: 150, targets: 1},
             { width: 150, targets: 2},
-            { width: 150, targets: 3},
-            { width: 150, targets: 4},
+        ],
+    
+});
+
+
+$('#data_table_pagos_medico').DataTable({
+    "destroy": true,
+    rowCallback: function( row, data, index ) {
+        var id_doc=String($('#id_usuario_doc').html())
+        if (data['estado'] == "pendiente" || data['doctor']['user_id']['email']!=id_doc) {
+            $(row).hide();
+        }
+    },
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/pagos_medico/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+
+        "columns": [
+            { data: "fecha"},
+            { data: "hora"},
+            { data: "precio"}
+        ],
+        columnDefs: [
+            { width: 100, targets: 0},
+            { width: 150, targets: 1},
+            { width: 150, targets: 2},
         ],
     
 });

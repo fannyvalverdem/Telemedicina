@@ -203,3 +203,10 @@ class Paquete_Paciente(models.Model):
 	citas_disponibles=models.IntegerField(default=0)
 	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 	paquete=models.ForeignKey(Paquete, null=True, blank=True, on_delete=models.CASCADE)
+
+class Pagos_Doctor(models.Model):
+	fecha=models.DateField()
+	hora=models.TimeField()
+	precio=models.FloatField()
+	estado=models.CharField(max_length=200)
+	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)

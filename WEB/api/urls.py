@@ -23,6 +23,8 @@ urlpatterns = [
 
 	url(r'^medico_favorito/$', views.MedicoFavViewset.as_view(), name='medico_favorito_api'),
 
+	url(r'^pagos_medico/$', views.PagoDoctorViewset.as_view(), name='pagos_medico_api'),
+
 
 	url(r'^medi_consulta/$', views.MedicamentosViewset.as_view(), name='medi_api'),
 	url(r'^recetar_consulta/$', views.RecetarMedicamentoViewset.as_view(), name='recetar_api'),
