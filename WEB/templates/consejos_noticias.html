@@ -50,7 +50,7 @@ div[id^="pictu"]{
                 <a href="/ver_mas_consejo/?id={{ consejos.id }}" name="consejos.id">
                     
                     <div id="pictu">
-                      <img src={{consejos.imagen}}>
+                      <img src="http://127.0.0.1:8000/{{consejos.imagen}}" width="100%">
                     </div>
                     <div id="consejo_inicio" class="info">
 
@@ -84,10 +84,10 @@ div[id^="pictu"]{
             {% if object_list2 %}
             {% for noticias in object_list2 %}
             <article id=art_inicio>
-              <a href="/ver_mas_noticias/?id={{ noticias.id }}" name="noticias.id">
+              <a href="/ver_mas_noticias/?ids={{ noticias.id }}" name="noticias.id">
                     
                     <div id="pictu">
-                      <img src={{noticias.imagen}}>
+                      <img src="http://127.0.0.1:8000/{{noticias.imagen}}" width="100%">
                     </div>
                     <div id="noticia_inicio" class="info">
 

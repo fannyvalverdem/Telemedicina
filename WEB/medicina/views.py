@@ -1059,7 +1059,7 @@ def consejos_noticias(request):
 	data_noticia=[]
 	for conse in last_tres:		
 		ids=conse.id
-		imagen=conse.imagen
+		imagen=str(conse.imagen)
 		titulo=conse.titulo
 		descripcion=conse.descripcion
 		fuente=conse.fuente
@@ -1067,12 +1067,12 @@ def consejos_noticias(request):
 		data_consejo.append(consejo)
 	for noti in last_tres2:		
 		ids=noti.id
-		imagen=noti.imagen
+		imagen=str(noti.imagen)
 		titulo=noti.titulo
 		descripcion=noti.descripcion
 		fuente=noti.fuente
 		noticia = {'id':ids,'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}
-		data_noticia.append(consejo)
+		data_noticia.append(noticia)
 	context= {'object_list': data_consejo,'object_list2': data_noticia}
 	return render(request, 'consejos_noticias.html', context)
 
@@ -1139,9 +1139,12 @@ def paquetes_inicio(request):
 	return render(request, 'paquetes_inicio.html', context)
 
 def ver_mas_consejo(request):
+
 	sku = request.GET.get('id')
+	print(sku)
 	conse=Consejos.objects.get(id=sku)
-	imagen=conse.imagen
+	imagen=str(conse.imagen)
+	print(imagen,"<<<<<<<<<<")
 	titulo=conse.titulo
 	descripcion=conse.descripcion
 	fuente=conse.fuente
@@ -1150,9 +1153,10 @@ def ver_mas_consejo(request):
 	return render(request,'detalles_noticia_consejo.html',context)
 
 def ver_mas_noticias(request):
-	sku = request.GET.get('id')
+	sku = request.GET.get('ids')
 	conse=Noticias.objects.get(id=sku)
-	imagen=conse.imagen
+	imagen=str(conse.imagen)
+	print(imagen,"<<<<<<<<<<")
 	titulo=conse.titulo
 	descripcion=conse.descripcion
 	fuente=conse.fuente
