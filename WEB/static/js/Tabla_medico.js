@@ -435,6 +435,10 @@ $('#data_table_info_medica').DataTable({
         { width: 100, targets: 0},
         { width: 100, targets: 1},
         { width: 100, targets: 2},
+        { width: 100, targets: 3},
+        { width: 100, targets: 4},
+        { width: 100, targets: 5},
+        { width: 100, targets: 6},
     ],
 });
 
@@ -467,6 +471,8 @@ $('#data_table_noticias').DataTable({
         { width: 100, targets: 0},
         { width: 100, targets: 1},
         { width: 100, targets: 2},
+        { width: 100, targets: 3},
+        { width: 100, targets: 4},
     ],
 });
 
@@ -499,5 +505,74 @@ $('#data_table_consejos').DataTable({
         { width: 100, targets: 0},
         { width: 100, targets: 1},
         { width: 100, targets: 2},
+        { width: 100, targets: 3},
+        { width: 100, targets: 4},
+    ],
+});
+
+$('#data_table_ver_medico_fav').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/medico_favorito/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "medico.doctor.identificador_medico"},
+        { data: "medico.doctor.user_id.persona_id.nombre"},
+        { data: "medico.doctor.user_id.persona_id.apellido"},
+        { data: "medico.especialidad.nombre"},
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+        { width: 100, targets: 3},
+    ],
+});
+
+$('#data_table_ingresar_medico_fav').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/medico_favorito/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "medico.doctor.identificador_medico"},
+        { data: "medico.doctor.user_id.persona_id.nombre"},
+        { data: "medico.doctor.user_id.persona_id.apellido"},
+        { data: "medico.especialidad.nombre"},
+        { data: "aceptar"},
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+        { width: 100, targets: 3},
+        { width: 150, className: "text-center", targets: 4, render: function(data){
+            return `<a href="/confirmacion_cita/" class="btn btn-primary" role="button"></a>
+                 `
+        }},
     ],
 });

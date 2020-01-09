@@ -1123,3 +1123,13 @@ def ver_mas_noticias(request):
 	data = [{'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}]
 	context= {'object_list':data}
 	return render(request,'detalles_noticia_consejo.html',context)
+
+def ingresar_medico_fav(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ingresar_medico_fav', dictionary)
+
+def ver_medico_fav(request):	
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_medico_fav.html', dictionary)
