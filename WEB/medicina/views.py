@@ -1231,3 +1231,7 @@ def mis_paquetes(request):
 	context= {'object_list':data}
 	return render(request,'mis_paquetes.html',context)
 
+def valores_cobrar(request):	
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'valores_cobrar.html', dictionary)
