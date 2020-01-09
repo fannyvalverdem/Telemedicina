@@ -1053,8 +1053,31 @@ def ingresar_info_medica(request):
 	return render(request, 'ingresar_info_manual.html', {'form':form});
 
 def consejos_noticias(request):
-	context= {'object_list': Listar("consejos"),'object_list2': Listar("noticias")}
+	last_tres = Consejos.objects.order_by('-id')[:3]
+	last_tres2 = Noticias.objects.order_by('-id')[:3]
+	data_consejo=[]
+	data_noticia=[]
+	for conse in last_tres:		
+		ids=conse.id
+		imagen=conse.imagen
+		titulo=conse.titulo
+		descripcion=conse.descripcion
+		fuente=conse.fuente
+		consejo = {'id':ids,'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}
+		data_consejo.append(consejo)
+	for noti in last_tres2:		
+		ids=noti.id
+		imagen=noti.imagen
+		titulo=noti.titulo
+		descripcion=noti.descripcion
+		fuente=noti.fuente
+		noticia = {'id':ids,'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}
+		data_noticia.append(consejo)
+	context= {'object_list': data_consejo,'object_list2': data_noticia}
 	return render(request, 'consejos_noticias.html', context)
+
+
+
 
 def ver_consejos(request):
 	dictionary = dict(request=request) 

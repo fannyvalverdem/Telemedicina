@@ -199,7 +199,3 @@ class Medico_Favorito(models.Model):
 	medico=models.ForeignKey(MatchEspecialidades, null=True, blank=True, on_delete=models.CASCADE)
 	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 
-class Paquete_Paciente(models.Model):
-	citas_disponibles=models.IntegerField(default=0)
-	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
-	paquete=models.ForeignKey(Paquete, null=True, blank=True, on_delete=models.CASCADE)
