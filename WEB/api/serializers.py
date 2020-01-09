@@ -84,19 +84,20 @@ class HorarioSerializer(serializers.ModelSerializer):
 		model= models.Horario
 		fields=("hora_entrada","hora_salida","dias","doctor")
 
+class DetalleConsultaSerializer(serializers.ModelSerializer):
+	
+	class Meta:
+		model= models.Detalle_Consulta
+		fields=("fecha_reser","fecha_prog","precio","calificacion")
 
 class ConsultaSerializer(serializers.ModelSerializer):
 	doctor_id=MedicoSerializer()
 	paciente_id=PacienteSerializer()
+	detalle=DetalleConsultaSerializer()
 	class Meta:
 		model= models.Consulta
-		fields=("estado","paciente_id","doctor_id")
+		fields=("id","estado","paciente_id","doctor_id","detalle")
 
-class DetalleConsultaSerializer(serializers.ModelSerializer):
-	consulta_id=ConsultaSerializer()
-	class Meta:
-		model= models.Detalle_Consulta
-		fields=("fecha_reser","fecha_prog","precio","calificacion","consulta_id")
 
 #class RecetaSerializer(serializers.ModelSerializer):
 #	class Meta:

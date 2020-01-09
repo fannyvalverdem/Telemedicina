@@ -1143,9 +1143,32 @@ def paquete_pago(request):
 def ingresar_medico_fav(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
-	return render(request,'ingresar_medico_fav', dictionary)
+	return render(request,'ingresar_medico_fav.html', dictionary)
 
 def ver_medico_fav(request):	
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_medico_fav.html', dictionary)
+
+
+def ingresar_fav(request):
+	current_user = request.user
+
+	user_ac_id=current_user.id
+	usuario=Usuario.objects.get(id=user_ac_id)
+	paciente=Paciente.objects.get(user_id=usuario)
+	print(paciente)
+
+	sku = request.GET.get('id')
+	doc=Doctor.objects.get(id=sku)
+	match_esp=MatchEspecialidades.objects.get(doctor=doc)
+
+	med_fav=Medico_Favorito(
+		medico =match_esp,
+		paciente =paciente
+		)
+	med_fav.save()
+	#redirect('ver_medico_fav')
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'ver_medico_fav.html', dictionary)

@@ -35,6 +35,7 @@ urlpatterns = [
 
 	url(r'^ver_medico_fav/$', views.ver_medico_fav, name='ver_medico_fav'),
 	url(r'^ingresar_medico_fav/$', views.ingresar_medico_fav, name='ingresar_medico_fav'),
+	url(r'^ingresar_fav/$', views.ingresar_fav, name='ingresar_fav'),
 	
 	url(r'^ingresar_noticias/$', views.ingresar_noticias, name='ingresar_noticias'),
 	url(r'^ver_noticias/$', views.ver_noticias, name='ver_noticias'),
