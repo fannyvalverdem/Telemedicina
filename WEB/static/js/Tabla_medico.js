@@ -666,3 +666,91 @@ $('#data_table_pagos_medico').DataTable({
         ],
     
 });
+
+$('#data_table_pagado').DataTable({
+    "destroy": true,
+    rowCallback: function( row, data, index ) {
+        var id_doc=String($('#id_usuario_doc').html())
+        if (data['estado'] == "pendiente") {
+            $(row).hide();
+        }
+    },
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/pagos_medico/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+
+        "columns": [
+            { data: "doctor.user_id.persona_id.nombre"},
+            { data: "doctor.user_id.persona_id.apellido"},
+            { data: "fecha"},
+            { data: "hora"},
+            { data: "precio"},
+        ],
+        columnDefs: [
+            { width: 100, targets: 0},
+            { width: 100, targets: 1},
+            { width: 100, targets: 2},
+            { width: 100, targets: 3},
+            { width: 100, targets: 4},
+        ],
+    
+});
+
+$('#data_table_pendiente').DataTable({
+    "destroy": true,
+    rowCallback: function( row, data, index ) {
+        var id_doc=String($('#id_usuario_doc').html())
+        if (data['estado'] == "pagado") {
+            $(row).hide();
+        }
+    },
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/pagos_medico/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+
+        "columns": [
+            { data: "doctor.user_id.persona_id.nombre"},
+            { data: "doctor.user_id.persona_id.apellido"},
+            { data: "fecha"},
+            { data: "hora"},
+            { data: "precio"},
+            { data: "precio"},
+        ],
+        columnDefs: [
+            { width: 100, targets: 0},
+            { width: 100, targets: 1},
+            { width: 100, targets: 2},
+            { width: 100, targets: 3},
+            { width: 100, targets: 4},
+            { width: 150, className: "text-center", targets: 5, render: function(data){
+            
+            return '<a href="/ingresar_fav/?id=' + data + '" class="btn btn-primary" role="button"></a>'
+        }},
+        ],
+    
+});
+
+
+

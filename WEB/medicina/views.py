@@ -1263,3 +1263,13 @@ def pagos_realizado(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'pagos_realizados.html', dictionary)
+
+def pagos_realizados_admin(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'pagos_realizados_admin.html', dictionary)
+
+def pagos_pendientes_admin(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'pagos_pendientes_admin.html', dictionary)

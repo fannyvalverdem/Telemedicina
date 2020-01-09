@@ -1,13 +1,13 @@
-{% extends 'index_medico.html' %}
+{% extends 'index_admin.html' %}
 {% load static %}
 
 {% block navs %}
 <ul class="nav nav-tabs">
 	<li class="nav-item active">
-		<a class="nav-link" href="{% url 'valores_cobrar' %}" >Valores por cobrar</a>
+		<a class="nav-link" href="" >Pendientes</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link" href="{% url 'pagos_realizado' %}" >Pagos Realizados</a>
+		<a class="nav-link" href="" >Realizado</a>
 	</li>
 </ul>
 {% endblock %}

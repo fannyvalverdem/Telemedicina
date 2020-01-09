@@ -1,19 +1,39 @@
-{% extends 'index_medico.html' %}
+{% extends 'menu_pagos_admin.html' %}
 {% load static %}
 
-{% block navs %}
-<ul class="nav nav-tabs">
-	<li class="nav-item active">
-		<a class="nav-link" href="{% url 'valores_cobrar' %}" >Valores por cobrar</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link" href="{% url 'pagos_realizado' %}" >Pagos Realizados</a>
-	</li>
-</ul>
+{% block contenido %}
+
+<div class="row">
+     <div class="col-xl-1">
+         
+     </div>
+     <div class="col-xl-10">
+        <div class="table-container">
+        <table id="data_table_pagado" class="table table-striped table-bordered dt-body-center">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Valor Final</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+	</div>
+	<div class="col-xl-1">
+	         
+	</div>
+</div>
+
 {% endblock %}
 
 {% block script %}
 
+    
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
