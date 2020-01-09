@@ -2,22 +2,33 @@
 {% load static %}
 
 {% block contenido %}
-<div id="titulo" class="row">
-	<h2>¡Paquetes especiales para ti!</h2>
-</div>
-<div class="row">
-	<div class="container-fluid">
-    	<div class="row flex-row flex-nowrap">
-    		{% if object_list %}
+
+<div class="col-12">
+    <div id="titulo_ini" class="row">
+        <header>
+            <h1>¡Paquetes especiales para ti!</h1>
+            <br><br><br>
+        </header>
+
+        <section class="container" >
+          <div id="notas">
             {% for paquete in object_list %}
-         	<div id="paquete_inicio" class="col-3">
-				<h4>{{paquete.nombre}}</h4>
-                <p>{{paquete.descripcion}}</p>
-                <h5>{{paquete.precio}}</h5>
-         	</div>
-         	{% endfor %}
-            {% endif %}
-         </div>
-     </div>
+            <article id=art_inicio>
+                <div id="paquete_inicio" class="col-12">
+                    <br><br>
+                    <h4>{{paquete.nombre}}</h4>
+                    <br><br>
+                    <p>{{paquete.descripcion}}</p>
+                    <br>
+                    <h5>{{paquete.precio}}</h5>
+                    <a href="/paquete_pago/?id={{ paquete.id }}" name="paquete.id">Obtener</a>
+                </div>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+    </div>
 </div>
+
+
 {% endblock %}

@@ -29,7 +29,9 @@ urlpatterns = [
 
 	
 	url(r'^consejos_noticias/$', views.consejos_noticias, name='consejos_noticias'),
+	
 	url(r'^paquetes_inicio/$', views.paquetes_inicio, name='paquetes_inicio'),
+	url(r'^paquete_pago/$', views.paquete_pago, name='paquete_pago'),
 
 	
 	url(r'^ingresar_noticias/$', views.ingresar_noticias, name='ingresar_noticias'),
@@ -45,7 +47,7 @@ urlpatterns = [
 
 	url(r'^zoom_video/$', views.zoom, name='zoom_video'),
 	url(r'^agendar_cita_medico/$', views.agendar_cita_medico, name='agendar_cita_medico'),
-
+	
 	url(r'^boton_pago/$', views.boton_pago, name='boton_pago'),
 	url(r'^acciones_consulta/$', views.acciones_consulta, name='acciones_consulta'),
 	url(r'^escribir_receta/$', views.escribir_receta, name='escribir_receta'),

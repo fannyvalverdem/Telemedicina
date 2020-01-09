@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
 .container-fluid {
 	background-color: #ffffff;
 }
@@ -221,6 +223,72 @@ li{
 
 #vertical-menu-medico a:hover {
     background-color: #ebebeb; /* Dark grey background on mouse-over */
+}
+
+#titulo_ini h1{
+	color: #65b4c3;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	
+}
+
+#titulo_ini2 h1{
+	color: #65b4c3;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	text-align: right;
+}
+
+article[id="art_inicio"]{
+  border: 1px gainsboro solid;
+  width: 325px;
+  height: 400px;
+  box-shadow: 3px 2px #eeeeee;
+  border-radius: 4px;
+  display: inline-block;
+  float: left;
+  margin: 10px;
+}
+
+#paquete_inicio h4{
+	font-family: 'Montserrat', sans-serif;
+	color: #e53956;
+	font-weight: bold;
+	text-align: center;
+	font-size:150%;
+}
+
+#paquete_inicio p{
+	color: #727176;
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+}
+
+#paquete_inicio h5{
+	color: #65b4c3;
+	font-family: 'Montserrat', sans-serif;
+	text-align: right;
+	font-weight: bold;
+	font-size:200%;
+}
+
+#paquete_inicio a{
+	color: #65b4c3;
+	font-family: 'Montserrat', sans-serif;
+	text-align: right;
+}
+
+#consejo_inicio h2, #noticia_inicio h2{
+	font-size: 0.8em;
+	font-family: 'Roboto',Sans-Serif;
+}
+
+div[id^="pictu"]{
+  width: 325px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  
 }
 
 /*

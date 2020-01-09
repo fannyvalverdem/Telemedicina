@@ -1099,7 +1099,8 @@ def ingresar_noticias(request):
 			return redirect('ver_noticias')
 
 def paquetes_inicio(request):
-	context= {'object_list': Listar("paquete")}
+	data=Listar("paquete")
+	context= {'object_list': data}
 	return render(request, 'paquetes_inicio.html', context)
 
 def ver_mas_consejo(request):
@@ -1123,3 +1124,18 @@ def ver_mas_noticias(request):
 	data = [{'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}]
 	context= {'object_list':data}
 	return render(request,'detalles_noticia_consejo.html',context)
+
+def paquete_pago(request):
+	sku = request.GET.get('id')
+	print(sku)
+	paque=Paquete.objects.get(id=sku)
+	print(paque)
+	nombre=paque.nombre
+	descripcion=paque.descripcion
+	citas=paque.citas
+	duracion=paque.duracion
+	precio=paque.precio
+	
+	data = [{'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio}]
+	context= {'object_list':data}
+	return render(request,'comprar_paquete.html',context)
