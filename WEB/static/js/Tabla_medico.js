@@ -576,3 +576,43 @@ $('#data_table_ingresar_medico_fav').DataTable({
         }},
     ],
 });
+
+$('#data_table_cobrar').DataTable({
+    "destroy": true,
+    rowCallback: function( row, data, index ) {
+        var id_doc=String($('#id_usuario_doc').html())
+        if (data['consulta_id']['estado'] == "agendada" || data['consulta_id']['doctor_id']['user_id']['username']!=id_doc) {
+            $(row).hide();
+        }
+    },
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/consulta/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+
+        "columns": [
+            { data: "consulta_id.paciente_id.user_id.persona_id.nombre"},
+            { data: "consulta_id.paciente_id.user_id.persona_id.apellido"},
+            { data: "fecha_reser"},
+            { data: "fecha_prog"},
+            { data: "precio"}
+        ],
+        columnDefs: [
+            { width: 100, targets: 0},
+            { width: 150, targets: 1},
+            { width: 150, targets: 2},
+            { width: 150, targets: 3},
+            { width: 150, targets: 4},
+        ],
+    
+});
