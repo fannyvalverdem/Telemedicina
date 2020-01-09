@@ -116,12 +116,7 @@ $('#data_table_tarifa').DataTable({
 
 $('#data_table_citas').DataTable({
     "destroy": true,
-    rowCallback: function( row, data, index ) {
-        var id_doc=String($('#id_usuario_doc').html())
-        if (data['consulta_id']['estado'] == "agendada" || data['consulta_id']['doctor_id']['user_id']['username']!=id_doc) {
-            $(row).hide();
-        }
-    },
+    
     "ajax": 
         {
         "method": "GET",
@@ -138,11 +133,11 @@ $('#data_table_citas').DataTable({
     },
 
         "columns": [
-            { data: "consulta_id.paciente_id.user_id.persona_id.nombre"},
-            { data: "consulta_id.paciente_id.user_id.persona_id.apellido"},
-            { data: "fecha_reser"},
-            { data: "fecha_prog"},
-            { data: "precio"}
+            { data: "paciente_id.user_id.persona_id.nombre"},
+            { data: "paciente_id.user_id.persona_id.apellido"},
+            { data: "detalle.fecha_reser"},
+            { data: "detalle.fecha_prog"},
+            { data: "detalle.precio"}
         ],
         columnDefs: [
             { width: 100, targets: 0},
@@ -550,6 +545,7 @@ $('#data_table_ver_medico_fav').DataTable({
 });
 
 $('#data_table_ingresar_medico_fav').DataTable({
+
     "destroy": true,
     "ajax": 
         {
@@ -585,11 +581,11 @@ $('#data_table_ingresar_medico_fav').DataTable({
         { width: 100, targets: 1},
         { width: 100, targets: 2},
         { width: 150, className: "text-center", targets: 3, render: function(data){
-            var= datito="?id='+str("doctor_id.id")+'"
-            var datito2=doctor_id['id']
-            alert(datito2)
+            
+            
+            //alert(doctor_id['id'])
 
-            return '<a href="/ingresar_fav/?id='+str(doctor_id['id'])+'" class="btn btn-primary" role="button"></a>'
+            return '<a href="/ingresar_fav/" class="btn btn-primary" role="button"></a>'
         }},
     ],
 });
