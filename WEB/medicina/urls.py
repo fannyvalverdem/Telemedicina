@@ -89,6 +89,7 @@ urlpatterns = [
 	url(r'^pagos_realizado/$', views.pagos_realizado, name='pagos_realizado'),
 	url(r'^pagos_realizados_admin/$', views.pagos_realizados_admin, name='pagos_realizados_admin'),
 	url(r'^pagos_pendientes_admin/$', views.pagos_pendientes_admin, name='pagos_pendientes_admin'),
+	url(r'^realizar_pago/$', views.realizar_pago, name='realizar_pago'),
 
 	url(r'^auth_zoom/$', views.auth_zoom, name='auth_zoom'),
 	url(r'^prueba_auth/$', views.zoom_redirect, name='prueba_auth'),

@@ -736,7 +736,7 @@ $('#data_table_pendiente').DataTable({
             { data: "fecha"},
             { data: "hora"},
             { data: "precio"},
-            { data: "precio"},
+            { data: "id"},
         ],
         columnDefs: [
             { width: 100, targets: 0},
@@ -746,7 +746,7 @@ $('#data_table_pendiente').DataTable({
             { width: 100, targets: 4},
             { width: 150, className: "text-center", targets: 5, render: function(data){
             
-            return '<a href="/ingresar_fav/?id=' + data + '" class="btn btn-primary" role="button"></a>'
+            return '<a href="/realizar_pago/?id=' + data + '" class="btn btn-primary" role="button"></a>'
         }},
         ],
     

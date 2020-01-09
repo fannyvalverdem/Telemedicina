@@ -1277,3 +1277,12 @@ def pagos_pendientes_admin(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'pagos_pendientes_admin.html', dictionary)
+
+def realizar_pago(request):
+	sku = request.GET.get('id')
+	pago=Pagos_Doctor.objects.get(id=sku)
+	pago.estado="pagado"
+
+	pago.save()
+	
+	return redirect('pagos_realizados_admin')
