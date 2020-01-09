@@ -1163,8 +1163,6 @@ def ver_medico_fav(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'ver_medico_fav.html', dictionary)
 
-<<<<<<< HEAD
-
 def ingresar_fav(request):
 	current_user = request.user
 
