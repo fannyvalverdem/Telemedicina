@@ -111,6 +111,7 @@ class Paquete(models.Model):
 	descripcion=models.TextField()
 	precio=models.FloatField()
 	duracion= models.IntegerField()
+	citas=models.IntegerField()
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
 	examen=models.ForeignKey(Examenes, null=True, blank=True, on_delete=models.CASCADE)
 

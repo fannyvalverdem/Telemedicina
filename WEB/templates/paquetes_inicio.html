@@ -1,0 +1,23 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+
+{% block contenido %}
+<div id="titulo" class="row">
+	<h2>¡Paquetes especiales para ti!</h2>
+</div>
+<div class="row">
+	<div class="container-fluid">
+    	<div class="row flex-row flex-nowrap">
+    		{% if object_list %}
+            {% for paquete in object_list %}
+         	<div id="paquete_inicio" class="col-3">
+				<h4>{{paquete.nombre}}</h4>
+                <p>{{paquete.descripcion}}</p>
+                <h5>{{paquete.precio}}</h5>
+         	</div>
+         	{% endfor %}
+            {% endif %}
+         </div>
+     </div>
+</div>
+{% endblock %}

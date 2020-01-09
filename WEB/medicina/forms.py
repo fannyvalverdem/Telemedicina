@@ -98,6 +98,7 @@ class PaqueteForm(forms.Form):
 	precio=forms.FloatField(label='Precio: ')
 	especialidad=forms.ModelChoiceField(label='Especialidad',queryset=Especialidad.objects.all(),required=False)
 	descripcion=forms.CharField(label='Descripcion del Paquete: ', widget=forms.Textarea())
+	citas=forms.IntegerField(label='Citas Gratis: ')
 	duracion=forms.IntegerField(label='Duración de paquetes: ')
 
 class TarifaForm(forms.Form):

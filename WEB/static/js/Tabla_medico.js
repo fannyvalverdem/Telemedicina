@@ -71,8 +71,8 @@ $('#data_table_paquete').DataTable({
         { data: "descripcion"},
         { data: "especialidad.nombre"},
         { data: "duracion"},
-        { data: "precio"},
-        { data: "especialidad"}
+        { data: "citas"},
+        { data: "precio"}
     ],
     columnDefs: [
         { width: 100, targets: 0},
@@ -80,10 +80,7 @@ $('#data_table_paquete').DataTable({
         { width: 150, targets: 2},
         { width: 150, targets: 3},
         { width: 150, targets: 4},
-        { width: 150, className: "text-center", targets: 5, render: function(data){
-            return `<a href="/confirmacion_emergencia/" class="btn btn-primary" role="button"><i class="fas fa-eye"></i></a>
-                 `
-        }},
+        { width: 150, targets: 5},
     ],
 });
 

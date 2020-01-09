@@ -507,12 +507,14 @@ def ingresar_paquete(request):
 		especialidad = form.cleaned_data['especialidad']
 		duracion =form.cleaned_data['duracion']
 		descripcion = form.cleaned_data['descripcion']
+		citas=form.cleaned_data['citas']
 
 		paquete=Paquete(
 			nombre=nombre,
 			precio=precio,
 			descripcion=descripcion,
 			especialidad=especialidad,
+			citas=citas,
 			duracion=duracion
 		)
 
@@ -1096,3 +1098,6 @@ def ingresar_noticias(request):
 			new_image.save()
 			return redirect('ver_noticias')
 
+def paquetes_inicio(request):
+	context= {'object_list': Listar("paquete")}
+	return render(request, 'paquetes_inicio.html', context)
