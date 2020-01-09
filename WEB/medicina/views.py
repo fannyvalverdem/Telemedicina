@@ -1101,3 +1101,25 @@ def ingresar_noticias(request):
 def paquetes_inicio(request):
 	context= {'object_list': Listar("paquete")}
 	return render(request, 'paquetes_inicio.html', context)
+
+def ver_mas_consejo(request):
+	sku = request.GET.get('id')
+	conse=Consejos.objects.get(id=sku)
+	imagen=conse.imagen
+	titulo=conse.titulo
+	descripcion=conse.descripcion
+	fuente=conse.fuente
+	data = [{'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}]
+	context= {'object_list':data}
+	return render(request,'detalles_noticia_consejo.html',context)
+
+def ver_mas_noticias(request):
+	sku = request.GET.get('id')
+	conse=Noticias.objects.get(id=sku)
+	imagen=conse.imagen
+	titulo=conse.titulo
+	descripcion=conse.descripcion
+	fuente=conse.fuente
+	data = [{'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}]
+	context= {'object_list':data}
+	return render(request,'detalles_noticia_consejo.html',context)
