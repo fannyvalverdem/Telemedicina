@@ -82,8 +82,8 @@ class TarifaViewset(generics.ListAPIView):
 		return Response(serializer.error,status=status.HTTP_400_BAD_REQUEST)
 
 class ConsultaViewset(generics.ListAPIView):
-	queryset = models.Detalle_Consulta.objects.all()
-	serializer_class = serializers.DetalleConsultaSerializer
+	queryset = models.Consulta.objects.all()
+	serializer_class = serializers.ConsultaSerializer
 
 class EspecialidadViewset(generics.ListAPIView):
 	queryset = models.Especialidad.objects.all()
