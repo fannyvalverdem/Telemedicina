@@ -32,6 +32,8 @@ urlpatterns = [
 	
 	url(r'^paquetes_inicio/$', views.paquetes_inicio, name='paquetes_inicio'),
 	url(r'^paquete_pago/$', views.paquete_pago, name='paquete_pago'),
+	url(r'^paquete_confirmacion/$', views.paquete_confirmacion, name='paquete_confirmacion'),
+	url(r'^mis_paquetes/$', views.mis_paquetes, name='mis_paquetes'),
 
 	url(r'^ver_medico_fav/$', views.ver_medico_fav, name='ver_medico_fav'),
 	url(r'^ingresar_medico_fav/$', views.ingresar_medico_fav, name='ingresar_medico_fav'),

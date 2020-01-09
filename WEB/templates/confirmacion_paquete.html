@@ -6,15 +6,14 @@
 <div class="col-12">
     <div id="titulo_ini" class="row">
         <header>
-            <h1>Comprar paquete</h1>
+            <h1>¡Felicidades! Disfruta tu nuevo paquete</h1>
             <br><br><br>
         </header>
 
         <section class="container" >
-            {% for paquete in object_list %}
           <div id="notas">
             <article id=art_inicio>
-                
+                {% for paquete in object_list %}
                 <div id="paquete_inicio" class="col-12">
                     <br>
                     <h4>{{paquete.nombre}}</h4>
@@ -24,16 +23,9 @@
                     <p>Durante {{paquete.duracion}} meses</p>
                     <h5>{{paquete.precio}}</h5>
                 </div>
-                
+                {% endfor %}
             </article>
           </div>
-
-            <form action="/boton_pago/">
-              <button id="btn-continuar">Continuar pago</button>
-            </form>
-            <br>
-            <button id="btn-continuar"><a href="/paquete_confirmacion/?id={{ paquete.id }}" name="paquete.id">Saltar</a></button>
-            {% endfor %}
         </section>
 
     </div>
