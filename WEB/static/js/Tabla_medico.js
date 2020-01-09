@@ -587,7 +587,8 @@ $('#data_table_ingresar_medico_fav').DataTable({
         { width: 150, className: "text-center", targets: 3, render: function(data){
             var= datito="?id='+str("doctor_id.id")+'"
             var datito2=doctor_id['id']
-            
+            alert(datito2)
+
             return '<a href="/ingresar_fav/?id='+str(doctor_id['id'])+'" class="btn btn-primary" role="button"></a>'
         }},
     ],
