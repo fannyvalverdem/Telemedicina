@@ -537,7 +537,7 @@ $('#data_table_ver_medico_fav').DataTable({
         { width: 100, targets: 0, render: function(data) {
             var image = '';
             if (data == null){
-                image = `<img src="https://via.placeholder.com/300x300" width="100%">`;
+                image = `<img src="http://127.0.0.1:8000/static/imagenes/doctor.png" width="100%">`;
             } else {
                 image = '<img src="' + data + '" width="100%">';
             }
@@ -578,7 +578,7 @@ $('#data_table_ingresar_medico_fav').DataTable({
         { width: 100, targets: 0, render: function(data) {
             var image = '';
             if (data == null){
-                image = `<img src="https://via.placeholder.com/300x300" width="100%">`;
+                image = `<img src="http://127.0.0.1:8000/static/imagenes/doctor.png" width="100%">`;
             } else {
                 image = '<img src="' + data + '" width="100%">';
             }
