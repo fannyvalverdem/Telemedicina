@@ -1,26 +1,75 @@
 <ion-header>
-  <ion-toolbar>
-      <ion-img src="assets/telemedicina_movil.jpg"></ion-img>
-  </ion-toolbar>
+  <ion-row class="ion-justify-content-end">
+    <ion-col>
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-img src="assets/ICONS_APP/ICONS_APP/logo.png"></ion-img>
+  </ion-row>
+    
+  
 </ion-header>
 
 <ion-content>
-  <ion-toolbar>
-    <ion-icon routerLink="../principal" name="arrow-round-back"></ion-icon>
-    <ion-title>Agendamiento de consulta medica</ion-title>
-  </ion-toolbar>
-  <ion-card>
-      <ion-label>Especialidad:</ion-label>
-      <ion-select>
-        <ion-select-option value="bird" selected>General</ion-select-option>
-        <ion-select-option value="cat">Traumatologia</ion-select-option>
-        <ion-select-option value="dog" selected>Cardiologia</ion-select-option>
-        <ion-select-option value="honeybadger">Oftalmologia</ion-select-option>
-      </ion-select>
-      <ion-label>Fecha:</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" placeholder="01/01/2020" max="2020-12-09"></ion-datetime>
-      <ion-label>Hora:</ion-label>
-      <ion-datetime displayFormat="HH:mm" placeholder="00:00"></ion-datetime>
-      <ion-button routerLink="../agendar-cita-med">Continuar</ion-button>
-    </ion-card>
+  <ion-grid>
+    
+    <ion-row id="title">
+      <ion-col size="1">
+        <ion-row>
+        <ion-img routerLink="../principal" id="atras" src="assets/ICONS_APP/ICONS_APP/atras.png"></ion-img>   
+      </ion-row>
+      </ion-col>     
+           
+      <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/agendar_cita_2.png"></ion-img>  
+      <ion-title>AGENDAR CITA</ion-title>
+    </ion-row>
+
+    <ion-row id="form" class="ion-justify-content-center">
+      <ion-col size="10" class="ion-align-self-center">
+      <ion-item>
+        <ion-label>Especialidad:</ion-label>
+       <ion-select>
+        
+       </ion-select>
+      </ion-item>       
+
+      </ion-col>
+      <ion-col size="10" class="ion-align-self-center">
+      
+        <ion-item>
+          <ion-label>Fecha:</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" placeholder="01/01/2020" max="2020-12-09"></ion-datetime>
+          
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="10" class="ion-align-self-center">
+      
+        <ion-item>
+          <ion-label>Hora:</ion-label>
+          <ion-datetime displayFormat="HH:mm" placeholder="00:00"></ion-datetime>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row id="next" routerLink="../agendar-cita-med" class="ion-justify-content-center">
+      
+        <ion-label>SIGUIENTE</ion-label>
+          
+    </ion-row>
+
+    
+      
+      
+    
+
+  </ion-grid>
+
+
+
+  
+  
+      
 </ion-content>
