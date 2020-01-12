@@ -187,3 +187,9 @@ class PagosMedicoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Pagos_Doctor
 		fields=("id","fecha","hora","precio","estado","doctor")
+
+class CitasMedicoSerializer(serializers.ModelSerializer):
+	doctor=MedicoSerializer()
+	class Meta:
+		model= models.Citas_Medico
+		fields=("id","m_id","m_url","fecha","hora","m_duration","doctor")

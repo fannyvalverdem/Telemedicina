@@ -12,7 +12,6 @@ urlpatterns = [
 	url(r'^confirmacion_emergencia/$', views.confirmacion_emergencia, name='confirmacion_emergencia'),
 
 	url(r'^selec_medico/$', views.selec_medico, name='selec_medico'),
-	url(r'^confirmacion_cita/$', views.confirmacion_cita, name='confirmacion_cita'),
 	url(r'^login/$', views.login, name='login'),
 	url(r'^perfil/$', views.perfil, name='perfil'),
 	url(r'^editar_perfil/$', views.editar_perfil, name='edit_perfil'),
@@ -73,6 +72,8 @@ urlpatterns = [
 	url(r'^medico/$', views.index_medico, name='index_medico'),
 	url(r'^administrador/', views.index_admin, name='index_admin'),
 	url(r'^agendar_cita/$', views.agendar_cita, name='ag-cita'),
+	#url(r'^seleccionar_agendar_cita/$', views.medicos_agendar_cita, name='selec-cita'),
+	url(r'^confirmar_cita/$', views.confirmar_agendar_cita, name='confi-cita'),
 
 	url(r'^ingresar_publicidad/$', views.publicidad_ingresar, name='ing-publicidad'),
 	url(r'^ver_publicidad/$', views.ver_publicidad, name='ver-publicidad'),

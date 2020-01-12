@@ -250,6 +250,17 @@ article[id="art_inicio"]{
   margin: 10px;
 }
 
+article[id="art_conf_cita"]{
+  width: 325px;
+  height: 400px;
+  box-shadow: 3px 2px #eeeeee;
+  border-radius: 4px;
+  display: inline-block;
+  float: left;
+  margin: 10px;
+  background-color: rgba(101, 180, 195, 0.2);
+}
+
 #paquete_inicio h4{
 	font-family: 'Montserrat', sans-serif;
 	color: #e53956;

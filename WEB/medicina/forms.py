@@ -165,10 +165,10 @@ class HorarioForm(forms.Form):
 class CitasForms(forms.Form):
 	especialidad = forms.ModelChoiceField(queryset=Especialidad.objects.all())
 	#especialidad=forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Especialidad'}))
-	date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
-	hora=forms.ChoiceField(required=True, choices=HORA,label='')
-	minutos=forms.ChoiceField(required=True, choices=MINUTOS_CITAS,label='')
-	zona=forms.ChoiceField(required=True, choices=ZONE,label='')
+	#date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'])
+	#hora=forms.ChoiceField(required=True, choices=HORA,label='')
+	#minutos=forms.ChoiceField(required=True, choices=MINUTOS_CITAS,label='')
+	#zona=forms.ChoiceField(required=True, choices=ZONE,label='')
 
 class Especialidades(forms.Form):
 	especialidad=forms.CharField(label='Especialidad:',max_length=100,widget=forms.TextInput())

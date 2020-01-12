@@ -1,47 +1,39 @@
-{% extends 'index_paciente.html' %}
+{% extends 'menu_agendar.html' %}
 {% load static %}
-{% load staticfiles %}
-
 
 {% block contenido %}
 
-<section>
-    
-    <div class="row">
-        <div id="in1" class="col-xl-12 col-sm-12">
-          <p>Consulta médica</p>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <img src="https://via.placeholder.com/300x300" alt="placeholder" class="col-12"/>
-            </div>
-        <div class="col-xl-12">
-            {% load crispy_forms_tags %}
-            <form action="" method="post">
-                <div class="row">
-                    {% csrf_token %}
-                    <div class="col-xl-5">
-                        {{ form.especialidad|as_crispy_field }}
-                        {{ form.nombres|as_crispy_field }}
-                        {{ form.apellido|as_crispy_field }}
-                        {{ form.documento_id|as_crispy_field }}
-                        {{ form.date|as_crispy_field }}
-                    </div>
-                    <div class="col-xl-2">
-                        
-                    </div>
-                    <div class="col-xl-5">
-                    </div>
-                    </div>
+<div class="col-12">
+    <div id="titulo_ini" class="row">
 
-                <button id="btn-continuar">Continuar</button>
-            </form>
-            <br>
-            <br>
+        <section class="container" >
+          <div id="notas">
+            <article id=art_conf_cita>
+                <div id="paquete_inicio" class="col-12">
+                    <br>
+                    <img id="avatar" src="{% static 'imagenes/doctor.png' %}" alt="">
+                    <br><br>
+                    <p>Especialidad: {{especialidad}}</p>
+                    <p>Médico: {{ cita.doctor.user_id.persona_id.nombre}} {{ cita.doctor.user_id.persona_id.apellido}}</p>
+                    <p>Fecha: {{cita.fecha}}</p>
+                    <p>Hora: {{cita.hora}}</p>
+                </div>
+            </article>
+            
+          </div>
+        </section>
+
+    </div>
+    <div class="row">
+        <div class="col-2">
+            
         </div>
+        <div class="col-6">
+            <button id="btn-continuar">Confirmar</button>
+        </div>
+        
     </div>
 </div>
 
 
-</section>
 {% endblock %}
