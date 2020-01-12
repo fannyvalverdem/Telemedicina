@@ -3,6 +3,11 @@ ion-toolbar{
 
 }
 
+#containerbuttons{
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
 ion-img{
     width: 350px; 
     height: 100px;
@@ -11,7 +16,7 @@ ion-img{
     
 }
 
-ion-col{
+ion-col.button{
     background:rgba(229, 57, 86,0.1);    
     padding: 5px;
     margin: 5px;
@@ -37,25 +42,8 @@ ion-col{
     margin: 0px;
 }
 
-ion-grid {
-    height: 20%;
-  
-    .em{
-        height: 80%;
+.desc{
+    color:#65b4c3;
 
-        .emergencia{
-            height: 80%;
+}
 
-            ion-row{
-                height: 100%;
-                
-                .label{
-                    height: 50%;
-                }
-            }
-
-        }
-
-
-    }
-  }

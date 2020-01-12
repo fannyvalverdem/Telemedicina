@@ -5,6 +5,7 @@ from . import views
 
 
 urlpatterns = [
+	url(r'^inicio_pacientes/$', views.inicio_pacientes, name='inicio_pacientes'),
 	url(r'^$', views.inicio, name='inicio'),
 	url(r'^agendar_emergencia/$', views.agendar_emergencia, name='agendar_emergencia'),
 	url(r'^accounts/$', include('allauth.urls')),
@@ -25,6 +26,8 @@ urlpatterns = [
 
 	url(r'^ver_mas_consejo/$', views.ver_mas_consejo, name='ver_mas_consejo'),
 	url(r'^ver_mas_noticias/$', views.ver_mas_noticias, name='ver_mas_noticias'),
+	url(r'^mis_noticias/$', views.mis_noticias, name='mis_noticias'),
+	url(r'^mis_consejos/$', views.mis_consejos, name='mis_consejos'),
 
 	
 	url(r'^consejos_noticias/$', views.consejos_noticias, name='consejos_noticias'),

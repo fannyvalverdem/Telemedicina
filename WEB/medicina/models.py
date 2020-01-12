@@ -179,12 +179,13 @@ class Publicidad(models.Model):
 		
 class Info_Medica(models.Model):	
 	peso=models.FloatField()
+	talla=models.FloatField()
 	sys=models.FloatField()
 	dia=models.FloatField()
 	pulse= models.IntegerField()
 	glucosa=models.FloatField()
 	colesterol=models.FloatField()
-
+	
 
 class Noticias(models.Model):
 	imagen=models.ImageField(upload_to = 'static/imagenes', default='static/imagenes/no-img.jpg')

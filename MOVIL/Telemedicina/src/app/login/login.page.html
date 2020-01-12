@@ -1,10 +1,12 @@
 
-<ion-content color="white" >
+<ion-content color="white"  >
   <ion-grid>
     <ion-row>
       <ion-img id="logo" src="assets/ICONS_APP/ICONS_APP/logo_2.png"></ion-img>
       
     </ion-row>
+    <ion-row id="input">
+      <ion-col col-12>
     <ion-row>
       <ion-col col-12>
         <ion-input type="email" placeholder="Correo Electrónico" required clearInput [(ngModel)]="user.username"
@@ -17,6 +19,14 @@
           name="password"></ion-input>
       </ion-col>
     </ion-row>
+    <ion-row class="ion-justify-content-end" id="recuperar">
+      <ion-label>¿Olvidaste tu contraseña?</ion-label>
+    </ion-row>
+    
+  </ion-col>
+    </ion-row>
+  
+  
     <ion-row class="ion-justify-content-center">
       <ion-button type="submit" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
       <!-- routerLink="principal" -->
@@ -26,24 +36,25 @@
       <p align="center"> o<br>Ingresa con</p>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="3" size-sm class="ion-align-self-center " >
+      <ion-col size="4" class="ion-align-self-center " id="redes">
         <ion-button>
           <ion-icon  name="logo-facebook"></ion-icon>
         </ion-button>
+        <ion-button>
+          <ion-icon  name="logo-google"></ion-icon>
+        </ion-button>
+        </ion-col>     
       
-      <ion-button>
-        <ion-icon  name="logo-googleplus"></ion-icon>
-      </ion-button>
-      </ion-col>
     </ion-row>
-    <ion-row class="ion-justify-content-center">
-      <ion-label>¿Has olvidado tu contraseña?</ion-label>
-    </ion-row>
-    <ion-item>
-      <ion-label>¿No tienes cuenta?</ion-label>
-      <ion-button  (click)="irARegistrar()">Regístrate</ion-button>
+    
+
+    <ion-footer>
+    <ion-row id= "registro" class="ion-justify-content-center" routerLink="registro">    
+      <ion-label>¿No tienes cuenta? ¡Registrate aquí!</ion-label>
+      
       <!-- routerLink="registro" -->
-    </ion-item>
+    </ion-row>
+  </ion-footer>
   </ion-grid>
 
 

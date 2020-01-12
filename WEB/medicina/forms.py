@@ -231,6 +231,7 @@ class ImageForm(forms.ModelForm):
 
 class InfoMedicaForm(forms.Form):
 	peso = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Peso [libras]'}))
+	talla = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Talla [cm]'}))
 	sys = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'SYS '}))
 	dia = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'DIA '}))
 	pulse = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Pulse '}))
