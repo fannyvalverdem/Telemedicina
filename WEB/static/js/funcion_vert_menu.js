@@ -6,7 +6,7 @@ function agendarBoton(){
 
 function escribirBoton(){
   document.querySelector('[ id="active"]').setAttribute('id','inactive')
-  document.querySelector('[ href="escribir_receta.html"]').setAttribute('id','active')
+  document.querySelector('[ href="escribir_receta2.html"]').setAttribute('id','active')
 
 }
 
