@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
 	url(r'^personas/$', views.PersonaViewset.as_view(), name='personas_api'),
 	url(r'^especialidad/$', views.EspecialidadViewset.as_view(), name='especialidad_api'),
+	url(r'^paciente/$', views.PacienteViewset.as_view(), name='paciente_api'),
 	url(r'^doctor/$', views.DoctorViewset.as_view(), name='doctor_api'),
 	url(r'^paquete/$', views.PaqueteViewset.as_view(), name='paquete_api'),
 	url(r'^tarifas/$', views.TarifaViewset.as_view(), name='tarifa_api'),
