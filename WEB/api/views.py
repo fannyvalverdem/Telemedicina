@@ -16,7 +16,9 @@ class AutenticarUsuario(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super(AutenticarUsuario, self).post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
-        return Response({'token': token.key, 'id': token.user_id})
+        # print(models.Paciente.objects.get(user_id=token.user_id).user_id.id)
+        if token.user_id == models.Paciente.objects.get(user_id=token.user_id).user_id.id:
+        	return Response({'token': token.key, 'id': token.user_id})
 		
 class PersonaViewset(generics.ListAPIView):
     queryset = models.Persona.objects.all()
@@ -61,6 +63,9 @@ class AdministradorViewset(generics.ListAPIView):
     		return Response(serializer.data, status=status.HTTP_201_CREATED)
     	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class PacienteViewset(generics.ListAPIView):
+	queryset = models.Paciente.objects.all()
+	serializer_class = serializers.PacienteSerializer
 
 class HorarioViewset(generics.ListAPIView):
 	queryset = models.Horario.objects.all()
