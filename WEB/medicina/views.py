@@ -816,10 +816,13 @@ def guardar_cita(request):
 	sku_m = request.GET.get('id')
 	sepa=sku_m.split('?')
 	sku=sepa[0]
-	especialidad = sepa[1].split('=')[1]
+	esp = sepa[1].split('=')[1]
+	especialidad=Especialidad.objects.get(nombre=esp)
 	cita=Citas_Medico.objects.get(id=sku)
 	today = date.today()
 	fecha_reser = today.strftime("%Y-%m-%d")
+	cita.disponible=False
+	cita.save()
 	detalle=Detalle_Consulta(
 		fecha_reser=fecha_reser,
 		fecha_prog=cita.fecha,
@@ -829,6 +832,21 @@ def guardar_cita(request):
 		especialidad=especialidad,
 		zoom=cita
 		)
+	detalle.save()
+	current_user = request.user
+	user_ac_id=current_user.id
+	paciente=Paciente.objects.get(user_id=user_ac_id)
+
+	consulta=Consulta(
+		estado='agendada',
+		paciente_id=paciente,
+		doctor_id=cita.doctor,
+		detalle=detalle
+		)
+
+	consulta.save()
+
+	return redirect('citas_prox')
 
 def login(request): 
     print(request.method,"<<<<<<<<<<")

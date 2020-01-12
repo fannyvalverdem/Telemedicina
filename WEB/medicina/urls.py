@@ -77,6 +77,7 @@ urlpatterns = [
 	url(r'^agendar_cita/$', views.agendar_cita, name='ag-cita'),
 	#url(r'^seleccionar_agendar_cita/$', views.medicos_agendar_cita, name='selec-cita'),
 	url(r'^confirmar_cita/$', views.confirmar_agendar_cita, name='confi-cita'),
+	url(r'^guardar_cita/$', views.guardar_cita, name='guardar_cita'),
 
 	url(r'^ingresar_publicidad/$', views.publicidad_ingresar, name='ing-publicidad'),
 	url(r'^ver_publicidad/$', views.ver_publicidad, name='ver-publicidad'),
