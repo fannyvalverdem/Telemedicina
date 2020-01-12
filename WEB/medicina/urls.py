@@ -26,6 +26,8 @@ urlpatterns = [
 
 	url(r'^ver_mas_consejo/$', views.ver_mas_consejo, name='ver_mas_consejo'),
 	url(r'^ver_mas_noticias/$', views.ver_mas_noticias, name='ver_mas_noticias'),
+	url(r'^mis_noticias/$', views.mis_noticias, name='mis_noticias'),
+	url(r'^mis_consejos/$', views.mis_consejos, name='mis_consejos'),
 
 	
 	url(r'^consejos_noticias/$', views.consejos_noticias, name='consejos_noticias'),

@@ -1076,8 +1076,21 @@ def consejos_noticias(request):
 	context= {'object_list': data_consejo,'object_list2': data_noticia}
 	return render(request, 'consejos_noticias.html', context)
 
+def mis_noticias(request):
+	noticias = Listar("noticias")
+	print(str(noticias[0]['imagen']).split("noticias/")[1],"<<<<<<<<<<")
+	for n in noticias:
+		n['imagen']=str(n['imagen']).split("noticias/")[1]
+	context= {'object_list': noticias}
+	return render(request, 'mis_noticias.html', context)
 
-
+def mis_consejos(request):
+	consejos = Listar("consejos")
+	print(str(consejos[0]['imagen']).split("consejos/")[1],"<<<<<<<<<<")
+	for c in consejos:
+		c['imagen']=str(c['imagen']).split("consejos/")[1]
+	context= {'object_list': consejos}
+	return render(request, 'mis_consejos.html', context)
 
 def ver_consejos(request):
 	dictionary = dict(request=request) 
