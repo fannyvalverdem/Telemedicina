@@ -47,11 +47,18 @@ ion-label{
 }
 
 #registro{
-    background:#65b4c3;
+    position: fixed;
+    bottom:0;
+    right:0;
+    left:0;
+    padding: 15px;
+    background-color:#65b4c3;
     ion-label{
         color:white;
+        font-size: 14px;
+        font-weight: bold;
     }
-
+    
 }
 
 ion-footer{padding-top: 10%;}

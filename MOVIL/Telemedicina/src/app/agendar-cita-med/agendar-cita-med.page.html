@@ -1,16 +1,57 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-row class="ion-justify-content-end">
+    <ion-col>
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
     <ion-img src="assets/ICONS_APP/ICONS_APP/logo.png"></ion-img>
-  </ion-toolbar>
+  </ion-row>
+    
+  
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-    <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/agendar_cita_2.png"></ion-img>
-    <ion-title>Agendamiento de consulta medica</ion-title>
-  </ion-row>
-  <ion-card >
+    
+    <ion-row id="title">
+      <ion-col size="1">
+        <ion-row>
+        <ion-img routerLink="/agendar-cita-esp" id="atras" src="assets/ICONS_APP/ICONS_APP/atras.png"></ion-img>   
+      </ion-row>
+      </ion-col>     
+           
+      <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/agendar_cita_2.png"></ion-img>  
+      <ion-title>AGENDAR CITA</ion-title>
+    </ion-row>
+
+    <!--Viene un ion-row para colocar la informacion de los doctores disponibles-->
+    <ion-row id="listadoctores">
+      <ion-col size="11">
+        <ion-list>
+         <ion-item *ngFor="let entry of form">
+            <ion-label>{{entry.val}}</ion-label>
+            <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
+         </ion-item>
+        </ion-list>
+      </ion-col>    
+    </ion-row>
+
+
+
+
+    <ion-row id="next" routerLink="../agendar-cita-conf" class="ion-justify-content-center">
+      
+      <ion-label>SIGUIENTE</ion-label>
+        
+    </ion-row>
+
+
+
+
+
+
+  <!--<ion-card >
       <ion-list>
        <ion-item *ngFor="let entry of form">
           <ion-label>{{entry.val}}</ion-label>
@@ -18,6 +59,6 @@
        </ion-item>
       </ion-list>
       <ion-button routerLink="../agendar-cita-conf">Continuar</ion-button>
-    </ion-card>
+    </ion-card>-->
   </ion-grid> 
 </ion-content>
