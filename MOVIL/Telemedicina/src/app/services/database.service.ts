@@ -24,9 +24,21 @@ export class DatabaseService {
 		return new HttpHeaders(header);
   }
   
+  registro(user,user2) {
+  		return new Promise((resolve,reject) => {
+			this.http.post(this.apiUrl+'api/usuario/', user, user2).subscribe(data => {
+				resolve(data);
+				console.log(data);
+			}, err => {
+				reject(err);
+				console.log(err);
+			});
+		});
+  }
+
   login(user) {
 		return new Promise((resolve,reject) => {
-			this.http.get(this.apiUrl+'api/usuario', user).subscribe(data => {
+			this.http.post(this.apiUrl+'api/autenticar/', user).subscribe(data => {
 				resolve(data);
 				console.log(data);
 			}, err => {

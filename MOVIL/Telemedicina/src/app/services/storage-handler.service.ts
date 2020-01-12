@@ -24,13 +24,13 @@ export class StorageHandlerService {
 		this.zoomAccessToken = "";
 	}
 
-	setAll(id, email, username) {
+	setAll(key, id) {
+		this.key = key;
 		this.id = id;
-		this.email = email;
-		this.username = username;
+		this.writeInStorage("key", key);
 		this.writeInStorage("id", id);
-		this.writeInStorage("email", email)
-		this.writeInStorage("username", username);
+		console.log(key);
+		console.log(id);
 	}
 
 	writeInStorage(key: string, value: any) {

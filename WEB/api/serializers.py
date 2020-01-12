@@ -17,10 +17,14 @@ class UsuarioSerializer(serializers.ModelSerializer):
 			username= validated_data['username']
 		)
 		usuario.set_password(validated_data['password'])
-        
+		print(persona_id)
 		for persona in persona_id:
-			person = models.Persona.objects.create(**persona, usuario=usuario)
+			print(persona)
+			print(*persona)
 		
+		person = models.Persona.objects.create(nombre=persona_id['nombre'], apellido= persona_id['apellido'],telefono=persona_id['telefono'], usuario=usuario)
+		# person = models.Persona.objects.create(**persona_id, usuario=usuario)
+		usuario.persona_id=models.Persona.objects.get(id=person.id)
 		usuario.save()
 		return usuario
 

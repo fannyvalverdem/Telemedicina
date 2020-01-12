@@ -38,7 +38,10 @@ urlpatterns = [
 	url(r'^detalles_paquetes/$', views.DetallesPaquetesViewset.as_view(), name='detalles_paquetes_api'),
 	url(r'^pagos_paciente/$', views.PagosViewset.as_view(), name='pagos_paciente_api'),
 	url(r'^detalles_especialidad/$', views.DetallesEspecialidadViewset.as_view(), name='detalles_especialidad_api'),
+
+
 	url(r'^rest-auth/', include('rest_auth.urls')),
     url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-	url(r'^autenticar/', views.AutenticarUsuario.as_view())
+	url(r'^autenticar/', views.AutenticarUsuario.as_view()),
+	# url(r'^registroUsuario/', views.CrearUsuario.as_view())
 ]

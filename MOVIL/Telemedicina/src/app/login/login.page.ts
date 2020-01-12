@@ -36,15 +36,13 @@ export class LoginPage implements OnInit {
       await this.restProvider.login(this.user)
         .then(data => {
           this.storageHandler.setAll(
-            // JSON.parse(JSON.stringify(data))['key'],
-            JSON.parse(JSON.stringify(data))['id'],
-            JSON.parse(JSON.stringify(data))['email'],
-            JSON.parse(JSON.stringify(data))['username']);
+            JSON.parse(JSON.stringify(data))['key'],
+            JSON.parse(JSON.stringify(data))['id']);
           this.showAlert("Inició sesión de forma correcta");
-          this.router.navigate(['/principal'], { skipLocationChange: true, replaceUrl: true });
+          this.router.navigate(['/principal'], { replaceUrl: true });
           retorno = true; //Retorna True si inició sesión de forma correcta
         }, err => {
-          this.showAlert(JSON.parse(JSON.stringify(err))['error']['non_field_errors'][0]);
+          this.showAlert(JSON.parse(JSON.stringify(err))['error']);
           retorno = false; //Retorna este False si las credenciales son incorrectas.
         })
     }
@@ -52,7 +50,7 @@ export class LoginPage implements OnInit {
     this.user.username = "";
     this.user.password = "";
 
-    //console.log(retorno);
+    console.log(retorno);
     return retorno;
   }
 
