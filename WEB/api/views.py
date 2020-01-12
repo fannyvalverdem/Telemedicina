@@ -10,7 +10,8 @@ import requests,json
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 
-# Create your views here.
+# Create your views here
+
 class AutenticarUsuario(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super(AutenticarUsuario, self).post(request, *args, **kwargs)
@@ -30,11 +31,13 @@ class PersonaViewset(generics.ListAPIView):
 class UsuarioViewset(generics.ListAPIView):
 	queryset = models.Usuario.objects.all()
 	serializer_class = serializers.UsuarioSerializer
+	
 	def post(self, request, format=None):
 		persona=models.Persona.objects.all().last()
 		myDict = dict(request.data)
 		myDict["persona_id"] = serializers.PersonaSerializer(myDict)
-		serializer = serializers.UsuarioSerializer(data=myDict)
+		print(myDict)
+		serializer = serializers.UsuarioSerializer(data=request.data)
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
