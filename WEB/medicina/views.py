@@ -195,11 +195,6 @@ def selec_medico(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'seleccionar_medico.html', dictionary)
 
-def confirmacion_cita(request):
-	dictionary = dict(request=request) 
-	dictionary.update(csrf(request)) 
-	return render(request,'confirmar_cita.html', dictionary)
-
 def agendar_emergencia(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
@@ -779,8 +774,6 @@ def ingresar_horario(request):
 
 
 def agendar_cita(request):
-	list_especialidades = Especialidad.objects.values_list('nombre',flat=True)
-	
 	if request.method == 'POST':
 		print("POST")
 		
@@ -788,17 +781,32 @@ def agendar_cita(request):
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
-		text = form.cleaned_data['especialidad']
-		console.log(text)
-		d = {'form':form, 'text':text}
-		
-		return render(request,'agendar_cita.html', d)
+		especialidad = form.cleaned_data['especialidad']
+		fecha_reserva = request.POST.get("fecha_reserva")
+		data=fecha_reserva.split(' ')
+		fecha=data[0]
+		hora=data[1]
+		fecha_format=datetime.datetime.strptime(fecha, '%m/%d/%Y').strftime('%Y-%m-%d')
+		print(fecha_format)
+		citas=Citas_Medico.objects.filter(fecha=fecha_format)
+		print(citas)
+		return render(request,'citas_disponibles_agendar.html', {'citas_disponibles':citas,'especialidad':especialidad})
+		#return redirect('selec-cita')
 	else:
 	#creating a new form
 		form = CitasForms()
 			#returning form 
-	context = {'especialidades': list_especialidades, 'form':form}
+	context = {'form':form}
 	return render(request, 'agendar_cita.html', context );
+
+def confirmar_agendar_cita(request):
+	sku_m = request.GET.get('id')
+	sepa=sku_m.split('?')
+	sku=sepa[0]
+	especialidad = sepa[1].split('=')[1]
+	cita=Citas_Medico.objects.get(id=sku)
+
+	return render(request,'confirmar_cita.html', {'cita':cita,'especialidad':especialidad})
 
 def login(request): 
     print(request.method,"<<<<<<<<<<")
