@@ -425,6 +425,7 @@ $('#data_table_info_medica').DataTable({
     "columns": [
         { data: "id"},
         { data: "peso"},
+        { data: "talla"},
         { data: "sys"},
         { data: "dia"},
         { data: "pulse"},
@@ -439,6 +440,7 @@ $('#data_table_info_medica').DataTable({
         { width: 100, targets: 4},
         { width: 100, targets: 5},
         { width: 100, targets: 6},
+        { width: 100, targets: 7},
     ],
 });
 

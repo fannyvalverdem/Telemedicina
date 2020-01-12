@@ -5,6 +5,7 @@ from . import views
 
 
 urlpatterns = [
+	url(r'^inicio_pacientes/$', views.inicio_pacientes, name='inicio_pacientes'),
 	url(r'^$', views.inicio, name='inicio'),
 	url(r'^agendar_emergencia/$', views.agendar_emergencia, name='agendar_emergencia'),
 	url(r'^accounts/$', include('allauth.urls')),
