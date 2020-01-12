@@ -1,48 +1,71 @@
 
 
 <ion-header>
-<ion-menu [content]="content" side="right">
-  <ion-content>
-    <ion-list>
-      <ion-item menuClose detail-none>Close Menu</ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-  <ion-toolbar>
+  <ion-row class="ion-justify-content-end">
+    <ion-col>
+
+    </ion-col>
+  </ion-row>
+  <ion-row>
+>>>>>>> 382841a0357736af958c1309bc7b5468341e112d
     <ion-img src="assets/ICONS_APP/ICONS_APP/logo.png"></ion-img>
-  </ion-toolbar>
+  </ion-row>
+    
+  
 </ion-header>
 
-<ion-content class="vertical-align-content">
+<ion-content >
   <ion-grid>
-    
+    <ion-row id="containerbuttons">
     <ion-row class="ion-justify-content-center">
-      <ion-col size="5" size-sm class="ion-align-self-center" >
+      <ion-col size="5" size-sm class="ion-align-self-center button" >
         <ion-row class="ion-justify-content-center" routerLink="../agendar-cita-esp">
           <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/agendar_cita_2.png"></ion-img>
          
-        </ion-row>        
+        </ion-row>
+             
       </ion-col>
-      <ion-col size="5" size-sm class="ion-align-self-center">
+      <ion-col size="5" size-sm class="ion-align-self-center button">
         <ion-row class="ion-justify-content-center" routerLink="../videollamada">
           <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/iniciar_consulta.png"></ion-img>
           
         </ion-row>
       </ion-col>
+      <ion-col size="5" size-sm class="ion-align-self-center">
+        <ion-row class="ion-justify-content-center">
+        <ion-label class="desc">Agendar cita</ion-label>
+      </ion-row>
+      </ion-col>
+      <ion-col size="5" size-sm class="ion-align-self-center">
+        <ion-row class="ion-justify-content-center">
+        <ion-label class="desc">Iniciar consulta</ion-label>
+      </ion-row>
+      </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="5" size-sm class="ion-align-self-center" >
+      <ion-col size="5" size-sm class="ion-align-self-center button" >
         <ion-row class="ion-justify-content-center" routerLink="../principal">        
           <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/doctores_fav_2.png"></ion-img>
         </ion-row>
       </ion-col>
-      <ion-col size="5" size-sm class="ion-align-self-center">
+      <ion-col size="5" size-sm class="ion-align-self-center button">
         <ion-row class="ion-justify-content-center" routerLink="../principal">        
           <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/historial_medico_2.png"></ion-img>
           
         </ion-row>
       </ion-col>
+      <ion-col size="5" size-sm class="ion-align-self-center">
+        <ion-row class="ion-justify-content-center">
+        <ion-label class="desc">Doctores favoritos</ion-label>
+      </ion-row>
+      </ion-col>
+      <ion-col size="5" size-sm class="ion-align-self-center">
+        <ion-row class="ion-justify-content-center">
+        <ion-label class="desc">Historial medico</ion-label>
+      </ion-row>
+      </ion-col>
     </ion-row>
+  </ion-row>
 
     <ion-row class="ion-justify-content-center em " routerLink="../emergencia">
       <ion-col size="10" size-sm class=" ion-align-self-center emergencia" >

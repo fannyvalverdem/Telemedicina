@@ -1,0 +1,38 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="col-12">
+    <div id="titulo_ini" class="row">
+        <header>
+            <h1>¡Consejos!</h1>
+            <br><br><br>
+        </header>
+
+        <section class="container" >
+          <div id="notas">
+            {% for consejos in object_list %}
+            <article id=art_inicio>
+
+                    <a href="/ver_mas_consejo/?id={{ consejos.id }}" name="consejos.id">
+                    
+                        <div id="pictu">
+                          <img src="http://127.0.0.1:8000/{{consejos.imagen}}" width="100%">
+                        </div>
+                        <div id="consejo_inicio" class="info" style="font-weight:bold">
+                          <header style="text-align:center" >
+                            <h5 id="titulo1" style="color:red" >{{consejos.titulo}}</h5>
+                          </header>
+                        </div>
+                    </a>
+
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+    </div>
+</div>
+
+
+{% endblock %}

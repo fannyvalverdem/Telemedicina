@@ -34,11 +34,19 @@ class Especialidad(models.Model):
 	def __str__(self):
 		return self.nombre
 
+class Tarifa(models.Model):
+	nombre= models.CharField(max_length=100)
+	descripcion=models.TextField()
+	precio=models.FloatField()
+	def __str__(self):
+		return self.nombre
+
 class Doctor(models.Model):
 	identificador_medico=models.CharField(max_length=250)
 	documento=models.FileField(upload_to=doc_up,null=True)
 	calificacion_total=models.FloatField(default=0,null=True)
 	citas_realizadas=models.IntegerField(default=0,null=True)
+	tarifa=models.ForeignKey(Tarifa, null=True, blank=True, on_delete=models.CASCADE)
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.user_id.persona_id.nombre+" "+self.user_id.persona_id.apellido
@@ -76,7 +84,16 @@ class Historial_consulta(models.Model):
 class Calificacion(models.Model):
 	valor=models.IntegerField()
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
-	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)	
+	doctor_id=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
+
+class Citas_Medico(models.Model):
+	m_id=models.IntegerField()
+	m_url=models.CharField(max_length=300,null=True)
+	m_duration=models.IntegerField()
+	fecha=models.DateField()
+	hora=models.TimeField()
+	disponible=models.BooleanField(default=True)
+	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
 class Detalle_Consulta(models.Model):
 	fecha_reser=models.DateField()
@@ -85,6 +102,7 @@ class Detalle_Consulta(models.Model):
 	precio=models.FloatField()
 	calificacion=models.IntegerField()
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
+	zoom=models.ForeignKey(Citas_Medico, null=True, blank=True, on_delete=models.CASCADE)
 
 class Consulta(models.Model):
 	estado=models.TextField()
@@ -114,13 +132,6 @@ class Paquete(models.Model):
 	citas=models.IntegerField()
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
 	examen=models.ForeignKey(Examenes, null=True, blank=True, on_delete=models.CASCADE)
-
-class Tarifa(models.Model):
-	nombre= models.CharField(max_length=100)
-	descripcion=models.TextField()
-	precio=models.FloatField()
-	def __str__(self):
-		return self.nombre
 		
 class Medicamento(models.Model):
 	nombre= models.CharField(max_length=100)
@@ -168,12 +179,13 @@ class Publicidad(models.Model):
 		
 class Info_Medica(models.Model):	
 	peso=models.FloatField()
+	talla=models.FloatField()
 	sys=models.FloatField()
 	dia=models.FloatField()
 	pulse= models.IntegerField()
 	glucosa=models.FloatField()
 	colesterol=models.FloatField()
-
+	
 
 class Noticias(models.Model):
 	imagen=models.ImageField(upload_to = 'static/imagenes', default='static/imagenes/no-img.jpg')
@@ -186,14 +198,6 @@ class Consejos(models.Model):
 	titulo=models.CharField(max_length=250)
 	descripcion=models.TextField()
 	fuente=models.CharField(max_length=250)
-
-class Citas_Medico(models.Model):
-	m_id=models.IntegerField()
-	m_url=models.CharField(max_length=300,null=True)
-	m_duration=models.IntegerField()
-	fecha=models.DateField()
-	hora=models.TimeField()
-	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
 class Medico_Favorito(models.Model):
 	medico=models.ForeignKey(MatchEspecialidades, null=True, blank=True, on_delete=models.CASCADE)

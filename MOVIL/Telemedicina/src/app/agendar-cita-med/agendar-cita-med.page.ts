@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AgendarCitaMedPage implements OnInit {
   
   public form = [
-    { val: 'Doctor 1', isChecked: true },
+    { val: 'Doctor 1', isChecked: false },
     { val: 'Doctor 2', isChecked: false },
     { val: 'Doctor 3', isChecked: false }
   ];

@@ -1,0 +1,141 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+
+{% block contenido %}
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content" id="myModal" >
+      <div class="modal-header">
+        <br>
+        <h4 class="modal-title">Terminos y condiciones</h4>
+      </div>
+
+      <div class="modal-body" style="text-align:justify;">
+        <p>
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="col-12">
+    <div id="titulo_ini" class="row">
+      <a href="/nuestros_paquetes/" >
+        <header>
+            <h1>¡Paquetes especiales para ti!</h1>
+            <br>
+        </header>
+      </a>
+
+      <section class="container" >
+        <div id="notas">
+          {% for paquete in object_list %}
+          <article id=art_inicio>
+              <div id="paquete_inicio" class="col-12">
+                  <br><br>
+                  <h4>{{paquete.nombre}}</h4>
+                  <br><br>
+                  <p>{{paquete.descripcion}}</p>
+                  <br>
+                  <h5>{{paquete.precio}}</h5>
+                  <a href="/paquete_pago/?id={{ paquete.id }}" name="paquete.id">Obtener</a>
+              </div>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+<div class="col-12">
+    <div id="titulo_ini2" class="row">
+      <a href="/mis_consejos/" >
+        <header>
+            <h1>Consejos de Salud</h1>
+            <br>
+        </header>
+      </a>
+      <section class="container" >
+        <div id="notas">
+          {% if object_list2 %}
+          {% for consejos in object_list2 %}
+          
+            <article id=art_inicio>
+              
+              <a href="/ver_mas_consejo/?id={{ consejos.id }}" name="consejos.id">
+                  
+                  <div id="art_fondo">
+                    <img src="http://127.0.0.1:8000/{{consejos.imagen}}" width="100%">
+                    <div id="texth5">{{consejos.titulo}}</div>
+                  </div>
+                  
+              </a>
+            
+          </article>
+          {% endfor %}
+          {% endif %}
+
+          
+        </div>
+      </section>
+    </div>
+</div>
+<br>
+<br>
+<br>
+
+<div class="col-12">
+    <div id="titulo_ini" class="row">
+      <a href="/mis_noticias/" >
+        <header>
+            <h1>Noticias</h1>
+            <br>
+        </header>
+      </a>
+      <section class="container" >
+        <div id="notas">
+          {% if object_list3 %}
+          {% for noticias in object_list3 %}
+
+          <article id=art_inicio>
+              
+              <a href="/ver_mas_noticias/?ids={{ noticias.id }}" name="noticias.id">
+                  
+                  <div id="art_fondo">
+                    <img src="http://127.0.0.1:8000/{{noticias.imagen}}" width="100%">
+                    <div id="texth5">{{noticias.titulo}}</div>
+                  </div>
+                  
+              </a>
+            
+          </article>
+
+          {% endfor %}
+          {% endif %}
+
+          
+        </div>
+      </section>
+    </div>
+</div>
+
+{% endblock %}
+{% block script %}
+<script>
+  $("#myModal").modal('show');
+  //$(document).ready(function(){
+    //$("#myModal").modal('show');
+  //});
+</script>
+{% endblock %}

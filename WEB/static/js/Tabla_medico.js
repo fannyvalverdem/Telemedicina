@@ -425,6 +425,7 @@ $('#data_table_info_medica').DataTable({
     "columns": [
         { data: "id"},
         { data: "peso"},
+        { data: "talla"},
         { data: "sys"},
         { data: "dia"},
         { data: "pulse"},
@@ -439,6 +440,7 @@ $('#data_table_info_medica').DataTable({
         { width: 100, targets: 4},
         { width: 100, targets: 5},
         { width: 100, targets: 6},
+        { width: 100, targets: 7},
     ],
 });
 
@@ -548,9 +550,23 @@ $('#data_table_ver_medico_fav').DataTable({
         { width: 100, targets: 3},
     ],
 });
-
+li=[];
 $('#data_table_ingresar_medico_fav').DataTable({
-
+    rowCallback: function( row, data ) {
+        if (li.length==0){
+            li.push(data['doctor_id']['identificador_medico']);
+        }
+        else{
+            for (var i=0; i<li.length;i++){
+                if (li[i]==data['doctor_id']['identificador_medico']){
+                    $(row).hide();
+                }
+                else{
+                    li.push(data['doctor_id']['identificador_medico'])
+                }
+            }
+        }
+    },
     "destroy": true,
     "ajax": 
         {

@@ -1,35 +1,7 @@
 {% extends 'index_paciente.html' %}
 {% load static %}
 
-{% block import %}
-<style>
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 
-article{
-  border: 1px gainsboro solid;
-  width: 325px;
-  height: 400px;
-  box-shadow: 3px 2px #eeeeee;
-  border-radius: 4px;
-  display: inline-block;
-  float: left;
-  margin: 10px;
-}
-h2{
-  font-size: 0.8em;
-  font-family: 'Roboto',Sans-Serif;
-}
-
-div[id^="pictu"]{
-  width: 325px;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-  
-}
-
-</style>
-{% endblock %}
 
 
 {% block contenido %}
@@ -37,37 +9,37 @@ div[id^="pictu"]{
 
 <div class="col-12">
     <div id="titulo_ini2" class="row">
+      <a href="/mis_consejos/" >
         <header>
             <h1>Consejos de Salud</h1>
         </header>
-        <section class="container" >
-          <div id="notas">
-            {% if object_list %}
-            {% for consejos in object_list %}
-            
-            <article id=art_inicio>
-                
-                <a href="/ver_mas_consejo/?id={{ consejos.id }}" name="consejos.id">
-                    
-                    <div id="pictu">
-                      <img src="http://127.0.0.1:8000/{{consejos.imagen}}" width="100%">
-                    </div>
-                    <div id="consejo_inicio" class="info">
-
-                        <header>
-                          <h2 id="titulo1">{{consejos.titulo}}</h2>
-                        </header>
-
-                    </div>
-                </a>
+      </a>
+      <section class="container" >
+        <div id="notas">
+          {% if object_list %}
+          {% for consejos in object_list %}
+          
+          <article id=art_inicio>
               
-            </article>
-            {% endfor %}
-            {% endif %}
-
+              <a href="/ver_mas_consejo/?id={{ consejos.id }}" name="consejos.id">
+                  
+                  <div id="pictu">
+                    <img src="http://127.0.0.1:8000/{{consejos.imagen}}" width="100%">
+                  </div>
+                  <div id="consejo_inicio" class="info" style="font-weight:bold">
+                    <header style="text-align:center" >
+                      <h5 id="titulo1" style="color:red" >{{consejos.titulo}}</h5>
+                    </header>
+                  </div>
+              </a>
             
-          </div>
-        </section>
+          </article>
+          {% endfor %}
+          {% endif %}
+
+          
+        </div>
+      </section>
     </div>
 </div>
 <br>
@@ -76,34 +48,36 @@ div[id^="pictu"]{
 
 <div class="col-12">
     <div id="titulo_ini" class="row">
+      <a href="/mis_noticias/" >
         <header>
             <h1>Noticias</h1>
         </header>
-        <section class="container" >
-          <div id="notas">
-            {% if object_list2 %}
-            {% for noticias in object_list2 %}
-            <article id=art_inicio>
-              <a href="/ver_mas_noticias/?ids={{ noticias.id }}" name="noticias.id">
-                    
-                    <div id="pictu">
-                      <img src="http://127.0.0.1:8000/{{noticias.imagen}}" width="100%">
-                    </div>
-                    <div id="noticia_inicio" class="info">
+      </a>
+      <section class="container" >
+        <div id="notas">
+          {% if object_list2 %}
+          {% for noticias in object_list2 %}
+          <article id=art_inicio>
+            <a href="/ver_mas_noticias/?ids={{ noticias.id }}" name="noticias.id">
+                  
+                <div id="pictu">
+                  <img src="http://127.0.0.1:8000/{{noticias.imagen}}" width="100%">
+                </div>
+                <div id="noticia_inicio" class="info" style="font-weight:bold">
 
-                        <header>
-                          <h2 id="titulo1">{{noticias.titulo}}</h2>
-                        </header>
+                    <header style="text-align:center" >
+                      <h5 id="titulo1" style="color:red" >{{noticias.titulo}}</h5>
+                    </header>
 
-                    </div>
-                </a>
-            </article>
-            {% endfor %}
-            {% endif %}
+                </div>
+            </a>
+          </article>
+          {% endfor %}
+          {% endif %}
 
-            
-          </div>
-        </section>
+          
+        </div>
+      </section>
     </div>
 </div>
 

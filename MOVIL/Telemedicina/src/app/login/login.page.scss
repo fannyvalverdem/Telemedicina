@@ -7,6 +7,19 @@
 
 }
 
+#input{
+    padding-top: 10%;
+    
+}
+
+#recuperar{
+    ion-label{
+        color: #e53956;
+        font-size: 14px;
+
+    }
+}
+
 ion-input{
     border: solid 1px #65b4c3;
     border-radius: 30px;
@@ -28,3 +41,25 @@ ion-row{
 ion-label{
     padding: 5px;
 }
+
+#redes{
+    padding: 0px;
+}
+
+#registro{
+    position: fixed;
+    bottom:0;
+    right:0;
+    left:0;
+    padding: 15px;
+    background-color:#65b4c3;
+    ion-label{
+        color:white;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    
+}
+
+ion-footer{padding-top: 10%;}
+

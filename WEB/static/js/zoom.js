@@ -1,8 +1,17 @@
 (function(){
 
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
     console.log('checkSystemRequirements');
     console.log(JSON.stringify(ZoomMtg.checkSystemRequirements()));
 
+    var zoom_id=getParameterByName('zoomid');
     // it's option if you want to change the jssdk dependency link resources.
     // ZoomMtg.setZoomJSLib('https://source.zoom.us/1.6.0/lib', '/av'); // CDN version default
     // ZoomMtg.setZoomJSLib('https://jssdk.zoomus.cn/1.6.0/lib', '/av'); // china cdn option 
@@ -13,6 +22,7 @@
     
     var API_KEY = 'fRb1YgwnRT6ASYvVxSMwOg';
 
+    //var id_zoom=String($('#zoom_id_cita').html())
     /**
      * NEVER PUT YOUR ACTUAL API SECRET IN CLIENT SIDE CODE, THIS IS JUST FOR QUICK PROTOTYPING
      * The below generateSignature should be done server side as not to expose your api secret in public
@@ -24,8 +34,8 @@
         var meetConfig = {
             apiKey: API_KEY,
             apiSecret: API_SECRET,
-            meetingNumber: 3496848501,
-            userName: "Persona",
+            meetingNumber: zoom_id,
+            userName: "Paciente",
             passWord: "",
             leaveUrl: "http://127.0.0.1:8000/",
             role: 0

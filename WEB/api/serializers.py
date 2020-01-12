@@ -43,12 +43,18 @@ class AdministradorSerializer(serializers.ModelSerializer):
 		model= models.Administrador
 		fields=("id","user_id")
 
+class TarifasSerializer(serializers.ModelSerializer):
+	class Meta:
+		model= models.Tarifa
+		fields=("nombre","descripcion","precio")
+
 class MedicoSerializer(serializers.ModelSerializer):
 	user_id=UsuarioSerializer()
+	tarifa=TarifasSerializer()
 
 	class Meta:
 		model= models.Doctor
-		fields=("id","identificador_medico","calificacion_total","citas_realizadas","user_id")
+		fields=("id","identificador_medico","calificacion_total","tarifa","citas_realizadas","user_id")
 
 class MatchEspecialidadSerializer(serializers.ModelSerializer):
 	doctor=MedicoSerializer()
@@ -69,12 +75,6 @@ class PaquetesSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Paquete
 		fields=("id","nombre","descripcion","precio","duracion","citas","especialidad")
-
-class TarifasSerializer(serializers.ModelSerializer):
-	class Meta:
-		model= models.Tarifa
-		fields=("nombre","descripcion","precio")
-
 
 class DiasSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -167,7 +167,7 @@ class RecetarMedicamentoSerializer(serializers.ModelSerializer):
 class InfoMedicaSerializer(serializers.ModelSerializer):
 	class Meta:
 		model=models.Info_Medica
-		fields=("id","peso","sys","dia","pulse","glucosa","colesterol")
+		fields=("id","talla","peso","sys","dia","pulse","glucosa","colesterol")
 
 class ConsejosSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -191,3 +191,9 @@ class PagosMedicoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Pagos_Doctor
 		fields=("id","fecha","hora","precio","estado","doctor")
+
+class CitasMedicoSerializer(serializers.ModelSerializer):
+	doctor=MedicoSerializer()
+	class Meta:
+		model= models.Citas_Medico
+		fields=("id","m_id","m_url","fecha","hora","m_duration","doctor")

@@ -5,6 +5,8 @@ from . import views
 
 
 urlpatterns = [
+	url(r'^calificar/$', views.calificar, name='calificar'),
+	url(r'^inicio_pacientes/$', views.inicio_pacientes, name='inicio_pacientes'),
 	url(r'^$', views.inicio, name='inicio'),
 	url(r'^agendar_emergencia/$', views.agendar_emergencia, name='agendar_emergencia'),
 	url(r'^accounts/$', include('allauth.urls')),
@@ -12,7 +14,6 @@ urlpatterns = [
 	url(r'^confirmacion_emergencia/$', views.confirmacion_emergencia, name='confirmacion_emergencia'),
 
 	url(r'^selec_medico/$', views.selec_medico, name='selec_medico'),
-	url(r'^confirmacion_cita/$', views.confirmacion_cita, name='confirmacion_cita'),
 	url(r'^login/$', views.login, name='login'),
 	url(r'^perfil/$', views.perfil, name='perfil'),
 	url(r'^editar_perfil/$', views.editar_perfil, name='edit_perfil'),
@@ -26,10 +27,13 @@ urlpatterns = [
 
 	url(r'^ver_mas_consejo/$', views.ver_mas_consejo, name='ver_mas_consejo'),
 	url(r'^ver_mas_noticias/$', views.ver_mas_noticias, name='ver_mas_noticias'),
+	url(r'^mis_noticias/$', views.mis_noticias, name='mis_noticias'),
+	url(r'^mis_consejos/$', views.mis_consejos, name='mis_consejos'),
 
 	
 	url(r'^consejos_noticias/$', views.consejos_noticias, name='consejos_noticias'),
 	
+	url(r'^nuestros_paquetes/$', views.nuestros_paquetes, name='nuestros_paquetes'),
 	url(r'^paquetes_inicio/$', views.paquetes_inicio, name='paquetes_inicio'),
 	url(r'^paquete_pago/$', views.paquete_pago, name='paquete_pago'),
 	url(r'^paquete_confirmacion/$', views.paquete_confirmacion, name='paquete_confirmacion'),
@@ -73,6 +77,9 @@ urlpatterns = [
 	url(r'^medico/$', views.index_medico, name='index_medico'),
 	url(r'^administrador/', views.index_admin, name='index_admin'),
 	url(r'^agendar_cita/$', views.agendar_cita, name='ag-cita'),
+	#url(r'^seleccionar_agendar_cita/$', views.medicos_agendar_cita, name='selec-cita'),
+	url(r'^confirmar_cita/$', views.confirmar_agendar_cita, name='confi-cita'),
+	url(r'^guardar_cita/$', views.guardar_cita, name='guardar_cita'),
 
 	url(r'^ingresar_publicidad/$', views.publicidad_ingresar, name='ing-publicidad'),
 	url(r'^ver_publicidad/$', views.ver_publicidad, name='ver-publicidad'),
