@@ -1,0 +1,35 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+
+{% block contenido %}
+
+<div class="col-12">
+    <div id="titulo_ini" class="row">
+        <header>
+            <h1>¡Nuestros paquetes!</h1>
+            <br><br><br>
+        </header>
+
+        <section class="container" >
+          <div id="notas">
+            {% for paquete in object_list %}
+            <article id=art_inicio>
+                <div id="paquete_inicio" class="col-12">
+                    <br><br>
+                    <h4>{{paquete.nombre}}</h4>
+                    <br>
+                    <p>{{paquete.descripcion}}</p>
+                    <p>{{paquete.citas}} citas gratis</p>
+                    <p>{{paquete.faltantes}} disponibles</p>
+                    <p>Durante {{paquete.duracion}} meses</p>
+                    <h5>{{paquete.precio}}</h5>
+                </div>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+    </div>
+</div>
+
+
+{% endblock %}

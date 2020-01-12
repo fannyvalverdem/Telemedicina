@@ -242,13 +242,15 @@ li{
 article[id="art_inicio"]{
   border: 1px gainsboro solid;
   width: 325px;
-  height: 400px;
-  box-shadow: 3px 2px #eeeeee;
+  height: 325px;
+  box-shadow: 15px 15px #eeeeee;
   border-radius: 4px;
   display: inline-block;
   float: left;
   margin: 10px;
 }
+
+
 
 article[id="art_conf_cita"]{
   width: 325px;
@@ -260,6 +262,16 @@ article[id="art_conf_cita"]{
   margin: 10px;
   background-color: rgba(101, 180, 195, 0.2);
 }
+#art_fondo {
+	background-color: #555555;
+	position: relative;
+	text-align: center;
+}
+#art_fondo img {
+	
+	opacity: 0.5;
+	filter: alpha(opacity=50); /* For IE8 and earlier */
+}
 
 #paquete_inicio h4{
 	font-family: 'Montserrat', sans-serif;
@@ -269,19 +281,23 @@ article[id="art_conf_cita"]{
 	font-size:150%;
 }
 
+#texth5 {
+	position: absolute;
+  	bottom: 8px;
+  	right: 16px;
+  	color: #FFFFFF;
+	font-family: 'Montserrat', sans-serif;
+	text-align: right;
+	font-weight: bold;
+	font-size:150%;
+}
+
 #paquete_inicio p{
 	color: #727176;
 	font-family: 'Montserrat', sans-serif;
 	text-align: center;
 }
 
-#paquete_inicio h5{
-	color: #65b4c3;
-	font-family: 'Montserrat', sans-serif;
-	text-align: right;
-	font-weight: bold;
-	font-size:200%;
-}
 
 #paquete_inicio a{
 	color: #65b4c3;
