@@ -12,11 +12,12 @@
                 <div id="paquete_inicio" class="col-12">
                     <br>
                     <img id="avatar" src="{% static 'imagenes/doctor.png' %}" alt="">
-                    <br><br>
+                    <br>
                     <p>Especialidad: {{especialidad}}</p>
                     <p>Médico: {{ cita.doctor.user_id.persona_id.nombre}} {{ cita.doctor.user_id.persona_id.apellido}}</p>
                     <p>Fecha: {{cita.fecha}}</p>
                     <p>Hora: {{cita.hora}}</p>
+                    <p>Precio: ${{cita.doctor.tarifa.precio}}</p>
                 </div>
             </article>
             
@@ -29,8 +30,13 @@
             
         </div>
         <div class="col-6">
-            <button id="btn-continuar">Confirmar</button>
+            <form action="/boton_pago/">
+              <button id="btn-continuar">Continuar pago</button>
+            </form>
+            <br>
+            <button id="btn-continuar"><a href="/guardar_cita/?id={{ cita.id }}" name="cita.id">Saltar</a></button>
         </div>
+        
         
     </div>
 </div>

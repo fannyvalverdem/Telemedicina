@@ -39,12 +39,18 @@ class AdministradorSerializer(serializers.ModelSerializer):
 		model= models.Administrador
 		fields=("id","user_id")
 
+class TarifasSerializer(serializers.ModelSerializer):
+	class Meta:
+		model= models.Tarifa
+		fields=("nombre","descripcion","precio")
+
 class MedicoSerializer(serializers.ModelSerializer):
 	user_id=UsuarioSerializer()
+	tarifa=TarifasSerializer()
 
 	class Meta:
 		model= models.Doctor
-		fields=("id","identificador_medico","calificacion_total","citas_realizadas","user_id")
+		fields=("id","identificador_medico","calificacion_total","tarifa","citas_realizadas","user_id")
 
 class MatchEspecialidadSerializer(serializers.ModelSerializer):
 	doctor=MedicoSerializer()
@@ -65,12 +71,6 @@ class PaquetesSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Paquete
 		fields=("id","nombre","descripcion","precio","duracion","citas","especialidad")
-
-class TarifasSerializer(serializers.ModelSerializer):
-	class Meta:
-		model= models.Tarifa
-		fields=("nombre","descripcion","precio")
-
 
 class DiasSerializer(serializers.ModelSerializer):
 	class Meta:

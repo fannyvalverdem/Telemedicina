@@ -34,11 +34,19 @@ class Especialidad(models.Model):
 	def __str__(self):
 		return self.nombre
 
+class Tarifa(models.Model):
+	nombre= models.CharField(max_length=100)
+	descripcion=models.TextField()
+	precio=models.FloatField()
+	def __str__(self):
+		return self.nombre
+
 class Doctor(models.Model):
 	identificador_medico=models.CharField(max_length=250)
 	documento=models.FileField(upload_to=doc_up,null=True)
 	calificacion_total=models.FloatField(default=0,null=True)
 	citas_realizadas=models.IntegerField(default=0,null=True)
+	tarifa=models.ForeignKey(Tarifa, null=True, blank=True, on_delete=models.CASCADE)
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.user_id.persona_id.nombre+" "+self.user_id.persona_id.apellido
@@ -84,6 +92,7 @@ class Citas_Medico(models.Model):
 	m_duration=models.IntegerField()
 	fecha=models.DateField()
 	hora=models.TimeField()
+	disponible=models.BooleanField(default=True)
 	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 
 class Detalle_Consulta(models.Model):
@@ -123,13 +132,6 @@ class Paquete(models.Model):
 	citas=models.IntegerField()
 	especialidad=models.ForeignKey(Especialidad, null=True, blank=True, on_delete=models.CASCADE)
 	examen=models.ForeignKey(Examenes, null=True, blank=True, on_delete=models.CASCADE)
-
-class Tarifa(models.Model):
-	nombre= models.CharField(max_length=100)
-	descripcion=models.TextField()
-	precio=models.FloatField()
-	def __str__(self):
-		return self.nombre
 		
 class Medicamento(models.Model):
 	nombre= models.CharField(max_length=100)

@@ -591,6 +591,7 @@ def ingresar_medico(request):
 
 		doc=Doctor(
 			identificador_medico=licencia_med,
+			tarifa=tarifa,
 			user_id=user
 		)
 
@@ -788,10 +789,13 @@ def agendar_cita(request):
 		hora=data[1]
 		fecha_format=datetime.datetime.strptime(fecha, '%m/%d/%Y').strftime('%Y-%m-%d')
 		print(fecha_format)
-		citas=Citas_Medico.objects.filter(fecha=fecha_format)
-		print(citas)
+		citas_m=Citas_Medico.objects.filter(fecha=fecha_format,hora__gte=hora,disponible=True)
+		match_doctores=MatchEspecialidades.objects.filter(especialidad=especialidad)
+		doctores=Doctor.objects.all()
+		doc=doctores.filter(id__in=match_doctores)
+		citas=citas_m.filter(doctor_id__in=doc).order_by('hora')
 		return render(request,'citas_disponibles_agendar.html', {'citas_disponibles':citas,'especialidad':especialidad})
-		#return redirect('selec-cita')
+		#return redirect('index_paciente')
 	else:
 	#creating a new form
 		form = CitasForms()
@@ -807,6 +811,24 @@ def confirmar_agendar_cita(request):
 	cita=Citas_Medico.objects.get(id=sku)
 
 	return render(request,'confirmar_cita.html', {'cita':cita,'especialidad':especialidad})
+
+def guardar_cita(request):
+	sku_m = request.GET.get('id')
+	sepa=sku_m.split('?')
+	sku=sepa[0]
+	especialidad = sepa[1].split('=')[1]
+	cita=Citas_Medico.objects.get(id=sku)
+	today = date.today()
+	fecha_reser = today.strftime("%Y-%m-%d")
+	detalle=Detalle_Consulta(
+		fecha_reser=fecha_reser,
+		fecha_prog=cita.fecha,
+		hora=cita.hora,
+		precio=cita.doctor.tarifa.precio,
+		calificacion=0,
+		especialidad=especialidad,
+		zoom=cita
+		)
 
 def login(request): 
     print(request.method,"<<<<<<<<<<")
