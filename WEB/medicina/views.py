@@ -45,7 +45,7 @@ def cerrar_sesion(request):
 
 def inicio(request):
 	if request.user.is_authenticated:
-		return render(request, "index_paciente.html")
+		return redirect(inicio_pacientes)
 	
 	if request.method == 'POST':
 		print("POST")
@@ -55,7 +55,7 @@ def inicio(request):
 	if form.is_valid():
 		dictionary = dict(request=request) 
 		dictionary.update(csrf(request)) 
-		return render(request,'index_paciente.html', dictionary)
+		return redirect(inicio_pacientes)
 	else:
 	#creating a new form
 		form = SignupForm()
@@ -591,6 +591,7 @@ def ingresar_medico(request):
 
 		doc=Doctor(
 			identificador_medico=licencia_med,
+			tarifa=tarifa,
 			user_id=user
 		)
 
@@ -788,10 +789,13 @@ def agendar_cita(request):
 		hora=data[1]
 		fecha_format=datetime.datetime.strptime(fecha, '%m/%d/%Y').strftime('%Y-%m-%d')
 		print(fecha_format)
-		citas=Citas_Medico.objects.filter(fecha=fecha_format)
-		print(citas)
+		citas_m=Citas_Medico.objects.filter(fecha=fecha_format,hora__gte=hora,disponible=True)
+		match_doctores=MatchEspecialidades.objects.filter(especialidad=especialidad)
+		doctores=Doctor.objects.all()
+		doc=doctores.filter(id__in=match_doctores)
+		citas=citas_m.filter(doctor_id__in=doc).order_by('hora')
 		return render(request,'citas_disponibles_agendar.html', {'citas_disponibles':citas,'especialidad':especialidad})
-		#return redirect('selec-cita')
+		#return redirect('index_paciente')
 	else:
 	#creating a new form
 		form = CitasForms()
@@ -807,6 +811,42 @@ def confirmar_agendar_cita(request):
 	cita=Citas_Medico.objects.get(id=sku)
 
 	return render(request,'confirmar_cita.html', {'cita':cita,'especialidad':especialidad})
+
+def guardar_cita(request):
+	sku_m = request.GET.get('id')
+	sepa=sku_m.split('?')
+	sku=sepa[0]
+	esp = sepa[1].split('=')[1]
+	especialidad=Especialidad.objects.get(nombre=esp)
+	cita=Citas_Medico.objects.get(id=sku)
+	today = date.today()
+	fecha_reser = today.strftime("%Y-%m-%d")
+	cita.disponible=False
+	cita.save()
+	detalle=Detalle_Consulta(
+		fecha_reser=fecha_reser,
+		fecha_prog=cita.fecha,
+		hora=cita.hora,
+		precio=cita.doctor.tarifa.precio,
+		calificacion=0,
+		especialidad=especialidad,
+		zoom=cita
+		)
+	detalle.save()
+	current_user = request.user
+	user_ac_id=current_user.id
+	paciente=Paciente.objects.get(user_id=user_ac_id)
+
+	consulta=Consulta(
+		estado='agendada',
+		paciente_id=paciente,
+		doctor_id=cita.doctor,
+		detalle=detalle
+		)
+
+	consulta.save()
+
+	return redirect('citas_prox')
 
 def login(request): 
     print(request.method,"<<<<<<<<<<")
@@ -1037,6 +1077,7 @@ def ingresar_info_medica(request):
 	#checking the form is valid or not 
 	if form.is_valid():
 		peso =form.cleaned_data['peso']
+		talla =form.cleaned_data['talla']
 		sys =form.cleaned_data['sys']
 		dia = form.cleaned_data['dia']
 		pulse =form.cleaned_data['pulse']
@@ -1045,6 +1086,7 @@ def ingresar_info_medica(request):
 
 		paquete=Info_Medica(
 			peso=peso,
+			talla=talla,
 			sys=sys,
 			dia=dia,
 			pulse=pulse,
@@ -1307,3 +1349,40 @@ def realizar_pago(request):
 	pago.save()
 	
 	return redirect('pagos_realizados_admin')
+
+def inicio_pacientes(request):
+	last_tres = Paquete.objects.order_by('-id')[:3]
+	data=[]
+	for paque in last_tres:
+		paque_id=paque.id
+		nombre=paque.nombre
+		descripcion=paque.descripcion
+		citas=paque.citas
+		duracion=paque.duracion
+		precio=paque.precio
+		paquete={'id':paque_id,'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio}
+		data.append(paquete)
+		print(data)
+
+	last_tres2 = Consejos.objects.order_by('-id')[:3]
+	last_tres3 = Noticias.objects.order_by('-id')[:3]
+	data_consejo=[]
+	data_noticia=[]
+	for conse in last_tres2:		
+		ids=conse.id
+		imagen=str(conse.imagen)
+		titulo=conse.titulo
+		descripcion=conse.descripcion
+		fuente=conse.fuente
+		consejo = {'id':ids,'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}
+		data_consejo.append(consejo)
+	for noti in last_tres3:		
+		ids=noti.id
+		imagen=str(noti.imagen)
+		titulo=noti.titulo
+		descripcion=noti.descripcion
+		fuente=noti.fuente
+		noticia = {'id':ids,'imagen': imagen,'titulo': titulo,'descripcion': descripcion,'fuente': fuente}
+		data_noticia.append(noticia)
+	context= {'object_list': data,'object_list2': data_consejo,'object_list3': data_noticia}
+	return render(request, 'inicio_paquetes.html', context)
