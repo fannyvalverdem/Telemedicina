@@ -19,6 +19,8 @@ class AutenticarUsuario(ObtainAuthToken):
         # print(models.Paciente.objects.get(user_id=token.user_id).user_id.id)
         if token.user_id == models.Paciente.objects.get(user_id=token.user_id).user_id.id:
         	return Response({'token': token.key, 'id': token.user_id})
+        else:
+        	return Response("No es paciente", status=status.HTTP_400_BAD_REQUEST)
 		
 class PersonaViewset(generics.ListAPIView):
     queryset = models.Persona.objects.all()
@@ -35,7 +37,7 @@ class UsuarioViewset(generics.ListAPIView):
 	serializer_class = serializers.UsuarioSerializer
 	
 	def post(self, request, format=None):
-		persona=models.Persona.objects.all().last()
+		# persona=models.Persona.objects.all().last()
 		myDict = dict(request.data)
 		myDict["persona_id"] = serializers.PersonaSerializer(myDict)
 		print(myDict)
@@ -56,6 +58,7 @@ class UsuarioViewset(generics.ListAPIView):
 class AdministradorViewset(generics.ListAPIView):
     queryset = models.Administrador.objects.all()
     serializer_class = serializers.AdministradorSerializer
+
     def post(self, request, format=None):
     	serializer = serializers.AdministradorSerializer(data=request.data)
     	if serializer.is_valid():
@@ -66,6 +69,17 @@ class AdministradorViewset(generics.ListAPIView):
 class PacienteViewset(generics.ListAPIView):
 	queryset = models.Paciente.objects.all()
 	serializer_class = serializers.PacienteSerializer
+
+	def post(self, request, format=None):
+		# persona=models.Usuario.objects.all().last()
+		myDict = dict(request.data)
+		myDict["user_id"] = serializers.UsuarioSerializer(myDict)
+		myDict["persona_id"] = serializers.PersonaSerializer(myDict)
+		serializer = serializers.PacienteSerializer(data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class HorarioViewset(generics.ListAPIView):
 	queryset = models.Horario.objects.all()

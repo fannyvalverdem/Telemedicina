@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class RegistroPage implements OnInit {
   persona_id: any = {nombre: "", apellido:"", telefono:""};
-  user: any = { username: "", password: "", persona_id:{}};
+  user_id: any = { username: "", password: "", email:"", persona_id:{}};
+  paciente: any = {user_id: this.user_id };
   
   constructor(private restProvider: DatabaseService,
     private storageHandler: StorageHandlerService,
@@ -33,14 +34,13 @@ export class RegistroPage implements OnInit {
       this.showAlert("Debe rellenar todos los campos.");
       retorno = false; //Retorna este False cuando no ingresó al menos un campo.
     } else {
-      await this.restProvider.registro(this.user, this.persona_id)
+      await this.restProvider.registro(this.paciente,this.user_id,this.persona_id)
         .then(data => {
-          
           this.showAlert("Se registró de forma correcta");
           this.router.navigate(['/principal'], { replaceUrl: true });
           retorno = true; //Retorna True si inició sesión de forma correcta
         }, err => {
-          this.showAlert(JSON.parse(JSON.stringify(err))['error']);
+          this.showAlert(this.user_id.persona_id.nombre);
           retorno = false; //Retorna este False si las credenciales son incorrectas.
         })
     }
@@ -63,7 +63,7 @@ export class RegistroPage implements OnInit {
   }
 
   inputsVacios() {
-    if (this.user.nombre == "" || this.user.apellido == "" || this.user.telefono == "" || this.user.username == "" || this.user.password == "") {
+    if (this.user_id.persona_id.nombre == "" || this.user_id.persona_id.apellido == "" || this.user_id.persona_id.telefono == "" || this.paciente.user_id.email == "" || this.paciente.user_id.username == "" || this.paciente.user_id.password == "") {
       return true;
     }
     return false;

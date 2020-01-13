@@ -17,11 +17,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
 			username= validated_data['username']
 		)
 		usuario.set_password(validated_data['password'])
-		print(persona_id)
-		for persona in persona_id:
-			print(persona)
-			print(*persona)
-		
+		# print(persona_id)
+		# for persona in persona_id:
+		# 	print(persona)
+		# 	print(*persona)	
 		person = models.Persona.objects.create(nombre=persona_id['nombre'], apellido= persona_id['apellido'],telefono=persona_id['telefono'], usuario=usuario)
 		# person = models.Persona.objects.create(**persona_id, usuario=usuario)
 		usuario.persona_id=models.Persona.objects.get(id=person.id)
@@ -31,6 +30,31 @@ class UsuarioSerializer(serializers.ModelSerializer):
 	class Meta:
 		fields=("id","email","username","password","persona_id")
 		model= models.Usuario
+
+class PacienteSerializer(serializers.ModelSerializer):
+	user_id=UsuarioSerializer()
+	# persona_id=PersonaSerializer()
+
+	def create(self, validated_data):
+		user_id = validated_data.pop('user_id')
+		persona_id = user_id.pop('persona_id')
+		usuario = models.Usuario.objects.create(
+			email=user_id['email'],
+			username= user_id['username']
+		)
+		password = serializers.CharField(write_only=True)
+		usuario.set_password(user_id['password'])
+		
+		person = models.Persona.objects.create(nombre=persona_id['nombre'], apellido= persona_id['apellido'],telefono=persona_id['telefono'])
+		# person = models.Persona.objects.create(**persona_id, usuario=usuario)
+		usuario.persona_id=models.Persona.objects.get(id=person.id)
+		usuario.save()
+		paciente = models.Paciente.objects.create(user_id=models.Usuario.objects.get(id=usuario.id))
+		return paciente
+	
+	class Meta:
+		model= models.Paciente
+		fields=("id","user_id","citas_realizadas")
 
 class EspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -62,12 +86,6 @@ class MatchEspecialidadSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.MatchEspecialidades
 		fields=("id","doctor","especialidad")
-
-class PacienteSerializer(serializers.ModelSerializer):
-	user_id=UsuarioSerializer()
-	class Meta:
-		model= models.Paciente
-		fields=("id","user_id","citas_realizadas")
 
 class PaquetesSerializer(serializers.ModelSerializer):
 	especialidad=EspecialidadSerializer()
