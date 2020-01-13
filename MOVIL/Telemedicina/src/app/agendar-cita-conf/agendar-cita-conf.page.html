@@ -1,25 +1,47 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-img src="assets/ICONS_APP/ICONS_APP/logo.png"></ion-img>
-  </ion-toolbar>
-</ion-header>
-  
-  <ion-content>
-    
-    <ion-grid>
-      <ion-row>
-      <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/agendar_cita_2.png"></ion-img>
-      <ion-title>Agendamiento de consulta medica</ion-title>
-    </ion-row>
-    
-      <ion-row id="infocita">
+  <ion-row class="ion-justify-content-end">
+    <ion-col>
 
-      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-img src="assets/ICONS_APP/ICONS_APP/logo.png"></ion-img>
+  </ion-row>
     
-      <ion-row class="ion-justify-content-center confirm" routerLink="../pago">
-        <ion-col size="5" size-sm class="ion-align-self-center">
-          <ion-label >Confirmar cita</ion-label> 
-        </ion-col> 
-      </ion-row >  
+  
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    
+    <ion-row id="title">
+      <ion-col size="1">
+        <ion-row>
+        <ion-img routerLink="/agendar-cita-esp" id="atras" src="assets/ICONS_APP/ICONS_APP/atras.png"></ion-img>   
+      </ion-row>
+      </ion-col>     
+           
+      <ion-img class="imagenes" src="assets/ICONS_APP/ICONS_APP/agendar_cita_2.png"></ion-img>  
+      <ion-title>AGENDAR CITA</ion-title>
+    </ion-row>
+
+    <!--Seccion info de la cita-->
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="10">
+
+      </ion-col>
+    </ion-row>
+
+
+    
+    <ion-row id="confirmar" routerLink="../pago" class="ion-justify-content-center">
+      
+      <ion-label>CONFIRMAR CITA</ion-label>
+        
+    </ion-row>
+
+
+
+      
     </ion-grid>
   </ion-content>
