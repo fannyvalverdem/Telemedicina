@@ -875,7 +875,7 @@ def login(request):
 	        		if username==str(data_admin[i]['user_id']['email']):
 	        			return redirect('index_admin')
 	        	
-	        	return redirect('index_paciente')
+	        	return redirect('inicio_pacientes')
 
 
 	        else:

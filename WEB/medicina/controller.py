@@ -32,8 +32,8 @@ def listar_meeting(usuario,token):
 
 def add_meeting(usuario,nombre,fecha,hora,dia,token):
 	url = "https://api.zoom.us/v2/users/"+usuario+"/meetings"
-	payload = "{\"topic\":\""+nombre+"\",\"type\":\"8\",\"start_time\":\""+fecha+"T"+hora+"\",\"duration\":\"15\",\"timezone\":\"America/Bogota\",\"recurrence\":{\"type\":\"2\",\"repeat_interval\":\"1\",\"weekly_days\":\""+dia+"\",\"end_times\": \"12\"},\"settings\":{\"join_before_host\":\"false\",\"auto_recording\":\"local\",\"use_pmi\":\"true\"}}"
-
+	payload = "{\"topic\":\""+nombre+"\",\"type\":\"8\",\"start_time\":\""+fecha+"T"+hora+"\",\"duration\":\"15\",\"timezone\":\"America/Bogota\",\"recurrence\":{\"type\":\"2\",\"repeat_interval\":\"1\",\"weekly_days\":\""+dia+"\",\"end_times\": \"12\"},\"settings\":{\"join_before_host\":\"true\",\"auto_recording\":\"local\",\"use_pmi\":\"true\"}}"
+ 
 	headers = {
 	    'content-type': "application/json",
 	    'authorization': "Bearer "+token+""

@@ -239,9 +239,12 @@ class InfoMedicaForm(forms.Form):
 	colesterol = forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Colesterol [mmol/l]'}))
 
 class NoticiasForm(forms.ModelForm):
-   class Meta:
-      model = Noticias
-      fields = ['imagen','titulo','descripcion','fuente']
+	class Meta:
+		model = Noticias
+		widgets = {
+            'descripcion': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+        }
+		fields = ['imagen','titulo','descripcion','fuente']
 
 class ConsejosForm(forms.ModelForm):
    class Meta:

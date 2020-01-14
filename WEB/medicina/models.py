@@ -73,14 +73,6 @@ class Paciente(models.Model):
 class Administrador(models.Model):
 	user_id=models.ForeignKey(Usuario, null=True, blank=True, on_delete=models.CASCADE)
 
-class Historial_consulta(models.Model):
-	tipo_sangre=models.CharField(max_length=10)
-	peso=models.FloatField()
-	estatura=models.FloatField()
-	fecha=models.DateField()
-	documento=models.TextField()	
-	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
-
 class Calificacion(models.Model):
 	valor=models.IntegerField()
 	paciente_id=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
