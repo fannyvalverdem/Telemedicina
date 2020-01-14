@@ -1,6 +1,9 @@
 <ion-content>
   <ion-grid>
     <ion-row>
+      <ion-img id="exit" routerLink="../login" src="assets/ICONS_APP/ICONS_APP/exit.png"></ion-img> 
+    </ion-row>
+    <ion-row>
       <ion-img id="logo" src="assets/ICONS_APP/ICONS_APP/logo_2.png"></ion-img>      
     </ion-row>
 
@@ -9,27 +12,32 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-input placeholder="Nombres" name="nombres"></ion-input>
+         <ion-input type="text" placeholder="Nombres" required clearInput [(ngModel)]="paciente.user_id.persona_id.nombre" name="nombre"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-input placeholder="Apellidos" name="apellidos"></ion-input>
+            <ion-input type="text" placeholder="Apellidos" required clearInput [(ngModel)]="paciente.user_id.persona_id.apellido" name="apellido"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-input placeholder="Telefono" name="telefono"></ion-input>
+        <ion-input type="tel" placeholder="Telefono" minlength=9 maxlength=10 required clearInput [(ngModel)]="paciente.user_id.persona_id.telefono" name="telefono"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-input type="email" placeholder="Correo electronico" name="email"></ion-input>
+        <ion-input type="email" placeholder="Correo Electronico" required clearInput [(ngModel)]="paciente.user_id.email" name="email"></ion-input>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-input type="password" placeholder="Contraseña" name="password"></ion-input>
+        <ion-input type="email" placeholder="Username" required clearInput [(ngModel)]="paciente.user_id.username" name="username"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-input type="password" placeholder="Contrasena" minlength=8 required clearInput [(ngModel)]="paciente.user_id.password" name="password"></ion-input>
       </ion-col>
     </ion-row>
 
@@ -37,7 +45,7 @@
     </ion-row>
 
     <ion-row class="ion-justify-content-center">
-      <ion-button type="submit" routerLink="../principal" >Registrarse</ion-button>
+      <ion-button type="submit" type="submit" (click)="registro()" >Registrarse</ion-button>
       <!-- routerLink="principal" -->
     </ion-row>
 
@@ -47,12 +55,5 @@
       </ion-col>
     </ion-row>
 
-
-
-
-
-
-
   </ion-grid> 
 </ion-content>
-

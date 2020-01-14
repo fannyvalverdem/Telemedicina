@@ -1386,3 +1386,14 @@ def inicio_pacientes(request):
 		data_noticia.append(noticia)
 	context= {'object_list': data,'object_list2': data_consejo,'object_list3': data_noticia}
 	return render(request, 'inicio_paquetes.html', context)
+
+def nuestros_paquetes(request):
+	paquete = Listar("paquete")
+	context= {'object_list': paquete}
+	return render(request, 'nuestros_paquetes.html', context)
+
+
+def calificar(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'calificar.html', dictionary)
