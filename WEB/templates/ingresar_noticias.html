@@ -1,4 +1,4 @@
-{% extends 'menu_consejos.html' %}
+{% extends 'menu_noticias.html' %}
 {% load staticfiles %}
 {% block contenido %}
     {% load crispy_forms_tags %}
@@ -18,34 +18,41 @@
           <p>Titulo:</p>
         </div>
       
-        <div class="col-xl-4">
+        <div class="col-xl-10">
           <p><input id="id_titulo" type="text" name="titulo" required></p>
         </div>
         <div class="col-xl-1">
         </div>
-        <div class="col-xl-1">
-          <p>Descripcion:</p>
-        </div>
-      
-        <div class="col-xl-4">
-          <p><input id="id_descripcion" type="text" name="descripcion" required></p>
-        </div>
-
-
       </div>
+
       <br>
       <div class="row">
         <div class="col-xl-1">
           <p>Fuente:</p>
         </div>
       
-        <div class="col-xl-4">
+        <div class="col-xl-10">
           <p><input id="id_fuente" type="text" name="fuente" required></p>
         </div>
          <div class="col-xl-1">
         </div>
-        
+
+      </div>
+      <div class="row">
       
+      <div class="col-xl-1">
+        <br>
+          <p>Descripcion:</p>
+        </div>    
+      </div>
+      <div class="row">
+         <div class="col-xl-1">
+        </div>
+        <div class="col-xl-10">
+        <textarea name="descripcion" rows="25" cols="80"></textarea>
+        </div>
+        <div class="col-xl-1">
+        </div>
       </div>
       <br>
       <br>

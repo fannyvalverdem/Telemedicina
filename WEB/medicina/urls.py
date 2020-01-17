@@ -72,6 +72,7 @@ urlpatterns = [
 	url(r'^ing_paquete/$', views.ingresar_paquete, name='ing-paquete'),
 	url(r'^ing_tarifa/$', views.ingresar_tarifa, name='ing-tarifa'),
 	url(r'^ing_medico/$', views.ingresar_medico, name='ing-medico'),
+	url(r'^ver_medico/', views.ver_medico, name='ver_medico'),
 	url(r'^ing_horario/$', views.ingresar_horario, name='ing-horario'),
 	url(r'^registro/', views.registro, name='registro'),
 	url(r'^paciente/$', views.index_paciente, name='index_paciente'),
@@ -91,6 +92,7 @@ urlpatterns = [
 	url(r'^reporte_paquete/$', views.reporte_paquete, name='r_paquete'),
 
 	url(r'^ingresar_especialidad/$', views.ingresar_especialidad, name='ingresar_especialidad'),
+	url(r'^ver_especialidad/', views.ver_especialidad, name='ver_especialidad'),
 	url(r'^match_especialidad/$', views.match_especialidad, name='match_especialidad'),
 
 	url(r'^valores_cobrar/$', views.valores_cobrar, name='valores_cobrar'),

@@ -97,6 +97,11 @@ def ingresar_especialidad(request):
 		form=Especialidades()
 	return render(request, 'ingresar_especialidad.html', {'form':form});
 
+def ver_especialidad(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_especialidad.html', dictionary)
+
 def registro(request):
 	if request.method == 'POST':
 		print("POST")
@@ -610,6 +615,11 @@ def ingresar_medico(request):
 		form = DoctorForm()
 			#returning form 
 	return render(request, 'ingresar_medico.html', {'form':form});
+
+def ver_medico(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'ver_medico.html', dictionary)
 
 def ingresar_horario(request):
 	if request.method == 'POST':
