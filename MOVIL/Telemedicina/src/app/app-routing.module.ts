@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'principal', loadChildren: './principal/principal.module#PrincipalPageModule' },
   { path: 'agendar-cita-esp', loadChildren: './agendar-cita-esp/agendar-cita-esp.module#AgendarCitaEspPageModule' },
   { path: 'agendar-cita-med', loadChildren: './agendar-cita-med/agendar-cita-med.module#AgendarCitaMedPageModule' },
-  { path: 'agendar-cita-conf', loadChildren: './agendar-cita-conf/agendar-cita-conf.module#AgendarCitaConfPageModule' },  { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
+  { path: 'agendar-cita-conf', loadChildren: './agendar-cita-conf/agendar-cita-conf.module#AgendarCitaConfPageModule' },
+  { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
   { path: 'videollamada', loadChildren: './videollamada/videollamada.module#VideollamadaPageModule' },
   { path: 'pago', loadChildren: './pago/pago.module#PagoPageModule' },
   { path: 'receta', loadChildren: './receta/receta.module#RecetaPageModule' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'receta-espec', loadChildren: './receta-espec/receta-espec.module#RecetaEspecPageModule' },
   { path: 'paquetes', loadChildren: './paquetes/paquetes.module#PaquetesPageModule' },
   { path: 'contacto', loadChildren: './contacto/contacto.module#ContactoPageModule' }
+  
 
 ];
 @NgModule({
