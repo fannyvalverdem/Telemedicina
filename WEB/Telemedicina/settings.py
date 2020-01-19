@@ -118,8 +118,10 @@ DATABASES = {
         'NAME': 'Telemedicina',
         'USER': 'django_windows',
         'PASSWORD': '1997',
-        'HOST': 'localhost',
-        'PORT':'',
+        # 'HOST': 'localhost',
+        # 'PORT':'',
+        'HOST': 'telemedicina-1455.postgres.pythonanywhere-services.com',
+        'PORT': 11455
     }
 }
 
