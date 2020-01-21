@@ -49,55 +49,6 @@
 	Paymentez.init('stg', 'PAYMENTEZ_CLIENT_APP_CODE', 'PAYMENTEZ_CLIENT_APP_KEY');
 
 
-	//addCard
-
-	/* Add Card converts sensitive card data to a single-use token which you can safely pass to your server to charge the user.
-	 *
-	 * @param uid User identifier. This is the identifier you use inside your application; you will receive it in notifications.
-	 * @param email Email of the user initiating the purchase. Format: Valid e-mail format.
-	 * @param card the Card used to create this payment token
-	 * @param success_callback a callback to receive the token
-	 * @param failure_callback a callback to receive an error
-	 */
-	Paymentez.addCard(uid, email, cardToSave, successHandler, errorHandler);
-
-	var successHandler = function(cardResponse) {
-	  console.log(cardResponse.card);
-	  if(cardResponse.card.status === 'valid'){
-	    $('#messages').html('Card Successfully Added<br>'+
-	                  'status: ' + cardResponse.card.status + '<br>' +
-	                  "Card Token: " + cardResponse.card.token + "<br>" +
-	                  "transaction_reference: " + cardResponse.card.transaction_reference
-	                );    
-	  }else if(cardResponse.card.status === 'review'){
-	    $('#messages').html('Card Under Review<br>'+
-	                  'status: ' + cardResponse.card.status + '<br>' +
-	                  "Card Token: " + cardResponse.card.token + "<br>" +
-	                  "transaction_reference: " + cardResponse.card.transaction_reference
-	                ); 
-	  }else if(cardResponse.card.status === 'pending'){
-	    $('#messages').html('Card Pending To Approve<br>'+
-	                  'status: ' + cardResponse.card.status + '<br>' +
-	                  "Card Token: " + cardResponse.card.token + "<br>" +
-	                  "transaction_reference: " + cardResponse.card.transaction_reference
-	                ); 
-	  }else{
-	    $('#messages').html('Error<br>'+
-	                  'status: ' + cardResponse.card.status + '<br>' +
-	                  "message Token: " + cardResponse.card.message + "<br>"
-	                ); 
-	  }
-	  submitButton.removeAttr("disabled");
-	  submitButton.text(submitInitialText);
-	};
-
-	var errorHandler = function(err) {    
-	  console.log(err.error);
-	  $('#messages').html(err.error.type);    
-	  submitButton.removeAttr("disabled");
-	  submitButton.text(submitInitialText);
-	};
-
 
 	//getSessionId
 	var session_id = Paymentez.getSessionId();
@@ -137,8 +88,8 @@
 
 
 var paymentezCheckout = new PaymentezCheckout.modal({
-      client_app_code: 'PAYMENTEZ_CLIENT_APP_CODE', // Client Credentials Provied by Paymentez
-      client_app_key: 'PAYMENTEZ_CLIENT_APP_KEY', // Client Credentials Provied by Paymentez
+      client_app_code: 'TPP2-EC-CLIENT', // Client Credentials Provied by Paymentez
+      client_app_key: 'sDAwQAdBqetYhVZFFLpOg6FU2cmjF0', // Client Credentials Provied by Paymentez
       locale: 'es', // User's preferred language (es, en, pt). English will be used by default.
       env_mode: 'stg', // `prod`, `stg` to change environment. Default is `stg`
       onOpen: function() {
