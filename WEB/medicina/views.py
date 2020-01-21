@@ -1397,3 +1397,8 @@ def calificar(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
 	return render(request,'calificar.html', dictionary)
+
+def tarjeta(request):
+	dictionary = dict(request=request) 
+	dictionary.update(csrf(request)) 
+	return render(request,'tarjeta.html', dictionary)

@@ -1,0 +1,165 @@
+{% extends 'index_paciente.html' %}
+{% load static %}
+
+{% block import %}
+<script src="https://code.jquery.com/jquery-1.11.3.min.js" charset="UTF-8"></script>
+
+<link href="https://cdn.paymentez.com/js/ccapi/stg/paymentez.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.paymentez.com/js/ccapi/stg/paymentez.min.js" charset="UTF-8"></script>
+<script src="https://cdn.paymentez.com/checkout/1.0.1/paymentez-checkout.min.js"></script>
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+	<div class="paymentez-form" id="my-card" data-capture-name="true"></div>
+	<button class="js-paymentez-checkout">Purchase</button>	
+</div>
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+var myCard = $('#my-card');
+var cardToSave = myCard.PaymentezForm('card');
+if(cardToSave == null){
+  alert("Invalid Card Data");
+}
+
+/**
+  * Init library
+  *
+  * @param env_mode `prod`, `stg`, `local` to change environment. Default is `stg`
+  * @param paymentez_client_app_code provided by Paymentez.
+  * @param paymentez_client_app_key provided by Paymentez.
+  */
+Paymentez.init('stg', 'PAYMENTEZ_CLIENT_APP_CODE', 'PAYMENTEZ_CLIENT_APP_KEY');
+
+/* Add Card converts sensitive card data to a single-use token which you can safely pass to your server to charge the user.
+ *
+ * @param uid User identifier. This is the identifier you use inside your application; you will receive it in notifications.
+ * @param email Email of the user initiating the purchase. Format: Valid e-mail format.
+ * @param card the Card used to create this payment token
+ * @param success_callback a callback to receive the token
+ * @param failure_callback a callback to receive an error
+ */
+Paymentez.addCard(uid, email, cardToSave, successHandler, errorHandler);
+
+var successHandler = function(cardResponse) {
+  console.log(cardResponse.card);
+  if(cardResponse.card.status === 'valid'){
+    $('#messages').html('Card Successfully Added<br>'+
+                  'status: ' + cardResponse.card.status + '<br>' +
+                  "Card Token: " + cardResponse.card.token + "<br>" +
+                  "transaction_reference: " + cardResponse.card.transaction_reference
+                );    
+  }else if(cardResponse.card.status === 'review'){
+    $('#messages').html('Card Under Review<br>'+
+                  'status: ' + cardResponse.card.status + '<br>' +
+                  "Card Token: " + cardResponse.card.token + "<br>" +
+                  "transaction_reference: " + cardResponse.card.transaction_reference
+                ); 
+  }else if(cardResponse.card.status === 'pending'){
+    $('#messages').html('Card Pending To Approve<br>'+
+                  'status: ' + cardResponse.card.status + '<br>' +
+                  "Card Token: " + cardResponse.card.token + "<br>" +
+                  "transaction_reference: " + cardResponse.card.transaction_reference
+                ); 
+  }else{
+    $('#messages').html('Error<br>'+
+                  'status: ' + cardResponse.card.status + '<br>' +
+                  "message Token: " + cardResponse.card.message + "<br>"
+                ); 
+  }
+  submitButton.removeAttr("disabled");
+  submitButton.text(submitInitialText);
+};
+
+var errorHandler = function(err) {    
+  console.log(err.error);
+  $('#messages').html(err.error.type);    
+  submitButton.removeAttr("disabled");
+  submitButton.text(submitInitialText);
+};
+
+var paymentezCheckout = new PaymentezCheckout.modal({
+  client_app_code: 'PAYMENTEZ_CLIENT_APP_CODE', // Client Credentials Provied by Paymentez
+  client_app_key: 'PAYMENTEZ_CLIENT_APP_KEY', // Client Credentials Provied by Paymentez
+  locale: 'es', // User's preferred language (es, en, pt). English will be used by default.
+  env_mode: 'stg', // `prod`, `stg` to change environment. Default is `stg`
+  onOpen: function() {
+      console.log('modal open');
+  },
+  onClose: function() {
+      console.log('modal closed');
+  },
+  onResponse: function(response) { // The callback to invoke when the Checkout process is completed
+
+      /*
+        In Case of an error, this will be the response.
+        response = {
+          "error": {
+            "type": "Server Error",
+            "help": "Try Again Later",
+            "description": "Sorry, there was a problem loading Checkout."
+          }
+        }
+
+        When the User completes all the Flow in the Checkout, this will be the response.
+        response = {
+           "transaction": {
+              "status": "success", // success, failure or pending
+              "payment_date": "2017-09-26T21:03:04",
+              "amount": 99.0,
+              "authorization_code": "148177",
+              "installments": 1,
+              "dev_reference": "referencia",
+              "message": "Operation Successful",
+              "carrier_code": "6",
+              "id": "CI-490", // transaction_id
+              "status_detail": 3 // for the status detail please refer to: https://paymentez.github.io/api-doc/#status-details
+           },
+           "card": {
+              "bin": "453254",
+              "status": "valid",
+              "token": "",
+              "expiry_year": "2020",
+              "expiry_month": "9",
+              "transaction_reference": "CI-490",
+              "type": "vi",
+              "number": "8311"
+          }
+       }
+
+      */
+      console.log('modal response');
+      document.getElementById('response').innerHTML = JSON.stringify(response);            
+  }
+});
+
+var btnOpenCheckout = document.querySelector('.js-paymentez-checkout');
+btnOpenCheckout.addEventListener('click', function(){
+// Open Checkout with further options:
+paymentezCheckout.open({
+  user_id: '1234',
+  user_email: 'test@paymentez.com', //optional        
+  user_phone: '7777777777', //optional
+  order_description: '1 Green Salad',
+  order_amount: 1500,
+  order_vat: 0,
+  order_reference: '#234323411',
+  //order_installments_type: 2, // optional: For Colombia an Brazil to show installments should be 0, For Ecuador the valid values are: https://paymentez.github.io/api-doc/#payment-methods-cards-debit-with-token-installments-type
+  //order_taxable_amount: 0, // optional: Only available for Ecuador. The taxable amount, if it is zero, it is calculated on the total. Format: Decimal with two fraction digits.
+  //order_tax_percentage: 10 // optional: Only available for Ecuador. The tax percentage to be applied to this order.
+});
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+paymentezCheckout.close();
+});
+
+</script>
+
+
+{% endblock %}
