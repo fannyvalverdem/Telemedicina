@@ -1,0 +1,32 @@
+{% extends 'menu_noticias.html' %}
+{% load static %}
+
+{% block contenido %}
+<div id="titulo" class="row">
+	<h2>Noticias</h2>
+</div>
+<div class="row">
+         <div class="col-xl-1">
+             
+         </div>
+         <div class="col-xl-10">
+            <div class="table-container">
+            <table id="data_table_noticias" class="table table-striped table-bordered dt-body-center">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Imagen</th>
+                        <th>Titulo</th>
+                        <th>Fuente</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xl-1">
+             
+         </div>
+   </div>
+{% endblock %}

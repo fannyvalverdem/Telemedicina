@@ -25,7 +25,7 @@ SECRET_KEY = '$r)5-ju@v_m(flzvsd%t!9oojo3oz&h!^jydp5^jzr7b-@!98$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = 'medicina.Usuario'
 # Application definition
@@ -115,11 +115,15 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Telemedicina',
-        'USER': 'django_windows',
-        'PASSWORD': '1997',
-        'HOST': 'localhost',
-        'PORT':'',
+        'NAME': 'telemedicina',
+        # 'USER': 'django_windows',
+        # 'PASSWORD': '1997',
+        # 'HOST': 'localhost',
+        # 'PORT':'',
+        'USER': 'super',
+        'PASSWORD': 'adminsuper',
+        'HOST': 'telemedicina-1455.postgres.pythonanywhere-services.com',
+        'PORT': 11455
     }
 }
 

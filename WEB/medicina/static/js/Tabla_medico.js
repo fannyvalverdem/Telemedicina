@@ -466,7 +466,6 @@ $('#data_table_noticias').DataTable({
         { data: "id"},
         { data: "imagen"},
         { data: "titulo"},
-        { data: "descripcion"},
         { data: "fuente"},
     ],
     columnDefs: [
@@ -474,7 +473,6 @@ $('#data_table_noticias').DataTable({
         { width: 100, targets: 1},
         { width: 100, targets: 2},
         { width: 100, targets: 3},
-        { width: 100, targets: 4},
     ],
 });
 
@@ -500,7 +498,6 @@ $('#data_table_consejos').DataTable({
         { data: "id"},
         { data: "imagen"},
         { data: "titulo"},
-        { data: "descripcion"},
         { data: "fuente"},
     ],
     columnDefs: [
@@ -508,7 +505,6 @@ $('#data_table_consejos').DataTable({
         { width: 100, targets: 1},
         { width: 100, targets: 2},
         { width: 100, targets: 3},
-        { width: 100, targets: 4},
     ],
 });
 
@@ -769,4 +765,60 @@ $('#data_table_pendiente').DataTable({
 });
 
 
+$('#data_table_espe').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/especialidad/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "nombre"}
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+    ],
+});
 
+$('#data_table_med').DataTable({
+    "destroy": true,
+    "ajax": 
+        {
+        "method": "GET",
+        "url": "/api/doctor/",
+        "dataSrc": "",
+        "error": function(xhr, status, error) {
+            console.log("readyState: " + xhr.readyState);
+            console.log("responseText: "+ xhr.responseText);
+            console.log("status: " + xhr.status);
+            console.log("text status: " + status);
+            console.log("error: " + error);
+        },
+    
+    },
+    
+    "columns": [
+        { data: "user_id.persona_id.nombre"},
+        { data: "user_id.persona_id.apellido"},
+        { data: "identificador_medico"},
+        { data: "user_id.email"},
+        { data: "tarifa.nombre"},
+    ],
+    columnDefs: [
+        { width: 100, targets: 0},
+        { width: 100, targets: 1},
+        { width: 100, targets: 2},
+        { width: 100, targets: 3},
+        { width: 100, targets: 4},
+    ],
+});
