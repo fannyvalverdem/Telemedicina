@@ -115,15 +115,15 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'telemedicina',
-        # 'USER': 'django_windows',
-        # 'PASSWORD': '1997',
-        # 'HOST': 'localhost',
-        # 'PORT':'',
-        'USER': 'super',
-        'PASSWORD': 'adminsuper',
-        'HOST': 'telemedicina-1455.postgres.pythonanywhere-services.com',
-        'PORT': 11455
+        'NAME': 'Telemedicina',
+         'USER': 'django_windows',
+         'PASSWORD': '1997',
+         'HOST': 'localhost',
+         'PORT':'',
+        #'USER': 'super',
+        #'PASSWORD': 'adminsuper',
+        #'HOST': 'telemedicina-1455.postgres.pythonanywhere-services.com',
+        #'PORT': 11455
     }
 }
 
