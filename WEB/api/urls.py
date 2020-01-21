@@ -34,7 +34,7 @@ urlpatterns = [
 
 	url(r'^publicidad/$', views.PublicidadViewset.as_view(), name='publicidad_api'),
 
-	url(r'^citas_medico/$', views.CitasMedicoViewset.as_view(), name='citas_medico'),
+	url(r'^citas_medico/$', views.CitasMedicoViewset.as_view(), name='citas_medico_api'),
 
 	url(r'^administrador/$', views.AdministradorViewset.as_view(), name='administrador_api'),
 	url(r'^match_especialidades/$', views.MatchEspecialidadesViewset.as_view(), name='match_espe_api'),

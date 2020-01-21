@@ -244,9 +244,11 @@ def citas_medico(request):
 	current_user = request.user
 	user_ac_id=current_user.id
 	doctor=Doctor.objects.get(user_id=user_ac_id)
-	cita_prox=Consulta.objects.filter(doctor_id=doctor.id,estado='agendada')
-	print(cita_prox)
-	return render(request,"citas_medico.html",{'cita_prox':cita_prox})
+	today=date.today()
+	fecha_format=today.strftime("%Y-%m-%d")
+	citas_m=Citas_Medico.objects.filter(fecha=fecha_format,disponible=True,doctor=doctor.id).order_by('hora')
+	print(citas_m)
+	return render(request,"citas_medico.html",{'cita_prox':citas_m})
 
 def reporte_medico(request):
 	dictionary = dict(request=request) 
@@ -926,8 +928,8 @@ def auth_zoom(request):
     horarios=Horario.objects.filter(doctor_id =doctor.id)
     #print(horarios)
     print(usuario.email)
-    crear_citas(token,horarios,'ivinces@espol.edu.ec',doctor)
-    #guardar_citas('ivinces@espol.edu.ec',token,doctor)
+    #crear_citas(token,horarios,'ivinces@espol.edu.ec',doctor)
+    guardar_citas('ivinces@espol.edu.ec',token,doctor)
     return redirect('index_admin')
 
 def zoom_redirect(request):
