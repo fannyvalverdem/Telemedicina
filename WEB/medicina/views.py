@@ -190,11 +190,6 @@ def index_medico(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'index_medico.html', dictionary)
 
-def agendar_cita_medico(request):
-	dictionary = dict(request=request) 
-	dictionary.update(csrf(request)) 
-	return render(request,'agendar_cita_medico.html', dictionary)
-
 def selec_medico(request):
 	dictionary = dict(request=request) 
 	dictionary.update(csrf(request)) 
@@ -785,6 +780,36 @@ def ingresar_horario(request):
 			#returning form 
 	return render(request, 'ingresar_horario_medico.html', {'form':form});
 
+def agendar_cita_medico(request):
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	doctor=Doctor.objects.get(user_id=user_ac_id)
+	print(str(doctor))
+	consulta=Consulta.objects.filter(doctor_id=doctor.id).all()
+	print(consulta)
+	if request.method == 'POST':
+		print("POST")
+	form= Agendar_MedicoForm(request.POST)
+	if form.is_valid():
+		pac=form.cleaned_data['paciente']
+		espe=form.cleaned_data['especialidad']
+		
+		print("llego aca")
+
+		doc = form.cleaned_data['medico']
+		fecha_reserva = request.POST.get("fecha_reserva")
+		data=fecha_reserva.split(' ')
+		fecha=data[0]
+		hora=data[1]
+		fecha_format=datetime.datetime.strptime(fecha, '%m/%d/%Y').strftime('%Y-%m-%d')
+		print(fecha_format)
+		citas_m=Citas_Medico.objects.filter(fecha=fecha_format,hora__gte=hora,disponible=True)
+		citas=citas_m.filter(doctor_id__in=doc).order_by('hora')
+		return render(request,'citas_disponibles_agendar.html', {'citas_disponibles':citas,'especialidad':especialidad})
+	else:
+		form=Agendar_MedicoForm()
+	return render(request,'agendar_cita_medico.html', {'form':form})
 
 def agendar_cita(request):
 	if request.method == 'POST':
@@ -951,6 +976,19 @@ def acciones_consulta(request):
 	dictionary.update(csrf(request)) 
 	return render(request,'acciones_consulta.html', dictionary)
 
+def historial_medico_paciente(request):
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	#doctor=Persona.objects.get(id=user_ac_person_id)
+	#usuario=Usuario.objects.get(id=user_ac_id)
+	consulta=Consulta.objects.last() #Cambiar
+	paciente=consulta.paciente_id
+	info_med=Info_Medica.objects.filter(paciente=paciente.id)
+	info_med2=info_med[0]
+	return render(request,'historial_medico_paciente.html', {'info_med':info_med, 'info_med2':info_med2})
+
+
 def ing_receta(request):
 	current_user = request.user
 	user_ac_id=current_user.id
@@ -1095,6 +1133,10 @@ def ingresar_info_medica(request):
 		pulse =form.cleaned_data['pulse']
 		glucosa = form.cleaned_data['glucosa']
 		colesterol = form.cleaned_data['colesterol']
+		current_user = request.user
+		user_ac_id=current_user.id
+		paciente=Paciente.objects.get(user_id=user_ac_id)
+
 
 		paquete=Info_Medica(
 			peso=peso,
@@ -1103,7 +1145,9 @@ def ingresar_info_medica(request):
 			dia=dia,
 			pulse=pulse,
 			glucosa=glucosa,
-			colesterol=colesterol
+			colesterol=colesterol,
+			paciente=paciente
+
 		)
 
 		paquete.save()

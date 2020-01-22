@@ -13,6 +13,8 @@ urlpatterns = [
 	url(r'^medico_emergencia/$', views.selec_med_emergencia, name='selec_med_emergencia'),
 	url(r'^confirmacion_emergencia/$', views.confirmacion_emergencia, name='confirmacion_emergencia'),
 
+	url(r'^historial_medico_paciente/$', views.historial_medico_paciente, name='historial_medico_paciente'),
+
 	url(r'^tarjeta/$', views.tarjeta, name='tarjeta'),
 
 	url(r'^selec_medico/$', views.selec_medico, name='selec_medico'),

@@ -6,12 +6,18 @@ function agendarBoton(){
 
 function escribirBoton(){
   document.querySelector('[ id="active"]').setAttribute('id','inactive')
-  document.querySelector('[ href="escribir_receta2.html"]').setAttribute('id','active')
+  document.querySelector('[ href="/ing_receta"]').setAttribute('id','active')
 
 }
 
 function historialBoton(){
   document.getElementById("active").setAttribute('id','inactive')
   document.querySelector('[ href=3]').setAttribute('id','active')
+
+}
+
+function juntaBoton(){
+  document.getElementById("active").setAttribute('id','inactive')
+  document.querySelector('[ href=4]').setAttribute('id','active')
 
 }

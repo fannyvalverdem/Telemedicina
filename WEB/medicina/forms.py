@@ -250,3 +250,10 @@ class ConsejosForm(forms.ModelForm):
    class Meta:
       model = Consejos
       fields = ['imagen','titulo','descripcion','fuente']
+
+class Agendar_MedicoForm(forms.Form):
+	paciente=forms.ModelChoiceField(queryset=Paciente.objects.all())
+	medico=forms.ModelChoiceField(queryset=Doctor.objects.all())
+	especialidad=forms.ModelChoiceField(queryset=Especialidad.objects.all())
+
+

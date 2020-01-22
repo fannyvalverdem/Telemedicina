@@ -1,8 +1,9 @@
 {% extends 'index_medico.html' %}
+{% load static %}
 {% block contenido %}
 <div class="container">
 	<div class="row">
-        <div id="titulo" class="col-xl-12">
+        <div id="titulo" class="col-12">
           <h2>Programar nueva cita:</h2>
           <br>
             <br>
@@ -11,54 +12,60 @@
         	<div class="col-12">
         		{% load crispy_forms_tags %}
         		<form action="/medico/" method="post">
-	        		<div class="row">Datos del Paciente
-		        		<div class="col-12">Nombres:
-		        		</div>
-		        		<div class="col-12">Apellidos:
-		        		</div>
-		        		<div class="col-12">Especialidad:
-		        		</div>
-		        	</div>
-
-	        	</form>
-        	</div>
-
-    </div>
-
-        <div class="row">
-        	<div class="col-12">
-        		{% load crispy_forms_tags %}
-        		<form action="/paciente/" method="post">
+        			<h3>Datos del Paciente:</h3>
 	        		<div class="row">
-		        		<div class="col-12">Fecha y hora:
+
+	        			
+						{% csrf_token %}
+						<div class="col-12">
+
+							{{ form.paciente|as_crispy_field }}
+							{{ form.medico|as_crispy_field }}
+							{{ form.especialidad|as_crispy_field }}
 							
-							<div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-						      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-						      <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-						        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-						      </div>
-						    </div>
+						</div>
+						<h5>Fecha y hora:</h5>
 
-						    <script>
-						      $(function () {
-						        $("#datetimepicker1").datetimepicker();
-						      });
-						    </script>
+						<div class="col-12">
 
+						    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+								<input type="text" class="form-control datetimepicker-input"
+									data-target="#datetimepicker1" name="fecha_reserva" />
+								<div class="input-group-append" data-target="#datetimepicker1"
+									data-toggle="datetimepicker">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
+							</div>
 
-		        		</div>
+							<script>
+								$(function () {
+									$("#datetimepicker1").datetimepicker(
+										 format: 'dd-mm-yyyy'
+									);
+
+									alert($('#datetimepicker1').data().datepicker.viewDate)
+								});
+							</script>
+
+						</div>
+						
+						<div class="col-12">
+							<div class="col-12">
+								<br>
+								<br>
+
+								<button type="submit" id="btn-continuar">Continuar</button>
+
+							</div>
+						</div>
+						<br>
+						<br>
+						
 		        	</div>
-		        	<div class="col-12">
-				        <div class="col-12">
-			                <br>
-			                <br>
-			                <form action="#">
-				        	  <button id="btn-continuar">Confirmar Cita</button>
-			                </form>
-				        </div>
-				    </div>
+
 	        	</form>
-        	</div>
+    		</div>
+    	</div>
 
     </div>
 </div>

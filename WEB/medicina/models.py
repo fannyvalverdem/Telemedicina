@@ -177,6 +177,7 @@ class Info_Medica(models.Model):
 	pulse= models.IntegerField()
 	glucosa=models.FloatField()
 	colesterol=models.FloatField()
+	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
 	
 
 class Noticias(models.Model):

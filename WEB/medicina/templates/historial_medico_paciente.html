@@ -1,0 +1,57 @@
+{% extends 'index_medico.html' %}
+{% load staticfiles %}
+
+{% block contenido %}
+{% if info_med2%}
+
+<h2 style="text-align: left;">Historial Paciente: {{info_med2.paciente.user_id.persona_id.nombre}} {{info_med2.paciente.user_id.persona_id.apellido}}</h2>
+<br><br>
+
+{% endif %}
+{% for info in info_med%}
+	<div id="citas-prev" class="row">
+		<div class="col-12">
+			<br>
+			<table style="width:100%;text-align: center;">
+			  <tr>
+			    <th></th>
+			    <th></th>
+			    <th></th>
+			  </tr>
+			  <tr>
+			  	<td></td>
+			  	<td>SYS: {{ info.sys}}</td>
+			    <td></td>
+			  </tr>
+			  <tr>
+			    <td>Peso: {{ info.peso}}</td>
+			    <td></td>
+			    <td>Glucosa: {{ info.glucosa}}</td>
+			  </tr>
+			  <tr>
+			    <td></td>
+			    <td>DIA: {{ info.dia}}</td>
+			    <td></td>
+			  </tr>
+			  <tr>
+			    <td>Talla: {{ info.talla}}</td>
+			    <td></td>
+			    <td>Colesterol: {{ info.colesterol}}</td>
+			  </tr>
+			  <tr>
+			    <td></td>
+			    <td>Pulso: {{ info.pulse}}</td>
+			    <td></td>
+			  </tr>
+			  
+			</table>
+			<br>
+		</div>
+
+	</div>
+	<br>
+		
+{% endfor %}
+
+
+{% endblock %}
