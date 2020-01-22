@@ -1,6 +1,10 @@
 {% extends 'menu_agendar.html' %}
 {% load static %}
 
+{% block import %}
+<script src="https://cdn.paymentez.com/checkout/1.0.1/paymentez-checkout.min.js"></script>
+{% endblock %}
+
 {% block contenido %}
 
 <div class="col-12">
@@ -30,9 +34,8 @@
             
         </div>
         <div class="col-6">
-            <form action="/boton_pago/">
-              <button id="btn-continuar">Continuar pago</button>
-            </form>
+            <button class="js-paymentez-checkout">Purchase</button>
+            <div id="response"></div>
             <br>
             <button id="btn-continuar"><a href="/guardar_cita/?id={{ cita.id }}?especialidad={{especialidad}}" name="cita.id">Saltar</a></button>
         </div>
@@ -42,4 +45,86 @@
 </div>
 
 
+{% endblock %}
+
+
+{% block script %}
+<script>
+var paymentezCheckout = new PaymentezCheckout.modal({
+    client_app_code: 'TPP2-EC-CLIENT', // Client Credentials Provied by Paymentez
+    client_app_key: 'sDAwQAdBqetYhVZFFLpOg6FU2cmjF0', // Client Credentials Provied by Paymentez
+    locale: 'es', // User's preferred language (es, en, pt). English will be used by default.
+    env_mode: 'stg', // `prod`, `stg` to change environment. Default is `stg`
+    onOpen: function() {
+        console.log('modal open');
+    },
+    onClose: function() {
+        console.log('modal closed');
+    },
+    onResponse: function(response) { // The callback to invoke when the Checkout process is completed
+
+        /*
+          In Case of an error, this will be the response.
+          response = {
+            "error": {
+              "type": "Server Error",
+              "help": "Try Again Later",
+              "description": "Sorry, there was a problem loading Checkout."
+            }
+          }
+
+          When the User completes all the Flow in the Checkout, this will be the response.
+          response = {
+             "transaction": {
+                "status": "success", // success, failure or pending
+                "payment_date": "2017-09-26T21:03:04",
+                "amount": 99.0,
+                "authorization_code": "148177",
+                "installments": 1,
+                "dev_reference": "referencia",
+                "message": "Operation Successful",
+                "carrier_code": "6",
+                "id": "CI-490", // transaction_id
+                "status_detail": 3 // for the status detail please refer to: https://paymentez.github.io/api-doc/#status-details
+             },
+             "card": {
+                "bin": "453254",
+                "status": "valid",
+                "token": "",
+                "expiry_year": "2020",
+                "expiry_month": "9",
+                "transaction_reference": "CI-490",
+                "type": "vi",
+                "number": "8311"
+            }
+         }
+
+        */
+        console.log('modal response');
+        document.getElementById('response').innerHTML = JSON.stringify(response);            
+    }
+});
+
+var btnOpenCheckout = document.querySelector('.js-paymentez-checkout');
+btnOpenCheckout.addEventListener('click', function(){
+  // Open Checkout with further options:
+  paymentezCheckout.open({
+    user_id: '1234',
+    user_email: 'test@paymentez.com', //optional        
+    user_phone: '7777777777', //optional
+    order_description: '1 Green Salad',
+    order_amount: 1500,
+    order_vat: 0,
+    order_reference: '#234323411',
+    //order_installments_type: 2, // optional: For Colombia an Brazil to show installments should be 0, For Ecuador the valid values are: https://paymentez.github.io/api-doc/#payment-methods-cards-debit-with-token-installments-type
+    //order_taxable_amount: 0, // optional: Only available for Ecuador. The taxable amount, if it is zero, it is calculated on the total. Format: Decimal with two fraction digits.
+    //order_tax_percentage: 10 // optional: Only available for Ecuador. The tax percentage to be applied to this order.
+  });
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+  paymentezCheckout.close();
+});
+</script>
 {% endblock %}
