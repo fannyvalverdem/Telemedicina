@@ -1,0 +1,29 @@
+{% extends 'index_medico.html' %}
+{% load static %}
+
+{% block contenido %}
+<div class="container">
+	{% load crispy_forms_tags %}
+    <form action="{% url 'junta_medica' %}" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="row">
+			<div class="col-12">
+				{{ form.solicitud }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				{{ form.motivo }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				{{ form.destinatario }}
+			</div>
+		</div>
+		<br>
+		<button type="submit" id="btn-guardar">Enviar</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -5,14 +5,14 @@ from . import views
 
 
 urlpatterns = [
-	url(r'^calificar/$', views.calificar, name='calificar'),
 	url(r'^inicio_pacientes/$', views.inicio_pacientes, name='inicio_pacientes'),
 	url(r'^$', views.inicio, name='inicio'),
 	url(r'^agendar_emergencia/$', views.agendar_emergencia, name='agendar_emergencia'),
 	url(r'^accounts/$', include('allauth.urls')),
 	url(r'^medico_emergencia/$', views.selec_med_emergencia, name='selec_med_emergencia'),
 	url(r'^confirmacion_emergencia/$', views.confirmacion_emergencia, name='confirmacion_emergencia'),
-
+	url(r'^junta_medica/$', views.junta_medica, name='junta_medica'),
+	
 	url(r'^historial_medico_paciente/$', views.historial_medico_paciente, name='historial_medico_paciente'),
 
 	url(r'^tarjeta/$', views.tarjeta, name='tarjeta'),

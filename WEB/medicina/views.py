@@ -21,6 +21,9 @@ from django.http import Http404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 from datetime import date
 import time
@@ -1018,6 +1021,31 @@ def ing_receta(request):
 		formset=MedicamentoFormset()
 
 	return render(request, 'escribir_receta2.html', {'formset':formset,'doctor':doctor,'paciente':paciente,'especialidad':especialidad})
+
+
+def junta_medica(request):
+	
+	current_user = str(request.user.persona_id.nombre)+" "+str(request.user.persona_id.apellido)
+	print(current_user)
+	lista_destino=[]
+	
+	form=Junta_MedicaForm(request.POST)
+	if form.is_valid():
+		solicitud=form.cleaned_data.get('solicitud')
+		motivo=form.cleaned_data.get('motivo')
+		destinatario = form.cleaned_data.get('destinatario')
+		for dest in destinatario:
+			lista_destino.append(str(dest.user_id.username))
+			print(dest.user_id.username)
+		motivo="Yo, "+current_user+"expreso que , "+motivo.lower()
+		
+		#email = EmailMessage(solicitud, motivo, to=destinatario)
+		#email.send()
+		email_from = settings.EMAIL_HOST_USER
+		send_mail(solicitud,motivo,email_from,destinatario,fail_silently=False)
+		return(index_medico)
+	form= Junta_MedicaForm()
+	return render(request, 'junta_medica.html', {'form':form})
 
 
 def escribir_receta(request):
