@@ -12,10 +12,14 @@ urlpatterns = [
 	url(r'^medico_emergencia/$', views.selec_med_emergencia, name='selec_med_emergencia'),
 	url(r'^confirmacion_emergencia/$', views.confirmacion_emergencia, name='confirmacion_emergencia'),
 	url(r'^junta_medica/$', views.junta_medica, name='junta_medica'),
+	url(r'^ver_junta_medica/$', views.ver_junta_medica, name='ver_junta_medica'),
 	
+	url(r'^aceptar_junta/$', views.aceptar_junta, name='aceptar_junta'),
+	url(r'^rechazar_junta/$', views.rechazar_junta, name='rechazar_junta'),
+
+
 	url(r'^historial_medico_paciente/$', views.historial_medico_paciente, name='historial_medico_paciente'),
 
-	url(r'^tarjeta/$', views.tarjeta, name='tarjeta'),
 
 	url(r'^selec_medico/$', views.selec_medico, name='selec_medico'),
 	url(r'^login/$', views.login, name='login'),

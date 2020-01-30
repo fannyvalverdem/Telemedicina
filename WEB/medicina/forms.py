@@ -257,9 +257,9 @@ class Agendar_MedicoForm(forms.Form):
 	especialidad=forms.ModelChoiceField(queryset=Especialidad.objects.all())
 
 class Junta_MedicaForm(forms.Form):
-	solicitud=forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Solicitud '}))
-	motivo=forms.CharField(label='',max_length=100,widget=forms.TextInput(attrs={'placeholder':'Motivo '}))
-	destinatario=forms.ModelMultipleChoiceField(
-                       widget = forms.SelectMultiple,
-                       queryset = Doctor.objects.all()
-               )
+	doctor=forms.ModelChoiceField(queryset=Doctor.objects.all())
+	motivo=forms.CharField(max_length=100,widget=forms.TextInput())
+	descripcion=forms.CharField(widget=forms.Textarea(attrs={'cols': 50, 'rows': 1}))
+	paciente=forms.ModelChoiceField(queryset=Paciente.objects.all())
+
+Junta_MedicaFormset=formset_factory(Junta_MedicaForm,extra=1)

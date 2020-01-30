@@ -208,3 +208,9 @@ class Pagos_Doctor(models.Model):
 	estado=models.CharField(max_length=200)
 	doctor=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE)
 	
+class Junta_Medica(models.Model):
+	paciente=models.ForeignKey(Paciente, null=True, blank=True, on_delete=models.CASCADE)
+	solicitante=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE, related_name='solicitante')
+	doctor_solicitado=models.ForeignKey(Doctor, null=True, blank=True, on_delete=models.CASCADE, related_name='doctor_solicitado')
+	motivo=models.CharField(max_length=200)
+	estado_solicitud=models.IntegerField(default=0)

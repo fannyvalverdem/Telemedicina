@@ -175,3 +175,7 @@ class PagoDoctorViewset(generics.ListAPIView):
 class CitasMedicoViewset(generics.ListAPIView):
 	queryset = models.Citas_Medico.objects.all()
 	serializer_class = serializers.CitasMedicoSerializer
+
+class JuntaMedicaViewset(generics.ListAPIView):
+	queryset = models.Junta_Medica.objects.all()
+	serializer_class = serializers.JuntaMedicaSerializer

@@ -25,10 +25,22 @@ img[id="avatar_doctor"]{
 	width: 25%;
 }
 
-div#citas-prev {
+div#citas-prev, div#citas-prev2, div#citas-prev3 {
   border: 1px solid #9a999e;
   padding: 10px;
   border-radius: 25px;
+}
+
+div#citas-prev2 {
+	background-color: #ffffdb;
+	border: 2px solid #d0d077;
+	font-weight: bold;
+	font-size: 15px;
+}
+div#citas-prev3 {
+	background-color: #ffffdb;
+	border: 2px solid #d0d077;
+	font-size: 15px;
 }
 
 div#inicio-cont{

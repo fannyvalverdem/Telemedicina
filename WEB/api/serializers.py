@@ -215,3 +215,11 @@ class CitasMedicoSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Citas_Medico
 		fields=("id","m_id","m_url","fecha","hora","m_duration","doctor")
+
+class JuntaMedicaSerializer(serializers.ModelSerializer):
+	paciente=PacienteSerializer()
+	solicitante=MedicoSerializer()
+	doctor_solicitado=MedicoSerializer()
+	class Meta:
+		model= models.Junta_Medica
+		fields=("id","paciente","solicitante","doctor_solicitado","motivo","estado_solicitud")

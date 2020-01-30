@@ -1,0 +1,60 @@
+{% extends 'menu_junta.html' %}
+{% load staticfiles %}
+
+{% block contenido %}
+{% if junta_form%}
+
+{% for junta in junta_form%}
+	<div id="citas-prev3" class="row">
+		<div class="col-12">
+			<br>
+			<table style="width:100%;text-align: center;">
+			  <tr>
+			    <th>Doctor Solicitante: </th>
+			    <th>Doctor Solicitado: </th>
+			    <th>Paciente: </th>
+			    <th>Motivo: </th>
+			  </tr>
+			  <tr>
+			  	<td>{{ junta.solicitante}}</td>
+			  	<td>{{ junta.doctor_solicitado}}</td>
+			  	<td>{{ junta.paciente}}</td>
+			    <td>{{ junta.motivo}}</td>
+			  </tr>
+			  {% if junta.estado_solicitud == 0 %}
+			  <tr>
+			    <td><a href="/rechazar_junta/?id={{ junta.id }}" name="junta.id" id="btn-rechazar" class="btn btn-danger">Rechazar</a></td>
+			    <td><a href="/aceptar_junta/?id={{ junta.id }}" name="junta.id" id="btn-aceptar" class="btn btn-success">Aceptar</a></td>
+			    <td></td>
+			    <td></td>
+			  </tr>
+			  {% endif %}
+			  {% if junta.estado_solicitud == -1 %}
+			  <tr>
+			    <td style="font-weight: bolder;">Estado: </td>
+			    <td style="font-weight: bold; color: red;"> Rechazado</td>
+			    <td></td>
+			    <td></td>
+			  </tr>
+			  {% endif %}
+			  {% if junta.estado_solicitud == 1 %}
+			  <tr>
+			    <td style="font-weight: bolder;">Estado: </td>
+			    <td style="font-weight: bold; color: green;">Aceptado</td>
+			    <td></td>
+			    <td></td>
+			  </tr>
+			  {% endif %}
+			  
+			</table>
+			<br>
+		</div>
+
+	</div>
+	<br>
+		
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}

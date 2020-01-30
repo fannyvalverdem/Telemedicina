@@ -1012,6 +1012,18 @@ def ing_receta(request):
 				name = form.cleaned_data.get('nombre')
 				cant = form.cleaned_data.get('cantidad')
 				des = form.cleaned_data.get('descripcion')
+				receta=Receta(
+					descripcion=descripcion,
+					consulta_id=consulta
+					)
+				receta.save()
+
+				escribir=RecetarMedicamentos(
+					receta=receta,
+					medicamento=name,
+				)
+				escribir.save()
+
 				print(name)
 				print(cant)
 				print(des)
@@ -1024,30 +1036,67 @@ def ing_receta(request):
 
 
 def junta_medica(request):
-	
-	current_user = str(request.user.persona_id.nombre)+" "+str(request.user.persona_id.apellido)
-	print(current_user)
-	lista_destino=[]
-	
-	form=Junta_MedicaForm(request.POST)
-	if form.is_valid():
-		solicitud=form.cleaned_data.get('solicitud')
-		motivo=form.cleaned_data.get('motivo')
-		destinatario = form.cleaned_data.get('destinatario')
-		for dest in destinatario:
-			lista_destino.append(str(dest.user_id.username))
-			print(dest.user_id.username)
-		motivo="Yo, "+current_user+"expreso que , "+motivo.lower()
-		
-		#email = EmailMessage(solicitud, motivo, to=destinatario)
-		#email.send()
-		email_from = settings.EMAIL_HOST_USER
-		send_mail(solicitud,motivo,email_from,destinatario,fail_silently=False)
-		return(index_medico)
-	form= Junta_MedicaForm()
-	return render(request, 'junta_medica.html', {'form':form})
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	doctor=Persona.objects.get(id=user_ac_person_id)
+	usuario=Usuario.objects.get(username=current_user.username)
+	doctor_solicitante=Doctor.objects.get(user_id=usuario)
+	consulta=Consulta.objects.last() #Cambiar
+	paciente=consulta.paciente_id
 
+	if request.method == 'POST':
+		print("POST")
 
+		formset=Junta_MedicaFormset(request.POST)
+		if formset.is_valid():
+			for form in formset:
+				doctor_solicitado = form.cleaned_data.get('doctor')
+				titulo = form.cleaned_data.get('motivo')
+				motivo = form.cleaned_data.get('descripcion')
+				print(doctor_solicitado)
+				print(titulo)
+				print(motivo)
+				nueva_junta = Junta_Medica(
+					paciente=paciente,
+					solicitante=doctor_solicitante,
+					doctor_solicitado=doctor_solicitado,
+					motivo=motivo,
+					estado_solicitud=0,
+					)
+				nueva_junta.save()
+			return redirect('index_medico')
+	else:
+		form=Junta_MedicaForm()
+		formset=Junta_MedicaFormset()
+
+	return render(request, 'junta_medica.html', {'formset':formset,'doctor':doctor})
+
+def ver_junta_medica(request):
+	current_user = request.user
+	usuario=Usuario.objects.get(username=current_user.username)
+	print(current_user.username)
+	print(usuario)
+	doctor=Doctor.objects.get(user_id=usuario)
+	junta=Junta_Medica.objects.filter(doctor_solicitado=doctor)
+	return render(request,'ver_junta_medica.html', {'junta_form':junta})
+
+def aceptar_junta(request):
+	sku = request.GET.get('id')
+	print(sku)
+	junta=Junta_Medica.objects.get(id=sku)
+	junta.estado_solicitud=1
+	junta.save()
+	return redirect('ver_junta_medica')
+
+def rechazar_junta(request):
+	sku = request.GET.get('id')
+	print(sku)
+	junta=Junta_Medica.objects.get(id=sku)
+	junta.estado_solicitud=-1
+	junta.save()
+	return redirect('ver_junta_medica')
+	
 def escribir_receta(request):
 	if request.method == 'POST':
 		print("POST")
@@ -1475,14 +1524,3 @@ def nuestros_paquetes(request):
 	paquete = Listar("paquete")
 	context= {'object_list': paquete}
 	return render(request, 'nuestros_paquetes.html', context)
-
-
-def calificar(request):
-	dictionary = dict(request=request) 
-	dictionary.update(csrf(request)) 
-	return render(request,'calificar.html', dictionary)
-
-def tarjeta(request):
-	dictionary = dict(request=request) 
-	dictionary.update(csrf(request)) 
-	return render(request,'tarjeta.html', dictionary)
