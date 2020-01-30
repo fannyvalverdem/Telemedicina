@@ -129,3 +129,13 @@ def crear_citas(token,horarios,email,doctor):
 			add_meeting(email,'Cita',fecha,stractual,dianum,token)
 
 	guardar_citas(email,token,doctor)
+
+def facturacion(tarifa,nombre,apellido,cedula):
+	today = date.today()
+	fecha = today.strftime("%Y/%m/%d")
+	strtarifa=str(tarifa)
+
+	data="{\"api_key\":\"API_1_1_5a4492f2d5137\",\"codigoDoc\":\"01\",\"emisor\":{fecha_emision\":\""+fecha+"\"},\"comprador\":{\"tipo_identificacion\":\"05\",\"identificacion\":\""+cedula+"\",\"razon_social\":\""+nombre+" "+apellido+"\"},\"items\":[{\"codigo_principal\":\"900053\",\"descripcion\":	\"Servicio Medico\",\"tipoproducto\":2,\"tipo_iva\":2,\"precio_unitario\":"+strtarifa+",\"cantidad\":1}],\"pagos\":[{\"tipo\":\"19\"}],}"
+
+	response=requests.post('https://azur.com.ec/plataforma/api/v2/factura/emision',data)
+	print(response)

@@ -31,13 +31,15 @@
     </div>
     <div class="row">
         <div class="col-2">
-            
         </div>
         <div class="col-6">
-            <button class="js-paymentez-checkout">Purchase</button><!--btn pago modal-->
-            <div id="response"></div>
+            <button id="btn-pagar" class="js-paymentez-checkout">Pagar</button><!--btn pago modal-->
+            <div id="response" style="display: none"></div>
+            <div id="exito" style="color: green"></div>
             <br>
-            <button id="btn-continuar"><a href="/guardar_cita/?id={{ cita.id }}?especialidad={{especialidad}}" name="cita.id">Saltar</a></button>
+            <div id="tarifa_id" style="display: none">{{cita.doctor.tarifa.precio}}</div>
+            <div id="usuario_id" style="display: none">{{usuario.email}}</div>
+            <button id="btn-continuar"><a href="/guardar_cita/?id={{ cita.id }}?especialidad={{especialidad}}" name="cita.id">Continuar</a></button>
         </div>
         
         
@@ -50,6 +52,21 @@
 
 {% block script %}
 <script>
+
+function formatDate() {
+    var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 var paymentezCheckout = new PaymentezCheckout.modal({
     client_app_code: 'TPP2-EC-CLIENT', // Client Credentials Provied by Paymentez
     client_app_key: 'sDAwQAdBqetYhVZFFLpOg6FU2cmjF0', // Client Credentials Provied by Paymentez
@@ -101,19 +118,28 @@ var paymentezCheckout = new PaymentezCheckout.modal({
 
         */
         console.log('modal response');
-        document.getElementById('response').innerHTML = JSON.stringify(response);            
+        var data=JSON.stringify(response);
+        document.getElementById('response').innerHTML = data;
+        document.getElementById('btn-pagar').style.visibility = 'hidden';
+        document.getElementById('exito').innerHTML = "Su pago ha sido realizado con exito";
+        
     }
 });
+
 
 var btnOpenCheckout = document.querySelector('.js-paymentez-checkout');
 btnOpenCheckout.addEventListener('click', function(){
   // Open Checkout with further options:
+
+  var tarifa=document.getElementById("tarifa_id").innerHTML;
+  var numtarifa=parseInt(tarifa);
+  var correo=document.getElementById("usuario_id").innerHTML;
   paymentezCheckout.open({
     user_id: '1234',
-    user_email: 'test@paymentez.com', //optional        
+    user_email: correo, //optional        
     user_phone: '7777777777', //optional
-    order_description: '1 Green Salad',
-    order_amount: 1500,
+    order_description: 'Servicio Medico Telemedicina',
+    order_amount: numtarifa,
     order_vat: 0,
     order_reference: '#234323411',
     //order_installments_type: 2, // optional: For Colombia an Brazil to show installments should be 0, For Ecuador the valid values are: https://paymentez.github.io/api-doc/#payment-methods-cards-debit-with-token-installments-type
