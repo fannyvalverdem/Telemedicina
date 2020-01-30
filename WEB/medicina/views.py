@@ -11,7 +11,7 @@ from django.contrib.auth import login as auth_login
 from .forms import *
 from .models import *
 from django.contrib.auth.models import User
-from .controller import Listar, Add, listar_meeting,add_meeting,add_user,crear_citas,guardar_citas
+from .controller import Listar, Add, listar_meeting,add_meeting,add_user,crear_citas,guardar_citas, facturacion
 import requests,json
 from .utility import *
 from django.http import QueryDict
@@ -72,7 +72,6 @@ def match_especialidad(request):
 	if form.is_valid():
 		opciones = form.cleaned_data.get('opciones')
 		especialidad=Especialidad.objects.last()
-		print(opciones[0],"<<<<<<<<<<<<<<")
 		for doctor in opciones:
 			match=MatchEspecialidades(
 				especialidad=especialidad,
@@ -125,8 +124,6 @@ def registro(request):
 				telefono=telefono,
 			)
 			persona.save()
-		
-			print("Persona ok")
 
 		# username =form.cleaned_data['email']
 		username = form1.cleaned_data['username']
@@ -134,8 +131,7 @@ def registro(request):
 		# password = form.cleaned_data['password']
 		password1 = form1.cleaned_data['password1']
 		password2 = form1.cleaned_data['password2']
-		
-		print(username,email,password1,password2,nombre,apellido,telefono,"<###")
+
 		persona=Persona.objects.order_by('-id')[0]
 		usuario=Usuario(
 			username=username,
@@ -245,7 +241,6 @@ def citas_medico(request):
 	today=date.today()
 	fecha_format=today.strftime("%Y-%m-%d")
 	citas_m=Citas_Medico.objects.filter(fecha=fecha_format,disponible=True,doctor=doctor.id).order_by('hora')
-	print(citas_m)
 	return render(request,"citas_medico.html",{'cita_prox':citas_m})
 
 def reporte_medico(request):
@@ -273,7 +268,6 @@ def citas_previas(request):
 	user_ac_id=current_user.id
 	paciente=Paciente.objects.get(user_id=user_ac_id)
 	cita_prev=Consulta.objects.filter(paciente_id=paciente.id,estado='realizada')
-	print(cita_prev)
 	return render(request,"citas_previas_paciente.html",{'cita_prev':cita_prev})
 
 
@@ -282,7 +276,6 @@ def citas_proximas(request):
 	user_ac_id=current_user.id
 	paciente=Paciente.objects.get(user_id=user_ac_id)
 	cita_prox=Consulta.objects.filter(paciente_id=paciente.id,estado='agendada')
-	print(cita_prox)
 	return render(request,"citas_proxima_paciente.html",{'cita_prox':cita_prox})
 
 def ver_publicidad(request):
@@ -790,7 +783,6 @@ def agendar_cita_medico(request):
 	doctor=Doctor.objects.get(user_id=user_ac_id)
 	print(str(doctor))
 	consulta=Consulta.objects.filter(doctor_id=doctor.id).all()
-	print(consulta)
 	if request.method == 'POST':
 		print("POST")
 	form= Agendar_MedicoForm(request.POST)
@@ -806,7 +798,6 @@ def agendar_cita_medico(request):
 		fecha=data[0]
 		hora=data[1]
 		fecha_format=datetime.datetime.strptime(fecha, '%m/%d/%Y').strftime('%Y-%m-%d')
-		print(fecha_format)
 		citas_m=Citas_Medico.objects.filter(fecha=fecha_format,hora__gte=hora,disponible=True)
 		citas=citas_m.filter(doctor_id__in=doc).order_by('hora')
 		return render(request,'citas_disponibles_agendar.html', {'citas_disponibles':citas,'especialidad':especialidad})
@@ -828,7 +819,6 @@ def agendar_cita(request):
 		fecha=data[0]
 		hora=data[1]
 		fecha_format=datetime.datetime.strptime(fecha, '%m/%d/%Y').strftime('%Y-%m-%d')
-		print(fecha_format)
 		citas_m=Citas_Medico.objects.filter(fecha=fecha_format,hora__gte=hora,disponible=True)
 		match_doctores=MatchEspecialidades.objects.filter(especialidad=especialidad)
 		doctores=Doctor.objects.all()
@@ -849,8 +839,13 @@ def confirmar_agendar_cita(request):
 	sku=sepa[0]
 	especialidad = sepa[1].split('=')[1]
 	cita=Citas_Medico.objects.get(id=sku)
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	persona=Persona.objects.get(id=user_ac_person_id)
+	usuario=Usuario.objects.get(id=user_ac_id)
 
-	return render(request,'confirmar_cita.html', {'cita':cita,'especialidad':especialidad})
+	return render(request,'confirmar_cita.html', {'cita':cita,'especialidad':especialidad,'usuario':usuario})
 
 def guardar_cita(request):
 	sku_m = request.GET.get('id')
@@ -859,6 +854,10 @@ def guardar_cita(request):
 	esp = sepa[1].split('=')[1]
 	especialidad=Especialidad.objects.get(nombre=esp)
 	cita=Citas_Medico.objects.get(id=sku)
+	current_user = request.user
+	user_ac_id=current_user.id
+	user_ac_person_id=current_user.persona_id.id
+	persona=Persona.objects.get(id=user_ac_person_id)
 	today = date.today()
 	fecha_reser = today.strftime("%Y-%m-%d")
 	cita.disponible=False
@@ -886,6 +885,8 @@ def guardar_cita(request):
 
 	consulta.save()
 
+	facturacion(cita.doctor.tarifa.precio,persona.nombre,persona.apellido,persona.numero_documento)
+
 	return redirect('citas_prox')
 
 def login(request): 
@@ -898,9 +899,7 @@ def login(request):
 	        username =form.cleaned_data['email']
 	        password = form.cleaned_data['password']
 	        user = authenticate(username=username,password=password)
-	        print(username)
-	        print(password)
-	        print(user)
+
 	        if user is not None:
 	        	auth_login(request=request,user=user)
 	        	response_doctor = requests.get('http://127.0.0.1:8000/api/doctor/')
@@ -1212,7 +1211,6 @@ def consejos_noticias(request):
 
 def mis_noticias(request):
 	noticias = Listar("noticias")
-	print(str(noticias[0]['imagen']).split("noticias/")[1],"<<<<<<<<<<")
 	for n in noticias:
 		n['imagen']=str(n['imagen']).split("noticias/")[1]
 	context= {'object_list': noticias}
@@ -1220,7 +1218,6 @@ def mis_noticias(request):
 
 def mis_consejos(request):
 	consejos = Listar("consejos")
-	print(str(consejos[0]['imagen']).split("consejos/")[1],"<<<<<<<<<<")
 	for c in consejos:
 		c['imagen']=str(c['imagen']).split("consejos/")[1]
 	context= {'object_list': consejos}
@@ -1291,7 +1288,6 @@ def ver_mas_consejo(request):
 	print(sku)
 	conse=Consejos.objects.get(id=sku)
 	imagen=str(conse.imagen)
-	print(imagen,"<<<<<<<<<<")
 	titulo=conse.titulo
 	descripcion=conse.descripcion
 	fuente=conse.fuente
@@ -1303,7 +1299,6 @@ def ver_mas_noticias(request):
 	sku = request.GET.get('ids')
 	conse=Noticias.objects.get(id=sku)
 	imagen=str(conse.imagen)
-	print(imagen,"<<<<<<<<<<")
 	titulo=conse.titulo
 	descripcion=conse.descripcion
 	fuente=conse.fuente
@@ -1400,7 +1395,6 @@ def mis_paquetes(request):
 		citas_disponibles=paque.citas_disponibles
 		paquete={'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio,'faltantes':citas_disponibles}
 		data.append(paquete)
-		print(data)
 
 	context= {'object_list':data}
 	return render(request,'mis_paquetes.html',context)
@@ -1446,7 +1440,6 @@ def inicio_pacientes(request):
 		precio=paque.precio
 		paquete={'id':paque_id,'nombre': nombre,'descripcion': descripcion,'citas': citas,'duracion': duracion,'precio':precio}
 		data.append(paquete)
-		print(data)
 
 	last_tres2 = Consejos.objects.order_by('-id')[:3]
 	last_tres3 = Noticias.objects.order_by('-id')[:3]
