@@ -1043,12 +1043,13 @@ def junta_medica(request):
 	doctor_solicitante=Doctor.objects.get(user_id=usuario)
 	consulta=Consulta.objects.last() #Cambiar
 	paciente=consulta.paciente_id
-
+	print(paciente)
 	if request.method == 'POST':
 		print("POST")
 
 		formset=Junta_MedicaFormset(request.POST)
 		if formset.is_valid():
+			print("dentro")
 			for form in formset:
 				doctor_solicitado = form.cleaned_data.get('doctor')
 				titulo = form.cleaned_data.get('motivo')

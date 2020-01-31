@@ -16,31 +16,31 @@
 			    <th>Motivo: </th>
 			  </tr>
 			  <tr>
-			  	<td>{{ junta.solicitante}}</td>
-			  	<td>{{ junta.doctor_solicitado}}</td>
-			  	<td>{{ junta.paciente}}</td>
-			    <td>{{ junta.motivo}}</td>
+			  	<td style="text-align: left;">{{ junta.solicitante}}</td>
+			  	<td style="text-align: left;">{{ junta.doctor_solicitado}}</td>
+			  	<td style="text-align: left;">{{ junta.paciente}}</td>
+			    <td style="text-align: left;">{{ junta.motivo}}</td>
 			  </tr>
 			  {% if junta.estado_solicitud == 0 %}
 			  <tr>
-			    <td><a href="/rechazar_junta/?id={{ junta.id }}" name="junta.id" id="btn-rechazar" class="btn btn-danger">Rechazar</a></td>
-			    <td><a href="/aceptar_junta/?id={{ junta.id }}" name="junta.id" id="btn-aceptar" class="btn btn-success">Aceptar</a></td>
+			    <td style="text-align: left;"><a href="/rechazar_junta/?id={{ junta.id }}" name="junta.id" id="btn-rechazar" class="btn btn-danger">Rechazar</a></td>
+			    <td style="text-align: left;"><a href="/aceptar_junta/?id={{ junta.id }}" name="junta.id" id="btn-aceptar" class="btn btn-success">Aceptar</a></td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  {% endif %}
 			  {% if junta.estado_solicitud == -1 %}
 			  <tr>
-			    <td style="font-weight: bolder;">Estado: </td>
-			    <td style="font-weight: bold; color: red;"> Rechazado</td>
+			    <td style="font-weight: bolder; text-align: left;">Estado: </td>
+			    <td style="font-weight: bold; color: red; text-align: left;"> Rechazado</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
 			  {% endif %}
 			  {% if junta.estado_solicitud == 1 %}
 			  <tr>
-			    <td style="font-weight: bolder;">Estado: </td>
-			    <td style="font-weight: bold; color: green;">Aceptado</td>
+			    <td style="font-weight: bolder; text-align: left;">Estado: </td>
+			    <td style="font-weight: bold; color: green; text-align: left;">Aceptado</td>
 			    <td></td>
 			    <td></td>
 			  </tr>
