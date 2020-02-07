@@ -28,13 +28,42 @@
     <!--Seccion info de la cita-->
     <ion-row class="ion-justify-content-center">
       <ion-col size="10">
+        <ion-card>
+          <ion-row class="ion-justify-content-center">
+          <ion-card-header>
+            <ion-card-title>Resumen</ion-card-title>
+          </ion-card-header>
+        </ion-row>
+          <ion-card-content>
+            <ion-row class="ion-justify-content-center align-items-center">
+            <ion-img src="assets/ICONS_APP/ICONS_APP/doctor.png"></ion-img>
+            </ion-row>
+            <ion-row class="ion-justify-content-center align-items-center">
+              <ion-col size="5">
+            <p>Especialidad: <br/>
+            Medico: <br/>
+            Fecha: <br/>
+            Hora:</p>
+            </ion-col>
+            <ion-col size="5">
+              <p>{{selected.especialidad}}<br/>
+              {{selected.nombre}}<br/>
+              {{selected.fecha}}<br/>
+              {{selected.hora}} </p>
+            </ion-col>
+            
+          
+          </ion-row>
+          </ion-card-content>
+       
+        </ion-card>
 
       </ion-col>
     </ion-row>
 
 
     
-    <ion-row id="confirmar" routerLink="../pago" class="ion-justify-content-center">
+    <ion-row id="confirmar" routerLink="../principal" class="ion-justify-content-center">
       
       <ion-label>CONFIRMAR CITA</ion-label>
         

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageHandlerService } from './storage-handler.service';
 import { AlertController, MenuController } from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';
+import 'rxjs/Rx';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ export class DatabaseService {
   
   apiUrl = "http://127.0.0.1:8000/";  //por el momento localmente
   zoomApiUrl = "https://api.zoom.us/v2/";
+  espec=[];
   
   constructor(private http: HttpClient, private storage: StorageHandlerService,
     private alertCtrl: AlertController, private httpIonic: HTTP
@@ -47,6 +50,12 @@ export class DatabaseService {
 			});
 		});
 	}
+
+	
+
+
+
+
 
 	getPersonInformation() {
 		return new Promise((resolve,reject) => {
@@ -105,6 +114,7 @@ export class DatabaseService {
 			}
 		});
 	}
+
 
 	getCourse(courseId) {
 		return new Promise((resolve,reject) => {

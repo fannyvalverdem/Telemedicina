@@ -110,7 +110,7 @@ class DetalleConsultaSerializer(serializers.ModelSerializer):
 	
 	class Meta:
 		model= models.Detalle_Consulta
-		fields=("fecha_reser","fecha_prog","precio","hora","calificacion")
+		fields=("fecha_reser","fecha_prog","precio","hora","calificacion","zoom")
 
 class ConsultaSerializer(serializers.ModelSerializer):
 	doctor_id=MedicoSerializer()

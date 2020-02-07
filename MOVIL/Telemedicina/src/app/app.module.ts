@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 import { SQLite } from '@ionic-native/sqlite/ngx';
+import {Zoom} from '@ionic-native/zoom/ngx';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DatabaseService } from './services/database.service';
@@ -29,6 +30,7 @@ import { StorageHandlerService } from './services/storage-handler.service';
     SQLitePorter,
     SQLite,
     DatabaseService,
+    Zoom,
     StorageHandlerService
   ],
   bootstrap: [AppComponent]

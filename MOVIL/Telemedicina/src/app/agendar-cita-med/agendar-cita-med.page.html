@@ -25,14 +25,29 @@
       <ion-title>AGENDAR CITA</ion-title>
     </ion-row>
 
+      
     <!--Viene un ion-row para colocar la informacion de los doctores disponibles-->
     <ion-row id="listadoctores">
-      <ion-col size="11">
+      <ion-col size="12">
         <ion-list>
-         <ion-item *ngFor="let entry of form">
-            <ion-label>{{entry.val}}</ion-label>
-            <ion-checkbox slot="start" [(ngModel)]="entry.isChecked"></ion-checkbox>
+          <ion-radio-group (ionChange)="radioGroupChange($event)">
+            <ion-item id="containerdoc" *ngFor="let entry of matchesp">
+              <ion-col size="1" size-sm>
+                <ion-radio></ion-radio>
+              </ion-col>
+              <ion-col size="2" size-sm>
+              <ion-img id='doctor' src="assets/ICONS_APP/ICONS_APP/doctor.png"></ion-img>
+              </ion-col>
+              <ion-col size="6" size-sm>
+              <ion-label>{{entry.doctor.user_id.persona_id.nombre}} {{entry.doctor.user_id.persona_id.apellido}}</ion-label>
+              </ion-col>
+              <ion-col size="3" size-sm>
+                {{entry.hora}}
+              </ion-col>
+              
+              
          </ion-item>
+        </ion-radio-group>
         </ion-list>
       </ion-col>    
     </ion-row>
@@ -40,7 +55,7 @@
 
 
 
-    <ion-row id="next" routerLink="../agendar-cita-conf" class="ion-justify-content-center">
+    <ion-row id="next" routerLink="../agendar-cita-conf" (click)="passingSelected()" class="ion-justify-content-center">
       
       <ion-label>SIGUIENTE</ion-label>
         

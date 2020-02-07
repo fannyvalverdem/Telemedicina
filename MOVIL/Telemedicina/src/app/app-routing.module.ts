@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: 'agendar-cita-med', loadChildren: './agendar-cita-med/agendar-cita-med.module#AgendarCitaMedPageModule' },
   { path: 'agendar-cita-conf', loadChildren: './agendar-cita-conf/agendar-cita-conf.module#AgendarCitaConfPageModule' },
   { path: 'perfil', loadChildren: './perfil/perfil.module#PerfilPageModule' },
-  { path: 'videollamada', loadChildren: './videollamada/videollamada.module#VideollamadaPageModule' },
   { path: 'pago', loadChildren: './pago/pago.module#PagoPageModule' },
   { path: 'receta', loadChildren: './receta/receta.module#RecetaPageModule' },
   { path: 'doctoresfav', loadChildren: './doctoresfav/doctoresfav.module#DoctoresfavPageModule' },

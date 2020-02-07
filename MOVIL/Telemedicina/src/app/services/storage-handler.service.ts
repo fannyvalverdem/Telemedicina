@@ -5,7 +5,10 @@ import { Storage } from '@ionic/storage';
 	providedIn: 'root'
 })
 export class StorageHandlerService {
-
+	especialidad: string;
+	fechacons: string;
+	horacons: string;
+	selectedapp: {};
 	key: any;
 	id: any;
 	email: string;
@@ -46,6 +49,40 @@ export class StorageHandlerService {
 		return retorno;
 	}
 
+	setEspecialidad(value: string){
+		this.especialidad= value;
+	}
+
+	getEspecialidad(){
+		return this.especialidad;
+	}
+
+	setFechaCons(value: string){
+		this.fechacons= value;
+	}
+
+	getFechaCons(){
+		return this.fechacons;
+	}
+
+	setHoraCons(value: string){
+		this.horacons= value;
+	}
+
+	getHoraCons(){
+		return this.horacons;
+	}
+
+	setSelectedAppoinment(value){
+		this.selectedapp= value;
+	}
+
+	getSelectedAppoinment(){
+		return this.selectedapp;
+	}
+
+
+
 	getKey() {
 		return this.key;
 	}
@@ -63,6 +100,7 @@ export class StorageHandlerService {
 		this.id = value;
 		this.writeInStorage("id", value);
 	}
+
 
 	getEsUsuario() {
 		return this.esUsuario;

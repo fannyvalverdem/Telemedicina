@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageHandlerService } from '../services/storage-handler.service';
 
 @Component({
   selector: 'app-agendar-cita-conf',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgendarCitaConfPage implements OnInit {
 
-  constructor() { }
+  selected:{};
+  
+  constructor(private storage: StorageHandlerService) { }
 
   ngOnInit() {
+    this.selected= this.storage.getSelectedAppoinment();
+    console.log(typeof(this.selected));
   }
+
 
 }
