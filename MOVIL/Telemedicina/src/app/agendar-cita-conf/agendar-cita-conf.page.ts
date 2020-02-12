@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StorageHandlerService } from '../services/storage-handler.service';
+import { DoctoresfavPage } from '../doctoresfav/doctoresfav.page';
 
 @Component({
   selector: 'app-agendar-cita-conf',
@@ -7,14 +9,32 @@ import { StorageHandlerService } from '../services/storage-handler.service';
   styleUrls: ['./agendar-cita-conf.page.scss'],
 })
 export class AgendarCitaConfPage implements OnInit {
-
-  selected:{};
+  especialidad=this.storage.getEspecialidad();
+  selected: any;
+  postobject: any = {estado: "agendado",paciente_id: {},doctor_id:{},detalle:{}};
   
-  constructor(private storage: StorageHandlerService) { }
+  constructor(private http: HttpClient,private storage: StorageHandlerService) { }
 
   ngOnInit() {
     this.selected= this.storage.getSelectedAppoinment();
-    console.log(typeof(this.selected));
+    this.postobject["doctor_id"]=this.selected["doctor"];
+    console.log(this.selected);
+    console.log(this.postobject);
+    
+  }
+
+  
+
+  passingFinal(){
+    this.storage.addToCitasAgendadas(this.selected);
+    this.http.post('http://127.0.0.1:8000/api/consulta/',this.postobject).subscribe(data => {     
+      console.log(data);
+    }, err => {
+      
+      console.log(err);
+    });
+    
+    
   }
 
 

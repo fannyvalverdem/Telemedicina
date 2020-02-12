@@ -16,6 +16,10 @@ export class AppComponent {
     {
       title:'Contactenos',
       url:'/contacto'
+    },
+    {
+      title:'Mis Citas',
+      url:'/miscitas'
     }
   ];
 

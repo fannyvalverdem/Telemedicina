@@ -36,10 +36,13 @@ export class LoginPage implements OnInit {
       await this.restProvider.login(this.user)
         .then(data => {
           this.storageHandler.setAll(
+            
             JSON.parse(JSON.stringify(data))['key'],
             JSON.parse(JSON.stringify(data))['id']);
+         
           this.showAlert("Inició sesión de forma correcta");
           this.router.navigate(['/principal'], { replaceUrl: true });
+          
           retorno = true; //Retorna True si inició sesión de forma correcta
         }, err => {
           this.showAlert(JSON.parse(JSON.stringify(err))['error']);

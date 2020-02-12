@@ -20,7 +20,9 @@ const routes: Routes = [
   { path: 'historialmed', loadChildren: './historialmed/historialmed.module#HistorialmedPageModule' },
   { path: 'receta-espec', loadChildren: './receta-espec/receta-espec.module#RecetaEspecPageModule' },
   { path: 'paquetes', loadChildren: './paquetes/paquetes.module#PaquetesPageModule' },
-  { path: 'contacto', loadChildren: './contacto/contacto.module#ContactoPageModule' }
+  { path: 'contacto', loadChildren: './contacto/contacto.module#ContactoPageModule' },
+  { path: 'miscitas', loadChildren: './miscitas/miscitas.module#MiscitasPageModule' }
+
   
 
 ];

@@ -36,7 +36,7 @@
         </ion-row>
           <ion-card-content>
             <ion-row class="ion-justify-content-center align-items-center">
-            <ion-img src="assets/ICONS_APP/ICONS_APP/doctor.png"></ion-img>
+            <ion-img id="doc" src="assets/ICONS_APP/ICONS_APP/doctor.png"></ion-img>
             </ion-row>
             <ion-row class="ion-justify-content-center align-items-center">
               <ion-col size="5">
@@ -45,9 +45,9 @@
             Fecha: <br/>
             Hora:</p>
             </ion-col>
-            <ion-col size="5">
-              <p>{{selected.especialidad}}<br/>
-              {{selected.nombre}}<br/>
+            <ion-col size="6">
+              <p>{{especialidad}}<br/>
+              {{selected.doctor.user_id.persona_id.nombre}} {{selected.doctor.user_id.persona_id.apellido}}<br/>
               {{selected.fecha}}<br/>
               {{selected.hora}} </p>
             </ion-col>
@@ -63,7 +63,7 @@
 
 
     
-    <ion-row id="confirmar" routerLink="../principal" class="ion-justify-content-center">
+    <ion-row id="confirmar" routerLink="../principal" (click)="passingFinal()" class="ion-justify-content-center">
       
       <ion-label>CONFIRMAR CITA</ion-label>
         

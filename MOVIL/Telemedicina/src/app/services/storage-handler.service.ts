@@ -5,8 +5,11 @@ import { Storage } from '@ionic/storage';
 	providedIn: 'root'
 })
 export class StorageHandlerService {
+	citas_agendadas=[];
+	citas_pasadas=[];
 	especialidad: string;
 	fechacons: string;
+	usuario: any;
 	horacons: string;
 	selectedapp: {};
 	key: any;
@@ -61,6 +64,14 @@ export class StorageHandlerService {
 		this.fechacons= value;
 	}
 
+	setUsuario(value){
+		this.usuario=value;
+	}
+
+	getUsuario(){
+		return this.usuario;
+	}
+
 	getFechaCons(){
 		return this.fechacons;
 	}
@@ -79,6 +90,15 @@ export class StorageHandlerService {
 
 	getSelectedAppoinment(){
 		return this.selectedapp;
+	}
+
+	addToCitasAgendadas(value){
+		this.citas_agendadas.push(value);
+
+	}
+
+	getListaCitasAgendadas(){
+		return this.citas_agendadas
 	}
 
 

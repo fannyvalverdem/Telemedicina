@@ -11,6 +11,7 @@ ion-header{
     
 }
 
+
 #title{
     padding-top: 30px;
     padding-bottom: 30px;
@@ -24,27 +25,12 @@ ion-header{
     
 }
 
+#containerdoc{
+    margin-bottom: 30px;
+}
+
 ion-title{
     color: #65b4c3;
     font-size: 18px;
 }
 
-#confirmar{
-    position: fixed;
-    bottom:0;
-    right:0;
-    left:0;
-    padding: 15px;
-    background-color:#e53956;
-    ion-label{
-        color:white;
-        font-size: 14px;
-        font-weight: bold;
-    }
-    
-}
-
-#doc{
-    width: 20%;
-    height: 20%;
-}

@@ -17,7 +17,7 @@
     <ion-row id="title">
       <ion-col size="1">
         <ion-row>
-        <ion-img routerLink="/agendar-cita-esp" id="atras" src="assets/ICONS_APP/ICONS_APP/atras.png"></ion-img>   
+        <ion-img routerLink="../agendar-cita-esp" id="atras" src="assets/ICONS_APP/ICONS_APP/atras.png"></ion-img>   
       </ion-row>
       </ion-col>     
            
@@ -30,10 +30,11 @@
     <ion-row id="listadoctores">
       <ion-col size="12">
         <ion-list>
-          <ion-radio-group (ionChange)="radioGroupChange($event)">
-            <ion-item id="containerdoc" *ngFor="let entry of matchesp">
+          <ion-radio-group [(ngModel)]="selected">
+            <ion-item id="containerdoc" *ngFor="let entry of matchesp; let indice=index">
               <ion-col size="1" size-sm>
-                <ion-radio></ion-radio>
+                <ion-radio value="{{indice}}"></ion-radio>
+                
               </ion-col>
               <ion-col size="2" size-sm>
               <ion-img id='doctor' src="assets/ICONS_APP/ICONS_APP/doctor.png"></ion-img>

@@ -15,7 +15,7 @@ export class AgendarCitaMedPage implements OnInit {
   fecha: string;
   hora: string;
   matchesp: any = [];
-  selected= {"especialidad": "","nombre": "" ,"fecha":"", "hora":""};
+  selected: any;
 
 
   constructor(private http: HttpClient,private storage: StorageHandlerService,private db: DatabaseService) { }
@@ -25,7 +25,7 @@ export class AgendarCitaMedPage implements OnInit {
     this.fecha=this.storage.getFechaCons();
     this.hora=this.storage.getHoraCons();
     this.getMatchEspecialidades();
-    console.log(typeof(this.selected));
+    
 
     
   }
@@ -45,7 +45,7 @@ export class AgendarCitaMedPage implements OnInit {
 		this.http.get('http://127.0.0.1:8000/api/match_especialidades/').subscribe(data => {
       for(var i in data){        
           if(data[i]["especialidad"]["nombre"]==this.espec){
-            this.selected["especialidad"]=this.espec;
+            
             doctorid=data[i]["doctor"]["id"];
             this.getCitaMedica(doctorid);            
           }
@@ -82,7 +82,8 @@ export class AgendarCitaMedPage implements OnInit {
       }
       
 
-      console.log(data);
+      
+      console.log(this.matchesp);
 
 		  
 		        
@@ -93,18 +94,14 @@ export class AgendarCitaMedPage implements OnInit {
 
     }
 
-    radioGroupChange(event) {
-      var index= (event.detail.value.split("-"))[2];
-      var selected= this.matchesp[index];
-      this.selected["nombre"]=selected["doctor"]["user_id"]["persona_id"]["nombre"]+ " "+selected["doctor"]["user_id"]["persona_id"]["apellido"];
-      this.selected["fecha"]=selected["fecha"];
-      this.selected["hora"]=selected["hora"];     
-
-      }
+    
 
     passingSelected(){
-      this.storage.setSelectedAppoinment(this.selected);
+      
+      this.storage.setSelectedAppoinment(this.matchesp[this.selected]);
     }
+
+    
 
 
 }
