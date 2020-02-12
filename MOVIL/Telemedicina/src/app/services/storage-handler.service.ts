@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { AngularDelegate } from '@ionic/angular';
 
 @Injectable({
 	providedIn: 'root'
@@ -7,6 +8,8 @@ import { Storage } from '@ionic/storage';
 export class StorageHandlerService {
 	citas_agendadas=[];
 	citas_pasadas=[];
+	idPaciente: any;
+	
 	especialidad: string;
 	fechacons: string;
 	usuario: any;
@@ -68,9 +71,19 @@ export class StorageHandlerService {
 		this.usuario=value;
 	}
 
+	setIdPaciente(value){
+		this.idPaciente=value;
+	}
+
+	getIdPaciente(){
+		return this.idPaciente;
+	}
+
 	getUsuario(){
 		return this.usuario;
 	}
+
+
 
 	getFechaCons(){
 		return this.fechacons;

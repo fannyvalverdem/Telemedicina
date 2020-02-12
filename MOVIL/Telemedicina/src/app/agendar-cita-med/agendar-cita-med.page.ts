@@ -26,6 +26,7 @@ export class AgendarCitaMedPage implements OnInit {
     this.hora=this.storage.getHoraCons();
     this.getMatchEspecialidades();
     
+    
 
     
   }
@@ -97,7 +98,6 @@ export class AgendarCitaMedPage implements OnInit {
     
 
     passingSelected(){
-      
       this.storage.setSelectedAppoinment(this.matchesp[this.selected]);
     }
 

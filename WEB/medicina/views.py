@@ -849,6 +849,7 @@ def confirmar_agendar_cita(request):
 
 def guardar_cita(request):
 	sku_m = request.GET.get('id')
+	
 	sepa=sku_m.split('?')
 	sku=sepa[0]
 	esp = sepa[1].split('=')[1]

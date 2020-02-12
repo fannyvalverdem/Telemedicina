@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics, status
 from medicina import models
 from . import serializers
+
 from rest_framework import filters
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
@@ -9,6 +10,9 @@ from rest_framework.views import APIView
 import requests,json
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
+from datetime import date
+import time
+import datetime
 
 # Create your views here
 
@@ -106,12 +110,79 @@ class TarifaViewset(generics.ListAPIView):
 class ConsultaViewset(generics.ListAPIView):
 	queryset = models.Consulta.objects.all()
 	serializer_class = serializers.ConsultaSerializer
-	def post(self,request,format=None):
-		serializer = serializers.ConsultaSerializer(data=request.data)
-		if serializer.is_valid():
-			serializer.save()
-			return Responde(serializer.data,status=status.HTTP_201_CREATED)
-		return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
+	def post(self, request, format=None):
+		myDict = request.data
+		print(myDict)
+		especialidad=models.Especialidad.objects.get(nombre=myDict["especialidad"])
+		cita=models.Citas_Medico.objects.get(id=myDict["detalle"]["zoom"])
+		persona=models.Persona.objects.get(id=myDict["paciente_id"]["user_id"]["persona_id"]["id"])
+		today = date.today()
+		fecha_reser = today.strftime("%Y-%m-%d")
+		cita.disponible=False
+		cita.save()
+		detalle=models.Detalle_Consulta(
+				fecha_reser=fecha_reser,
+				fecha_prog=cita.fecha,
+				hora=cita.hora,
+				precio=cita.doctor.tarifa.precio,
+				calificacion=0,
+				especialidad=especialidad,
+				zoom=cita
+				)
+		detalle.save()
+		paciente=models.Paciente.objects.get(id=myDict["paciente_id"]["id"])
+		consulta=models.Consulta(
+				estado='agendada',
+				paciente_id=paciente,
+				doctor_id=cita.doctor,
+				detalle=detalle
+				)
+		consulta.save()	
+		print("Hola")
+		print(myDict["paciente_id"]["id"])
+		print(detalle)
+		print(especialidad)
+		print(cita)
+		print(persona)
+		print(paciente)
+		print(consulta)
+
+		return Response(status=status.HTTP_201_CREATED)
+		
+		#sepa=sku_m.split('?')
+		#sku=sepa[0]
+		#esp = sepa[1].split('=')[1]
+		#especialidad=Especialidad.objects.get(nombre=esp)
+		#cita=Citas_Medico.objects.get(id=sku)
+		#current_user = request.user
+		#user_ac_id=current_user.id
+		#user_ac_person_id=current_user.persona_id.id
+		#persona=Persona.objects.get(id=user_ac_person_id)
+		#today = date.today()
+		#fecha_reser = today.strftime("%Y-%m-%d")
+		#cita.disponible=False
+		#cita.save()
+		#detalle=Detalle_Consulta(
+				#fecha_reser=fecha_reser,
+				#fecha_prog=cita.fecha,
+				#hora=cita.hora,
+				#precio=cita.doctor.tarifa.precio,
+				#calificacion=0,
+				#especialidad=especialidad,
+				#zoom=cita
+				#)
+	    #detalle.save()
+		#current_user = request.user
+		#user_ac_id=current_user.id
+		#paciente=Paciente.objects.get(user_id=user_ac_id)
+		#consulta=Consulta(
+				#estado='agendada',
+				#paciente_id=paciente,
+				#doctor_id=cita.doctor,
+				#detalle=detalle
+				#)
+		#consulta.save()
+		
 
 class EspecialidadViewset(generics.ListAPIView):
 	queryset = models.Especialidad.objects.all()
