@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, RouterEvent } from '@angular/router';
@@ -34,7 +34,8 @@ export class AppComponent {
     private router: Router,
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private toastCtrl: ToastController
   ) {
     this.router.events.subscribe((event:RouterEvent)=> {
       this.selectedPath = event.url;
@@ -48,6 +49,9 @@ export class AppComponent {
       this.splashScreen.hide();
 
       //Inicialización de servicio Zoom
+      console.log(this.ZOOM_API_KEY);
+      console.log(this.ZOOM_API_SECRET);
+      console.log(this.zoomService.initialize(this.ZOOM_API_KEY,this.ZOOM_API_SECRET))
       this.zoomService.initialize(this.ZOOM_API_KEY,this.ZOOM_API_SECRET)
       .then((success: any) => {
         this.presentToast("Servicio de videoconferencia inicializado correctamente.",2000)
