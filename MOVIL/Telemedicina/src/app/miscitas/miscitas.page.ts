@@ -12,7 +12,6 @@ import { Zoom } from '@ionic-native/zoom';
 export class MiscitasPage implements OnInit {
   
   zoomService = Zoom;
-  displayName: string = "";
   citas_agendadas=[];
   citas_pasadas=[];
   constructor(private storage: StorageHandlerService, private db: DatabaseService) { }
@@ -22,5 +21,20 @@ export class MiscitasPage implements OnInit {
     this.citas_agendadas=this.storage.getListaCitasAgendadas();
     console.log(this.citas_agendadas);
 
+  }
+
+  async joinMeeting(meetingId) {
+    console.log(meetingId);
+
+    //Unión al meeting
+    let options = {};
+    this.zoomService.joinMeeting(meetingId,"","Paciente",options)
+    .then((success: any) => {
+      this.presentToast("Videoconferencia exitosa.",1000)
+    },)
+    .catch((error: any) => {
+      this.showAlert(error)
+    });
+    
   }
 }
