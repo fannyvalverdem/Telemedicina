@@ -14,7 +14,7 @@ export class MiscitasPage implements OnInit {
   zoomService = Zoom;
   citas_agendadas=[];
   citas_pasadas=[];
-  constructor(private storage: StorageHandlerService, private db: DatabaseService) { }
+  constructor(private storage: StorageHandlerService, private db: DatabaseService, private toastCtrl: ToastController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.db.listarCitasPacientes();
@@ -30,11 +30,28 @@ export class MiscitasPage implements OnInit {
     let options = {};
     this.zoomService.joinMeeting(meetingId,"","Paciente",options)
     .then((success: any) => {
-      this.presentToast("Videoconferencia exitosa.",1000)
+      this.presentToast("Videoconferencia exitosa",1000)
     },)
     .catch((error: any) => {
       this.showAlert(error)
     });
     
+  }
+
+  async presentToast(mensaje,duracion) {
+    const toast = await this.toastCtrl.create({
+    message: mensaje,
+    duration: duracion
+    });
+    toast.present();
+  }
+
+  async showAlert(mensaje) {
+    const alert = await this.alertCtrl.create({
+      header: "Sistema",
+      message: mensaje,
+      buttons: ["OK"]
+    });
+    await alert.present();
   }
 }
