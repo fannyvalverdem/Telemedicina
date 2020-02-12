@@ -1,0 +1,42 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			Detalle Curso
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding class="background">
+	<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content></ion-refresher-content>
+	</ion-refresher>
+
+	<h2 ion-text>{{course.name}}</h2>
+	<p>{{course.description}}</p>
+
+	<ion-item>
+		<ion-label ion-text>Fecha de inicio:</ion-label>
+		<p ion-text item-content>{{course.start_date}}</p>
+	</ion-item>
+	<ion-item>
+		<ion-label ion-text>Fecha fin:</ion-label>
+		<p ion-text item-content>{{course.end_date}}</p>
+	</ion-item>
+
+	<h3>Itinerario:</h3>
+	<ion-list class="transparent">
+		<ion-card padding *ngFor="let clase of course.course_classes" color="light">
+			<h4>{{clase.subject}}</h4>
+			<p>{{clase.description}}</p>
+			<p>Fecha: {{clase.date}}</p>
+			<p>Tiempo: {{clase.time}}</p>
+			<p>Estado: {{clase.status.status_name}}</p>
+
+			<ion-button *ngIf="!isTutor && isActive(clase.status.status_name)" expand="block" color="primary" (click)="verVideo(clase.id)">Ver clase</ion-button>
+			<ion-button *ngIf="isTutor && isActive(clase.status.status_name)" expand="block" color="primary" (click)="initMeeting(clase.id)">Iniciar clase</ion-button>
+		</ion-card>
+	</ion-list>
+</ion-content>

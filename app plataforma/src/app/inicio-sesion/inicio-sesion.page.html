@@ -1,0 +1,28 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-title>Plataforma Aprendizaje</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+	<div text-center>
+		<ion-text color="light">
+			<h3>Iniciar Sesión</h3>
+		</ion-text>
+    </div>
+	<ion-list>
+		<ion-item>
+			<ion-label position="floating">Correo electrónico</ion-label>
+			<ion-input type="text" required clearInput [(ngModel)]="user.username" name="username"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="floating">Contraseña</ion-label>
+			<ion-input type="password" required clearInput [(ngModel)]="user.password" name="password"></ion-input>
+		</ion-item>
+		<!--<ion-button expand="block" color="primary" (click)="probarZak()">Probar ZAK</ion-button>-->
+	</ion-list>
+	<ion-list padding color="secondary">
+		<ion-button expand="block" color="primary" (click)="iniciarSesion()">Iniciar Sesión</ion-button>
+		<ion-button expand="block" color="primary" (click)="irARegistrar()">Registrarse</ion-button>
+	</ion-list>
+</ion-content>
