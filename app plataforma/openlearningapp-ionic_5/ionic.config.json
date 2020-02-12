@@ -1,0 +1,7 @@
+{
+  "name": "AppPlataformaAprendizajeNuevo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

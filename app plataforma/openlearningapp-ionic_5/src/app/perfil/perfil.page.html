@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+    <div *ngIf="!modificar">
+        <ion-item>
+            <h3>{{person.profile.names}} {{person.profile.last_names}}</h3>
+        </ion-item>
+        
+        <ion-list>
+            <ion-item lines="full">
+                <ion-label color="Primary">Email:</ion-label><br>
+                <ion-label color="Dark">{{person.email}}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label color="Primary">Fecha de nacimiento:</ion-label><br>
+                <ion-label color="Dark">{{person.profile.dob}}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label color="Primary">Teléfono:</ion-label><br>
+                <ion-label color="Dark">{{person.profile.phone}}</ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label color="Primary">Dirección:</ion-label><br>
+                <ion-label color="Dark">{{person.profile.address}}</ion-label>
+            </ion-item>
+        </ion-list>
+        <ion-button expand="block" color="primary" (click)="cambiarModificar()">Modificar</ion-button>
+    </div>
+    
+    <div *ngIf="modificar">
+        <!-- Input de nombres -->
+        <ion-item lines="full">
+            <ion-label stacked>Nombres:</ion-label><br>
+            <ion-input type="text" placeholder="{{person.profile.names}}" [(ngModel)]="modifiedPerson.profile.names" name="names"></ion-input>
+        </ion-item>
+
+        <!-- Input de apellidos -->
+        <ion-item lines="full">
+            <ion-label stacked>Apellidos:</ion-label><br>
+            <ion-input type="text" placeholder="{{person.profile.last_names}}" [(ngModel)]="modifiedPerson.profile.last_names" name="last_names"></ion-input>
+        </ion-item>
+
+        <!-- Input de dob -->
+        <ion-item lines="full">
+            <ion-label stacked>Fecha de nacimiento:</ion-label><br>
+            <ion-input type="date" placeholder="{{person.profile.dob}}" [(ngModel)]="modifiedPerson.profile.dob" name="dob" [max]="maxDate" [min]="minDate"></ion-input>
+        </ion-item>
+
+        <!-- Input de teléfono -->
+        <ion-item lines="full">
+            <ion-label stacked>Teléfono:</ion-label><br>
+            <ion-input type="text" placeholder="{{person.profile.phone}}" [(ngModel)]="modifiedPerson.profile.phone" name="phone"></ion-input>
+        </ion-item>
+
+        <!-- Input de dirección -->
+        <ion-item lines="full">
+            <ion-label stacked>Dirección:</ion-label><br>
+            <ion-input type="text" placeholder="{{person.profile.address}}" [(ngModel)]="modifiedPerson.profile.address" name="address"></ion-input>
+        </ion-item>
+
+        <ion-list>
+            <ion-button expand="block" color="primary" (click)="modificarDatos()">Guardar cambios</ion-button>
+            <ion-button expand="block" color="primary" (click)="cambiarModificar()">Regresar</ion-button>
+        </ion-list>
+    </div>
+
+</ion-content>

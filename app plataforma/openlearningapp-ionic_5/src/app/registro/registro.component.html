@@ -1,0 +1,66 @@
+<ion-header>
+	<ion-toolbar color="primary">
+		<ion-buttons slot="start">
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>
+			Registro de usuario
+		</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content padding class="background">
+	<ion-item>
+		<ion-label position="floating">E-mail</ion-label>
+		<ion-input type="email" placeholder="Correo electrónico" [(ngModel)]="studentUser.email" maxlength="254"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="floating">Nombres</ion-label>
+		<ion-input type="text" placeholder="PrimerNombre SegundoNombre" maxlength="63" [(ngModel)]="studentUser.profile.names"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="floating">Apellidos</ion-label>
+		<ion-input type="text" placeholder="PrimerApellido SegundoApellido" maxlength="63" [(ngModel)]="studentUser.profile.last_names"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="floating">Identificación</ion-label>
+		<ion-input type="text" placeholder="Número de identificación" maxlength="10" [(ngModel)]="studentUser.profile.identification"></ion-input>
+	</ion-item>
+	<ion-list>
+		<ion-radio-group [(ngModel)]="studentUser.profile.gender">
+			<ion-list-header>
+				<ion-label>Género</ion-label>
+			</ion-list-header>
+			<ion-item>
+				<ion-label>Masculino</ion-label>
+				<ion-radio slot="start" value="M"></ion-radio>
+			</ion-item>
+			<ion-item>
+				<ion-label>Femenino</ion-label>
+				<ion-radio slot="start" value="F"></ion-radio>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+	<ion-item>
+		<ion-label position="floating">Fecha de nacimiento</ion-label>
+		<ion-input type="date" placeholder="Fecha" [(ngModel)]="studentUser.profile.dob" [max]="maxDate" [min]="minDate"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="floating">Teléfono</ion-label>
+		<ion-input type="tel" placeholder="Número de teléfono" [(ngModel)]="studentUser.profile.phone"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="floating">Dirección domiciliaria</ion-label>
+		<ion-input type="text" placeholder="Dirección de domicilio" [(ngModel)]="studentUser.profile.address"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="floating">Contraseña</ion-label>
+		<ion-input type="password" [(ngModel)]="studentUser.password" name="password" maxlength="8"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label position="floating">Repetir contraseña</ion-label>
+		<ion-input type="password" [(ngModel)]="passwordRepetition" name="repeatedPassword" maxlength="8"></ion-input>
+	</ion-item>
+
+	<ion-button expand="block" color="primary" (click)="registrarEstudiante()">Registrar</ion-button>
+</ion-content>
