@@ -23,6 +23,8 @@ export class MiscitasPage implements OnInit {
 
   }
 
+
+//ARIZAGA
   async verVideo(classId) {
     var sessionInfo:any = await this.sessionInfo(classId);
     //console.log(sessionInfo['meeting_number']);
@@ -38,4 +40,16 @@ export class MiscitasPage implements OnInit {
     });
     
   }
+
+  private async sessionInfo(classId) {
+    var session:any = {};
+    await this.restProvider.getClassVideoSession(classId)
+    .then(data => {
+      session = data;
+    }, err => {
+      this.showAlert("Ocurrió un error al obtener la session.");
+    })
+    return session;
+  }
+  
 }
