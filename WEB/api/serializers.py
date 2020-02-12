@@ -106,11 +106,19 @@ class HorarioSerializer(serializers.ModelSerializer):
 		model= models.Horario
 		fields=("hora_entrada","hora_salida","dias","doctor")
 
+class CitasMedicoSerializer(serializers.ModelSerializer):
+	doctor=MedicoSerializer()
+	class Meta:
+		model= models.Citas_Medico
+		fields=("id","m_id","m_url","fecha","hora","m_duration","doctor")
+
 class DetalleConsultaSerializer(serializers.ModelSerializer):
-	
+	especialidad= EspecialidadSerializer()
+	zoom= CitasMedicoSerializer()
 	class Meta:
 		model= models.Detalle_Consulta
-		fields=("fecha_reser","fecha_prog","precio","hora","calificacion","zoom")
+		fields=("fecha_reser","fecha_prog","precio","especialidad","hora","calificacion","zoom")
+
 
 class ConsultaSerializer(serializers.ModelSerializer):
 	doctor_id=MedicoSerializer()
@@ -210,11 +218,7 @@ class PagosMedicoSerializer(serializers.ModelSerializer):
 		model= models.Pagos_Doctor
 		fields=("id","fecha","hora","precio","estado","doctor")
 
-class CitasMedicoSerializer(serializers.ModelSerializer):
-	doctor=MedicoSerializer()
-	class Meta:
-		model= models.Citas_Medico
-		fields=("id","m_id","m_url","fecha","hora","m_duration","doctor")
+
 
 class JuntaMedicaSerializer(serializers.ModelSerializer):
 	paciente=PacienteSerializer()
@@ -223,3 +227,4 @@ class JuntaMedicaSerializer(serializers.ModelSerializer):
 	class Meta:
 		model= models.Junta_Medica
 		fields=("id","paciente","solicitante","doctor_solicitado","motivo","estado_solicitud")
+

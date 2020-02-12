@@ -849,7 +849,7 @@ def confirmar_agendar_cita(request):
 
 def guardar_cita(request):
 	sku_m = request.GET.get('id')
-	
+
 	sepa=sku_m.split('?')
 	sku=sepa[0]
 	esp = sepa[1].split('=')[1]
@@ -956,8 +956,8 @@ def auth_zoom(request):
     horarios=Horario.objects.filter(doctor_id =doctor.id)
     #print(horarios)
     print(usuario.email)
-    #crear_citas(token,horarios,'ivinces@espol.edu.ec',doctor)
-    guardar_citas('ivinces@espol.edu.ec',token,doctor)
+    crear_citas(token,horarios,'ivinces@espol.edu.ec',doctor)
+    #guardar_citas('ivinces@espol.edu.ec',token,doctor)
     return redirect('index_admin')
 
 def zoom_redirect(request):

@@ -32,7 +32,7 @@ export class AgendarCitaConfPage implements OnInit {
   
 
   passingFinal(){
-    this.storage.addToCitasAgendadas(this.citas_agendadas);
+    
     this.http.post('http://127.0.0.1:8000/api/consulta/',this.postobject).subscribe(data => {     
       console.log(data);
     }, err => {

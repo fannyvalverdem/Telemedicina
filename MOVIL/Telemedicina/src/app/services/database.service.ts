@@ -51,6 +51,23 @@ export class DatabaseService {
 		});
 	}
 
+	listarCitasPacientes(){
+		this.http.get('http://127.0.0.1:8000/api/consulta/').subscribe(data => {			
+			for(var i in data){				
+				if(data[i]["paciente_id"]["user_id"]["id"]=this.storage.getId() && data[i]["estado"]=="agendada"){
+					this.storage.addToCitasAgendadas(data[i]);
+				}
+			}
+			
+		 
+					
+			}, err => {     
+			  console.log(err);
+			
+		}); 
+
+	}
+
 
 
 
